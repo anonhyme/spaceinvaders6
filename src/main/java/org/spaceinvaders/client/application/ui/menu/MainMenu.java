@@ -18,6 +18,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.spaceinvaders.client.place.NameTokens;
 
@@ -40,12 +41,19 @@ public class MainMenu extends Composite {
     @UiField
     NavbarNav navBarNav;
 
+    @UiField
+    DropDownMenu dropDownMenu;
+
     public MainMenu() {
         initWidget(uiBinder.createAndBindUi(this));
-        this.addNavbarLink("Main", NameTokens.home);
-        this.addNavbarLink("RPC Example", NameTokens.exampleRpc);
-        this.addNavbarLink("Bootstrap", NameTokens.bootstrapExamplePage);
-        this.addNavbarLink("Simple", NameTokens.simplePage);
+        this.addNavbarLinkInDropDown("Session 1", NameTokens.home);
+        this.addNavbarLinkInDropDown("Session 2", NameTokens.home);
+        this.addNavbarLinkInDropDown("Session 3", NameTokens.home);
+//        this.addNavbarLink("Main", NameTokens.home);
+//        this.addNavbarLink("RPC Example", NameTokens.exampleRpc);
+//        this.addNavbarLink("Bootstrap", NameTokens.bootstrapExamplePage);
+//        this.addNavbarLink("Simple", NameTokens.simplePage);
+
     }
 
     @Override
@@ -58,5 +66,11 @@ public class MainMenu extends Composite {
         AnchorListItem anchorListItem = new AnchorListItem(name);
         anchorListItem.setTargetHistoryToken(nameToken);
         navBarNav.add(anchorListItem);
+    }
+
+    private void addNavbarLinkInDropDown(String name, String nameToken) {
+        AnchorListItem anchorListItem = new AnchorListItem(name);
+        //anchorListItem.setTargetHistoryToken(nameToken); // Removed for now until we have NameTokens for each sessions
+        dropDownMenu.add(anchorListItem);
     }
 }
