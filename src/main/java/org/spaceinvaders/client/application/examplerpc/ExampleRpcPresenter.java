@@ -20,8 +20,8 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.rpc.ExampleServiceAsync;
-import org.spaceinvaders.shared.model.ExampleRPC;
+import org.spaceinvaders.client.rpc.DataProviderServiceAsync;
+import org.spaceinvaders.shared.model.DataProviderModel;
 
 public class ExampleRpcPresenter extends Presenter<ExampleRpcPresenter.MyView, ExampleRpcPresenter.MyProxy> implements ExampleRpcUiHandlers {
     interface MyView extends View, HasUiHandlers<ExampleRpcUiHandlers> {
@@ -35,7 +35,7 @@ public class ExampleRpcPresenter extends Presenter<ExampleRpcPresenter.MyView, E
     public interface MyProxy extends ProxyPlace<ExampleRpcPresenter> {
     }
 
-    ExampleServiceAsync exampleService;
+    DataProviderServiceAsync exampleService;
 
     @Override
     protected void revealInParent() {
@@ -46,7 +46,7 @@ public class ExampleRpcPresenter extends Presenter<ExampleRpcPresenter.MyView, E
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ExampleServiceAsync exampleService) {
+            DataProviderServiceAsync exampleService) {
         super(eventBus, view, proxy, RevealType.Root);
 
         this.exampleService = exampleService;
@@ -71,13 +71,13 @@ public class ExampleRpcPresenter extends Presenter<ExampleRpcPresenter.MyView, E
 
     @Override
     public void sendRequestToServer() {
-        exampleService.sayHello(new AsyncCallback<ExampleRPC>() {
+        exampleService.sayHello(new AsyncCallback<DataProviderModel>() {
             @Override
             public void onFailure(Throwable caught) {
             }
 
             @Override
-            public void onSuccess(ExampleRPC result) {
+            public void onSuccess(DataProviderModel result) {
                 GWT.log("got [" + result.getResponse() + "]");
 
             }

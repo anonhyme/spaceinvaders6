@@ -1,6 +1,5 @@
 package org.spaceinvaders.client.application.home;
 
-import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.event.shared.EventBus;
 
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -13,7 +12,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.rpc.ExampleServiceAsync;
+import org.spaceinvaders.client.rpc.DataProviderServiceAsync;
 
 import javax.inject.Inject;
 
@@ -33,7 +32,7 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
 //    BootstrapExamplePresenter bootstrapPresenter;
 
 
-    private ExampleServiceAsync helloService;
+    private DataProviderServiceAsync helloService;
     private DispatchAsync dispatchAsync;
 
 
@@ -41,7 +40,7 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
     HomePagePresenter(EventBus eventBus,
                       MyView view,
                       MyProxy proxy,
-                      ExampleServiceAsync helloService,
+                      DataProviderServiceAsync helloService,
                       DispatchAsync dispatchAsync
                       ) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);

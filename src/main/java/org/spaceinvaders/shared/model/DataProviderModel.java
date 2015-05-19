@@ -7,14 +7,14 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  * @author antoine
  */
-public class ExampleRPC implements IsSerializable {
+public class DataProviderModel implements IsSerializable {
     private String response;
 
 
-    public ExampleRPC() {
+    public DataProviderModel() {
     }
 
-    public ExampleRPC(String input) {
+    public DataProviderModel(String input) {
         super();
         this.response = input;
     }

@@ -3,7 +3,7 @@
 //import com.google.gwt.event.shared.GwtEvent;
 //import com.google.gwt.event.shared.HasHandlers;
 //
-//import org.spaceinvaders.shared.model.ExampleRPC;
+//import org.spaceinvaders.shared.model.DataProviderModel;
 //
 //import java.util.List;
 //
@@ -19,12 +19,12 @@
 //        return TYPE;
 //    }
 //
-//    ExampleRPC modelRPC;
+//    DataProviderModel modelRPC;
 //
 //    public ExampleRpcEvent() {
 //    }
 //
-//    public ExampleRpcEvent(ExampleRPC modelRPC) {
+//    public ExampleRpcEvent(DataProviderModel modelRPC) {
 //        this.modelRPC = modelRPC;
 //    }
 //
@@ -33,7 +33,7 @@
 //    }
 //
 //    //TODO what is that ?!?
-//    public static void fire(HasHandlers source, ExampleRPC data) {
+//    public static void fire(HasHandlers source, DataProviderModel data) {
 //        source.fireEvent(new ExampleRpcEvent(data));
 //    }
 //}

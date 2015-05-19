@@ -28,7 +28,7 @@
     <!-- RPC Servlet mapping -->
     <servlet>
         <servlet-name>helloService</servlet-name>
-        <servlet-class>org.spaceinvaders.server.rpc.ExampleServiceServlet</servlet-class>
+        <servlet-class>org.spaceinvaders.server.rpc.DataProviderServiceServlet</servlet-class>
     </servlet>
 
     <!-- hello is the relative path called with the annotation -->
