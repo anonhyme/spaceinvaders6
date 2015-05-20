@@ -10,6 +10,7 @@
     <packaging>war</packaging>
     <name>GWTP web application</name>
 
+
     <!-- http://dev.arcbees.com/gwtp/resources/ -->
 
     <properties>
@@ -200,6 +201,13 @@
                         <artifactId>appengine-tools-sdk</artifactId>
                         <version>${gae.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.jasig.cas.client</groupId>
+                        <artifactId>cas-client-core</artifactId>
+                        <version>3.3.3</version>
+                        <scope>runtime</scope>
+                        <type>jar</type>
+                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>
@@ -364,15 +372,12 @@
             <groupId>org.jasig.cas.client</groupId>
             <artifactId>cas-client-core</artifactId>
             <version>3.3.3</version>
-            <scope>runtime</scope>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>2.7.0</version>
         </dependency>
-
     </dependencies>
 
     <repositories>
