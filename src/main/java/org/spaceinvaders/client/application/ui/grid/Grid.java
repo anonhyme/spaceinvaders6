@@ -1,35 +1,19 @@
 package org.spaceinvaders.client.application.ui.grid;
 
-import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.cellview.client.ColumnSortList;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.google.gwt.user.cellview.client.AbstractCellTable;
-import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.view.client.AsyncDataProvider;
-import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.view.client.Range;
-import com.google.gwt.view.client.RangeChangeEvent;
 import com.google.inject.Inject;
 
-import org.gwtbootstrap3.client.ui.constants.ButtonType;
-import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.DataGrid;
-import org.spaceinvaders.client.rpc.ExampleServiceAsync;
-import org.spaceinvaders.shared.model.ExampleRPC;
+import org.spaceinvaders.client.rpc.DataProviderServiceAsync;
 import org.spaceinvaders.shared.model.TableDataTest;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 5/18/2015
@@ -47,7 +31,7 @@ public class Grid extends Composite {
     DataGrid<TableDataTest> dataGrid = new DataGrid<TableDataTest>(10);
 
     @Inject
-    ExampleServiceAsync exampleService;
+    DataProviderServiceAsync exampleService;
 
     @Inject
     public Grid() {

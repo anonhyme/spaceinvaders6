@@ -1,19 +1,8 @@
 package org.spaceinvaders.client.application.home;
 
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.gwtplatform.mvp.client.ViewImpl;
-
-import org.gwtbootstrap3.client.ui.Button;
-import org.gwtbootstrap3.client.ui.constants.ButtonType;
-
 
 import javax.inject.Inject;
 

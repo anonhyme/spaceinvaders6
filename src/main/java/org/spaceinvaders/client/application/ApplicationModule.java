@@ -1,11 +1,7 @@
 package org.spaceinvaders.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-
-import org.spaceinvaders.client.application.bootstrapExample.BootstrapExampleModule;
-import org.spaceinvaders.client.application.examplerpc.ExampleRpcModule;
 import org.spaceinvaders.client.application.home.HomeModule;
-import org.spaceinvaders.client.application.simplepage.SimplePageModule;
 
 public class ApplicationModule extends AbstractPresenterModule {
     @Override
@@ -17,8 +13,5 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new HomeModule());
 
 
-        install(new BootstrapExampleModule());
-        install(new SimplePageModule());
-        install(new ExampleRpcModule());
     }
 }

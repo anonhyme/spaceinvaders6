@@ -9,9 +9,13 @@
 
     <b:Navbar>
         <b:NavbarHeader>
-            <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}">Hello</b:NavbarBrand>
+            <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}">Home page</b:NavbarBrand>
         </b:NavbarHeader>
         <b:NavbarNav ui:field="navBarNav">
+            <b:ListDropDown>
+                <b:AnchorButton dataToggle="DROPDOWN">Session</b:AnchorButton>
+                <b:DropDownMenu ui:field="dropDownMenu"/>
+            </b:ListDropDown>
             <!--<b:AnchorListItem targetHistoryToken="{nameTokens.getHome}" active="true">Main</b:AnchorListItem>-->
             <!--<b:AnchorListItem targetHistoryToken="{nameTokens.getExampleRpc}" >RPC Example</b:AnchorListItem>-->
             <!--<b:AnchorListItem targetHistoryToken="{nameTokens.getBootstrapExamplePage}" >Bootstrap</b:AnchorListItem>-->
