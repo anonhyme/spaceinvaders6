@@ -2,10 +2,12 @@ package org.spaceinvaders.server.rpc;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import org.spaceinvaders.server.dispatch.UserSessionImpl;
 import org.spaceinvaders.client.rpc.ExampleService;
 import org.spaceinvaders.shared.model.ExampleRPC;
 import org.spaceinvaders.shared.model.TableDataTest;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class ExampleServiceServlet extends RemoteServiceServlet implements Examp
         ExampleRPC hello = new ExampleRPC("hello");
         return hello;
     }
+
 
     @Override
     public List<TableDataTest> fetchData() {
