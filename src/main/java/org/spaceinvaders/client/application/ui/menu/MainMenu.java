@@ -25,12 +25,6 @@ import org.spaceinvaders.client.place.NameTokens;
 import javax.inject.Inject;
 import javax.lang.model.element.Name;
 
-/**
- * Created with IntelliJ IDEA Project: projetS6 on 5/18/2015
- *
- * @author antoine
- */
-
 public class MainMenu extends Composite {
 
     interface MainMenuUiBinder extends UiBinder<Widget, MainMenu> {
@@ -49,18 +43,12 @@ public class MainMenu extends Composite {
         this.addNavbarLinkInDropDown("Session 1", NameTokens.home);
         this.addNavbarLinkInDropDown("Session 2", NameTokens.home);
         this.addNavbarLinkInDropDown("Session 3", NameTokens.home);
-//        this.addNavbarLink("Main", NameTokens.home);
-//        this.addNavbarLink("RPC Example", NameTokens.exampleRpc);
-//        this.addNavbarLink("Bootstrap", NameTokens.bootstrapExamplePage);
-//        this.addNavbarLink("Simple", NameTokens.simplePage);
-
     }
 
     @Override
     protected void onAttach() {
         super.onAttach();
     }
-
 
     private void addNavbarLink(String name, String nameToken) {
         AnchorListItem anchorListItem = new AnchorListItem(name);

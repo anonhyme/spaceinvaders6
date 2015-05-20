@@ -6,8 +6,6 @@
     <g:HTMLPanel>
         <div>
             <menu:MainMenu/>
-            <!--<g:SimplePanel ui:field="bootstrapContent"/>-->
-
             <h2>Home page</h2>
 
             <p>

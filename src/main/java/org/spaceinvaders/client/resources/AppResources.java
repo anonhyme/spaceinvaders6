@@ -21,14 +21,6 @@ import com.google.gwt.resources.client.CssResource;
 
 public interface AppResources extends ClientBundle {
 
-//    interface Normalize extends CssResource {
-//    }
-//
-//    interface MyStyle extends CssResource {
-//
-//
-//    }
-
     interface Style extends CssResource {
         @ClassName("pricing-table")
         String pricingTable();
@@ -61,12 +53,6 @@ public interface AppResources extends ClientBundle {
         String panelFooter();
     }
 
-//    @Source("css/normalize.gss")
-//    Normalize normalize();
-
     @Source("css/style.gss")
     Style style();
-
-//    @Source("css/myStyle.css")
-//    MyStyle myStyle();
 }
