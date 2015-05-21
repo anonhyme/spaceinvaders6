@@ -5,7 +5,6 @@ SET SEARCH_PATH TO note;
 --
 -- AP types and procedures
 --
-
 CREATE TYPE ap_summary_t AS (ap_name text, ap_result_percent int);
 
 CREATE OR REPLACE FUNCTION get_ap_results(student_id text, session_id text) RETURNS SETOF ap_summary_t AS $$
