@@ -1,4 +1,4 @@
-package org.spaceinvaders.server.dispatch;
+package org.spaceinvaders.shared;
 
 /**
  * Created by AlexandraMaude on 2015-05-19.
