@@ -5,9 +5,10 @@ public class NameTokens {
     public static final String bootstrapExamplePage = "bootstrapExamplePage";
     public static final String simplePage = "simplePage";
     public static final String exampleRpc = "exampleRpc";
+    public static final String graphDemo = "graphDemo";
 
     public static String getHome() {
-        return home;
+        return graphDemo;
     }
 
     public static String getBootstrapExamplePage() {
@@ -20,5 +21,9 @@ public class NameTokens {
 
     public static String getExampleRpc() {
         return exampleRpc;
+    }
+
+    public static String getGraphDemo() {
+        return graphDemo;
     }
 }

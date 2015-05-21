@@ -369,6 +369,23 @@
             <scope>runtime</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.sencha.gxt</groupId>
+            <artifactId>gxt</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sencha.gxt</groupId>
+            <artifactId>gxt-chart</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sencha.gxt</groupId>
+            <artifactId>gxt-examples</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
 
     </dependencies>
 

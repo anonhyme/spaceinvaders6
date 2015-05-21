@@ -19,29 +19,29 @@
         </b:NavbarNav>
     </b:Navbar>
     <!--<b:Row>-->
-        <!--<b:Column size="XS_12">-->
-            <!--&lt;!&ndash;<b:PageHeader></b:PageHeader>&ndash;&gt;-->
-            <!--<b:Panel>-->
-                <!--<b:PanelHeader>-->
-                    <!--<b:Heading size="H2" text="Hello"/>-->
-                <!--</b:PanelHeader>-->
-                <!--<b:PanelBody>-->
-                    <!--<a href="#{nameTokens.getBootstrapExamplePage}">Bootstrap</a>-->
-                <!--</b:PanelBody>-->
-            <!--</b:Panel>-->
-        <!--</b:Column>-->
+    <!--<b:Column size="XS_12">-->
+    <!--&lt;!&ndash;<b:PageHeader></b:PageHeader>&ndash;&gt;-->
+    <!--<b:Panel>-->
+    <!--<b:PanelHeader>-->
+    <!--<b:Heading size="H2" text="Hello"/>-->
+    <!--</b:PanelHeader>-->
+    <!--<b:PanelBody>-->
+    <!--<a href="#{nameTokens.getBootstrapExamplePage}">Bootstrap</a>-->
+    <!--</b:PanelBody>-->
+    <!--</b:Panel>-->
+    <!--</b:Column>-->
     <!--</b:Row>-->
     <!--<g:HTMLPanel tag="nav">-->
-        <!--<ul>-->
-            <!--<li>-->
-                <!--<a href="#{nameTokens.getBootstrapExamplePage}">Bootstrap</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a href="#{nameTokens.getSimplePage}">Simple Page</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a href="#{nameTokens.getExampleRpc}">Example Rpc</a>-->
-            <!--</li>-->
-        <!--</ul>-->
+    <!--<ul>-->
+    <!--<li>-->
+    <!--<a href="#{nameTokens.getBootstrapExamplePage}">Bootstrap</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#{nameTokens.getSimplePage}">Simple Page</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#{nameTokens.getExampleRpc}">Example Rpc</a>-->
+    <!--</li>-->
+    <!--</ul>-->
     <!--</g:HTMLPanel>-->
 </ui:UiBinder>

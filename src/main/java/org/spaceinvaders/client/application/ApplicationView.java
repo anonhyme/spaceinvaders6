@@ -38,5 +38,7 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     @Override
     public void showLoading(boolean visibile) {
         loadingMessage.getStyle().setVisibility(visibile ? Style.Visibility.VISIBLE : Style.Visibility.HIDDEN);
+
     }
+
 }

@@ -16,5 +16,6 @@ import java.util.List;
 @RemoteServiceRelativePath("hello")
 public interface DataProviderService extends RemoteService {
     public DataProviderModel sayHello();
+
     public List<TableDataTest> fetchData();
 }

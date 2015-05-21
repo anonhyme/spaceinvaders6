@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  * @author antoine
  */
-public class TableDataTest implements IsSerializable{
+public class TableDataTest implements IsSerializable {
     private String field1;
     private String field2;
     private String field3;
