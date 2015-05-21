@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.chart.client.chart.Chart;
+import com.sencha.gxt.chart.client.chart.Legend;
 import com.sencha.gxt.chart.client.chart.axis.CategoryAxis;
 import com.sencha.gxt.chart.client.chart.axis.NumericAxis;
 import com.sencha.gxt.chart.client.chart.series.LineSeries;
@@ -96,9 +97,9 @@ public class CumulativeGradeLineChart extends AbstractChart {
 
     @Override
     public void setData() {
-        addData("Rapport", 50, 60, 100);
-        addData("Evaluation 1", 60, 80, 100);
-        addData("Evaluation 2", 70, 90, 100);
+        addData("Rapport", 50, 40, 100);
+        addData("Evaluation 1", 60, 50, 100);
+        addData("Evaluation 2", 70, 100, 100);
         addData("Examen", 80, 70, 100);
         addData("Examen final", 60, 50, 100);
 
@@ -138,7 +139,8 @@ public class CumulativeGradeLineChart extends AbstractChart {
             LineSeries<Data> series = new LineSeries<Data>();
             series.setYAxisPosition(Chart.Position.LEFT);
             series.setYField(dataAccess.grade());
-            series.setStroke(new RGB(255, 0, 0));
+            series.setStroke(new RGB(0, 255, 0));
+            series.setFill(new RGB(0, 255, 0));
             series.setStrokeWidth(3);
             series.setSmooth(false);
             chart.addSeries(series);
@@ -146,7 +148,8 @@ public class CumulativeGradeLineChart extends AbstractChart {
             LineSeries<Data> series2 = new LineSeries<Data>();
             series2.setYAxisPosition(Chart.Position.LEFT);
             series2.setYField(dataAccess.averageGrade());
-            series2.setStroke(new RGB(0, 255, 0));
+            series2.setStroke(new RGB(255, 0, 0));
+            series2.setFill(new RGB(255, 0, 0));
             series2.setStrokeWidth(3);
             series2.setSmooth(false);
             chart.addSeries(series2);
@@ -155,9 +158,17 @@ public class CumulativeGradeLineChart extends AbstractChart {
             series3.setYAxisPosition(Chart.Position.LEFT);
             series3.setYField(dataAccess.maxGrade());
             series3.setStroke(new RGB(0, 0, 255));
+            //series3.setFill(new RGB(0, 0, 255));
             series3.setStrokeWidth(3);
             series3.setSmooth(false);
             chart.addSeries(series3);
+
+
+            final Legend<Data> legend = new Legend<Data>();
+            legend.setItemHighlighting(true);
+            legend.setItemHiding(true);
+            legend.getBorderConfig().setStrokeWidth(0);
+            chart.setLegend(legend);
 
             VerticalLayoutContainer layout = new VerticalLayoutContainer();
             layout.add(chart, new VerticalLayoutContainer.VerticalLayoutData(1, 1));

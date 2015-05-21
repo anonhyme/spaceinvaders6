@@ -13,7 +13,7 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
         void setChart(IsWidget content);
     }
 
-    public enum ChartType {CumulativeGradeLineChart, Area, GroupBar, StackedBar}
+    public enum ChartType {CumulativeGradeLineChart, Area, GroupBar, StackedBar, Gauge}
 
     ;
 
@@ -45,6 +45,8 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
                 break;
             case StackedBar:
                 this.chart = new StackedBarChart();
+            case Gauge:
+                this.chart = new GaugeChart();
         }
     }
     public void setChartData(){

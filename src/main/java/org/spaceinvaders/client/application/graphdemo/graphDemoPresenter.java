@@ -64,7 +64,7 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
 
 
         GraphWidgetPresenter graphPresenter2 = graphWidgetPresenterProvider.get();
-        graphPresenter2.setGraphType(GraphWidgetPresenter.ChartType.GroupBar);
+        graphPresenter2.setGraphType(GraphWidgetPresenter.ChartType.Gauge);
         graphPresenter2.setChartData();
         graphPresenter2.showChart();
         view.setGraph(graphPresenter2);
