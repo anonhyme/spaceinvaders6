@@ -33,7 +33,6 @@ public class CompetenceResultsEntity {
         this.competenceLabel = competenceLabel;
     }
 
-    @Basic
     @Column(name = "result_value")
     public Integer getResultValue() {
         return resultValue;
@@ -43,7 +42,6 @@ public class CompetenceResultsEntity {
         this.resultValue = resultValue;
     }
 
-    @Basic
     @Column(name = "avg_result_value")
     public Integer getAvgResultValue() {
         return avgResultValue;
@@ -53,7 +51,6 @@ public class CompetenceResultsEntity {
         this.avgResultValue = avgResultValue;
     }
 
-    @Basic
     @Column(name = "max_result_value")
     public Integer getMaxResultValue() {
         return maxResultValue;
@@ -63,7 +60,6 @@ public class CompetenceResultsEntity {
         this.maxResultValue = maxResultValue;
     }
 
-    @Basic
     @Column(name = "standard_dev")
     public Integer getStandardDev() {
         return standardDev;
@@ -73,7 +69,6 @@ public class CompetenceResultsEntity {
         this.standardDev = standardDev;
     }
 
-    @Basic
     @Column(name = "cumulated_frequency_percent")
     public Integer getCumulatedFrequencyPercent() {
         return cumulatedFrequencyPercent;

@@ -43,7 +43,6 @@ public class EvaluationResultsEntity {
         this.competenceLabel = competenceLabel;
     }
 
-    @Basic
     @Column(name = "result_value")
     public Integer getResultValue() {
         return resultValue;
@@ -53,7 +52,6 @@ public class EvaluationResultsEntity {
         this.resultValue = resultValue;
     }
 
-    @Basic
     @Column(name = "avg_result_value")
     public Integer getAvgResultValue() {
         return avgResultValue;
@@ -63,7 +61,6 @@ public class EvaluationResultsEntity {
         this.avgResultValue = avgResultValue;
     }
 
-    @Basic
     @Column(name = "max_result_value")
     public Integer getMaxResultValue() {
         return maxResultValue;
@@ -73,7 +70,6 @@ public class EvaluationResultsEntity {
         this.maxResultValue = maxResultValue;
     }
 
-    @Basic
     @Column(name = "standard_dev")
     public Integer getStandardDev() {
         return standardDev;

@@ -10,8 +10,8 @@
             <property name="hibernate.connection.url"
                       value="jdbc:postgresql://thunder.servebeer.com:5433/S6_PROJET_P02"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.username" value="bedh2102"/>
-            <property name="hibernate.connection.password" value="bedh2102"/>
+            <property name="hibernate.connection.username" value="opus"/>
+            <property name="hibernate.connection.password" value="opus102"/>
         </properties>
     </persistence-unit>
 </persistence>

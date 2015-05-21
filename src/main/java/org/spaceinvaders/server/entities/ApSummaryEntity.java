@@ -18,7 +18,6 @@ public class ApSummaryEntity {
         this.apName = apName;
     }
 
-    @Basic
     @Column(name = "ap_result_percent")
     public Integer getApResultPercent() {
         return apResultPercent;
