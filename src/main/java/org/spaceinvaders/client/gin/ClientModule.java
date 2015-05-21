@@ -14,8 +14,6 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
 import org.spaceinvaders.client.application.ApplicationModule;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.ResourceLoader;
-import org.spaceinvaders.client.rpc.DataProviderService;
-import org.spaceinvaders.client.rpc.DataProviderServiceAsync;
 
 /**
  * See more on setting up the PlaceManager on <a href="// See more on:
@@ -33,18 +31,10 @@ public class ClientModule extends AbstractPresenterModule {
         install(new DefaultModule());
         install(new ApplicationModule());
 
-        //TODO Install RpcDispatchAsyncModule() to use GWTP rpc dispatcher
+        // TODO : Install RpcDispatchAsyncModule() to use GWTP rpc dispatcher
         install(new RpcDispatchAsyncModule());
 
-        //REMEMBER bind ressource loader
+        // TODO : bind resource loader
         bind(ResourceLoader.class).asEagerSingleton();
     }
-
-    //REMEMBER create the RPC service
-    @Provides
-    @Singleton
-    DataProviderServiceAsync helloService() {
-        return GWT.create(DataProviderService.class);
-    }
-
 }

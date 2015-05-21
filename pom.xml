@@ -19,13 +19,12 @@
         <gwtp.version>1.4</gwtp.version>
         <gin.version>2.1.2</gin.version>
         <bootstrap.version>0.9.1</bootstrap.version>
-        <gsss.version>1.1-SNAPSHOT</gsss.version>
+        <gsss.version>1.0</gsss.version>
         <gwtchosen.version>2.0.0</gwtchosen.version>
 
         <gquery.version>1.4.3</gquery.version>
 
         <gwt.style>OBF</gwt.style>
-
 
         <!-- server -->
         <guice.version>4.0</guice.version>
@@ -242,7 +241,7 @@
         <dependency>
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-rest-shared</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.4</version>
         </dependency>
 
         <dependency>
@@ -373,6 +372,11 @@
             <groupId>org.jasig.cas.client</groupId>
             <artifactId>cas-client-core</artifactId>
             <version>3.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>2.7.0</version>
         </dependency>
     </dependencies>
 

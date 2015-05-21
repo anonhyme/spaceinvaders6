@@ -25,18 +25,18 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- RPC Servlet mapping -->
-    <servlet>
-        <servlet-name>helloService</servlet-name>
-        <servlet-class>org.spaceinvaders.server.rpc.DataProviderServiceServlet</servlet-class>
-    </servlet>
+    <!-- RPC Servlet mapping example -->
+    <!--<servlet>-->
+        <!--<servlet-name>helloService</servlet-name>-->
+        <!--<servlet-class>org.spaceinvaders.server.rpc.DataProviderServiceServlet</servlet-class>-->
+    <!--</servlet>-->
 
     <!-- hello is the relative path called with the annotation -->
     <!-- @RemoteServiceRelativePath("hello") in the client interface -->
-    <servlet-mapping>
-        <servlet-name>helloService</servlet-name>
-        <url-pattern>/ProjetS6/hello</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>helloService</servlet-name>-->
+        <!--<url-pattern>/ProjetS6/hello</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <filter>
         <filter-name>CAS	Authentication	Filter</filter-name>
