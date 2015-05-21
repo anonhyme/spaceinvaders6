@@ -16,6 +16,7 @@ import com.sencha.gxt.fx.client.Draggable;
 import com.sencha.gxt.fx.client.easing.Default;
 import com.sencha.gxt.fx.client.easing.EasingFunction;
 import com.sencha.gxt.fx.client.easing.ElasticIn;
+import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.Resizable;
 import com.sencha.gxt.widget.core.client.container.MarginData;
@@ -79,7 +80,7 @@ public class GaugeChart extends AbstractChart{
     private static final DataPropertyAccess dataAccess = GWT.create(DataPropertyAccess.class);
     ListStore<Data> store = new ListStore<Data>(dataAccess.nameKey());
 
-    private FramedPanel panel;
+    private ContentPanel panel;
 
     @Override
     public void setData() {
@@ -89,22 +90,24 @@ public class GaugeChart extends AbstractChart{
     public Widget asWidget() {
         if (panel == null) {
             final Chart<Data> chart1 = createGauge(store, 30, new RGB("#82B525"), false, new Default(), dataAccess.gradeTotal());
-            final Chart<Data> chart2 = createGauge(store, 80, new RGB("#3AA8CB"), false, new ElasticIn(), dataAccess.currentMax());
-
-
+            final Chart<Data> chart2 = createGauge(store, 80, new RGB("#3AA8CB"), true, new ElasticIn(), dataAccess.currentMax());
             VerticalLayoutContainer layout = new VerticalLayoutContainer();
             layout.add(chart1, new VerticalLayoutContainer.VerticalLayoutData(1, 0.5));
             layout.add(chart2, new VerticalLayoutContainer.VerticalLayoutData(1, 0.5));
 
-            panel = new FramedPanel();
+            panel = new ContentPanel();
             panel.setLayoutData(new MarginData(10));
-            panel.setCollapsible(true);
-            panel.setHeadingText("Stacked Bar Chart");
+            panel.setCollapsible(false);
+            panel.setHeaderVisible(false);
+            panel.setBorders(false);
             panel.setPixelSize(620, 500);
-            panel.setBodyBorder(true);
+            panel.setBodyBorder(false);
             panel.add(layout);
 
-            final Resizable resize = new Resizable(panel, Resizable.Dir.E, Resizable.Dir.SE, Resizable.Dir.S);
+            //panel.setHeadingText("Gauge Charts");
+
+            //Use if we want chart to be resizeable and draggable by the user
+            /*final Resizable resize = new Resizable(panel, Resizable.Dir.E, Resizable.Dir.SE, Resizable.Dir.S);
             resize.setMinHeight(400);
             resize.setMinWidth(400);
             panel.addExpandHandler(new ExpandEvent.ExpandHandler() {
@@ -119,7 +122,7 @@ public class GaugeChart extends AbstractChart{
                     resize.setEnabled(false);
                 }
             });
-            new Draggable(panel, panel.getHeader()).setUseProxy(false);
+           // new Draggable(panel, panel.getHeader()).setUseProxy(false);*/
         }
         return panel;
     }
@@ -148,5 +151,12 @@ public class GaugeChart extends AbstractChart{
         chart.addSeries(gauge);
 
         return chart;
+    }
+
+    @Override
+    public void resize(int x, int y){
+        if (panel!=null) {
+            panel.setPixelSize(x, y);
+        }
     }
 }

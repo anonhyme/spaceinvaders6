@@ -54,5 +54,7 @@ public abstract class AbstractChart extends Composite {
 
     abstract public void setData();
 
+    abstract public void resize(int x, int y);
+
 
 }

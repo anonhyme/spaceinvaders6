@@ -15,6 +15,7 @@ import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.fx.client.Draggable;
+import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.Resizable;
 import com.sencha.gxt.widget.core.client.container.MarginData;
@@ -72,7 +73,7 @@ public class GroupBarChart extends AbstractChart {
         }
     }
 
-    private FramedPanel panel;
+    private ContentPanel panel;
 
     public interface DataPropertyAccess extends PropertyAccess<Data> {
         ValueProvider<Data, Double> grade();
@@ -148,15 +149,19 @@ public class GroupBarChart extends AbstractChart {
             VerticalLayoutContainer layout = new VerticalLayoutContainer();
             layout.add(chart, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
 
-            panel = new FramedPanel();
+            panel = new ContentPanel();
             panel.setLayoutData(new MarginData(10));
             panel.setCollapsible(true);
             panel.setHeadingText("Grouped Bar Chart");
             panel.setPixelSize(620, 500);
-            panel.setBodyBorder(true);
+            panel.setBorders(false);
+            panel.setBodyBorder(false);
+            panel.setHeaderVisible(false);
             panel.add(chart);
 
-            final Resizable resize = new Resizable(panel, Resizable.Dir.E, Resizable.Dir.SE, Resizable.Dir.S);
+
+            //Use if we want chart to be resizeable and draggable by the user
+            /*final Resizable resize = new Resizable(panel, Resizable.Dir.E, Resizable.Dir.SE, Resizable.Dir.S);
             resize.setMinHeight(400);
             resize.setMinWidth(400);
             panel.addExpandHandler(new ExpandEvent.ExpandHandler() {
@@ -171,10 +176,15 @@ public class GroupBarChart extends AbstractChart {
                     resize.setEnabled(false);
                 }
             });
-            new Draggable(panel, panel.getHeader()).setUseProxy(false);
+            new Draggable(panel, panel.getHeader()).setUseProxy(false);*/
         }
 
         return panel;
+    }
+
+    @Override
+    public void resize(int x, int y){
+        panel.setPixelSize(x, y);
     }
 
 }

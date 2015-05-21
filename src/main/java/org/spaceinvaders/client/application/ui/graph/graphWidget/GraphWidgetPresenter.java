@@ -13,7 +13,7 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
         void setChart(IsWidget content);
     }
 
-    public enum ChartType {CumulativeGradeLineChart, Area, GroupBar, StackedBar, Gauge}
+    public enum ChartType {CumulativeGradeLineChart, Area, GroupBar, StackedBar, Gauge, Pie}
 
     ;
 
@@ -45,10 +45,16 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
                 break;
             case StackedBar:
                 this.chart = new StackedBarChart();
+                break;
             case Gauge:
                 this.chart = new GaugeChart();
+                break;
+            case Pie:
+                this.chart = new PieChart();
+                break;
         }
     }
+
     public void setChartData(){
         this.chart.setData();
     }
@@ -56,6 +62,10 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
     public void showChart(){
         MyView view = getView();
         view.setChart(chart);
+
     }
 
+    public void resizeChart(int width, int height){
+        this.chart.resize(400,400);
+    }
 }

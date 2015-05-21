@@ -16,6 +16,7 @@ import com.sencha.gxt.chart.client.draw.Stop;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.*;
 import com.sencha.gxt.fx.client.Draggable;
+import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.Resizable;
 import com.sencha.gxt.widget.core.client.container.MarginData;
@@ -70,7 +71,7 @@ public class PieChart extends AbstractChart {
     public static final DataModelProperties dataModelProperties = GWT.create(DataModelProperties.class);
     private ListStore<DataModel> listStore;
     private Chart<DataModel> chart;
-    private FramedPanel panel;
+    private ContentPanel panel;
 
 
     @Override
@@ -126,15 +127,18 @@ public class PieChart extends AbstractChart {
             VerticalLayoutContainer layout = new VerticalLayoutContainer();
             layout.add(chart, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
 
-            panel = new FramedPanel();
+            panel = new ContentPanel();
             panel.setLayoutData(new MarginData(10));
             panel.setCollapsible(true);
             panel.setHeadingText("Pie Chart");
             panel.setPixelSize(620, 500);
-            panel.setBodyBorder(true);
+            panel.setBodyBorder(false);
+            panel.setBorders(false);
+            panel.setHeaderVisible(false);
             panel.add(layout);
 
-            final Resizable resize = new Resizable(panel, Resizable.Dir.E, Resizable.Dir.SE, Resizable.Dir.S);
+            //Use if we want chart to be resizeable and draggable by the user
+            /*final Resizable resize = new Resizable(panel, Resizable.Dir.E, Resizable.Dir.SE, Resizable.Dir.S);
             resize.setMinHeight(400);
             resize.setMinWidth(400);
             panel.addExpandHandler(new ExpandEvent.ExpandHandler() {
@@ -149,7 +153,7 @@ public class PieChart extends AbstractChart {
                     resize.setEnabled(false);
                 }
             });
-            new Draggable(panel, panel.getHeader()).setUseProxy(false);
+            new Draggable(panel, panel.getHeader()).setUseProxy(false);*/
         }
         return panel;
 
@@ -168,9 +172,14 @@ public class PieChart extends AbstractChart {
         DataModel item2 = new DataModel();
         item2.setId(2);
         item2.setName("female");
-        item2.setData(50);
+        item2.setData(2);
 
         listStore.add(item1);
         listStore.add(item2);
+    }
+
+    @Override
+    public void resize(int x, int y){
+        panel.setPixelSize(x, y);
     }
 }
