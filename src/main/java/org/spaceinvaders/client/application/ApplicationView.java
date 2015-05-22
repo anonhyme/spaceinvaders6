@@ -15,9 +15,9 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     public interface Binder extends UiBinder<Widget, ApplicationView> {
     }
 
-
     @UiField
     Element loadingMessage;
+
     @UiField
     SimplePanel mainContentPanel;
 

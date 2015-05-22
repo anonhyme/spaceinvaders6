@@ -2,14 +2,18 @@ package org.spaceinvaders.client.place;
 
 public class NameTokens {
     public static final String home = "!home";
+<<<<<<< HEAD
     public static final String bootstrapExamplePage = "bootstrapExamplePage";
     public static final String simplePage = "simplePage";
     public static final String exampleRpc = "exampleRpc";
     public static final String graphDemo = "graphDemo";
+=======
+>>>>>>> master
 
     public static String getHome() {
-        return home;
+        return graphDemo;
     }
+<<<<<<< HEAD
 
     public static String getBootstrapExamplePage() {
         return bootstrapExamplePage;
@@ -26,4 +30,6 @@ public class NameTokens {
     public static String getGraphDemo() {
         return graphDemo;
     }
+=======
+>>>>>>> master
 }

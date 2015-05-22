@@ -19,13 +19,12 @@
         <gwtp.version>1.4</gwtp.version>
         <gin.version>2.1.2</gin.version>
         <bootstrap.version>0.9.1</bootstrap.version>
-        <gsss.version>1.1-SNAPSHOT</gsss.version>
+        <gsss.version>1.0</gsss.version>
         <gwtchosen.version>2.0.0</gwtchosen.version>
 
         <gquery.version>1.4.3</gquery.version>
 
         <gwt.style>OBF</gwt.style>
-
 
         <!-- server -->
         <guice.version>4.0</guice.version>
@@ -202,6 +201,13 @@
                         <artifactId>appengine-tools-sdk</artifactId>
                         <version>${gae.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.jasig.cas.client</groupId>
+                        <artifactId>cas-client-core</artifactId>
+                        <version>3.3.3</version>
+                        <scope>runtime</scope>
+                        <type>jar</type>
+                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>
@@ -235,7 +241,7 @@
         <dependency>
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-rest-shared</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.4</version>
         </dependency>
 
         <dependency>
@@ -248,8 +254,13 @@
         <!-- Persistence -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.9.Final</version>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.10.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.1.0.Final</version>
         </dependency>
 
         <!-- GWT-Platform dependencies -->
@@ -366,8 +377,11 @@
             <groupId>org.jasig.cas.client</groupId>
             <artifactId>cas-client-core</artifactId>
             <version>3.3.3</version>
-            <scope>runtime</scope>
-            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>2.7.0</version>
         </dependency>
         <dependency>
             <groupId>com.sencha.gxt</groupId>
@@ -387,6 +401,12 @@
         </dependency>
 
 
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
+        </dependency>
     </dependencies>
 
     <repositories>
