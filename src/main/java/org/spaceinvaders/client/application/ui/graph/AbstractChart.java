@@ -13,7 +13,7 @@ import com.sencha.gxt.widget.core.client.FramedPanel;
 /**
  * Created by Etienne on 2015-05-20.
  */
-public abstract class AbstractChart extends Composite {
+public abstract class AbstractChart<T> extends Composite {
 
     // Needs to define DataModel
     /* Example
@@ -52,7 +52,7 @@ public abstract class AbstractChart extends Composite {
     //private FramedPanel panel;
 */
 
-    abstract public void setData();
+    abstract public void setData(T data);
 
     abstract public void resize(int x, int y);
 

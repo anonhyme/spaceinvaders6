@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.ui.graph;
 
+import com.github.underscore._;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,11 +22,17 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.ExpandEvent;
+import org.spaceinvaders.client.entities.ApSummaryEntity;
+import org.spaceinvaders.client.entities.CompetenceResultsEntity;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class CumulativeGradeLineChart extends AbstractChart {
+public class CumulativeGradeLineChart extends AbstractChart<List<CompetenceResultsEntity>> {
 
     public class Data {
         private String evaluationName;
@@ -97,13 +104,24 @@ public class CumulativeGradeLineChart extends AbstractChart {
     private int currentTotalMaxGrade = 0;
 
     @Override
+    public void setData(List<CompetenceResultsEntity> l){
+       //Logic to add together results from same avaluation in different competencies
+
+
+        setData();
+    }
+
+    int numCompetences = 0;
+    public void setNumCompetences(int n){
+        numCompetences =n;
+    }
+
     public void setData() {
         addData("Rapport", 50, 40, 100);
         addData("Evaluation 1", 60, 50, 100);
         addData("Evaluation 2", 70, 100, 100);
         addData("Examen", 80, 70, 100);
         addData("Examen final", 60, 50, 100);
-
     }
 
     private void addData(String name, double grade, double average, double maxGrade) {

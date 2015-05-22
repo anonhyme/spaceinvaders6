@@ -23,12 +23,13 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.ExpandEvent;
+import org.spaceinvaders.client.entities.ApSummaryEntity;
 
 
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class GaugeChart extends AbstractChart{
+public class GaugeChart extends AbstractChart<ApSummaryEntity>{
 
     public class Data {
         private String competencyName;
@@ -83,7 +84,7 @@ public class GaugeChart extends AbstractChart{
     private ContentPanel panel;
 
     @Override
-    public void setData() {
+    public void setData(ApSummaryEntity e) {
         store.add(new Data("GEN501", 50, 30));
     }
 

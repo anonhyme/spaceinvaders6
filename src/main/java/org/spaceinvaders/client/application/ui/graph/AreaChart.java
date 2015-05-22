@@ -22,11 +22,12 @@ import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import org.spaceinvaders.client.entities.ApSummaryEntity;
 
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class AreaChart extends AbstractChart {
+public class AreaChart extends AbstractChart<ApSummaryEntity> {
 
     public class Data {
         private String evaluationName;
@@ -93,7 +94,7 @@ public class AreaChart extends AbstractChart {
     ListStore<Data> store = new ListStore<Data>(dataAccess.nameKey());
 
     @Override
-    public void setData() {
+    public void setData(ApSummaryEntity data) {
         addData("Rapport", 50, 60, 100);
         addData("Evaluation 1", 60, 80, 100);
         addData("Evaluation 2", 70, 90, 100);

@@ -22,11 +22,14 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.ExpandEvent;
+import org.spaceinvaders.client.entities.ApSummaryEntity;
+
+import java.util.List;
 
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class GroupBarChart extends AbstractChart {
+public class GroupBarChart extends AbstractChart<List<ApSummaryEntity>> {
     public class Data {
         private String className;
         private double grade;
@@ -92,11 +95,11 @@ public class GroupBarChart extends AbstractChart {
     ListStore<Data> store = new ListStore<Data>(dataAccess.nameKey());
 
     @Override
-    public void setData() {
-        store.add(new Data("GEN501", 50, 60, 99));
-        store.add(new Data("GEN502", 60, 80, 99));
-        store.add(new Data("GEN503", 50, 60, 99));
-        store.add(new Data("GEN504", 60, 80, 99));
+    public void setData(List<ApSummaryEntity> apList) {
+        for (int i =0; i< apList.size(); i++) {
+            ApSummaryEntity e = apList.get(i);
+            store.add(new Data(e.getApName(), e.getApResult(), e.getApAverage(), e.getApMax()));
+        }
     }
 
     @Override

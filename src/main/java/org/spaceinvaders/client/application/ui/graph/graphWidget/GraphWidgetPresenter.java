@@ -7,6 +7,10 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import org.spaceinvaders.client.application.ui.graph.*;
+import org.spaceinvaders.client.entities.ApSummaryEntity;
+import org.spaceinvaders.client.entities.CompetenceResultsEntity;
+
+import java.util.List;
 
 public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.MyView> {
     public interface MyView extends View {
@@ -55,8 +59,19 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
         }
     }
 
-    public void setChartData(){
-        this.chart.setData();
+
+
+    public void setChartData(List<ApSummaryEntity> l){
+        this.chart.setData(l);
+    }
+
+    public void setChartData(List<CompetenceResultsEntity> l, int numCompetences){
+        ((CumulativeGradeLineChart)chart).setNumCompetences(numCompetences);
+        this.chart.setData(l);
+    }
+
+    public void setChartData(ApSummaryEntity e){
+        this.chart.setData(e);
     }
 
     public void showChart(){
