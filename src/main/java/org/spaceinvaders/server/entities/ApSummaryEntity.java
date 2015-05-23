@@ -2,11 +2,15 @@ package org.spaceinvaders.server.entities;
 
 import javax.persistence.*;
 
+// TODO : stored procedure
+
 @Entity
 @Table(name = "ap_summary_t", schema = "note", catalog = "S6_PROJET_P02")
 public class ApSummaryEntity {
     private String apName;
-    private Integer apResultPercent;
+    private Integer resultValue;
+    private Integer avgValue;
+    private Integer maxValue;
 
     @Id
     @Column(name = "ap_name")
@@ -18,13 +22,31 @@ public class ApSummaryEntity {
         this.apName = apName;
     }
 
-    @Column(name = "ap_result_percent")
-    public Integer getApResultPercent() {
-        return apResultPercent;
+    @Column(name = "result_value")
+    public Integer getResultValue() {
+        return resultValue;
     }
 
-    public void setApResultPercent(Integer apResultPercent) {
-        this.apResultPercent = apResultPercent;
+    public void setResultValue(Integer resultValue) {
+        this.resultValue = resultValue;
+    }
+
+    @Column(name = "avg_value")
+    public Integer getAvgValue() {
+        return avgValue;
+    }
+
+    public void setAvgValue(Integer avgValue) {
+        this.avgValue = avgValue;
+    }
+
+    @Column(name = "max_value")
+    public Integer getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(Integer maxValue) {
+        this.maxValue = maxValue;
     }
 
     @Override
@@ -35,8 +57,9 @@ public class ApSummaryEntity {
         ApSummaryEntity that = (ApSummaryEntity) o;
 
         if (apName != null ? !apName.equals(that.apName) : that.apName != null) return false;
-        if (apResultPercent != null ? !apResultPercent.equals(that.apResultPercent) : that.apResultPercent != null)
-            return false;
+        if (resultValue != null ? !resultValue.equals(that.resultValue) : that.resultValue != null) return false;
+        if (avgValue != null ? !avgValue.equals(that.avgValue) : that.avgValue != null) return false;
+        if (maxValue != null ? !maxValue.equals(that.maxValue) : that.maxValue != null) return false;
 
         return true;
     }
@@ -44,7 +67,9 @@ public class ApSummaryEntity {
     @Override
     public int hashCode() {
         int result = apName != null ? apName.hashCode() : 0;
-        result = 31 * result + (apResultPercent != null ? apResultPercent.hashCode() : 0);
+        result = 31 * result + (resultValue != null ? resultValue.hashCode() : 0);
+        result = 31 * result + (avgValue != null ? avgValue.hashCode() : 0);
+        result = 31 * result + (maxValue != null ? maxValue.hashCode() : 0);
         return result;
     }
 }

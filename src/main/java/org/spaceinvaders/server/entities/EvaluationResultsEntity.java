@@ -2,6 +2,15 @@ package org.spaceinvaders.server.entities;
 
 import javax.persistence.*;
 
+@NamedStoredProcedureQuery(
+    name = "GetSemesterResults",
+    resultClasses = EvaluationResultsEntity.class,
+    procedureName = "note.get_semester_results",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class),
+    }
+)
 @Entity
 @Table(name = "evaluation_results_t", schema = "note", catalog = "S6_PROJET_P02")
 public class EvaluationResultsEntity {

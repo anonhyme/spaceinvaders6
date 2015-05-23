@@ -1,9 +1,5 @@
 package org.spaceinvaders.client.gin;
 
-import com.google.gwt.core.client.GWT;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-
 import com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
@@ -22,19 +18,15 @@ import org.spaceinvaders.client.resources.ResourceLoader;
 public class ClientModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
+        install(new DefaultModule());
+        install(new RpcDispatchAsyncModule());
+        install(new ApplicationModule());
 
         // DefaultPlaceManager Places
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.home);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.home);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.home);
 
-        install(new DefaultModule());
-        install(new ApplicationModule());
-
-        // TODO : Install RpcDispatchAsyncModule() to use GWTP rpc dispatcher
-        install(new RpcDispatchAsyncModule());
-
-        // TODO : bind resource loader
         bind(ResourceLoader.class).asEagerSingleton();
     }
 }

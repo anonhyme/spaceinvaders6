@@ -1,6 +1,9 @@
 package org.spaceinvaders.server.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
+// TODO : stored procedure
 
 @Entity
 @Table(name = "competence_results_t", schema = "note", catalog = "S6_PROJET_P02")

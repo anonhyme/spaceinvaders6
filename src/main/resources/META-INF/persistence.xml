@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence">
 
-    <persistence-unit name="persistUnit">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <persistence-unit name="persistUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>org.spaceinvaders.server.entities.ApSummaryEntity</class>
         <class>org.spaceinvaders.server.entities.CompetenceResultsEntity</class>
         <class>org.spaceinvaders.server.entities.EvaluationResultsEntity</class>
         <properties>
-            <property name="hibernate.connection.url"
+            <property name="javax.persistence.jdbc.url"
                       value="jdbc:postgresql://thunder.servebeer.com:5433/S6_PROJET_P02"/>
-            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.username" value="opus"/>
-            <property name="hibernate.connection.password" value="opus102"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="opus"/>
+            <property name="javax.persistence.jdbc.password" value="opus102"/>
         </properties>
     </persistence-unit>
 </persistence>
