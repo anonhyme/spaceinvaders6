@@ -14,18 +14,16 @@ SET SEARCH_PATH TO note;
 --
 -- AP types and procedures
 --
--- DROP TYPE ap_summary_t CASCADE;
-
-CREATE TYPE ap_summary_t AS (
+CREATE TYPE ap_grades_summary_t AS (
   ap_name text,
   result_value int,
   avg_value int,
   max_value int
 );
 
-CREATE OR REPLACE FUNCTION get_ap_results(student_id text, session_id int) RETURNS SETOF ap_summary_t AS $$
+CREATE OR REPLACE FUNCTION get_ap_results(student_id text, session_id int) RETURNS SETOF ap_grades_summary_t AS $$
     -- TODO : CREATE SELECT STATEMENT
-    SELECT 'GEN501', 80, 79, 100
+    SELECT           'GEN501', 80, 79, 100
     UNION ALL SELECT 'GEN402', 75, 73, 90
     UNION ALL SELECT 'GEN666', 42, 50, 110;
 $$ LANGUAGE SQL;
@@ -37,9 +35,7 @@ $$ LANGUAGE SQL;
 --
 -- Semester types and procedures
 --
--- DROP TYPE evaluation_results_t CASCADE;
-
-CREATE TYPE evaluation_results_t AS (
+CREATE TYPE competence_eval_result_t AS (
   eval_label text,
   course_label text,
   competence_label text,
@@ -49,39 +45,27 @@ CREATE TYPE evaluation_results_t AS (
   standard_dev int
 );
 
-CREATE OR REPLACE FUNCTION get_semester_results(student_id text, session_id int) RETURNS SETOF evaluation_results_t AS $$
+CREATE OR REPLACE FUNCTION get_semester_eval_results(student_id text, session_id int) RETURNS SETOF competence_eval_result_t AS $$
   -- TODO : CREATE SELECT STATEMENT
-  SELECT 'Sommatif APP2', 'GEN501', 'GEN501-1', 80, 75, 120, 6
+  SELECT           'Sommatif APP2', 'GEN501', 'GEN501-1', 80, 75, 120, 6
   UNION ALL SELECT 'Sommatif APP2', 'GEN501', 'GEN501-2', 56, 50, 70, 5
   UNION ALL SELECT 'Sommatif APP2', 'GEN402', 'GEN402-1', 74, 70, 75, 11
-  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN501-1', 80, 75, 85, 3
-  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN402-2', 80, 73, 110, 4;
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75, 85, 3
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73, 110, 4;
 $$ LANGUAGE SQL;
 
 -- Semester procedure example
 -- SELECT * FROM get_semester_results('bedh2102', 'S5I');
 
-
---
--- Course types and procedures
---
--- DROP TYPE competence_results_t CASCADE;
-
-CREATE TYPE competence_results_t AS (
-  eval_label text,
-  competence_label text,
-  result_value int,
-  avg_result_value int,
-  max_result_value int,
-  standard_dev int,
-  cumulated_frequency_percent int -- how many points compared to the max possible number at this moment
-);
-
-CREATE OR REPLACE FUNCTION get_course_results(student_id text, session_id int) RETURNS SETOF competence_results_t AS $$
+CREATE OR REPLACE FUNCTION get_ap_eval_results(student_id text, session_id int, ap_id int) RETURNS SETOF competence_eval_result_t AS $$
   -- TODO : CREATE SELECT STATEMENT
-  SELECT 'Sommatif APP2', 'GEN501-1', 80, 75, 120, 6, 80
-  UNION ALL SELECT 'Sommatif APP2', 'GEN501-2', 56, 50, 70, 5, 85;
+  SELECT           'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75, 85, 3
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73, 110, 4;
 $$ LANGUAGE SQL;
 
--- Course procedure example
--- SELECT * FROM get_course_results('bedh2102', 'S5I');
+-- Ap results procedure example
+-- SELECT * FROM get_semester_results('bedh2102', 'S5I');
+
+
+-- TODO : probably add a procedure to retrieve competence progress (ex : student has currently 50/300 of the total points for a competence)
+-- We could also include it in the competence_eval_result_t but it seems like a lot of information at the same time

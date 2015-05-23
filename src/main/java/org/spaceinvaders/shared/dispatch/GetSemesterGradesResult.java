@@ -1,7 +1,7 @@
 package org.spaceinvaders.shared.dispatch;
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
-import org.spaceinvaders.shared.dto.EvaluationResultsDto;
+import org.spaceinvaders.shared.dto.CompetenceEvalResultDto;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  * The result of a {@link GetSemesterGradesAction} action.
  */
 public class GetSemesterGradesResult implements Result {
-    private List<EvaluationResultsDto> evaluationResults;
+    private List<CompetenceEvalResultDto> evaluationResults;
 
-    public GetSemesterGradesResult(final List<EvaluationResultsDto> evaluationResults) {
+    public GetSemesterGradesResult(final List<CompetenceEvalResultDto> evaluationResults) {
         this.evaluationResults = evaluationResults;
     }
 
@@ -22,7 +22,7 @@ public class GetSemesterGradesResult implements Result {
     private GetSemesterGradesResult() {
     }
 
-    public List<EvaluationResultsDto> getEvaluationResults() {
+    public List<CompetenceEvalResultDto> getEvaluationResults() {
         return evaluationResults;
     }
 }

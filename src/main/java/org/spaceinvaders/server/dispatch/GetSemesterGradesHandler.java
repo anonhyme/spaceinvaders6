@@ -21,20 +21,19 @@ import com.google.inject.Provider;
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
-import org.spaceinvaders.server.dao.SemesterResultsDao;
+import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.spaceinvaders.server.entities.*;
-import org.spaceinvaders.shared.dto.EvaluationResultsDto;
+import org.spaceinvaders.shared.dto.CompetenceEvalResultDto;
 
 import java.util.List;
 
 public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGradesAction, GetSemesterGradesResult> {
-    private SemesterResultsDao semesterResultsDao;
+    private CompetenceEvalResultDao competenceEvalResultDao;
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
 
@@ -42,10 +41,10 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
     GetSemesterGradesHandler(
             ServletContext servletContext,
             Provider<HttpServletRequest> requestProvider,
-            SemesterResultsDao semesterResultsDao) {
+            CompetenceEvalResultDao competenceEvalResultDao) {
         this.servletContext = servletContext;
         this.requestProvider = requestProvider;
-        this.semesterResultsDao = semesterResultsDao;
+        this.competenceEvalResultDao = competenceEvalResultDao;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
         int semesterID = action.getSemesterID();
         String cip = action.getCip();
 
-        List<EvaluationResultsDto> results = semesterResultsDao.getSemesterResults(cip, semesterID);
+        List<CompetenceEvalResultDto> results = competenceEvalResultDao.getSemesterResults(cip, semesterID);
 
         // TODO : return all the results the way we want to
         return new GetSemesterGradesResult(results);
