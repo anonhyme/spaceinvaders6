@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;

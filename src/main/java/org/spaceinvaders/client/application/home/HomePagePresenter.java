@@ -1,53 +1,53 @@
 package org.spaceinvaders.client.application.home;
 
+import com.google.gwt.core.client.GWT;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
+
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.rpc.DataProviderServiceAsync;
+import org.spaceinvaders.client.rpc.SemesterServiceAsync;
+import org.spaceinvaders.shared.model.TableDataTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomePagePresenter.MyProxy> {
-    public interface MyView extends View {
+public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomePagePresenter.MyProxy> implements HomeUiHandlers {
+    public interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
+        void updateTable(List<TableDataTest> result);
     }
 
-    @ProxyCodeSplit
+    @ProxyStandard
     @NameToken(NameTokens.home)
     public interface MyProxy extends ProxyPlace<HomePagePresenter> {
     }
 
-//    public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_HeaderPresenter = new GwtEvent.Type<>();
-//    public static final GwtEvent.Type<RevealContentHandler<?>> SLOT_bootstrapPresenter = new GwtEvent.Type<>();
 
+    private List<TableDataTest> topResult = new ArrayList<TableDataTest>();
 
-//    BootstrapExamplePresenter bootstrapPresenter;
-
-
-    private DataProviderServiceAsync helloService;
-    private DispatchAsync dispatchAsync;
-
+    private SemesterServiceAsync exampleService;
 
     @Inject
     HomePagePresenter(EventBus eventBus,
                       MyView view,
                       MyProxy proxy,
-                      DataProviderServiceAsync helloService,
+                      SemesterServiceAsync exampleService,
                       DispatchAsync dispatchAsync
-                      ) {
+    ) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
-        this.helloService = helloService;
-        this.dispatchAsync = dispatchAsync;
-
-//        this.bootstrapPresenter = bootstrapPresenter;
-
+        this.exampleService = exampleService;
+        getView().setUiHandlers(this);
     }
 
     @Override
@@ -55,24 +55,47 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
         RevealRootLayoutContentEvent.fire(this, this);
     }
 
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+    }
+
+    @Override
+    protected void onReset() {
+        super.onReset();
+    }
+
 //    @Override
-//    protected void onBind() {
-//        super.onBind();
-//        setInSlot(SLOT_HeaderPresenter, headerPresenter);
-////        setInSlot(SLOT_bootstrapPresenter, bootstrapPresenter);
+//    public void getData() {
+//        exampleService.fetchData(new AsyncCallback<List<TableDataTest>>() {
+//            List<TableDataTest> tableDataTests = new ArrayList<TableDataTest>();
 //
-////        helloService.sayHello(new AsyncCallback<HelloRPC>() {
-////            @Override
-////            public void onFailure(Throwable caught) {
-////
-////            }
-////
-////            @Override
-////            public void onSuccess(HelloRPC result) {
-////
-////                GWT.log("got [" + result.getResponse() + "]");
-////
-////            }
-////        });
+//            @Override
+//            public void onFailure(Throwable caught) {
+//            }
+//
+//            @Override
+//            public void onSuccess(List<TableDataTest> result) {
+//                setResult(result);
+//                getView().updateTable(result);
+//            }
+//        });
+//        GWT.log("getData() " + getTopResult());
 //    }
+
+    public List<TableDataTest> getDataList() {
+        GWT.log("getDataList [" + topResult + "]");
+        return getTopResult();
+    }
+
+    void setResult(List<TableDataTest> result) {
+        GWT.log("SetResult [" + result + "]");
+        this.topResult = result;
+    }
+
+    public List<TableDataTest> getTopResult() {
+        GWT.log("getTopResult [" + topResult + "]");
+        return topResult;
+    }
 }

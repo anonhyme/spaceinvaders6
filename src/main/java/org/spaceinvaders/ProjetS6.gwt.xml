@@ -1,26 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <module rename-to='ProjetS6'>
     <!-- Inherit the core Web Toolkit stuff. -->
-    <inherits name='com.google.gwt.user.User' />
-    <inherits name='com.google.gwt.inject.Inject' />
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='com.google.gwt.inject.Inject'/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
 
     <!-- Default css -->
     <!--<inherits name='com.google.gwt.user.theme.standard.Standard' />-->
-     <!--<inherits name='com.google.gwt.user.theme.chrome.Chrome'/>-->
+    <!--<inherits name='com.google.gwt.user.theme.chrome.Chrome'/>-->
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
     <!-- Other module inherits -->
-    <inherits name='com.gwtplatform.dispatch.Dispatch' />
+    <inherits name='com.gwtplatform.dispatch.Dispatch'/>
 
-    <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
+    <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
 
-    <source path='client' />
-    <source path='shared' />
+    <source path='client'/>
+    <source path='shared'/>
 
-    <set-configuration-property name="gin.ginjector.modules" value="org.spaceinvaders.client.gin.ClientModule"/>
+    <set-configuration-property name="gin.ginjector.modules"
+                                value="org.spaceinvaders.client.gin.ClientModule"/>
 
     <set-configuration-property name="CssResource.enableGss" value="true"/>
-    <set-configuration-property name="CssResource.legacy" value="true" />
+    <set-configuration-property name="CssResource.legacy" value="true"/>
 
 </module>

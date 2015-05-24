@@ -209,6 +209,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
+            <version>4.0</version>
+        </dependency>
+
         <!-- GQuery -->
         <dependency>
             <groupId>com.googlecode.gwtquery</groupId>
@@ -246,11 +252,11 @@
         </dependency>
 
         <!-- Persistence -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.9.Final</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-core</artifactId>-->
+            <!--<version>4.3.9.Final</version>-->
+        <!--</dependency>-->
 
         <!-- GWT-Platform dependencies -->
         <dependency>
@@ -366,9 +372,21 @@
             <groupId>org.jasig.cas.client</groupId>
             <artifactId>cas-client-core</artifactId>
             <version>3.3.3</version>
-            <scope>runtime</scope>
-            <type>jar</type>
+            <scope>provided</scope>
+            <!--<type>jar</type>-->
         </dependency>
+
+        <dependency>
+            <groupId>com.sencha.gxt</groupId>
+            <artifactId>gxt</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.10.Final</version>
+        </dependency>
+
 
     </dependencies>
 

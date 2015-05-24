@@ -2,8 +2,10 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
 
     <persistence-unit name="persistUnit">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
         <properties>
+            <!--<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/app1_sandbox"/>-->
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/app1_sandbox"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.user" value="postgres"/>

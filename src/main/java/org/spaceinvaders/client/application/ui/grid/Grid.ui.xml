@@ -12,8 +12,9 @@
             <b:Heading size="H3" text="Data Grid"/>
         </b:PanelHeader>
         <b:PanelBody>
-            <b.html:DataGrid bordered="true" condensed="true" striped="true" hover="true" height="1000px"
-                        width="100%"  ui:field="dataGrid"/>
+            <b.html:DataGrid bordered="true" condensed="true" striped="true" hover="true"
+                             height="1000px"
+                             width="100%" ui:field="dataGrid"/>
         </b:PanelBody>
     </b:Panel>
 </ui:UiBinder>

@@ -61,7 +61,6 @@ public class MainMenu extends Composite {
         super.onAttach();
     }
 
-
     private void addNavbarLink(String name, String nameToken) {
         AnchorListItem anchorListItem = new AnchorListItem(name);
         anchorListItem.setTargetHistoryToken(nameToken);

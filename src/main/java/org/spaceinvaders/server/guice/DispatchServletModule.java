@@ -8,6 +8,7 @@ import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 public class DispatchServletModule extends ServletModule {
     @Override
     public void configureServlets() {
+//        filter("/*").through(PersistFilter.class);
         serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(DispatchServiceImpl.class);
     }
 }

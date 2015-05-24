@@ -14,8 +14,8 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
 import org.spaceinvaders.client.application.ApplicationModule;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.ResourceLoader;
-import org.spaceinvaders.client.rpc.DataProviderService;
-import org.spaceinvaders.client.rpc.DataProviderServiceAsync;
+import org.spaceinvaders.client.rpc.SemesterService;
+import org.spaceinvaders.client.rpc.SemesterServiceAsync;
 
 /**
  * See more on setting up the PlaceManager on <a href="// See more on:
@@ -26,7 +26,7 @@ public class ClientModule extends AbstractPresenterModule {
     protected void configure() {
 
         // DefaultPlaceManager Places
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.home);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.gridDemo);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.home);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.home);
 
@@ -43,8 +43,8 @@ public class ClientModule extends AbstractPresenterModule {
     //REMEMBER create the RPC service
     @Provides
     @Singleton
-    DataProviderServiceAsync helloService() {
-        return GWT.create(DataProviderService.class);
+    SemesterServiceAsync helloService() {
+        return GWT.create(SemesterService.class);
     }
 
 }
