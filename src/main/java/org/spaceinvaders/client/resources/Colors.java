@@ -16,21 +16,4 @@ package org.spaceinvaders.client.resources;
 
 public class Colors {
     public static final String C_PRIMARY = "#fbe605";
-
-    public static final String C_TEXT = "#231f20";
-    public static final String C_TEXT_LIGHT = "#fff";
-
-    public static final String C_STRIPE_LIGHT = "#fff";
-    public static final String C_STRIPE_MEDIUM1 = "#fafafa";
-    public static final String C_STRIPE_MEDIUM2 = "#f2f2f2";
-    public static final String C_STRIPE_MEDIUM3 = "#ebebeb";
-    public static final String C_STRIPE_DARK = "#000";
-    public static final String C_STRIPE_COLORED = C_PRIMARY;
-
-    public static final String C_PRODUCT_CHOSEN = "#b4d333";
-    public static final String C_PRODUCT_GAE = "#36baec";
-    public static final String C_PRODUCT_GWTP = "#f7941e";
-    public static final String C_PRODUCT_JUKITO = "#ed1c24";
-    public static final String C_PRODUCT_GQUERY = "#0768ac";
-    public static final String C_PRODUCT_ELASTIC = "#fbe605";
 }

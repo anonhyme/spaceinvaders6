@@ -4,12 +4,14 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
-import org.spaceinvaders.server.rpc.SemesterServiceServlet;
+import javax.servlet.annotation.WebListener;
 
+@WebListener
 public class GuiceServletConfig extends GuiceServletContextListener {
     @Override
     protected Injector getInjector() {
-        Injector injector = Guice.createInjector(new ServerModule(), new DispatchServletModule());
-        return injector;
+        return Guice.createInjector(new ServerModule(),
+                                    new DispatchServletModule(),
+                                    new DaoModule());
     }
 }
