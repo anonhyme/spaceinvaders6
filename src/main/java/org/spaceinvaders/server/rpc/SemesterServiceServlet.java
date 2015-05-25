@@ -3,7 +3,6 @@ package org.spaceinvaders.server.rpc;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import org.spaceinvaders.client.rpc.SemesterService;
-import org.spaceinvaders.shared.model.EvaluationGrid;
 import org.spaceinvaders.shared.model.SemesterCourses;
 import org.spaceinvaders.shared.model.SemesterInfo;
 

@@ -11,7 +11,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
     @Override
     protected Injector getInjector() {
         return Guice.createInjector(new ServerModule(),
-                                    new DispatchServletModule(),
-                                    new DaoModule());
+                new DispatchServletModule(),
+                new DaoModule());
     }
 }

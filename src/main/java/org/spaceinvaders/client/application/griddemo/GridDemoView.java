@@ -133,7 +133,7 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
         return column;
     }
 
-    private List<EvaluationGrid> defaultEval(int countCol, int countRow){
+    private List<EvaluationGrid> defaultEval(int countCol, int countRow) {
         List<EvaluationGrid> evaluations = new ArrayList<EvaluationGrid>();
         List<SemesterCourses> semesterCourses = new ArrayList<SemesterCourses>();
         for (int i = 0; i < countRow; i++) {
@@ -141,7 +141,7 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
         }
 
         for (int i = 0; i < countCol; i++) {
-            evaluations.add(new EvaluationGrid("APP "+i, String.valueOf(i), semesterCourses));
+            evaluations.add(new EvaluationGrid("APP " + i, String.valueOf(i), semesterCourses));
         }
         return evaluations;
     }

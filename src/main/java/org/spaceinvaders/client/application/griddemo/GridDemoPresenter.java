@@ -31,6 +31,7 @@ import java.util.List;
 public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridDemoPresenter.MyProxy> implements GridDemoUiHandlers {
     interface MyView extends View, HasUiHandlers<GridDemoUiHandlers> {
         void updateSemesterTable(List<EvaluationGrid> result);
+
         void initSemesterTable(SemesterInfo result);
     }
 

@@ -3,8 +3,10 @@ package org.spaceinvaders.server.dispatch;
 /**
  * Created by AlexandraMaude on 2015-05-19.
  */
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+
 import org.jasig.cas.client.validation.Assertion;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +36,9 @@ public class UserSessionImpl {
         try {
             if (session != null) {
                 return session;
-            }
-            else if (provider.get().isRequestedSessionIdValid()) {
+            } else if (provider.get().isRequestedSessionIdValid()) {
                 return provider.get().getSession(false);
-            }
-            else {
+            } else {
                 return null;
             }
         } catch (Exception e) {
@@ -50,15 +50,15 @@ public class UserSessionImpl {
         return getSession() != null;
     }
 
-    public String getUserId(){
+    public String getUserId() {
         String userId = null;
         HttpSession session = getSession();
 
-        if(session != null){
+        if (session != null) {
             Assertion assertion = (Assertion) session.getAttribute(org.jasig.cas.client.util.AbstractCasFilter.CONST_CAS_ASSERTION);
 
             if (assertion != null) {
-                userId =  assertion.getPrincipal().getName();
+                userId = assertion.getPrincipal().getName();
             }
         }
 
