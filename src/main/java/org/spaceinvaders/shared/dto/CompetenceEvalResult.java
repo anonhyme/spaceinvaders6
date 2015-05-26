@@ -2,7 +2,7 @@ package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
 
-public class CompetenceEvalResultDto implements Serializable {
+public class CompetenceEvalResult implements Serializable {
     private String evalLabel;
     private String courseLabel;
     private String competenceLabel;

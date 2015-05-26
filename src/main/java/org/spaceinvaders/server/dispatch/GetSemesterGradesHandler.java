@@ -22,13 +22,15 @@ import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
+import org.spaceinvaders.server.dao.SemesterInfoDao;
+import org.spaceinvaders.server.entities.CompetenceEntity;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.spaceinvaders.shared.dto.CompetenceEvalResultDto;
+import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.List;
 
@@ -53,9 +55,8 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
         int semesterID = action.getSemesterID();
         String cip = action.getCip();
 
-        List<CompetenceEvalResultDto> results = competenceEvalResultDao.getSemesterResults(cip, semesterID);
+        List<CompetenceEvalResult> results = competenceEvalResultDao.getSemesterResults(cip, semesterID);
 
-        // TODO : return all the results the way we want to
         return new GetSemesterGradesResult(results);
     }
 

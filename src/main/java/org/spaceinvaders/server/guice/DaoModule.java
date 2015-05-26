@@ -5,6 +5,8 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDaoImpl;
+import org.spaceinvaders.server.dao.SemesterInfoDao;
+import org.spaceinvaders.server.dao.SemesterInfoDaoImpl;
 
 public class DaoModule extends AbstractModule {
     @Override
@@ -12,5 +14,6 @@ public class DaoModule extends AbstractModule {
         install(new JpaPersistModule("persistUnit"));
 
         bind(CompetenceEvalResultDao.class).to(CompetenceEvalResultDaoImpl.class);
+        bind(SemesterInfoDao.class).to(SemesterInfoDaoImpl.class);
     }
 }
