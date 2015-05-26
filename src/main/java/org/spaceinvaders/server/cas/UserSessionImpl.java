@@ -1,4 +1,4 @@
-package org.spaceinvaders.shared;
+package org.spaceinvaders.server.cas;
 
 /**
  * Created by AlexandraMaude on 2015-05-19.
