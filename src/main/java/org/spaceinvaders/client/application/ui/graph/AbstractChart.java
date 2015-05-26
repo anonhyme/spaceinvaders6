@@ -15,43 +15,6 @@ import com.sencha.gxt.widget.core.client.FramedPanel;
  */
 public abstract class AbstractChart<T> extends Composite {
 
-    // Needs to define DataModel
-    /* Example
-    public class DataModel {
-        private int id;
-        private String name;
-        private double data;
-        public int getId() {
-            return id;
-        }
-        public void setId(int id) {
-            this.id = id;
-        }
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public double getData() {
-            return data;
-        }
-        public void setData(double data) {
-            this.data = data;
-        }
-    }
-
-    public interface DataModelProperties extends PropertyAccess<DataModel> {
-        ModelKeyProvider<DataModel> id();
-        ValueProvider<DataModel, String> name();
-        ValueProvider<DataModel, Double> data();
-    }
-     public static final DataModelProperties dataModelProperties = GWT.create(DataModelProperties.class);
-    private ListStore<DataModel> listStore;
-    //private Chart<DataModel> chart;
-    //private FramedPanel panel;
-*/
-
     abstract public void setData(T data);
 
     abstract public void resize(int x, int y);

@@ -19,8 +19,6 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
 
     public enum ChartType {CumulativeGradeLineChart, Area, GroupBar, StackedBar, Gauge, Pie}
 
-    ;
-
     public static final Object TYPE_basicChart = new Object();
 
     private AbstractChart chart;
@@ -80,7 +78,4 @@ public class GraphWidgetPresenter extends PresenterWidget<GraphWidgetPresenter.M
 
     }
 
-    public void resizeChart(int width, int height){
-        this.chart.resize(400,400);
-    }
 }

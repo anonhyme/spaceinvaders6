@@ -4,6 +4,7 @@
 package org.spaceinvaders.client.application.graphdemo;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
@@ -15,6 +16,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
+import org.spaceinvaders.client.application.ui.graph.CumulativeGradeLineChart;
 import org.spaceinvaders.client.application.ui.graph.graphWidget.GraphWidgetPresenter;
 import org.spaceinvaders.client.entities.ApSummaryEntity;
 import org.spaceinvaders.client.entities.CompetenceResultsEntity;
@@ -26,13 +28,13 @@ import java.util.List;
 public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, GraphDemoPresenter.MyProxy> {
 
     interface MyView extends View {
-        void setGraph(GraphWidgetPresenter presenter);
-        void setCol1(GraphWidgetPresenter presenter);
-        void setCol2(GraphWidgetPresenter presenter);
-        void setCol3(GraphWidgetPresenter presenter);
-        void setCol4(GraphWidgetPresenter presenter);
-        void setCol5(GraphWidgetPresenter presenter);
-        void setCol6(GraphWidgetPresenter presenter);
+        void setGraph(IsWidget presenter);
+        void setCol1(IsWidget presenter);
+        void setCol2(IsWidget presenter);
+        void setCol3(IsWidget presenter);
+        void setCol4(IsWidget presenter);
+        void setCol5(IsWidget presenter);
+        void setCol6(IsWidget presenter);
         void setStudentProgress(double progress);
         void setClassProgress(double progress);
     }
@@ -107,11 +109,14 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
         view.setClassProgress(60.9);
         view.setStudentProgress(50);
 
-        GraphWidgetPresenter graphPresenter = graphWidgetPresenterProvider.get();
+        /*GraphWidgetPresenter graphPresenter = graphWidgetPresenterProvider.get();
         graphPresenter.setGraphType(GraphWidgetPresenter.ChartType.CumulativeGradeLineChart);
         graphPresenter.setChartData(competenceResultsEntityList, 2);
         graphPresenter.showChart();
-        view.setCol1(graphPresenter);
+        view.setCol1(graphPresenter);*/
+        CumulativeGradeLineChart chart = new CumulativeGradeLineChart();
+        chart.setData(competenceResultsEntityList);
+        view.setCol1(chart);
 
 
         GraphWidgetPresenter graphPresenter2 = graphWidgetPresenterProvider.get();

@@ -58,30 +58,30 @@ public class GraphDemoView extends ViewImpl implements GraphDemoPresenter.MyView
         }
     }
 
-    public void setGraph(GraphWidgetPresenter presenter) {
+    public void setGraph(IsWidget presenter) {
     }
 
-    public void setCol1(GraphWidgetPresenter presenter) {
+    public void setCol1(IsWidget presenter) {
         col1.add(presenter);
     }
 
-    public void setCol2(GraphWidgetPresenter presenter) {
+    public void setCol2(IsWidget presenter) {
         col2.add(presenter);
     }
 
-    public void setCol3(GraphWidgetPresenter presenter) {
+    public void setCol3(IsWidget presenter) {
         col3.add(presenter);
     }
 
-    public void setCol4(GraphWidgetPresenter presenter) {
+    public void setCol4(IsWidget presenter) {
         col4.add(presenter);
     }
 
-    public void setCol5(GraphWidgetPresenter presenter) {
+    public void setCol5(IsWidget presenter) {
         col5.add(presenter);
     }
 
-    public void setCol6(GraphWidgetPresenter presenter) {
+    public void setCol6(IsWidget presenter) {
         col6.add(presenter);
     }
 

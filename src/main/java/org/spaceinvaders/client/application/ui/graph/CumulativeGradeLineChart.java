@@ -129,6 +129,7 @@ public class CumulativeGradeLineChart extends AbstractChart<List<CompetenceResul
         currentTotalAverageGrade += average;
         currentTotalMaxGrade += maxGrade;
         store.add(new Data(name, currentTotalGrade, currentTotalAverageGrade, currentTotalMaxGrade));
+
     }
 
     @Override
