@@ -69,3 +69,22 @@ $$ LANGUAGE SQL;
 
 -- TODO : probably add a procedure to retrieve competence progress (ex : student has currently 50/300 of the total points for a competence)
 -- We could also include it in the competence_eval_result_t but it seems like a lot of information at the same time
+
+-- CREATE TYPE competence_t AS (ap_label text, competence_label text);
+
+CREATE OR REPLACE FUNCTION get_semester_competences(student_id text, session_id int) RETURNS SETOF competence_t AS $$
+  -- TODO : CREATE SELECT STATEMENT
+  SELECT           'GEN501', 'GEN501-1'
+  UNION ALL SELECT 'GEN501', 'GEN501-2'
+  UNION ALL SELECT 'GEN402', 'GEN402-1'
+  UNION ALL SELECT 'GEN666', 'GEN666-1'
+  UNION ALL SELECT 'GEN666', 'GEN666-2';
+$$ LANGUAGE SQL;
+
+CREATE TYPE evaluation_t AS (evaluation_label text);
+
+CREATE OR REPLACE FUNCTION get_semester_evals(student_id text, session_id int) RETURNS SETOF evaluation_t AS $$
+  -- TODO : CREATE SELECT STATEMENT
+  SELECT           'Sommatif APP2'
+  UNION ALL SELECT 'Sommatif APP3';
+$$ LANGUAGE SQL;

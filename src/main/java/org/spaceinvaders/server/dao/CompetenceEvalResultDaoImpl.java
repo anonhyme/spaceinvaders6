@@ -5,7 +5,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 import org.spaceinvaders.server.entities.*;
-import org.spaceinvaders.shared.dto.CompetenceEvalResultDto;
+import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
@@ -35,13 +35,13 @@ public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
         return query.getResultList();
     }
 
-    public List<CompetenceEvalResultDto> getSemesterResults(String cip, int semesterID) {
+    public List<CompetenceEvalResult> getSemesterResults(String cip, int semesterID) {
         List<CompetenceEvalResultEntity> results = getSemesterResultsEntities(cip, semesterID);
         return entitiesToDtos(results);
     }
 
-    public List<CompetenceEvalResultDto> entitiesToDtos(List<CompetenceEvalResultEntity> entities) {
-        List<CompetenceEvalResultDto> dtos = new ArrayList<>();
+    public List<CompetenceEvalResult> entitiesToDtos(List<CompetenceEvalResultEntity> entities) {
+        List<CompetenceEvalResult> dtos = new ArrayList<>();
         for (CompetenceEvalResultEntity entity : entities) {
             dtos.add(entityToDto(entity));
         }
@@ -49,8 +49,8 @@ public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
     }
 
     // TODO : I think that all this Dto business is ugly (needs to be tested if it stays this way)
-    public CompetenceEvalResultDto entityToDto(CompetenceEvalResultEntity entity) {
-        CompetenceEvalResultDto dto = new CompetenceEvalResultDto();
+    public CompetenceEvalResult entityToDto(CompetenceEvalResultEntity entity) {
+        CompetenceEvalResult dto = new CompetenceEvalResult();
         dto.setEvalLabel(entity.getEvalLabel());
         dto.setCourseLabel(entity.getCourseLabel());
         dto.setCompetenceLabel(entity.getCompetenceLabel());

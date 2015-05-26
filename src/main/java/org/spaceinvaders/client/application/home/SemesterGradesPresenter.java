@@ -14,28 +14,30 @@ import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 
 import javax.inject.Inject;
 
 // TODO : rename this class and others to something more appropriate (SemesterGridPresenter?)
 
-public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomePagePresenter.MyProxy> {
+public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy> {
     public interface MyView extends View {
     }
 
     @ProxyCodeSplit
-    @NameToken(NameTokens.home)
-    public interface MyProxy extends ProxyPlace<HomePagePresenter> {
+    @NameToken(NameTokens.semesterGrades)
+    public interface MyProxy extends ProxyPlace<SemesterGradesPresenter> {
     }
 
     private DispatchAsync dispatcher;
 
     @Inject
-    HomePagePresenter(EventBus eventBus,
-                      MyView view,
-                      MyProxy proxy,
-                      DispatchAsync dispatchAsync
-                      ) {
+    SemesterGradesPresenter(EventBus eventBus,
+                            MyView view,
+                            MyProxy proxy,
+                            DispatchAsync dispatchAsync
+    ) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
         this.dispatcher = dispatchAsync;
@@ -60,6 +62,18 @@ public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomeP
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
                 Window.alert("success = " + result.getEvaluationResults().get(0).getCompetenceLabel());
+            }
+        });
+
+        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetSemesterInfoResult result) {
+                Window.alert("success = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
             }
         });
     }

@@ -24,49 +24,48 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.dao.SemesterInfoDao;
 import org.spaceinvaders.server.entities.CompetenceEntity;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
-
 import java.util.List;
 
-public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGradesAction, GetSemesterGradesResult> {
-    private CompetenceEvalResultDao competenceEvalResultDao;
+public class GetSemesterInfoHandler implements ActionHandler<GetSemesterInfoAction, GetSemesterInfoResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
 
     @Inject
-    GetSemesterGradesHandler(
+    SemesterInfoDao semesterInfoDao;
+
+    @Inject
+    GetSemesterInfoHandler(
             ServletContext servletContext,
             Provider<HttpServletRequest> requestProvider,
             CompetenceEvalResultDao competenceEvalResultDao) {
         this.servletContext = servletContext;
         this.requestProvider = requestProvider;
-        this.competenceEvalResultDao = competenceEvalResultDao;
     }
 
     @Override
-    public GetSemesterGradesResult execute(GetSemesterGradesAction action, ExecutionContext context)
+    public GetSemesterInfoResult execute(GetSemesterInfoAction action, ExecutionContext context)
             throws ActionException {
         int semesterID = action.getSemesterID();
         String cip = action.getCip();
 
-        List<CompetenceEvalResult> results = competenceEvalResultDao.getSemesterResults(cip, semesterID);
+        SemesterInfo semesterInfo = semesterInfoDao.getSemesterInfo(cip, semesterID);
 
-        return new GetSemesterGradesResult(results);
+        return  new GetSemesterInfoResult(semesterInfo);
     }
 
     @Override
-    public Class<GetSemesterGradesAction> getActionType() {
-        return GetSemesterGradesAction.class;
+    public Class<GetSemesterInfoAction> getActionType() {
+        return GetSemesterInfoAction.class;
     }
 
     @Override
-    public void undo(GetSemesterGradesAction action, GetSemesterGradesResult result, ExecutionContext context)
+    public void undo(GetSemesterInfoAction action, GetSemesterInfoResult result, ExecutionContext context)
             throws ActionException {
         // Not undoable
     }
