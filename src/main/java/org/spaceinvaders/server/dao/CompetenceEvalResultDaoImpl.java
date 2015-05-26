@@ -29,7 +29,7 @@ public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
         entityManager.clear();
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("GetSemesterEvalResults");
         query.setParameter("student_id", cip);
-        query.setParameter("session_id", semesterID);
+        query.setParameter("session_id", semesterID); // TODO : should be named semester_id
         query.execute();
 
         return query.getResultList();
