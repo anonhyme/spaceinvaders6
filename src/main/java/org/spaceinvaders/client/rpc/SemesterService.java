@@ -18,6 +18,5 @@ import javax.persistence.EntityManager;
  */
 @RemoteServiceRelativePath("dataService")
 public interface SemesterService extends RemoteService {
-
-    SemesterInfo fetchSemesterInfo();
+    EvaluationGrid fetchSemesterInfo();
 }

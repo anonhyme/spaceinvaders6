@@ -31,8 +31,7 @@ import java.util.List;
 public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridDemoPresenter.MyProxy> implements GridDemoUiHandlers {
     interface MyView extends View, HasUiHandlers<GridDemoUiHandlers> {
         void updateSemesterTable(List<EvaluationGrid> result);
-
-        void initSemesterTable(SemesterInfo result);
+        void initSemesterTable(EvaluationGrid result);
     }
 
     @ContentSlot
@@ -69,20 +68,20 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
     @Override
     public void fetchSemesterInfo() {
         GWT.log("Async call fetchSemesterData");
-        exampleService.fetchSemesterInfo(new AsyncCallback<SemesterInfo>() {
+        exampleService.fetchSemesterInfo(new AsyncCallback<EvaluationGrid>() {
             @Override
             public void onFailure(Throwable caught) {
             }
 
             @Override
-            public void onSuccess(SemesterInfo result) {
+            public void onSuccess(EvaluationGrid result) {
                 getView().initSemesterTable(result);
             }
         });
     }
 
-    @Override
-    public void initDataGrid() {
-//        getView().initSemesterTable();
-    }
+//    @Override
+//    public void initDataGrid() {
+////        getView().initSemesterTable();
+//    }
 }

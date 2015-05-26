@@ -18,10 +18,10 @@ public class AbstractGrid<T extends BaseGrid> {
     }
 
     List<String> getColumnValue() {
-        return t.getApValue();
+        return t.getApList();
     }
 
     List<String> getRowValue() {
-        return t.getEvaluationValue();
+        return t.getEvaluationList();
     }
 }

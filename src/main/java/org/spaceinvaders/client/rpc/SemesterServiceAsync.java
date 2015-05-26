@@ -9,5 +9,5 @@ import org.spaceinvaders.shared.model.TableDataTest;
 import java.util.List;
 
 public interface SemesterServiceAsync {
-    void fetchSemesterInfo(AsyncCallback<SemesterInfo> async);
+    void fetchSemesterInfo(AsyncCallback<EvaluationGrid> async);
 }

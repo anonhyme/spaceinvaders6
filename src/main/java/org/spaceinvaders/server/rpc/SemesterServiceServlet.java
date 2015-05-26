@@ -3,6 +3,7 @@ package org.spaceinvaders.server.rpc;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import org.spaceinvaders.client.rpc.SemesterService;
+import org.spaceinvaders.shared.model.EvaluationGrid;
 import org.spaceinvaders.shared.model.SemesterCourses;
 import org.spaceinvaders.shared.model.SemesterInfo;
 
@@ -17,8 +18,9 @@ import java.util.List;
 public class SemesterServiceServlet extends RemoteServiceServlet implements SemesterService {
 
     @Override
-    public SemesterInfo fetchSemesterInfo() {
+    public EvaluationGrid fetchSemesterInfo() {
         SemesterInfo semesterInfo = new SemesterInfo();
+        EvaluationGrid evaluationGrid = new EvaluationGrid();
         List<SemesterCourses> semesterCourse = new ArrayList<>();
         semesterCourse.add(new SemesterCourses("GEN600", "1"));
         semesterCourse.add(new SemesterCourses("GEN650", "1"));
@@ -26,7 +28,9 @@ public class SemesterServiceServlet extends RemoteServiceServlet implements Seme
         semesterCourse.add(new SemesterCourses("GIF611", "1"));
         semesterCourse.add(new SemesterCourses("GIF620", "1"));
         semesterInfo.setCoursesList(semesterCourse);
-        return semesterInfo;
+
+        evaluationGrid.setSemesterCourse(semesterCourse);
+        return evaluationGrid;
     }
 
 }
