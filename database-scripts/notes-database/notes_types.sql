@@ -70,7 +70,7 @@ $$ LANGUAGE SQL;
 -- TODO : probably add a procedure to retrieve competence progress (ex : student has currently 50/300 of the total points for a competence)
 -- We could also include it in the competence_eval_result_t but it seems like a lot of information at the same time
 
--- CREATE TYPE competence_t AS (ap_label text, competence_label text);
+CREATE TYPE competence_t AS (ap_label text, competence_label text);
 
 CREATE OR REPLACE FUNCTION get_semester_competences(student_id text, session_id int) RETURNS SETOF competence_t AS $$
   -- TODO : CREATE SELECT STATEMENT
