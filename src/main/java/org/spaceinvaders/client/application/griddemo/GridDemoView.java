@@ -8,28 +8,18 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
-
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
-import org.spaceinvaders.shared.model.Evaluation;
-import org.spaceinvaders.shared.model.EvaluationGrid;
-import org.spaceinvaders.shared.model.SemesterCourses;
-import org.spaceinvaders.shared.model.SemesterInfo;
-import org.spaceinvaders.shared.model.TableDataTest;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.spaceinvaders.shared.model.*;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> implements GridDemoPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridDemoView> {
     }
-//    @UiField(provided = true)
-//    @UiField
-//    CellTable<TableDataTest> dataGrid;
 
     @UiField
     HTMLPanel panel;
@@ -37,12 +27,12 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     @UiField
     Container containerCellTable;
 
-    CellTable<EvaluationGrid> dataGrid;
+    CellTable<EvaluationGrid> cellTable;
+    CellTable<AbstractGrid> abstractDataGrid;
 
     List<SemesterCourses> semesterCourses;
     SemesterInfo semesterInfo;
 
-//    EvaluationGrid evaluationGrid = new EvaluationGrid();
 
     protected ListDataProvider<EvaluationGrid> dataSemesterProvider = new ListDataProvider<EvaluationGrid>();
     protected ListDataProvider<TableDataTest> dataProvider = new ListDataProvider<TableDataTest>();
@@ -64,54 +54,52 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
         dataSemesterProvider.setList(result);
         dataSemesterProvider.flush();
         dataSemesterProvider.refresh();
-        dataGrid.redraw();
+        cellTable.redraw();
     }
 
     @Override
     public void initSemesterTable(SemesterInfo semesterInfo) {
 
         this.semesterInfo = semesterInfo;
-//        this.evaluationGrid = evaluationGrid;
         GWT.log("initSemesterTable ");
         EvaluationGrid evaluationGrid = new EvaluationGrid();
 
 
-        dataGrid = new CellTable<EvaluationGrid>();
+        cellTable = new CellTable<EvaluationGrid>();
+        abstractDataGrid = new CellTable<AbstractGrid>();
         this.semesterCourses = evaluationGrid.getSemesterCourse();
 
         initColumn();
         dataSemesterProvider.setList(defaultEval(semesterInfo.getCoursesList().size(), 10));
-        int rowCount = semesterInfo.getCoursesList().size();
 
         dataSemesterProvider.flush();
         dataSemesterProvider.refresh();
-        dataGrid.redraw();
-        dataGrid.setStriped(true);
-        dataGrid.setBordered(true);
-        dataGrid.setCondensed(true);
-        dataGrid.setColumnWidth(0, "5%");
-        dataGrid.setColumnWidth(1, "10%");
-        dataGrid.setAccessKey('1');
+        cellTable.redraw();
+        cellTable.setStriped(true);
+        cellTable.setBordered(true);
+        cellTable.setCondensed(true);
+        cellTable.setColumnWidth(0, "5%");
+        cellTable.setColumnWidth(1, "10%");
 
-        dataGrid.setRowData(0, defaultEval(10, semesterInfo.getCoursesList().size()));
+        cellTable.setRowData(0, defaultEval(10, semesterInfo.getCoursesList().size()));
 
 
-        containerCellTable.add(dataGrid);
+        containerCellTable.add(cellTable);
     }
 
     private void initColumn() {
         GWT.log("initColumn");
 
-        dataGrid.addColumn(getTypeColumn(), "Type");
-        dataGrid.addColumn(getEvalTotalColumn(), "Eval Total");
+        cellTable.addColumn(getTypeColumn(), "Type");
+        cellTable.addColumn(getEvalTotalColumn(), "Eval Total");
 
         //TODO add semesterInfo in EvaluationGrid Replace SemesterInfo
         for (int i = 0; i < semesterInfo.getCoursesList().size(); i++) {
             GWT.log("initColumn " + semesterInfo.getCourseNameFor(i));
-            dataGrid.addColumn(new IndexedColumn(i), semesterInfo.getCourseNameFor(i));
+            cellTable.addColumn(new IndexedColumn(i), semesterInfo.getCourseNameFor(i));
         }
 
-        dataSemesterProvider.addDataDisplay(dataGrid);
+        dataSemesterProvider.addDataDisplay(cellTable);
     }
 
     private Column<EvaluationGrid, String> getTypeColumn() {

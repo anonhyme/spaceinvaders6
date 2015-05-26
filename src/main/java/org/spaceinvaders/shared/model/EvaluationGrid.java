@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author antoine
  */
-public class EvaluationGrid implements IsSerializable {
+public class EvaluationGrid implements IsSerializable, BaseGrid<String> {
 
     private String evaluationType;
     private String evaluationTotal;
@@ -28,7 +28,6 @@ public class EvaluationGrid implements IsSerializable {
     public EvaluationGrid(String evaluationType, String evaluationTotal) {
         this.evaluationType = evaluationType;
         this.evaluationTotal = evaluationTotal;
-        this.semesterCourse = semesterCourse;
     }
 
     public String getEvaluationType() {
@@ -54,4 +53,20 @@ public class EvaluationGrid implements IsSerializable {
     public void setSemesterCourse(List<SemesterCourses> semesterCourse) {
         this.semesterCourse = semesterCourse;
     }
+
+    @Override
+    public String getT() {
+        return null;
+    }
+
+    @Override
+    public List<String> getApValue() {
+        return null;
+    }
+
+    @Override
+    public List<String> getEvaluationValue() {
+        return null;
+    }
+
 }

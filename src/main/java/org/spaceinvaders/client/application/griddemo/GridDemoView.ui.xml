@@ -8,11 +8,11 @@
         <b:Container ui:field="containerCellTable">
 
         </b:Container>
-        <!--<b.html:CellTable ui:field="dataGrid"/>-->
+        <!--<b.html:CellTable ui:field="cellTable"/>-->
 
         <!--</b.html:CellTable>-->
         <!--<div>-->
-        <!--<cell:CellTable ui:field="dataGrid" width="100%"/>-->
+        <!--<cell:CellTable ui:field="cellTable" width="100%"/>-->
         <!--</div>-->
     </g:HTMLPanel>
 </ui:UiBinder>
