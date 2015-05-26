@@ -6362,9 +6362,9 @@ CREATE OR REPLACE RULE v_timespan_update AS
 
 
 
-CREATE TYPE ap_summary_t AS (ap_id int, ap_name text, ap_result_percent int);
+CREATE TYPE note.ap_summary_t AS (ap_id int, ap_name text, ap_result_percent int);
 
-CREATE OR REPLACE FUNCTION get_ap_results(student_id text, session_id text) RETURNS SETOF ap_summary_t AS $$
+CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id text) RETURNS SETOF note.ap_summary_t AS $$
     -- TODO : CREATE SELECT STATEMENT
     SELECT 1, 'GEN501', 80
     UNION ALL SELECT 2, 'GEN402', 75
@@ -6375,7 +6375,7 @@ $$ LANGUAGE SQL;
 -- SELECT * FROM get_ap_results('bedh2102', 'S5I');
 
 
-CREATE TYPE evaluation_results_t AS (
+CREATE TYPE note.evaluation_results_t AS (
   eval_id int,
   eval_label text,
   course_label text,
@@ -6387,7 +6387,7 @@ CREATE TYPE evaluation_results_t AS (
 );
 
 
-CREATE OR REPLACE FUNCTION get_semester_results(student_id text, session_id text) RETURNS SETOF evaluation_results_t AS $$
+CREATE OR REPLACE FUNCTION note.get_semester_results(student_id text, session_id text) RETURNS SETOF note.evaluation_results_t AS $$
   -- TODO : CREATE SELECT STATEMENT
   SELECT 1, 'Sommatif APP2', 'GEN501', 'GEN501-1', 80, 75, 120, 6
   UNION ALL SELECT 2, 'Sommatif APP2', 'GEN501', 'GEN501-2', 56, 50, 70, 5
@@ -6403,7 +6403,7 @@ $$ LANGUAGE SQL;
 --
 -- Course types and procedures
 --
-CREATE TYPE competence_results_t AS (
+CREATE TYPE note.competence_results_t AS (
   eval_id int,
   eval_label text,
   competence_label text,
@@ -6414,7 +6414,7 @@ CREATE TYPE competence_results_t AS (
   cumulated_frequency_percent int -- how many points compared to the max possible number at this moment
 );
 
-CREATE OR REPLACE FUNCTION get_course_results(student_id text, session_id text) RETURNS SETOF competence_results_t AS $$
+CREATE OR REPLACE FUNCTION note.get_course_results(student_id text, session_id text) RETURNS SETOF note.competence_results_t AS $$
   -- TODO : CREATE SELECT STATEMENT
   SELECT 1, 'Sommatif APP2', 'GEN501-1', 80, 75, 120, 6, 80
   UNION ALL SELECT 2, 'Sommatif APP2', 'GEN501-2', 56, 50, 70, 5, 85;
