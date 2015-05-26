@@ -468,3 +468,62 @@ INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, use
 	Create an evaluation that represent a final exam, lab report, etc
 */
  
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app1_intra', 'App 1 Sommatif', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app1_RAPPORT', 'App 1 Rapport', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app2_intra', 'App 2 Sommatif', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app2_RAPPORT', 'App 2 Rapport', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app3_intra', 'App 3 Sommatif', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app3_RAPPORT', 'App 3 Rapport', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app4_intra', 'App 4 Sommatif', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app4_RAPPORT', 'App 4 Rapport', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app5_intra', 'App 5 Sommatif', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app5_RAPPORT', 'App 5 Rapport', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app6_intra', 'App 6 Sommatif', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+ 
+INSERT INTO note.evaluation (evaluation_type_id, eg_id, label, short_description, user_id)
+	(SELECT et.evaluation_type_id, eg.eg_id, 'gegis1_app6_RAPPORT', 'App 6 Rapport', 1
+	FROM note.evaluation_type et, note.educationnal_goal eg
+	WHERE et.label = 'Session' AND eg.label = 'gegis1');
