@@ -6365,14 +6365,14 @@ CREATE OR REPLACE RULE v_timespan_update AS
 --
 -- AP types and procedures
 --
-CREATE TYPE note.ap_grades_summary_t AS (
+CREATE TYPE note.t_ap_grades_summary AS (
   ap_name text,
   result_value int,
   avg_value int,
   max_value int
 );
 
-CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id int) RETURNS SETOF note.ap_grades_summary_t AS $$
+CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id int) RETURNS SETOF note.t_ap_grades_summary AS $$
     -- TODO : CREATE SELECT STATEMENT
     SELECT           'GEN501', 80, 79, 100
     UNION ALL SELECT 'GEN402', 75, 73, 90
