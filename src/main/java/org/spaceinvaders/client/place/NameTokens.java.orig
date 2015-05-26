@@ -1,19 +1,19 @@
 package org.spaceinvaders.client.place;
 
 public class NameTokens {
-    public static final String home = "!home";
 <<<<<<< HEAD
+    public static final String home = "!home";
     public static final String bootstrapExamplePage = "bootstrapExamplePage";
     public static final String simplePage = "simplePage";
     public static final String exampleRpc = "exampleRpc";
     public static final String graphDemo = "graphDemo";
 =======
->>>>>>> master
+    public static final String semesterGrades = "!semesterGrades";
+>>>>>>> origin/hugo
 
-    public static String getHome() {
-        return graphDemo;
+    public static String getSemesterGrades() {
+        return semesterGrades;
     }
-<<<<<<< HEAD
 
     public static String getBootstrapExamplePage() {
         return bootstrapExamplePage;
@@ -30,6 +30,4 @@ public class NameTokens {
     public static String getGraphDemo() {
         return graphDemo;
     }
-=======
->>>>>>> master
 }

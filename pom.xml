@@ -252,15 +252,22 @@
         </dependency>
 
         <!-- Persistence -->
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-entitymanager</artifactId>-->
+            <!--<version>4.3.10.Final</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-validator</artifactId>-->
+            <!--<version>4.1.0.Final</version>-->
+        <!--</dependency>-->
+
+        <!-- eclipse link -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.10.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.0</version>
         </dependency>
 
         <!-- GWT-Platform dependencies -->
@@ -306,7 +313,11 @@
             <artifactId>gin</artifactId>
             <version>${gin.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
         <!-- Google Web Toolkit dependencies -->
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -346,11 +357,12 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>ca.uSherbrooke.gegi</groupId>
-            <artifactId>ui-component</artifactId>
-            <version>1.0.1</version>
-        </dependency>
+        <!-- TODO : find out what this is and why it's not working -->
+        <!--<dependency>-->
+            <!--<groupId>ca.uSherbrooke.gegi</groupId>-->
+            <!--<artifactId>ui-component</artifactId>-->
+            <!--<version>1.0.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.gwtplatform</groupId>

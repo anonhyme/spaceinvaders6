@@ -44,9 +44,9 @@ public class MainMenu extends Composite {
 
     public MainMenu() {
         initWidget(uiBinder.createAndBindUi(this));
-        this.addNavbarLinkInDropDown("Session 1", NameTokens.home);
-        this.addNavbarLinkInDropDown("Session 2", NameTokens.home);
-        this.addNavbarLinkInDropDown("Session 3", NameTokens.home);
+        this.addNavbarLinkInDropDown("Session 1", NameTokens.semesterGrades);
+        this.addNavbarLinkInDropDown("Session 2", NameTokens.semesterGrades);
+        this.addNavbarLinkInDropDown("Session 3", NameTokens.semesterGrades);
 
         graphDemoButton.setTargetHistoryToken(NameTokens.getGraphDemo());
     }
