@@ -6362,21 +6362,31 @@ CREATE OR REPLACE RULE v_timespan_update AS
 
 
 
-CREATE TYPE note.ap_summary_t AS (ap_id int, ap_name text, ap_result_percent int);
+--
+-- AP types and procedures
+--
+CREATE TYPE note.ap_grades_summary_t AS (
+  ap_name text,
+  result_value int,
+  avg_value int,
+  max_value int
+);
 
-CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id text) RETURNS SETOF note.ap_summary_t AS $$
+CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id int) RETURNS SETOF note.ap_grades_summary_t AS $$
     -- TODO : CREATE SELECT STATEMENT
-    SELECT 1, 'GEN501', 80
-    UNION ALL SELECT 2, 'GEN402', 75
-    UNION ALL SELECT 3, 'GEN666', 42;
+    SELECT           'GEN501', 80, 79, 100
+    UNION ALL SELECT 'GEN402', 75, 73, 90
+    UNION ALL SELECT 'GEN666', 42, 50, 110;
 $$ LANGUAGE SQL;
 
 -- AP procedure example
 -- SELECT * FROM get_ap_results('bedh2102', 'S5I');
 
 
-CREATE TYPE note.evaluation_results_t AS (
-  eval_id int,
+--
+-- Semester types and procedures
+--
+CREATE TYPE note.t_competence_eval_result AS (
   eval_label text,
   course_label text,
   competence_label text,
@@ -6386,38 +6396,48 @@ CREATE TYPE note.evaluation_results_t AS (
   standard_dev int
 );
 
-
-CREATE OR REPLACE FUNCTION note.get_semester_results(student_id text, session_id text) RETURNS SETOF note.evaluation_results_t AS $$
+CREATE OR REPLACE FUNCTION note.get_semester_eval_results(student_id text, session_id int) RETURNS SETOF note.t_competence_eval_result AS $$
   -- TODO : CREATE SELECT STATEMENT
-  SELECT 1, 'Sommatif APP2', 'GEN501', 'GEN501-1', 80, 75, 120, 6
-  UNION ALL SELECT 2, 'Sommatif APP2', 'GEN501', 'GEN501-2', 56, 50, 70, 5
-  UNION ALL SELECT 3, 'Sommatif APP2', 'GEN402', 'GEN402-1', 74, 70, 75, 11
-  UNION ALL SELECT 4, 'Sommatif APP3', 'GEN666', 'GEN501-1', 80, 75, 85, 3
-  UNION ALL SELECT 5, 'Sommatif APP3', 'GEN666', 'GEN402-2', 80, 73, 110, 4;
+  SELECT           'Sommatif APP2', 'GEN501', 'GEN501-1', 80, 75, 120, 6
+  UNION ALL SELECT 'Sommatif APP2', 'GEN501', 'GEN501-2', 56, 50, 70, 5
+  UNION ALL SELECT 'Sommatif APP2', 'GEN402', 'GEN402-1', 74, 70, 75, 11
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75, 85, 3
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73, 110, 4;
 $$ LANGUAGE SQL;
 
 -- Semester procedure example
 -- SELECT * FROM get_semester_results('bedh2102', 'S5I');
 
-
---
--- Course types and procedures
---
-CREATE TYPE note.competence_results_t AS (
-  eval_id int,
-  eval_label text,
-  competence_label text,
-  result_value int,
-  avg_result_value int,
-  max_result_value int,
-  standard_dev int,
-  cumulated_frequency_percent int -- how many points compared to the max possible number at this moment
-);
-
-CREATE OR REPLACE FUNCTION note.get_course_results(student_id text, session_id text) RETURNS SETOF note.competence_results_t AS $$
+CREATE OR REPLACE FUNCTION note.get_ap_eval_results(student_id text, session_id int, ap_id int) RETURNS SETOF note.t_competence_eval_result AS $$
   -- TODO : CREATE SELECT STATEMENT
-  SELECT 1, 'Sommatif APP2', 'GEN501-1', 80, 75, 120, 6, 80
-  UNION ALL SELECT 2, 'Sommatif APP2', 'GEN501-2', 56, 50, 70, 5, 85;
+  SELECT           'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75, 85, 3
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73, 110, 4;
+$$ LANGUAGE SQL;
+
+-- Ap results procedure example
+-- SELECT * FROM get_semester_results('bedh2102', 'S5I');
+
+
+-- TODO : probably add a procedure to retrieve competence progress (ex : student has currently 50/300 of the total points for a competence)
+-- We could also include it in the competence_eval_result_t but it seems like a lot of information at the same time
+
+CREATE TYPE note.t_competence AS (ap_label text, competence_label text);
+
+CREATE OR REPLACE FUNCTION note.get_semester_competences(student_id text, session_id int) RETURNS SETOF note.t_competence AS $$
+  -- TODO : CREATE SELECT STATEMENT
+  SELECT           'GEN501', 'GEN501-1'
+  UNION ALL SELECT 'GEN501', 'GEN501-2'
+  UNION ALL SELECT 'GEN402', 'GEN402-1'
+  UNION ALL SELECT 'GEN666', 'GEN666-1'
+  UNION ALL SELECT 'GEN666', 'GEN666-2';
+$$ LANGUAGE SQL;
+
+CREATE TYPE note.t_evaluation AS (evaluation_label text);
+
+CREATE OR REPLACE FUNCTION note.get_semester_evals(student_id text, session_id int) RETURNS SETOF note.t_evaluation AS $$
+  -- TODO : CREATE SELECT STATEMENT
+  SELECT           'Sommatif APP2'
+  UNION ALL SELECT 'Sommatif APP3';
 $$ LANGUAGE SQL;
 
 
