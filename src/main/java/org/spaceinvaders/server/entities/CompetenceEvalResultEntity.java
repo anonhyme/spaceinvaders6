@@ -24,7 +24,7 @@ import javax.persistence.*;
     )
 })
 @Entity
-@Table(name = "competence_eval_result_t", schema = "note", catalog = "S6_PROJET_P02")
+@Table(name = "t_competence_eval_result", schema = "note", catalog = "S6_PROJET_P02")
 public class CompetenceEvalResultEntity {
     private String evalLabel;
     private String courseLabel;

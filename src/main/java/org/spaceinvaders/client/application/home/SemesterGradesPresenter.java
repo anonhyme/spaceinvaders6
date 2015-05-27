@@ -74,7 +74,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
             @Override
             public void onSuccess(GetSemesterInfoResult result) {
                 Window.alert("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
-                Window.alert("competence = " + result.getSemesterInfo().getCompetences().get(0).getCompetenceLabel());
+                Window.alert("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
             }
         });
     }

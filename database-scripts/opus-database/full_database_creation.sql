@@ -6360,7 +6360,9 @@ CREATE OR REPLACE RULE v_timespan_update AS
   ON UPDATE TO note.v_timespan DO INSTEAD  UPDATE note.timespan SET label = new.label, start_date = new.start_date, end_date = new.end_date
   WHERE timespan.timespan_id = new.timespan_id;
 
-
+--
+-- ********************************* CUSTOM GRADES PROCEDURES ********************************* --
+--
 
 --
 -- AP types and procedures
