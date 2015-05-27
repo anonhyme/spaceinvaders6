@@ -81,7 +81,7 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
     public Competence CompetenceEntityToDto(CompetenceEntity entity) {
         Competence dto = new Competence();
         dto.setApLabel(entity.getApLabel());
-        dto.setCompetenceLabel(entity.getApLabel());
+        dto.setCompetenceLabel(entity.getCompetenceLabel());
         return dto;
     }
 

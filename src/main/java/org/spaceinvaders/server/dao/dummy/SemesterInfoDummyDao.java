@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SemesterInfoDummyDao implements SemesterInfoDao {
-
     @Override
     public List<EvaluationEntity> getSemesterEvals(String cip, int semesterID) {
         return null;
