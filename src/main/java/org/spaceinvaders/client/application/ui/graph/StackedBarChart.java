@@ -2,6 +2,7 @@ package org.spaceinvaders.client.application.ui.graph;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.chart.client.chart.Chart;
 import com.sencha.gxt.chart.client.chart.Legend;
@@ -22,7 +23,6 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.ExpandEvent;
-import org.spaceinvaders.client.entities.ApSummaryEntity;
 
 /**
  * Created by Etienne on 2015-05-20.
@@ -31,7 +31,7 @@ import org.spaceinvaders.client.entities.ApSummaryEntity;
 //Data Structure should be:
 // string key gradeType (
 // data evaluation1, evaluation2, etc
-public class StackedBarChart extends AbstractChart<ApSummaryEntity> {
+public class StackedBarChart extends Composite{
     public class Data {
         private String evaluationName;
         private double grade;
@@ -96,8 +96,7 @@ public class StackedBarChart extends AbstractChart<ApSummaryEntity> {
     private static final DataPropertyAccess dataAccess = GWT.create(DataPropertyAccess.class);
     ListStore<Data> store = new ListStore<Data>(dataAccess.nameKey());
 
-    @Override
-    public void setData(ApSummaryEntity e) {
+    public void setData() {
         store.add(new Data("Rapport", Math.random() * 100, 60, 100));
         store.add(new Data("Evaluation 1", 60, 80, 100));
         store.add(new Data("Evaluation 2", 70, 90, 100));
@@ -183,7 +182,7 @@ public class StackedBarChart extends AbstractChart<ApSummaryEntity> {
         return panel;
     }
 
-    @Override
+
     public void resize(int x, int y){
         panel.setPixelSize(x, y);
     }

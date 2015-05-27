@@ -1,13 +1,14 @@
 
-package org.spaceinvaders.client.application.ui.graph.cumulativegradelinechartwidget;
+package org.spaceinvaders.client.application.ui.graph.evaluationresultswidget;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.sencha.gxt.chart.client.chart.Chart;
 import org.spaceinvaders.client.application.ui.graph.EvalInfo;
-import org.spaceinvaders.client.application.ui.graph.LineChart;
+import org.spaceinvaders.client.application.ui.graph.GroupBarChart;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
@@ -15,22 +16,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CumulativeGradeLineChartWidgetPresenter extends PresenterWidget<CumulativeGradeLineChartWidgetPresenter.MyView> {
+public class EvaluationResultsWidgetPresenter extends PresenterWidget<EvaluationResultsWidgetPresenter.MyView> {
     public interface MyView extends View {
         void setChart(IsWidget chart);
     }
-    LineChart chart;
 
+    GroupBarChart chart;
 
-            @Inject
-    CumulativeGradeLineChartWidgetPresenter(EventBus eventBus, MyView view) {
+    @Inject
+    EvaluationResultsWidgetPresenter(EventBus eventBus, MyView view) {
         super(eventBus, view);
-        chart = new LineChart();
+        chart = new GroupBarChart();
+        chart.setTitle("Notes", "Évaluation");
+       // chart.setAxes(Chart.Position.LEFT, Chart.Position.BOTTOM);
     }
 
     public void setData( List<CompetenceEvalResult> results){
-
-        ArrayList<LineChart.Data> chartData = new ArrayList<>();
+        ArrayList<GroupBarChart.Data> chartData = new ArrayList<>();
         Set<String> evalNames = new HashSet<>();
         ArrayList<EvalInfo> evalTotals = new ArrayList<>();
         for (CompetenceEvalResult c : results) {
@@ -49,18 +51,10 @@ public class CumulativeGradeLineChartWidgetPresenter extends PresenterWidget<Cum
                 }
             }
         }
-        double currentStudentTotal =0;
-        double currentAvgTotal =0;
-        double currentMaxTotal = 0;
-        chartData.add(chart.new Data("", 0,0,0));
         for (EvalInfo e : evalTotals) {
-            currentStudentTotal+= e.getStudentTotal();
-            currentAvgTotal += e.getAverageTotal();
-            currentMaxTotal +=e.getMaxTotal();
-            chartData.add(chart.new Data(e.getName(), currentStudentTotal, currentAvgTotal, currentMaxTotal ));
-           // chartData.add(chart.new Data(e.getName(), e.getStudentTotal(), e.getAverageTotal(), e.getMaxTotal()));
+            chartData.add(chart.new Data(e.getName(), e.getStudentTotal(), e.getAverageTotal(), e.getMaxTotal()));
         }
-         chart.setData(chartData);
+        chart.setData(chartData);
     }
 
     public void showChart(){
@@ -69,8 +63,7 @@ public class CumulativeGradeLineChartWidgetPresenter extends PresenterWidget<Cum
     }
 
     public void resizeChart(int width, int height){
-        this.chart.resize(width,height);
+        this.chart.resize(width, height);
     }
-
 
 }

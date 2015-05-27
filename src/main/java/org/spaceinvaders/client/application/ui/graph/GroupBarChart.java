@@ -2,6 +2,7 @@ package org.spaceinvaders.client.application.ui.graph;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.chart.client.chart.Chart;
 import com.sencha.gxt.chart.client.chart.Legend;
@@ -21,15 +22,14 @@ import com.sencha.gxt.widget.core.client.Resizable;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
-import com.sencha.gxt.widget.core.client.event.ExpandEvent;
-import org.spaceinvaders.client.entities.ApSummaryEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class GroupBarChart extends AbstractChart<List<ApSummaryEntity>> {
+public class GroupBarChart extends Composite {
     public class Data {
         private String className;
         private double grade;
@@ -94,40 +94,47 @@ public class GroupBarChart extends AbstractChart<List<ApSummaryEntity>> {
     private static final DataPropertyAccess dataAccess = GWT.create(DataPropertyAccess.class);
     ListStore<Data> store = new ListStore<Data>(dataAccess.nameKey());
 
-    @Override
-    public void setData(List<ApSummaryEntity> apList) {
-        for (int i =0; i< apList.size(); i++) {
-            ApSummaryEntity e = apList.get(i);
-            store.add(new Data(e.getApName(), e.getApResult(), e.getApAverage(), e.getApMax()));
-        }
+    public void setData(ArrayList<Data> data) {
+        store.addAll(data);
     }
 
+    private String xTitle= "";
+    private String yTitle= "";
+
+    public void setTitle(String xTitle, String yTitle){
+        this.xTitle = xTitle;
+        this.yTitle = yTitle;
+    }
+
+    Chart.Position xPos = Chart.Position.BOTTOM;
+    Chart.Position yPos = Chart.Position.LEFT;
+  /*  public void setAxes(Chart.Position xPos, Chart.Position yPos){
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }*/
     @Override
     public Widget asWidget() {
         if (panel == null) {
-            TextSprite title = new TextSprite("Note cumulative");
-            title.setFontSize(18);
+            TextSprite title = new TextSprite(xTitle);
+           title.setFontSize(18);
 
             NumericAxis<Data> axis = new NumericAxis<Data>();
-            axis.setPosition(Chart.Position.BOTTOM);
+            axis.setPosition(xPos);
             axis.addField(dataAccess.grade());
             axis.addField(dataAccess.averageGrade());
             axis.addField(dataAccess.maxGrade());
             axis.setTitleConfig(title);
             axis.setDisplayGrid(true);
-            axis.setMinimum(0);
-            axis.setMaximum(100);
 
-            title = new TextSprite("Cours");
-            title.setFontSize(18);
-
+           title = new TextSprite(yTitle);
+           title.setFontSize(18);
             CategoryAxis<Data, String> catAxis = new CategoryAxis<Data, String>();
-            catAxis.setPosition(Chart.Position.LEFT);
+            catAxis.setPosition(yPos);
             catAxis.setField(dataAccess.className());
             catAxis.setTitleConfig(title);
 
             final BarSeries<Data> bar = new BarSeries<Data>();
-            bar.setYAxisPosition(Chart.Position.BOTTOM);
+            bar.setYAxisPosition(xPos);
             bar.addYField(dataAccess.grade());
             bar.addYField(dataAccess.averageGrade());
             bar.addYField(dataAccess.maxGrade());
@@ -185,7 +192,6 @@ public class GroupBarChart extends AbstractChart<List<ApSummaryEntity>> {
         return panel;
     }
 
-    @Override
     public void resize(int x, int y){
         panel.setPixelSize(x, y);
     }

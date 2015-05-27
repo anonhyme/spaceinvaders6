@@ -23,12 +23,11 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.ExpandEvent;
-import org.spaceinvaders.client.entities.ApSummaryEntity;
 
 /**
  * Created by Etienne on 2015-05-19.
  */
-public class PieChart extends AbstractChart<ApSummaryEntity> {
+public class PieChart extends Composite{
     // Chart data model
     public class DataModel {
         private int id;
@@ -160,7 +159,7 @@ public class PieChart extends AbstractChart<ApSummaryEntity> {
 
     }
 
-    public void setData(ApSummaryEntity e) {
+    public void setData() {
 
     }
 
@@ -179,7 +178,6 @@ public class PieChart extends AbstractChart<ApSummaryEntity> {
         listStore.add(item2);
     }
 
-    @Override
     public void resize(int x, int y){
         panel.setPixelSize(x, y);
     }

@@ -3,6 +3,7 @@ package org.spaceinvaders.client.application.ui.graph;
 import com.github.underscore._;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.chart.client.chart.Chart;
 import com.sencha.gxt.chart.client.chart.Legend;
@@ -22,9 +23,9 @@ import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.ExpandEvent;
-import org.spaceinvaders.client.entities.ApSummaryEntity;
-import org.spaceinvaders.client.entities.CompetenceResultsEntity;
 
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +33,7 @@ import java.util.Set;
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class CumulativeGradeLineChart extends AbstractChart<List<CompetenceResultsEntity>> {
+public class LineChart extends Composite {
 
     public class Data {
         private String evaluationName;
@@ -98,38 +99,8 @@ public class CumulativeGradeLineChart extends AbstractChart<List<CompetenceResul
     private static final DataPropertyAccess dataAccess = GWT.create(DataPropertyAccess.class);
     ListStore<Data> store = new ListStore<Data>(dataAccess.nameKey());
 
-
-    private int currentTotalGrade =0;
-    private int currentTotalAverageGrade =0 ;
-    private int currentTotalMaxGrade = 0;
-
-    @Override
-    public void setData(List<CompetenceResultsEntity> l){
-       //Logic to add together results from same avaluation in different competencies
-
-
-        setData();
-    }
-
-    int numCompetences = 0;
-    public void setNumCompetences(int n){
-        numCompetences =n;
-    }
-
-    public void setData() {
-        addData("Rapport", 50, 40, 100);
-        addData("Evaluation 1", 60, 50, 100);
-        addData("Evaluation 2", 70, 100, 100);
-        addData("Examen", 80, 70, 100);
-        addData("Examen final", 60, 50, 100);
-    }
-
-    private void addData(String name, double grade, double average, double maxGrade) {
-        currentTotalGrade += grade;
-        currentTotalAverageGrade += average;
-        currentTotalMaxGrade += maxGrade;
-        store.add(new Data(name, currentTotalGrade, currentTotalAverageGrade, currentTotalMaxGrade));
-
+    public void setData(ArrayList<Data> data) {
+        store.addAll(data);
     }
 
     @Override
@@ -221,7 +192,6 @@ public class CumulativeGradeLineChart extends AbstractChart<List<CompetenceResul
         return panel;
     }
 
-    @Override
     public void resize(int x, int y){
         panel.setPixelSize(x, y);
     }

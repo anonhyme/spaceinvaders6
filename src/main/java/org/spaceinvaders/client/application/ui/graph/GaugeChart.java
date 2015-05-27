@@ -2,6 +2,7 @@ package org.spaceinvaders.client.application.ui.graph;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.chart.client.chart.Chart;
 import com.sencha.gxt.chart.client.chart.axis.GaugeAxis;
@@ -21,15 +22,13 @@ import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.Resizable;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
-import com.sencha.gxt.widget.core.client.event.CollapseEvent;
-import com.sencha.gxt.widget.core.client.event.ExpandEvent;
-import org.spaceinvaders.client.entities.ApSummaryEntity;
+
 
 
 /**
  * Created by Etienne on 2015-05-20.
  */
-public class GaugeChart extends AbstractChart<ApSummaryEntity>{
+public class GaugeChart extends Composite{
 
     public class Data {
         private String competencyName;
@@ -83,8 +82,8 @@ public class GaugeChart extends AbstractChart<ApSummaryEntity>{
 
     private ContentPanel panel;
 
-    @Override
-    public void setData(ApSummaryEntity e) {
+
+    public void setData() {
         store.add(new Data("GEN501", 50, 30));
     }
 
@@ -154,7 +153,7 @@ public class GaugeChart extends AbstractChart<ApSummaryEntity>{
         return chart;
     }
 
-    @Override
+
     public void resize(int x, int y){
         if (panel!=null) {
             panel.setPixelSize(x, y);
