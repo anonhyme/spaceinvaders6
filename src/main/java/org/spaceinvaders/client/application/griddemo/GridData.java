@@ -1,39 +1,19 @@
 package org.spaceinvaders.client.application.griddemo;
 
+import org.spaceinvaders.shared.dto.Competence;
+import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 5/26/2015
  *
  * @author antoine
  */
-public class GridData<T> {
-    T t;
-    String header;
-    String rowTitle;
+public abstract class GridData<T, E> {
 
-    public GridData() {
-    }
+    abstract List<Competence> getAllCompetences();
 
-    public T getT() {
-        return t;
-    }
+    abstract List<CompetenceEvalResult> getAllRow();
 
-    public void setT(T t) {
-        this.t = t;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
-
-    public String getRowTitle() {
-        return rowTitle;
-    }
-
-    public void setRowTitle(String rowTitle) {
-        this.rowTitle = rowTitle;
-    }
 }

@@ -1,6 +1,14 @@
 package org.spaceinvaders.server.entities;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.Table;
 
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(

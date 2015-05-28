@@ -5,18 +5,18 @@
          version="2.5">
 
     <display-name>ProjetS6</display-name>
-    <servlet>
-        <servlet-name>org.spaceinvaders.ProjetS6 SemesterService</servlet-name>
-        <servlet-class>org.spaceinvaders.server.rpc.SemesterServiceServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>org.spaceinvaders.ProjetS6 SemesterService</servlet-name>
-        <url-pattern>/ProjetS6/dataService</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>org.spaceinvaders.ProjetS6 SemesterService</servlet-name>-->
+        <!--&lt;!&ndash;<servlet-class>org.spaceinvaders.server.rpc.SemesterServiceServlet</servlet-class>&ndash;&gt;-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>org.spaceinvaders.ProjetS6 SemesterService</servlet-name>-->
+        <!--<url-pattern>/ProjetS6/dataService</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <welcome-file-list>
-        <welcome-file>ProjetS6.html</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>ProjetS6.html</welcome-file>-->
+    <!--</welcome-file-list>-->
 
 
     <!--

@@ -18,19 +18,19 @@ package org.spaceinvaders.server.dispatch;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
+
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.dao.SemesterInfoDao;
-import org.spaceinvaders.server.entities.CompetenceEntity;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class GetSemesterInfoHandler implements ActionHandler<GetSemesterInfoAction, GetSemesterInfoResult> {
     private Provider<HttpServletRequest> requestProvider;

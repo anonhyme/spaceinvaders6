@@ -1,6 +1,14 @@
 package org.spaceinvaders.server.entities;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.Table;
 
 @NamedStoredProcedureQueries({
     @NamedStoredProcedureQuery(
@@ -13,7 +21,7 @@ import javax.persistence.*;
         })
 })
 @Entity
-@Table(name = "competence_t", schema = "note", catalog = "S6_PROJET_P02")
+@Table(name = "t_competence", schema = "note", catalog = "S6_PROJET_P02")
 public class CompetenceEntity {
     private String apLabel;
     private String competenceLabel;

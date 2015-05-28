@@ -10,10 +10,10 @@ import java.util.List;
  *
  * @author antoine
  */
-public class SemesterInfo implements IsSerializable {
+public class SemesterInfoModel implements IsSerializable {
     List<SemesterCourses> coursesList;
 
-    public SemesterInfo() {
+    public SemesterInfoModel() {
         coursesList = new ArrayList<>();
     }
 

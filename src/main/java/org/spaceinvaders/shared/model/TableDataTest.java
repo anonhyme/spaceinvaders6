@@ -3,7 +3,6 @@ package org.spaceinvaders.shared.model;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

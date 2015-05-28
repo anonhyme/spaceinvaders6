@@ -22,17 +22,14 @@ import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
-import org.spaceinvaders.server.dao.SemesterInfoDao;
-import org.spaceinvaders.server.entities.CompetenceEntity;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGradesAction, GetSemesterGradesResult> {
     private CompetenceEvalResultDao competenceEvalResultDao;

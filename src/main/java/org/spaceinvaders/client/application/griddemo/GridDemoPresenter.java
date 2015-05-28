@@ -5,10 +5,12 @@ package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -19,19 +21,20 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.rpc.SemesterServiceAsync;
-import org.spaceinvaders.shared.model.EvaluationGrid;
-import org.spaceinvaders.shared.model.SemesterInfo;
-import org.spaceinvaders.shared.model.TableDataTest;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
+import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 
 public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridDemoPresenter.MyProxy> implements GridDemoUiHandlers {
+
     interface MyView extends View, HasUiHandlers<GridDemoUiHandlers> {
-        void updateSemesterTable(List<EvaluationGrid> result);
-        void initSemesterTable(EvaluationGrid result);
+
+        void initSemesterTable(GetSemesterInfoResult result);
+
+        void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult);
+
+//        void showModalInfo(String info);
     }
 
     @ContentSlot
@@ -42,16 +45,17 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
     public interface MyProxy extends ProxyPlace<GridDemoPresenter> {
     }
 
-    private SemesterServiceAsync exampleService;
+    //    private SemesterServiceAsync exampleService;
+    private DispatchAsync dispatcher;
 
     @Inject
     public GridDemoPresenter(
             EventBus eventBus,
             MyView view,
-            SemesterServiceAsync exampleService,
+            DispatchAsync dispatchAsync,
             MyProxy proxy) {
         super(eventBus, view, proxy, RevealType.Root);
-        this.exampleService = exampleService;
+        this.dispatcher = dispatchAsync;
         getView().setUiHandlers(this);
     }
 
@@ -61,27 +65,32 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
         GWT.log("onBind ");
     }
 
-    /**
-     * Retrieve basic semester info Courses name Count
-     */
-
     @Override
     public void fetchSemesterInfo() {
         GWT.log("Async call fetchSemesterData");
-        exampleService.fetchSemesterInfo(new AsyncCallback<EvaluationGrid>() {
+
+        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
             }
 
             @Override
-            public void onSuccess(EvaluationGrid result) {
+            public void onSuccess(GetSemesterInfoResult result) {
                 getView().initSemesterTable(result);
             }
         });
-    }
 
-//    @Override
-//    public void initDataGrid() {
-////        getView().initSemesterTable();
-//    }
+        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetSemesterGradesResult result) {
+                getView().initSemesterGradesResult(result);
+            }
+        });
+    }
 }

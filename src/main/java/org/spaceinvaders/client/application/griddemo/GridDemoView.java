@@ -13,12 +13,15 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
-import org.spaceinvaders.shared.model.*;
+import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dto.Competence;
+import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+
+import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> implements GridDemoPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridDemoView> {
@@ -30,104 +33,111 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     @UiField
     Container containerCellTable;
 
-    CellTable<EvaluationGrid> cellTable;
+    @UiField
+    Container containerModal;
 
-    CellTable<AbstractGrid> abstractDataGrid;
+    CellTable<CompetenceEvalResult> cellTable;
 
-    CellTable<GridData> dataCellTable;
+//    HashMap<String, >
 
-    List<SemesterCourses> semesterCourses;
+    protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
 
-    protected ListDataProvider<EvaluationGrid> dataSemesterProvider = new ListDataProvider<>();
+    EvaluationDataGrid evaluationDataGrid = new EvaluationDataGrid();
 
     @Inject
     GridDemoView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
+//    @Override
+//    public void updateSemesterTable(List<EvaluationDataGrid> result) {
+//        GWT.log("updateSemesterTable ");
+//        dataSemesterProvider.getList().clear();
+////        dataSemesterProvider.setList(result);
+//        dataSemesterProvider.flush();
+//        dataSemesterProvider.refresh();
+//        cellTable.redraw();
+//    }
+
     @Override
-    public void updateSemesterTable(List<EvaluationGrid> result) {
-        GWT.log("updateSemesterTable ");
-        dataSemesterProvider.getList().clear();
-        dataSemesterProvider.setList(result);
-        dataSemesterProvider.flush();
-        dataSemesterProvider.refresh();
-        cellTable.redraw();
+    public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
+        GWT.log("initSemesterGradesResult ");
+        evaluationDataGrid.setCompetenceEvalResult(semesterGradesResult.getEvaluationResults());
+        GWT.log("initSemesterGradesResult " + evaluationDataGrid.getCompetenceEvalResult().get(0).getCompetenceLabel());
     }
 
     @Override
-    public void initSemesterTable(EvaluationGrid semesterInfo) {
+    public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
         GWT.log("initSemesterTable ");
         //TODO List AP and courses
-//        this.semesterInfo = semesterInfo;
-
-        EvaluationGrid evaluationGrid = new EvaluationGrid();
+        evaluationDataGrid.setSemesterInfo(semesterInfoResult.getSemesterInfo());
 
         cellTable = new CellTable<>();
-        abstractDataGrid = new CellTable<AbstractGrid>();
 
-        this.semesterCourses = evaluationGrid.getSemesterCourse();
+        initColumn(evaluationDataGrid.getAllCompetences());
+        dataSemesterProvider.setList(evaluationDataGrid.getAllRow());
 
-        initColumn(semesterInfo.getSemesterCourse());
-
-        dataSemesterProvider.setList(defaultEval(semesterInfo.getSemesterCourse().size(), 10));
         dataSemesterProvider.flush();
         dataSemesterProvider.refresh();
 
+        cellTableSetup();
         cellTable.redraw();
-        cellTable.setStriped(true);
-        cellTable.setBordered(true);
-        cellTable.setCondensed(true);
-        cellTable.setColumnWidth(0, "5%");
-        cellTable.setColumnWidth(1, "10%");
-
-        cellTable.setRowData(0, defaultEval(10, semesterInfo.getSemesterCourse().size()));
-
         containerCellTable.add(cellTable);
     }
 
-    private void initColumn(List<SemesterCourses> semesterCourses) {
-        setEvaluationTypeColumn();
-        setEvaluationTotalColumn();
+    /**
+     * Set table presentation
+     */
+    private void cellTableSetup() {
+        cellTable.setStriped(true);
+        cellTable.setBordered(true);
+        cellTable.setCondensed(true);
+        cellTable.setColumnWidth(0, "15%");
+        cellTable.setColumnWidth(1, "8%");
 
-        //TODO add semesterInfo in EvaluationGrid Replace SemesterInfo
-        for (int i = 0; i < semesterCourses.size(); i++) {
-            GWT.log("initColumn " + semesterCourses.get(i).getCourseName());
-            cellTable.addColumn(new IndexedColumn(i), semesterCourses.get(i).getCourseName());
+    }
+
+    private void initColumn(List<Competence> competences) {
+        GWT.log("initColumn ");
+        setEvaluationTypeColumn();
+        HashMap<String, String> competenceMap;
+
+
+//        setEvaluationTotalColumn();
+
+        for (int i = 0; i < competences.size(); i++) {
+            GWT.log("initColumn " + competences.get(i).getCompetenceLabel());
+            GWT.log("initColumn " + competences.get(i).getApLabel());
+            cellTable.addColumn(new IndexedColumn(i), competences.get(i).getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
 
     private void setEvaluationTypeColumn() {
-        Column<EvaluationGrid, String> column = new Column<EvaluationGrid, String>(new TextCell()) {
+        Column<CompetenceEvalResult, String> column = new Column<CompetenceEvalResult, String>(new TextCell()) {
             @Override
-            public String getValue(EvaluationGrid data) {
-                return data.getEvaluationType();
+            public String getValue(CompetenceEvalResult data) {
+                String value = "   ";
+                GWT.log("getValue .......................");
+                try {
+                    GWT.log("getValue trying the shit ");
+                    value = data.getEvalLabel();
+                } catch (Exception e) {
+                    GWT.log("getValue exception catch ");
+                }
+                return value;
             }
         };
         cellTable.addColumn(column, "Evaluation");
     }
 
     private void setEvaluationTotalColumn() {
-        Column<EvaluationGrid, String> column = new Column<EvaluationGrid, String>(new TextCell()) {
+        Column<CompetenceEvalResult, String> column = new Column<CompetenceEvalResult, String>(new TextCell()) {
             @Override
-            public String getValue(EvaluationGrid data) {
-                return data.getEvaluationTotal();
+            public String getValue(CompetenceEvalResult data) {
+                return data.getMaxResultValue().toString();
             }
         };
         cellTable.addColumn(column, "Total");
-    }
-
-    private List<EvaluationGrid> defaultEval(int countCol, int countRow) {
-        List<EvaluationGrid> evaluations = new ArrayList<EvaluationGrid>();
-        List<SemesterCourses> semesterCourses = new ArrayList<SemesterCourses>();
-        for (int i = 0; i < countRow; i++) {
-            semesterCourses.add(new SemesterCourses());
-        }
-
-        for (int i = 0; i < countCol; i++) {
-            evaluations.add(new EvaluationGrid("APP " + i, String.valueOf(i), semesterCourses));
-        }
-        return evaluations;
     }
 }

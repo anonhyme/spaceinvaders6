@@ -1,7 +1,5 @@
 package org.spaceinvaders.client.application;
 
-import javax.inject.Inject;
-
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -13,6 +11,8 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+
+import javax.inject.Inject;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
 

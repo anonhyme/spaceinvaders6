@@ -1,6 +1,7 @@
 package org.spaceinvaders.shared.dispatch;
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
+
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.List;

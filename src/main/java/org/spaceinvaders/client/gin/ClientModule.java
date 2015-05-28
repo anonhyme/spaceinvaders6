@@ -23,10 +23,18 @@ public class ClientModule extends AbstractPresenterModule {
         install(new ApplicationModule());
 
         // DefaultPlaceManager Places
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.semesterGrades);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.gridDemo);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.semesterGrades);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.semesterGrades);
 
         bind(ResourceLoader.class).asEagerSingleton();
     }
+
+//    //REMEMBER create the RPC service
+//    @Provides
+//    @Singleton
+//    SemesterServiceAsync helloService() {
+//        return GWT.create(SemesterService.class);
+//    }
+
 }
