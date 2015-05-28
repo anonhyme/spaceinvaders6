@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.home;
+package org.spaceinvaders.client.application.semestergrades;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
