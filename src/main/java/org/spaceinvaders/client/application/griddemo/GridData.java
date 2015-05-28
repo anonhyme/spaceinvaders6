@@ -10,10 +10,10 @@ import java.util.List;
  *
  * @author antoine
  */
-public abstract class GridData<T, E> {
+public interface GridData<T, E> {
 
-    abstract List<Competence> getAllCompetences();
+    public List<Competence> getAllCompetences();
 
-    abstract List<CompetenceEvalResult> getAllRow();
+    public List<CompetenceEvalResult> getAllRow();
 
 }

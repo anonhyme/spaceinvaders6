@@ -5,9 +5,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 
-
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
@@ -17,12 +15,11 @@ import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
-
-import javax.inject.Inject;
-
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
 import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
+
+import javax.inject.Inject;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
 
@@ -31,6 +28,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     }
 
     private final DispatchAsync dispatcher;
+
 
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_SetMainContent = new Type<>();
@@ -56,7 +54,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Override
     protected void onBind() {
         super.onBind();
-
         dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -65,7 +62,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
             @Override
             public void onSuccess(GetUserInfoResult result) {
-                Window.alert("cip = " + result.getUserInfo().getCip());
+//                Window.alert("cip = " + result.getUserInfo().getCip());
             }
         });
     }

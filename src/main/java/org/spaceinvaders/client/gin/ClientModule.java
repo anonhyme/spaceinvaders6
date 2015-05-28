@@ -29,12 +29,4 @@ public class ClientModule extends AbstractPresenterModule {
 
         bind(ResourceLoader.class).asEagerSingleton();
     }
-
-//    //REMEMBER create the RPC service
-//    @Provides
-//    @Singleton
-//    SemesterServiceAsync helloService() {
-//        return GWT.create(SemesterService.class);
-//    }
-
 }

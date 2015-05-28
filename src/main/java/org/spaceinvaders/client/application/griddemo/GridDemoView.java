@@ -53,7 +53,6 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
         GWT.log("initSemesterGradesResult ");
         evaluationDataGrid.setCompetenceEvalResult(semesterGradesResult.getEvaluationResults());
-        GWT.log("initSemesterGradesResult " + evaluationDataGrid.getCompetenceEvalResult().get(0).getCompetenceLabel());
     }
 
     @Override
@@ -69,66 +68,44 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
         dataSemesterProvider.flush();
         dataSemesterProvider.refresh();
-
-        cellTableSetup();
-        cellTable.redraw();
-        containerCellTable.add(cellTable);
-    }
-
-    /**
-     * Set table presentation
-     */
-    private void cellTableSetup() {
         cellTable.setStriped(true);
         cellTable.setBordered(true);
         cellTable.setCondensed(true);
         cellTable.setColumnWidth(0, "15%");
         cellTable.setColumnWidth(1, "8%");
-
+        cellTable.redraw();
+        containerCellTable.add(cellTable);
     }
 
     private void initColumn(List<Competence> competences) {
-        GWT.log("initColumn ");
         setEvaluationTypeColumn();
-        this.competenceMap = new HashMap<>();
-
+        setCompetenceHashMap(competences);
         for (int i = 0; i < competences.size(); i++) {
-            competenceMap.put(competences.get(i).getCompetenceLabel(), i);
-        }
-
-        for (int i = 0; i < competences.size(); i++) {
-            GWT.log("initColumn " + competences.get(i).getCompetenceLabel());
-            GWT.log("initColumn " + competences.get(i).getApLabel());
             cellTable.addColumn(new IndexedColumn(i, competenceMap), competences.get(i).getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
+    }
+
+    private void setCompetenceHashMap(List<Competence> competences) {
+        this.competenceMap = new HashMap<>();
+        for (int i = 0; i < competences.size(); i++) {
+            competenceMap.put(competences.get(i).getCompetenceLabel(), i);
+        }
     }
 
     private void setEvaluationTypeColumn() {
         Column<CompetenceEvalResult, String> column = new Column<CompetenceEvalResult, String>(new TextCell()) {
             @Override
             public String getValue(CompetenceEvalResult data) {
-                String value = "   ";
-                GWT.log("getValue .......................");
+                String value = "";
+                //TODO Check why it's not working without the try/catch
                 try {
-                    GWT.log("getValue trying the shit ");
                     value = data.getEvalLabel();
                 } catch (Exception e) {
-                    GWT.log("getValue exception catch ");
                 }
                 return value;
             }
         };
         cellTable.addColumn(column, "Evaluation");
-    }
-
-    private void setEvaluationTotalColumn() {
-        Column<CompetenceEvalResult, String> column = new Column<CompetenceEvalResult, String>(new TextCell()) {
-            @Override
-            public String getValue(CompetenceEvalResult data) {
-                return data.getMaxResultValue().toString();
-            }
-        };
-        cellTable.addColumn(column, "Total");
     }
 }

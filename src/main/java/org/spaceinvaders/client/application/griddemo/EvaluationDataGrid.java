@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author antoine
  */
-public class EvaluationDataGrid extends GridData<SemesterInfo, CompetenceEvalResult> {
+public class EvaluationDataGrid implements GridData<SemesterInfo, CompetenceEvalResult> {
     /**
      * Semester Info
      */
@@ -85,12 +85,12 @@ public class EvaluationDataGrid extends GridData<SemesterInfo, CompetenceEvalRes
     }
 
     @Override
-    List<Competence> getAllCompetences() {
+    public List<Competence> getAllCompetences() {
         return semesterInfo.getCompetences();
     }
 
     @Override
-    List<CompetenceEvalResult> getAllRow() {
+    public List<CompetenceEvalResult> getAllRow() {
         GWT.log("getAllRow Trying to get All Row ......");
         GWT.log("getAllRow " + competenceEvalResult.get(0).getCompetenceLabel());
         return competenceEvalResult;
