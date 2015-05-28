@@ -35,17 +35,18 @@ public class IndexedColumn extends Column<CompetenceEvalResult, String> {
         GWT.log("Set Column ");
         GWT.log("getValue " + evaluationDataGrid.getResultValue());
         GWT.log("getValue " + evaluationDataGrid.getMaxResultValue());
-
-        //TODO MAKE IT WORK
-//        Integer result = new Integer((evaluationDataGrid.getResultValue() / evaluationDataGrid.getMaxResultValue())*100);
-
+        Integer result = new Integer((evaluationDataGrid.getResultValue() / evaluationDataGrid.getMaxResultValue())*100);
         GWT.log("getValue :: result" + (evaluationDataGrid.getResultValue() / evaluationDataGrid.getMaxResultValue())*100);
         int res = divideAndConquere(evaluationDataGrid.getResultValue(),evaluationDataGrid.getMaxResultValue());
         String evaluationLabel = "   ";
         if (hashMap.get(evaluationDataGrid.getCompetenceLabel()) == index) {
-            evaluationLabel = Integer.toString(res);
+            evaluationLabel = Integer.toString(result);
 
         }
+        Double test =2.6000;
+        Integer.valueOf(Double.toString(test));
+        GWT.log("getValue     " +  test);
+//
         return evaluationLabel;
     }
 
