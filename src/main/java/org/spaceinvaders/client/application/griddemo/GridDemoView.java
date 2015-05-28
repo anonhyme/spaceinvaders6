@@ -38,7 +38,7 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     CellTable<CompetenceEvalResult> cellTable;
 
-//    HashMap<String, >
+    HashMap<String, Integer> competenceMap;
 
     protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
 
@@ -48,16 +48,6 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     GridDemoView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
-
-//    @Override
-//    public void updateSemesterTable(List<EvaluationDataGrid> result) {
-//        GWT.log("updateSemesterTable ");
-//        dataSemesterProvider.getList().clear();
-////        dataSemesterProvider.setList(result);
-//        dataSemesterProvider.flush();
-//        dataSemesterProvider.refresh();
-//        cellTable.redraw();
-//    }
 
     @Override
     public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
@@ -100,15 +90,16 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     private void initColumn(List<Competence> competences) {
         GWT.log("initColumn ");
         setEvaluationTypeColumn();
-        HashMap<String, String> competenceMap;
+        this.competenceMap = new HashMap<>();
 
-
-//        setEvaluationTotalColumn();
+        for (int i = 0; i < competences.size(); i++) {
+            competenceMap.put(competences.get(i).getCompetenceLabel(), i);
+        }
 
         for (int i = 0; i < competences.size(); i++) {
             GWT.log("initColumn " + competences.get(i).getCompetenceLabel());
             GWT.log("initColumn " + competences.get(i).getApLabel());
-            cellTable.addColumn(new IndexedColumn(i), competences.get(i).getCompetenceLabel());
+            cellTable.addColumn(new IndexedColumn(i, competenceMap), competences.get(i).getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
