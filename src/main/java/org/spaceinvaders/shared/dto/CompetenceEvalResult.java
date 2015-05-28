@@ -19,6 +19,7 @@ public class CompetenceEvalResult implements Serializable {
         this.evalLabel = evalLabel;
     }
 
+    // TODO : should be named AP label instead
     public String getCourseLabel() {
         return courseLabel;
     }

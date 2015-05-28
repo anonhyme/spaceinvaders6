@@ -36,7 +36,7 @@ public class CompetenceEntity {
         this.apLabel = apLabel;
     }
 
-    @Basic
+    @Id
     @Column(name = "competence_label")
     public String getCompetenceLabel() {
         return competenceLabel;
