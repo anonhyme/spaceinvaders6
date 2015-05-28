@@ -6,7 +6,7 @@ import com.google.gwt.user.cellview.client.Column;
 
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
-import java.util.DoubleSummaryStatistics;
+import com.google.gwt.i18n.client.NumberFormat;
 import java.util.HashMap;
 
 /**
@@ -32,29 +32,13 @@ public class IndexedColumn extends Column<CompetenceEvalResult, String> {
 
     @Override
     public String getValue(CompetenceEvalResult evaluationDataGrid) {
-        GWT.log("Set Column ");
-        GWT.log("getValue " + evaluationDataGrid.getResultValue());
-        GWT.log("getValue " + evaluationDataGrid.getMaxResultValue());
+        NumberFormat formatter = NumberFormat.getFormat("#.##");
 
-        //TODO MAKE IT WORK
-//        Integer result = new Integer((evaluationDataGrid.getResultValue() / evaluationDataGrid.getMaxResultValue())*100);
-
-        GWT.log("getValue :: result" + (evaluationDataGrid.getResultValue() / evaluationDataGrid.getMaxResultValue())*100);
-        int res = divideAndConquere(evaluationDataGrid.getResultValue(),evaluationDataGrid.getMaxResultValue());
         String evaluationLabel = "   ";
         if (hashMap.get(evaluationDataGrid.getCompetenceLabel()) == index) {
-            evaluationLabel = Integer.toString(res);
-
+            double res = 100 * evaluationDataGrid.getResultValue().doubleValue() / evaluationDataGrid.getMaxResultValue();
+            evaluationLabel = formatter.format(res);
         }
         return evaluationLabel;
     }
-
-    public static native int divideAndConquere(int num, int den) /*-{
-        return (num/den)*100;
-    }-*/;
-
-    private Integer divide(int num, int den) {
-        return (num/den)*100;
-    }
-
 }
