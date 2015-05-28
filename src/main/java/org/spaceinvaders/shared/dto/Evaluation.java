@@ -9,7 +9,8 @@ public class Evaluation implements Serializable {
         this.evaluationLabel = label;
     }
 
-    public Evaluation() {}
+    public Evaluation() {
+    }
 
     public String getEvaluationLabel() {
         return evaluationLabel;

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface CompetenceEvalResultDao {
     List<CompetenceEvalResultEntity> getSemesterResultsEntities(String cip, int semesterID);
+
     List<CompetenceEvalResult> getSemesterResults(String cip, int semesterID);
 }

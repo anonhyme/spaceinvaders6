@@ -26,7 +26,7 @@ public class EvaluationDataGrid extends GridData<SemesterInfo, CompetenceEvalRes
      * Competence Evaluation Result
      */
     private Evaluation evaluation;
-//    private List<Competence>
+    //    private List<Competence>
     private List<CompetenceEvalResult> competenceEvalResult;
 
     /**

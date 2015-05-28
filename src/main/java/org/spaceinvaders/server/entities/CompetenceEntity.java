@@ -11,14 +11,14 @@ import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 @NamedStoredProcedureQueries({
-    @NamedStoredProcedureQuery(
-        name = "GetSemesterCompetences",
-        resultClasses = CompetenceEntity.class,
-        procedureName = "note.get_semester_competences",
-        parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class)
-        })
+        @NamedStoredProcedureQuery(
+                name = "GetSemesterCompetences",
+                resultClasses = CompetenceEntity.class,
+                procedureName = "note.get_semester_competences",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class)
+                })
 })
 @Entity
 @Table(name = "t_competence", schema = "note", catalog = "S6_PROJET_P02")

@@ -8,7 +8,8 @@
 
     <b:Navbar>
         <b:NavbarHeader>
-            <b:NavbarBrand targetHistoryToken="{nameTokens.getSemesterGrades}">Home page</b:NavbarBrand>
+            <b:NavbarBrand targetHistoryToken="{nameTokens.getSemesterGrades}">Home page
+            </b:NavbarBrand>
         </b:NavbarHeader>
         <b:NavbarNav ui:field="navBarNav">
             <b:ListDropDown>

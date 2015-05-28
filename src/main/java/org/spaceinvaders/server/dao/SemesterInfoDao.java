@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface SemesterInfoDao {
     List<EvaluationEntity> getSemesterEvals(String cip, int semesterID);
+
     List<CompetenceEntity> getSemesterCompetences(String cip, int semesterID);
+
     SemesterInfo getSemesterInfo(String cip, int semesterID);
 }
