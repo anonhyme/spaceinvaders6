@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.home;
+package org.spaceinvaders.client.application.semestergrades;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
