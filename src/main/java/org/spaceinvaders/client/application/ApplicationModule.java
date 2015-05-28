@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import org.spaceinvaders.client.application.semestergrades.SemesterGradesModule;
 import org.spaceinvaders.client.application.graphdemo.GraphDemoModule;
 import org.spaceinvaders.client.application.home.SemesterGradesModule;
 import org.spaceinvaders.client.application.ui.graph.cumulativegradelinechartwidget.CumulativeGradeLineChartWidgetModule;

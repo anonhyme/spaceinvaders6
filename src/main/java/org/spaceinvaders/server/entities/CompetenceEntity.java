@@ -13,7 +13,7 @@ import javax.persistence.*;
         })
 })
 @Entity
-@Table(name = "competence_t", schema = "note", catalog = "S6_PROJET_P02")
+@Table(name = "t_competence", schema = "note", catalog = "S6_PROJET_P02")
 public class CompetenceEntity {
     private String apLabel;
     private String competenceLabel;
@@ -28,7 +28,7 @@ public class CompetenceEntity {
         this.apLabel = apLabel;
     }
 
-    @Basic
+    @Id
     @Column(name = "competence_label")
     public String getCompetenceLabel() {
         return competenceLabel;

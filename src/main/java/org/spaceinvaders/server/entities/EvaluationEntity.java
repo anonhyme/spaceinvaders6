@@ -13,7 +13,7 @@ import javax.persistence.*;
     }
 )
 @Entity
-@Table(name = "evaluation_t", schema = "note", catalog = "S6_PROJET_P02")
+@Table(name = "t_evaluation", schema = "note", catalog = "S6_PROJET_P02")
 public class EvaluationEntity {
     private String evaluationLabel;
 

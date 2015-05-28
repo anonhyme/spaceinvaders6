@@ -13,6 +13,11 @@ public class SemesterInfo implements Serializable {
     @SuppressWarnings("unused")
     public SemesterInfo() {}
 
+    public SemesterInfo(List<Competence> competences, List<Evaluation> evals) {
+        this.competences = competences;
+        this.evals = evals;
+    }
+
     public List<Competence> getCompetences() {
         return competences;
     }
