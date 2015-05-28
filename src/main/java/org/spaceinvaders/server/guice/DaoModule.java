@@ -6,8 +6,6 @@ import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDaoImpl;
 import org.spaceinvaders.server.dao.SemesterInfoDao;
 import org.spaceinvaders.server.dao.SemesterInfoDaoImpl;
-import org.spaceinvaders.server.dao.dummy.CompetenceEvalResultDummyDao;
-import org.spaceinvaders.server.dao.dummy.SemesterInfoDummyDao;
 
 public class DaoModule extends AbstractModule {
     @Override

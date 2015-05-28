@@ -1,4 +1,4 @@
-package org.spaceinvaders.server.dao.dummy;
+package org.spaceinvaders.server.dao.mock;
 
 import org.spaceinvaders.server.dao.SemesterInfoDao;
 import org.spaceinvaders.server.entities.CompetenceEntity;
@@ -10,7 +10,7 @@ import org.spaceinvaders.shared.dto.SemesterInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SemesterInfoDummyDao implements SemesterInfoDao {
+public class SemesterInfoDaoMock implements SemesterInfoDao {
     @Override
     public List<EvaluationEntity> getSemesterEvals(String cip, int semesterID) {
         return null;

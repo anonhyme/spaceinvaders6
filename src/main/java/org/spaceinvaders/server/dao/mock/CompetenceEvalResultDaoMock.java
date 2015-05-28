@@ -1,4 +1,4 @@
-package org.spaceinvaders.server.dao.dummy;
+package org.spaceinvaders.server.dao.mock;
 
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
@@ -7,7 +7,7 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompetenceEvalResultDummyDao implements CompetenceEvalResultDao {
+public class CompetenceEvalResultDaoMock implements CompetenceEvalResultDao {
     @Override
     public List<CompetenceEvalResultEntity> getSemesterResultsEntities(String cip, int semesterID) {
         return null;
