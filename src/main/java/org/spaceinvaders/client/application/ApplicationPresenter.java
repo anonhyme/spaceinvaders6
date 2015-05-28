@@ -17,6 +17,7 @@ import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
 import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
 
@@ -47,5 +48,22 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @ProxyEvent
     public void onLockInteraction(LockInteractionEvent event) {
         getView().showLoading(event.shouldLock());
+    }
+
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetUserInfoResult result) {
+                Window.alert("cip = " + result.getUserInfo().getCip());
+            }
+        });
     }
 }

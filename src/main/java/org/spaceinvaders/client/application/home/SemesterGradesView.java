@@ -7,12 +7,12 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 import javax.inject.Inject;
 
-public class HomePageView extends ViewImpl implements HomePagePresenter.MyView {
-    public interface Binder extends UiBinder<Widget, HomePageView> {
+public class SemesterGradesView extends ViewImpl implements SemesterGradesPresenter.MyView {
+    public interface Binder extends UiBinder<Widget, SemesterGradesView> {
     }
 
     @Inject
-    HomePageView(Binder uiBinder) {
+    SemesterGradesView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 }

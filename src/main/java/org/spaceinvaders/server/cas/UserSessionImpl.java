@@ -1,5 +1,6 @@
 package org.spaceinvaders.server.cas;
 
+import com.google.appengine.api.users.UserService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserSessionImpl {
+public class UserSessionImpl implements UserSession {
 
     private Provider<HttpServletRequest> provider = null;
     private HttpSession session = null;
@@ -54,7 +55,8 @@ public class UserSessionImpl {
             Assertion assertion = (Assertion) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
             cip = assertion.getPrincipal().getName();
         } catch (NullPointerException ex) {
-            Logger.getLogger(UserSessionImpl.class.getName()).log(Level.SEVERE, ex.getMessage());
+            // check your web.xml
+            Logger.getLogger(UserSessionImpl.class.getName()).log(Level.SEVERE, "Session or CAS assertion is null, verify your web.xml");
         }
 
         return cip;

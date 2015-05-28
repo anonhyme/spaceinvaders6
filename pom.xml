@@ -252,10 +252,22 @@
         </dependency>
 
         <!-- Persistence -->
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-entitymanager</artifactId>-->
+            <!--<version>4.3.10.Final</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-validator</artifactId>-->
+            <!--<version>4.1.0.Final</version>-->
+        <!--</dependency>-->
+
+        <!-- eclipse link -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.9.Final</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.0</version>
         </dependency>
 
         <!-- GWT-Platform dependencies -->
@@ -301,7 +313,11 @@
             <artifactId>gin</artifactId>
             <version>${gin.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
         <!-- Google Web Toolkit dependencies -->
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -333,13 +349,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.3</version>
-        </dependency>
-
         <!-- Other -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -347,6 +356,13 @@
             <version>${servlet-api.version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- TODO : find out what this is and why it's not working -->
+        <!--<dependency>-->
+            <!--<groupId>ca.uSherbrooke.gegi</groupId>-->
+            <!--<artifactId>ui-component</artifactId>-->
+            <!--<version>1.0.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.gwtplatform</groupId>
@@ -378,6 +394,13 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>2.7.0</version>
+        </dependency>
+
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
         </dependency>
     </dependencies>
 
