@@ -15,17 +15,17 @@ import java.util.HashMap;
  *
  * @author antoine
  */
-public class IndexedColumn extends Column<CompetenceEvalResult, String> {
+public class CompetenceColumn extends Column<CompetenceEvalResult, String> {
     private final int index;
     private final HashMap<String, Integer> hashMap;
 
-    public IndexedColumn(int index) {
+    public CompetenceColumn(int index) {
         super(new TextCell());
         this.index = index;
         hashMap = null;
     }
 
-    public IndexedColumn(int index, HashMap<String, Integer> hashMap) {
+    public CompetenceColumn(int index, HashMap<String, Integer> hashMap) {
         super(new TextCell());
         this.index = index;
         this.hashMap = new HashMap<>(hashMap);

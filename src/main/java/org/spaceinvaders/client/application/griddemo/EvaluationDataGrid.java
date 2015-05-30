@@ -15,23 +15,14 @@ import java.util.List;
  * @author antoine
  */
 public class EvaluationDataGrid implements GridData<SemesterInfo, CompetenceEvalResult> {
-    /**
-     * Semester Info
-     */
+
     private SemesterInfo semesterInfo;
     private List<String> apLabels;
     private List<String> competenceLabels;
 
-    /**
-     * Competence Evaluation Result
-     */
     private Evaluation evaluation;
-    //    private List<Competence>
     private List<CompetenceEvalResult> competenceEvalResult;
 
-    /**
-     * Semester general info Needed to setup de cell grid
-     */
     public EvaluationDataGrid() {
 
     }
@@ -91,8 +82,6 @@ public class EvaluationDataGrid implements GridData<SemesterInfo, CompetenceEval
 
     @Override
     public List<CompetenceEvalResult> getAllRow() {
-        GWT.log("getAllRow Trying to get All Row ......");
-        GWT.log("getAllRow " + competenceEvalResult.get(0).getCompetenceLabel());
         return competenceEvalResult;
     }
 }

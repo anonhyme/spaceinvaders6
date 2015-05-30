@@ -51,18 +51,14 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     @Override
     public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
-        GWT.log("initSemesterGradesResult ");
         evaluationDataGrid.setCompetenceEvalResult(semesterGradesResult.getEvaluationResults());
     }
 
     @Override
     public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
-        GWT.log("initSemesterTable ");
         //TODO List AP and courses
         evaluationDataGrid.setSemesterInfo(semesterInfoResult.getSemesterInfo());
-
         cellTable = new CellTable<>();
-
         initColumn(evaluationDataGrid.getAllCompetences());
         dataSemesterProvider.setList(evaluationDataGrid.getAllRow());
 
@@ -81,7 +77,7 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
         setEvaluationTypeColumn();
         setCompetenceHashMap(competences);
         for (int i = 0; i < competences.size(); i++) {
-            cellTable.addColumn(new IndexedColumn(i, competenceMap), competences.get(i).getCompetenceLabel());
+            cellTable.addColumn(new CompetenceColumn(i, competenceMap), competences.get(i).getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }

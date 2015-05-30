@@ -33,8 +33,6 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
         void initSemesterTable(GetSemesterInfoResult result);
 
         void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult);
-
-//        void showModalInfo(String info);
     }
 
     @ContentSlot
@@ -45,7 +43,6 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
     public interface MyProxy extends ProxyPlace<GridDemoPresenter> {
     }
 
-    //    private SemesterServiceAsync exampleService;
     private DispatchAsync dispatcher;
 
     @Inject
