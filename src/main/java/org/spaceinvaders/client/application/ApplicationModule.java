@@ -17,5 +17,6 @@ public class ApplicationModule extends AbstractPresenterModule {
 
         install(new SemesterGradesModule());
         install(new GridDemoModule());
+
     }
 }

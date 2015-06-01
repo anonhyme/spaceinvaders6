@@ -18,11 +18,31 @@
 
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
 
+    <inherits name="com.arcbees.gwtpolymer.GwtPolymer"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.coredrawerpanel.CoreDrawerPanel"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.coreheaderpanel.CoreHeaderPanel"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.coretoolbar.CoreToolbar"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.coreanimatedpages.CoreAnimatedPages"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.papericonbutton.PaperIconButton"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.coretransition.CoreTransition"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.corestyle.CoreStyle"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.paperitem.PaperItem"/>
+    <inherits name="com.arcbees.gwtpolymer.elements.paperbutton.PaperButton"/>
+
+    <inherits name="com.google.gwt.query.Query"/>
+
+    <extend-configuration-property name="gwtpolymer.elements"
+                                   value="core-animated-pages/transitions/slide-from-right.html"/>
+
     <source path='client'/>
     <source path='shared'/>
 
     <set-configuration-property name="gin.ginjector.modules"
                                 value="org.spaceinvaders.client.gin.ClientModule"/>
+    <set-configuration-property name="gwtp.bootstrapper"
+                                value="org.spaceinvaders.client.MyBootstrapper"/>
+    <extend-configuration-property name="gwtpolymer.elements"
+                                   value="core-animated-pages/transitions/slide-from-right.html"/>
 
     <set-configuration-property name="CssResource.enableGss" value="true"/>
     <set-configuration-property name="CssResource.legacy" value="true"/>

@@ -21,8 +21,8 @@
         <bootstrap.version>0.9.1</bootstrap.version>
         <gsss.version>1.0</gsss.version>
         <gwtchosen.version>2.0.0</gwtchosen.version>
-
         <gquery.version>1.4.3</gquery.version>
+        <gwt-polymer.version>0.5.5-SNAPSHOT</gwt-polymer.version>
 
         <gwt.style>OBF</gwt.style>
 
@@ -224,6 +224,12 @@
 
         <!-- Client UI -->
         <dependency>
+            <groupId>com.arcbees.gwtpolymer</groupId>
+            <artifactId>gwt-polymer</artifactId>
+            <version>${gwt-polymer.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.arcbees.gss</groupId>
             <artifactId>gsss</artifactId>
             <version>${gsss.version}</version>
@@ -249,18 +255,6 @@
             <version>${gwtchosen.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Persistence -->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-entitymanager</artifactId>-->
-        <!--<version>4.3.10.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-validator</artifactId>-->
-        <!--<version>4.1.0.Final</version>-->
-        <!--</dependency>-->
 
         <!-- eclipse link -->
         <dependency>
@@ -317,6 +311,7 @@
             <artifactId>guice-persist</artifactId>
             <version>${guice.version}</version>
         </dependency>
+
         <!-- Google Web Toolkit dependencies -->
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -348,6 +343,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
+        </dependency>
+
         <!-- Other -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -355,13 +357,6 @@
             <version>${servlet-api.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- TODO : find out what this is and why it's not working -->
-        <!--<dependency>-->
-        <!--<groupId>ca.uSherbrooke.gegi</groupId>-->
-        <!--<artifactId>ui-component</artifactId>-->
-        <!--<version>1.0.1</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.gwtplatform</groupId>
@@ -394,13 +389,6 @@
             <artifactId>gwt-user</artifactId>
             <version>2.7.0</version>
         </dependency>
-
-        <!-- postgresql driver -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.4-1201-jdbc41</version>
-        </dependency>
     </dependencies>
 
     <repositories>
@@ -410,6 +398,14 @@
             <url>http://www.gel.usherbrooke.ca/artifactory/repo</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype.snapshots</id>
+            <name>Sonatype snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
