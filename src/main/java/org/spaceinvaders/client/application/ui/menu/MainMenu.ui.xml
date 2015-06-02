@@ -6,7 +6,7 @@
     <ui:with field="css" type="org.spaceinvaders.client.resources.AppResources"/>
     <ui:with type="org.spaceinvaders.client.place.NameTokens" field="nameTokens"/>
 
-    <b:Navbar>
+    <b:Navbar ui:field="materialNav">
         <b:NavbarHeader>
             <b:NavbarBrand targetHistoryToken="{nameTokens.getSemesterGrades}">Home page
             </b:NavbarBrand>

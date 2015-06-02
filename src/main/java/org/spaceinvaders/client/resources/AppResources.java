@@ -21,38 +21,30 @@ import com.google.gwt.resources.client.CssResource;
 
 public interface AppResources extends ClientBundle {
 
-    interface Style extends CssResource {
-        @ClassName("pricing-table")
-        String pricingTable();
+    interface TopNavbar extends CssResource {
 
-        @ClassName("panel-heading-landing")
-        String panelHeadingLanding();
+        @ClassName("materialTop")
+        String materialTop();
 
-        @ClassName("panel-heading-landing-box")
-        String panelHeadingLandingBox();
+        @ClassName("material")
+        String material();
 
-        @ClassName("panel-title-landing")
-        String panelTitleLanding();
+        @ClassName("material-icon")
+        String materialIcon();
 
-        @ClassName("btn-price")
-        String btnPrice();
+        @ClassName("info")
+        String info();
 
-        @ClassName("panel-body-landing")
-        String panelBodyLanding();
+//        material-icon span
 
-        @ClassName("panel")
-        String panel();
+//        info h4
+//
+//        info>p
+//
+//        info>a
 
-        @ClassName("panel-footer-landing")
-        String panelFooterLanding();
-
-        @ClassName("btn")
-        String btn();
-
-        @ClassName("panel-footer")
-        String panelFooter();
     }
 
-    @Source("css/style.gss")
-    Style style();
+    @Source("css/topNavbar.gss")
+    TopNavbar topNavBar();
 }
