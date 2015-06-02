@@ -4,6 +4,7 @@
     <inherits name='com.google.gwt.user.User'/>
     <inherits name='com.google.gwt.inject.Inject'/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+    <inherits name="com.google.gwt.logging.Logging"/>
 
     <add-linker name="xsiframe"/>
     <set-configuration-property name="devModeRedirectEnabled" value="true"/>
