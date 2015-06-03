@@ -65,6 +65,7 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     @Override
     public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
+
         //TODO List AP and courses
         evaluationDataGrid.setSemesterInfo(semesterInfoResult.getSemesterInfo());
         cellTable = new CellTable<>();
