@@ -1,5 +1,4 @@
-<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:b='urn:import:org.gwtbootstrap3.client.ui'
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
@@ -8,17 +7,20 @@
     <ui:with field="nameTokens" type="org.spaceinvaders.client.place.NameTokens"/>
 
     <g:HTMLPanel>
-        <b:Navbar>
+        <b:Navbar ui:field="materialNavBar">
             <b:NavbarHeader>
                 <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}">Home page</b:NavbarBrand>
             </b:NavbarHeader>
+
             <b:NavbarCollapse>
+
                 <b:NavbarNav>
                     <b:ListDropDown>
                         <b:AnchorButton dataToggle="DROPDOWN">Session</b:AnchorButton>
                         <b:DropDownMenu ui:field="dropDownMenu"/>
                     </b:ListDropDown>
                 </b:NavbarNav>
+
                 <b:Nav pull="RIGHT">
                     <b:NavbarText>
                         <b.html:Span ui:field="spanUsername"/>
@@ -27,7 +29,10 @@
                         <b:NavbarLink ui:field="navbarLinkDisconnect">Déconnexion</b:NavbarLink>
                     </b:NavbarText>
                 </b:Nav>
+
             </b:NavbarCollapse>
+
         </b:Navbar>
     </g:HTMLPanel>
+
 </ui:UiBinder>

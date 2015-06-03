@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.semestergrades;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -32,6 +33,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     public interface MyProxy extends ProxyPlace<SemesterGradesPresenter> {
     }
 
+
     private DispatchAsync dispatcher;
 
     @Inject
@@ -55,6 +57,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
         super.onBind();
 
         // TODO : Remove that and put it where we'll really use it
+        //TODO : Inject User session to get the id
         this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -63,7 +66,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
-                Window.alert("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
+                GWT.log("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
             }
         });
 
@@ -75,8 +78,8 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
             @Override
             public void onSuccess(GetSemesterInfoResult result) {
-                Window.alert("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
-                Window.alert("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
+                GWT.log("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
+                GWT.log("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
             }
         });
     }

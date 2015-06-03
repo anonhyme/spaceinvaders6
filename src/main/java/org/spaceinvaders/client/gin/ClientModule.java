@@ -28,5 +28,6 @@ public class ClientModule extends AbstractPresenterModule {
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.semesterGrades);
 
         bind(ResourceLoader.class).asEagerSingleton();
+
     }
 }

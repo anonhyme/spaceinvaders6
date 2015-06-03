@@ -1,13 +1,13 @@
 package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 
@@ -34,6 +34,14 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     AppResources appResources;
 
+    CellTable<CompetenceEvalResult> cellTable;
+    HashMap<String, Integer> competenceMap;
+    protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
+    EvaluationDataGrid evaluationDataGrid = new EvaluationDataGrid();
+
+    @UiField
+    HTMLPanel menuPanel;
+
     @UiField
     HTMLPanel panel;
 
@@ -42,17 +50,6 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     @UiField
     Container containerModal;
-
-    @UiField
-    DivElement materialDiv;
-
-    CellTable<CompetenceEvalResult> cellTable;
-
-    HashMap<String, Integer> competenceMap;
-
-    protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
-
-    EvaluationDataGrid evaluationDataGrid = new EvaluationDataGrid();
 
     @Inject
     GridDemoView(Binder uiBinder, AppResources appResources) {
@@ -126,5 +123,23 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
                 Window.alert("hello");
             }
         });
+    }
+
+    @Override
+    public void addToSlot(Object slot, IsWidget content) {
+        super.addToSlot(slot, content);
+
+        if (slot == GridDemoPresenter.SLOT_WIDGET_ELEMENT) {
+            menuPanel.add(content);
+        }
+    }
+
+    @Override
+    public void removeFromSlot(Object slot, IsWidget content) {
+        super.removeFromSlot(slot, content);
+
+        if (slot == GridDemoPresenter.SLOT_WIDGET_ELEMENT) {
+            menuPanel.remove(content);
+        }
     }
 }

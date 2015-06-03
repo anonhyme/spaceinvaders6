@@ -1,11 +1,10 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:menu='urn:import:org.spaceinvaders.client.application.ui.menu'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
     <g:HTMLPanel>
         <div>
-            <menu:MainMenu/>
+
             <h2>Home page</h2>
 
             <p>
