@@ -15,10 +15,14 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
+import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
+import org.spaceinvaders.client.widgets.materialmenu.MaterialMenuPresenter;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
 
 import javax.inject.Inject;
 
@@ -33,18 +37,21 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     public interface MyProxy extends ProxyPlace<SemesterGradesPresenter> {
     }
 
+    public static final Object SLOT_MENU_WIDGET = new Object();
 
+    private final WidgetsFactory widgetsFactory;
     private DispatchAsync dispatcher;
+    private String userName = "";
 
     @Inject
     SemesterGradesPresenter(EventBus eventBus,
                             MyView view,
                             MyProxy proxy,
-                            DispatchAsync dispatchAsync
-    ) {
+                            DispatchAsync dispatchAsync,
+                            WidgetsFactory widgetsFactory) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
-
         this.dispatcher = dispatchAsync;
+        this.widgetsFactory = widgetsFactory;
     }
 
     @Override
@@ -55,6 +62,19 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     @Override
     protected void onBind() {
         super.onBind();
+
+        dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetUserInfoResult result) {
+                GWT.log(result.getUserInfo().getCip());
+                setUserName(result.getUserInfo().getCip());
+            }
+        });
 
         // TODO : Remove that and put it where we'll really use it
         //TODO : Inject User session to get the id
@@ -82,5 +102,14 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
                 GWT.log("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
             }
         });
+    }
+
+    private void setUserName(String userName) {
+        GWT.log("setUserName ::::::::: " + userName);
+        addToSlot(SLOT_MENU_WIDGET, widgetsFactory.createTopMenu(userName));
+    }
+
+    private String getUserName(){
+        return this.userName;
     }
 }

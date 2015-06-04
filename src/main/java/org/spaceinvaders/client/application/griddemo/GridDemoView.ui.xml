@@ -7,11 +7,11 @@
     <ui:with field="res" type="org.spaceinvaders.client.resources.AppResources"/>
 
     <g:HTMLPanel ui:field="panel">
-        <g:HTMLPanel ui:field="menuPanel"></g:HTMLPanel>
+        <g:HTMLPanel ui:field="menuPanel"/>
 
         <b:Container ui:field="containerCellTable"/>
 
-        <b:Container ui:field="containerModal"></b:Container>
+        <b:Container ui:field="containerModal"/>
 
     </g:HTMLPanel>
 </ui:UiBinder>

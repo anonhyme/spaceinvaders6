@@ -12,7 +12,7 @@ public class GridDemoModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         bindPresenter(GridDemoPresenter.class, GridDemoPresenter.MyView.class, GridDemoView.class, GridDemoPresenter.MyProxy.class);
-        bind(MaterialMenuPresenter.MyView.class).to(MaterialMenuView.class);
-        install(new GinFactoryModuleBuilder().build(WidgetsFactory.class));
+//        bind(MaterialMenuPresenter.MyView.class).to(MaterialMenuView.class);
+//        install(new GinFactoryModuleBuilder().build(WidgetsFactory.class));
     }
 }

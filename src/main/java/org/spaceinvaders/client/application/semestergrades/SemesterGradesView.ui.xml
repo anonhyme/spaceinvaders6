@@ -2,7 +2,10 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
+    <ui:with field="res" type="org.spaceinvaders.client.resources.AppResources"/>
+
     <g:HTMLPanel>
+        <g:HTMLPanel ui:field="menuPanel"/>
         <div>
 
             <h2>Home page</h2>

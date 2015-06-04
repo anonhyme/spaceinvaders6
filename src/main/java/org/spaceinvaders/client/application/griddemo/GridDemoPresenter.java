@@ -8,6 +8,7 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -88,7 +89,7 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
             }
         });
 
-        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
+        DispatchRequest dispatchRequestInfo = this.dispatcher.execute(new GetSemesterInfoAction(getUserName(), 3), new AsyncCallback<GetSemesterInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert(caught.getMessage());
@@ -100,7 +101,7 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
             }
         });
 
-        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
+        DispatchRequest dispatchRequestSemesterGrades = this.dispatcher.execute(new GetSemesterGradesAction(getUserName(), 3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert(caught.getMessage());
@@ -108,9 +109,18 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
 
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
+                GWT.log("fetchSemesterInfo getUserName :::::" + getUserName());
                 getView().initSemesterGradesResult(result);
             }
         });
+
+        if(dispatchRequestInfo.isPending()){
+            GWT.log("Still waiting for dispatchRequestInfo");
+        }
+
+        if(dispatchRequestSemesterGrades.isPending()){
+            GWT.log("Still waiting for dispatchRequestSemesterGrades");
+        }
     }
 
     private void setUserName(String userName) {
@@ -119,7 +129,7 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
         addToSlot(SLOT_WIDGET_ELEMENT, materialMenuPresenter);
     }
 
-    private String getUserName(){
+    private String getUserName() {
         return this.userName;
     }
 }
