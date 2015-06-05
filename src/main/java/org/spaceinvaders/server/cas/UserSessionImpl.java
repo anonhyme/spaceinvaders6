@@ -1,17 +1,16 @@
 package org.spaceinvaders.server.cas;
 
-import com.google.appengine.api.users.UserService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class UserSessionImpl implements UserSession {
 

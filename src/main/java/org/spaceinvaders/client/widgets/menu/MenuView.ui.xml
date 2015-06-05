@@ -9,7 +9,7 @@
     <g:HTMLPanel>
         <b:Navbar ui:field="materialNavBar">
             <b:NavbarHeader>
-                <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}">Home page</b:NavbarBrand>
+                <b:NavbarBrand ui:field="navbarBrand" targetHistoryToken="{nameTokens.getHome}">Home page</b:NavbarBrand>
             </b:NavbarHeader>
 
             <b:NavbarCollapse>

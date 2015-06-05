@@ -11,6 +11,7 @@
     <inherits name='com.gwtplatform.dispatch.Dispatch'/>
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
     <inherits name="com.google.gwt.query.Query"/>
+    <inherits name="com.googlecode.gwt.charts.Charts"/>
 
     <source path='client'/>
     <source path='shared'/>
@@ -22,7 +23,6 @@
     <set-configuration-property name="CssResource.legacy" value="true"/>
     <set-configuration-property name="gin.ginjector.modules"
                                 value="org.spaceinvaders.client.gin.ClientModule"/>
-
     <!-- Other setting -->
     <!--<set-configuration-property name="CssResource.style" value="pretty"/>-->
     <!--<set-configuration-property name="CssResource.obfuscationPrefix" value="empty"/>-->

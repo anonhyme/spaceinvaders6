@@ -35,14 +35,6 @@ public interface AppResources extends ClientBundle {
         @ClassName("info")
         String info();
 
-//        material-icon span
-
-//        info h4
-//
-//        info>p
-//
-//        info>a
-
     }
 
     @Source("css/topNavbar.gss")

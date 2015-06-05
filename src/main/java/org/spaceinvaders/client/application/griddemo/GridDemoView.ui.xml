@@ -12,6 +12,7 @@
         <b:Container ui:field="containerCellTable"/>
 
         <b:Container ui:field="containerModal"/>
+        <b:Button ui:field="fire">FIRE !</b:Button>
 
     </g:HTMLPanel>
 </ui:UiBinder>

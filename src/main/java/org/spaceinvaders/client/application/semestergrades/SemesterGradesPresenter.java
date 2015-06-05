@@ -14,15 +14,20 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
+import org.spaceinvaders.client.application.griddemo.GridDemoPresenter;
+import org.spaceinvaders.client.events.HideMenuEvent;
+import org.spaceinvaders.client.events.LoginEvent;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
-import org.spaceinvaders.client.widgets.materialmenu.MaterialMenuPresenter;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
 import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -31,6 +36,7 @@ import javax.inject.Inject;
 public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy> {
     public interface MyView extends View {
     }
+    private static final Logger LOGGER = Logger.getLogger(GridDemoPresenter.class.getName());
 
     @ProxyCodeSplit
     @NameToken(NameTokens.semesterGrades)
@@ -63,6 +69,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     protected void onBind() {
         super.onBind();
 
+        LOGGER.log(Level.INFO, "callServerLoginAction(): Server failed to process login call.");
         dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -71,7 +78,6 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
             @Override
             public void onSuccess(GetUserInfoResult result) {
-                GWT.log(result.getUserInfo().getCip());
                 setUserName(result.getUserInfo().getCip());
             }
         });
@@ -106,6 +112,8 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
     private void setUserName(String userName) {
         GWT.log("setUserName ::::::::: " + userName);
+        LoginEvent.fire(userName, this);
+        HideMenuEvent.fire(userName, this);
         addToSlot(SLOT_MENU_WIDGET, widgetsFactory.createTopMenu(userName));
     }
 

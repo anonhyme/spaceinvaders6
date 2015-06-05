@@ -1,6 +1,6 @@
 package org.spaceinvaders.client.widgets.commons;
 
-import org.spaceinvaders.client.widgets.materialmenu.MaterialMenuPresenter;
+import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 6/2/2015
@@ -8,5 +8,5 @@ import org.spaceinvaders.client.widgets.materialmenu.MaterialMenuPresenter;
  * @author antoine
  */
 public interface WidgetsFactory {
-    MaterialMenuPresenter createTopMenu(String userId);
+    MenuPresenter createTopMenu(String userId);
 }

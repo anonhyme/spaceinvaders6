@@ -1,9 +1,11 @@
 package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -11,8 +13,10 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 
+import com.googlecode.gwt.charts.client.ChartWidget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
+import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
@@ -23,6 +27,8 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -33,9 +39,9 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     }
 
     AppResources appResources;
-
     CellTable<CompetenceEvalResult> cellTable;
     HashMap<String, Integer> competenceMap;
+
     protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
     EvaluationDataGrid evaluationDataGrid = new EvaluationDataGrid();
 
@@ -51,6 +57,9 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     @UiField
     Container containerModal;
 
+    @UiField
+    Button fire;
+
     @Inject
     GridDemoView(Binder uiBinder, AppResources appResources) {
         initWidget(uiBinder.createAndBindUi(this));
@@ -59,16 +68,17 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     @Override
     public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
+
 //        materialDiv.addClassName(appResources.topNavBar().material());
         evaluationDataGrid.setCompetenceEvalResult(semesterGradesResult.getEvaluationResults());
     }
 
     @Override
     public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
-
-        //TODO List AP and courses
+        //TODO to refactor
         evaluationDataGrid.setSemesterInfo(semesterInfoResult.getSemesterInfo());
         cellTable = new CellTable<>();
+//        ChartWidget
         initColumn(evaluationDataGrid.getAllCompetences());
         dataSemesterProvider.setList(evaluationDataGrid.getAllRow());
 
@@ -118,12 +128,12 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     @Override
     protected void onAttach() {
         super.onAttach();
-        $(containerCellTable).click(new Function() {
-            @Override
-            public void f() {
-                Window.alert("hello");
-            }
-        });
+//        $(containerCellTable).click(new Function() {
+//            @Override
+//            public void f() {
+//                Window.alert("hello");
+//            }
+//        });
     }
 
     @Override
@@ -142,5 +152,10 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
         if (slot == GridDemoPresenter.SLOT_WIDGET_ELEMENT) {
             menuPanel.remove(content);
         }
+    }
+
+    @UiHandler("fire")
+    public void initiateHacking(ClickEvent event) {
+//        getUiHandlers().onFire();
     }
 }

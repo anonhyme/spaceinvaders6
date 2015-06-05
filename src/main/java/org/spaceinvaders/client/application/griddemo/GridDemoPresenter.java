@@ -18,9 +18,10 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
+import org.spaceinvaders.client.events.HideMenuEvent;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
-import org.spaceinvaders.client.widgets.materialmenu.MaterialMenuPresenter;
+import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
@@ -60,7 +61,6 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
             MyProxy proxy,
             WidgetsFactory widgetsFactory) {
         super(eventBus, view, proxy, RevealType.Root);
-
         this.dispatcher = dispatchAsync;
         this.widgetsFactory = widgetsFactory;
 
@@ -84,7 +84,6 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
 
             @Override
             public void onSuccess(GetUserInfoResult result) {
-                GWT.log(result.getUserInfo().getCip());
                 setUserName(result.getUserInfo().getCip());
             }
         });
@@ -109,24 +108,22 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
 
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
-                GWT.log("fetchSemesterInfo getUserName :::::" + getUserName());
                 getView().initSemesterGradesResult(result);
             }
         });
+    }
 
-        if(dispatchRequestInfo.isPending()){
-            GWT.log("Still waiting for dispatchRequestInfo");
-        }
-
-        if(dispatchRequestSemesterGrades.isPending()){
-            GWT.log("Still waiting for dispatchRequestSemesterGrades");
-        }
+    @Override
+    public void onFire() {
+        HideMenuEvent.fire("hello", this);
     }
 
     private void setUserName(String userName) {
         GWT.log("setUserName ::::::::: " + userName);
-        MaterialMenuPresenter materialMenuPresenter = widgetsFactory.createTopMenu(userName);
-        addToSlot(SLOT_WIDGET_ELEMENT, materialMenuPresenter);
+        MenuPresenter menuPresenter = widgetsFactory.createTopMenu(userName);
+        menuPresenter.addUserLoginHandler(menuPresenter, this);
+        menuPresenter.addHideMenuHandler(menuPresenter, this);
+        addToSlot(SLOT_WIDGET_ELEMENT, menuPresenter);
     }
 
     private String getUserName() {

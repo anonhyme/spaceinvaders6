@@ -23,7 +23,7 @@
         <gwtchosen.version>2.0.0</gwtchosen.version>
         <gquery.version>1.4.3</gquery.version>
         <gwt-polymer.version>0.5.5-SNAPSHOT</gwt-polymer.version>
-
+        <gwt-charts.version>0.9.10</gwt-charts.version>
         <gwt.style>OBF</gwt.style>
 
         <!-- server -->
@@ -317,6 +317,13 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
+        </dependency>
+
+        <!-- GWT-Charts -->
+        <dependency>
+            <groupId>com.googlecode.gwt-charts</groupId>
+            <artifactId>gwt-charts</artifactId>
+            <version>${gwt-charts.version}</version>
         </dependency>
 
         <!-- Google App Engine -->
