@@ -6,7 +6,8 @@ public class Competence implements Serializable {
     private String apLabel;
     private String competenceLabel;
 
-    public Competence() {}
+    public Competence() {
+    }
 
     public Competence(String apLabel, String competenceLabel) {
         this.apLabel = apLabel;

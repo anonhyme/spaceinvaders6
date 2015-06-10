@@ -1,7 +1,11 @@
 package org.spaceinvaders.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+
+import org.spaceinvaders.client.application.griddemo.GridDemoModule;
+
 import org.spaceinvaders.client.application.semestergrades.SemesterGradesModule;
+
 
 public class ApplicationModule extends AbstractPresenterModule {
     @Override
@@ -12,5 +16,6 @@ public class ApplicationModule extends AbstractPresenterModule {
                 ApplicationPresenter.MyProxy.class);
 
         install(new SemesterGradesModule());
+        install(new GridDemoModule());
     }
 }

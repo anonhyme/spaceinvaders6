@@ -5,6 +5,9 @@
     <inherits name='com.google.gwt.inject.Inject'/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
 
+    <add-linker name="xsiframe"/>
+    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+
     <!-- Default css -->
     <!--<inherits name='com.google.gwt.user.theme.standard.Standard' />-->
     <!--<inherits name='com.google.gwt.user.theme.chrome.Chrome'/>-->
