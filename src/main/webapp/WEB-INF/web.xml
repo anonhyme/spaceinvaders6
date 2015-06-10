@@ -5,20 +5,6 @@
          version="2.5">
 
     <display-name>ProjetS6</display-name>
-    <!--<servlet>-->
-        <!--<servlet-name>org.spaceinvaders.ProjetS6 SemesterService</servlet-name>-->
-        <!--&lt;!&ndash;<servlet-class>org.spaceinvaders.server.rpc.SemesterServiceServlet</servlet-class>&ndash;&gt;-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>org.spaceinvaders.ProjetS6 SemesterService</servlet-name>-->
-        <!--<url-pattern>/ProjetS6/dataService</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<welcome-file-list>-->
-        <!--<welcome-file>ProjetS6.html</welcome-file>-->
-    <!--</welcome-file-list>-->
-
-
     <!--
      This Guice listener hijacks all further filters and servlets. Extra
      filters and servlets have to be configured in your
@@ -41,7 +27,7 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>CAS	Authentication	Filter</filter-name>
+        <filter-name>CAS Authentication Filter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
         <init-param>
             <param-name>casServerLoginUrl</param-name>
@@ -53,8 +39,9 @@
         </init-param>
     </filter>
     <filter>
-        <filter-name>CAS	Validation	Filter</filter-name>
-        <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+        <filter-name>CAS Validation Filter</filter-name>
+        <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter
+        </filter-class>
         <init-param>
             <param-name>casServerUrlPrefix</param-name>
             <param-value>https://cas.usherbrooke.ca/</param-value>
@@ -73,11 +60,11 @@
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>CAS	Authentication	Filter</filter-name>
+        <filter-name>CAS Authentication Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>CAS	Validation	Filter</filter-name>
+        <filter-name>CAS Validation Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

@@ -1,6 +1,3 @@
-
-
-
 package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.core.client.GWT;
@@ -21,15 +18,18 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.place.NameTokens;
+import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
+import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
 
 public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridDemoPresenter.MyProxy> implements GridDemoUiHandlers {
 
     interface MyView extends View, HasUiHandlers<GridDemoUiHandlers> {
-
         void initSemesterTable(GetSemesterInfoResult result);
 
         void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult);
@@ -38,6 +38,8 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_GridDemo = new Type<RevealContentHandler<?>>();
 
+    public static final Object SLOT_WIDGET_ELEMENT = new Object();
+
     @NameToken(NameTokens.gridDemo)
     @ProxyCodeSplit
     public interface MyProxy extends ProxyPlace<GridDemoPresenter> {
@@ -45,49 +47,90 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
 
     private DispatchAsync dispatcher;
 
+    private final WidgetsFactory widgetsFactory;
+
+    private String userName = "";
+
     @Inject
     public GridDemoPresenter(
             EventBus eventBus,
             MyView view,
             DispatchAsync dispatchAsync,
-            MyProxy proxy) {
+            MyProxy proxy,
+            WidgetsFactory widgetsFactory) {
         super(eventBus, view, proxy, RevealType.Root);
         this.dispatcher = dispatchAsync;
+        this.widgetsFactory = widgetsFactory;
+
         getView().setUiHandlers(this);
     }
 
     protected void onBind() {
         super.onBind();
-        fetchSemesterInfo();
-        GWT.log("onBind ");
+        this.fetchSemesterData();
+        this.fetchUserInfo();
+
     }
 
-    @Override
-    public void fetchSemesterInfo() {
-        GWT.log("Async call fetchSemesterData");
-
-        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
+    private void fetchUserInfo() {
+        dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert(caught.getMessage());
             }
 
             @Override
-            public void onSuccess(GetSemesterInfoResult result) {
-                getView().initSemesterTable(result);
+            public void onSuccess(GetUserInfoResult result) {
+                GWT.log("1 onSuccess GetuserInfoResult :::::: ");
+                setUserName(result.getUserInfo().getCip());
             }
         });
+    }
 
-        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
+    public void fetchSemesterData() {
+        dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
             public void onFailure(Throwable caught) {
+                GWT.log("onFailure GetSemesterGradesAction ::::: ");
                 Window.alert(caught.getMessage());
             }
 
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
+                GWT.log(" 3 onSuccess GetSemesterGradesResult ::::: " + result.getEvaluationResults().get(1).getCompetenceLabel());
                 getView().initSemesterGradesResult(result);
+                fetchSemesterInfo();
             }
         });
+    }
+
+    protected void fetchSemesterInfo() {
+        GWT.log("Async call fetchSemesterData");
+
+        dispatcher.execute(new GetSemesterInfoAction(3), new AsyncCallback<GetSemesterInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                GWT.log("onFailure GetSemesterInfoAction ::::: ");
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetSemesterInfoResult result) {
+                GWT.log("2 onSuccess GetSemesterInfoAction ::::: ");
+
+                getView().initSemesterTable(result);
+            }
+        });
+    }
+
+    private void setUserName(String userName) {
+        GWT.log("setUserName ::::::::: " + userName);
+        MenuPresenter menuPresenter = widgetsFactory.createTopMenu(userName);
+        menuPresenter.addUserLoginHandler(menuPresenter, this);
+        addToSlot(SLOT_WIDGET_ELEMENT, menuPresenter);
+    }
+
+    private String getUserName() {
+        return this.userName;
     }
 }

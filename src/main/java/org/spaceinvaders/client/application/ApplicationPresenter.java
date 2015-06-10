@@ -15,7 +15,6 @@ import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
-import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
 import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
 

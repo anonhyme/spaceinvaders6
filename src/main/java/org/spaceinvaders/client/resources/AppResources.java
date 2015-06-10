@@ -21,10 +21,22 @@ import com.google.gwt.resources.client.CssResource;
 
 public interface AppResources extends ClientBundle {
 
-    interface Style extends CssResource {
+    interface TopNavbar extends CssResource {
+
+        @ClassName("materialTop")
+        String materialTop();
+
+        @ClassName("material")
+        String material();
+
+        @ClassName("material-icon")
+        String materialIcon();
+
+        @ClassName("info")
+        String info();
 
     }
 
-//    @Source("css/style.gss")
-//    Style style();
+    @Source("css/topNavbar.gss")
+    TopNavbar topNavBar();
 }
