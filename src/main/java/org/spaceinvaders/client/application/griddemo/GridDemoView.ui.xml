@@ -5,16 +5,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <g:HTMLPanel ui:field="panel">
         <menu:MainMenu/>
-        <b:Container ui:field="containerCellTable">
-
-        </b:Container>
-
-        <b:Container ui:field="containerModal"></b:Container>
-        <!--<b.html:CellTable ui:field="cellTable"/>-->
-
-        <!--</b.html:CellTable>-->
-        <!--<div>-->
-        <!--<cell:CellTable ui:field="cellTable" width="100%"/>-->
-        <!--</div>-->
+        <b:Container ui:field="containerCellTable"/>
+        <b:Container ui:field="containerModal"/>
     </g:HTMLPanel>
 </ui:UiBinder>

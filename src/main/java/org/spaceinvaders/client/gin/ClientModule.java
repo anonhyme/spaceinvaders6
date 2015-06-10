@@ -9,7 +9,6 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 import org.spaceinvaders.client.application.ApplicationModule;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.resources.ResourceLoader;
 
 /**
  * See more on setting up the PlaceManager on <a href="// See more on:
@@ -27,6 +26,5 @@ public class ClientModule extends AbstractPresenterModule {
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.semesterGrades);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.semesterGrades);
 
-        bind(ResourceLoader.class).asEagerSingleton();
     }
 }

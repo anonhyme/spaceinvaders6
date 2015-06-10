@@ -22,37 +22,9 @@ import com.google.gwt.resources.client.CssResource;
 public interface AppResources extends ClientBundle {
 
     interface Style extends CssResource {
-        @ClassName("pricing-table")
-        String pricingTable();
 
-        @ClassName("panel-heading-landing")
-        String panelHeadingLanding();
-
-        @ClassName("panel-heading-landing-box")
-        String panelHeadingLandingBox();
-
-        @ClassName("panel-title-landing")
-        String panelTitleLanding();
-
-        @ClassName("btn-price")
-        String btnPrice();
-
-        @ClassName("panel-body-landing")
-        String panelBodyLanding();
-
-        @ClassName("panel")
-        String panel();
-
-        @ClassName("panel-footer-landing")
-        String panelFooterLanding();
-
-        @ClassName("btn")
-        String btn();
-
-        @ClassName("panel-footer")
-        String panelFooter();
     }
 
-    @Source("css/style.gss")
-    Style style();
+//    @Source("css/style.gss")
+//    Style style();
 }
