@@ -2,6 +2,7 @@
 package org.spaceinvaders.client.widgets.menu;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.query.client.GQuery;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.google.web.bindery.event.shared.EventBus;
@@ -11,10 +12,11 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
-import org.spaceinvaders.client.events.HideMenuEvent;
+import org.spaceinvaders.client.events.HasLoginHandlers;
 import org.spaceinvaders.client.events.LoginEvent;
+import org.spaceinvaders.client.events.LoginEventHandler;
 
-public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> implements LoginEvent.LoginHandler, HideMenuEvent.HideMenuHandler ,HasLoginHandlers, MenuUiHandlers {
+public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> implements LoginEventHandler, HasLoginHandlers, MenuUiHandlers {
 
     public interface MyView extends View, HasUiHandlers<MenuUiHandlers> {
         void setUserName(String userName);
@@ -22,6 +24,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     }
 
     private final String userName;
+    private EventBus eventBus;
 
     @Inject
     MenuPresenter(EventBus eventBus,
@@ -29,37 +32,28 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
                   @Assisted String userName) {
         super(eventBus, view);
         this.userName = userName;
-        view.setUserName(userName);
+//        view.setUserName(userName);
+        this.eventBus = eventBus;
+        getView().setUserName(userName);
     }
 
     @Override
     public void onLogin(LoginEvent event) {
         GWT.log("onLogin " + event.getUserName());
+        GQuery.console.log("HELLOOOOO");
     }
 
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+    }
 
     @Override
-    public HandlerRegistration addUserLoginHandler(LoginEvent.LoginHandler loginHandler, Object source) {
+    public HandlerRegistration addUserLoginHandler(LoginEventHandler loginEventHandler, Object source) {
         //TODO HandlerRegistration & EventBus
         GWT.log("addUserLoginHandler :::::::::::::::::::");
-        HandlerRegistration hr = getEventBus().addHandlerToSource(LoginEvent.TYPE, source, loginHandler);
+        HandlerRegistration hr = getEventBus().addHandlerToSource(LoginEvent.TYPE, source, loginEventHandler);
         registerHandler(hr);
         return hr;
     }
-
-    @Override
-    public void onHideMenu(HideMenuEvent event) {
-        GWT.log("onHideMenu ::::::::::::");
-        getView().changeTitle("SpaceInvaders");
-    }
-
-    @Override
-    public HandlerRegistration addHideMenuHandler(HideMenuEvent.HideMenuHandler hideMenuHandler, Object source) {
-        GWT.log("addHideMenuHandler :::::::::::::::::::");
-        HandlerRegistration hr = getEventBus().addHandlerToSource(HideMenuEvent.TYPE, source, hideMenuHandler);
-        registerHandler(hr);
-        return hr;
-    }
-
-
 }

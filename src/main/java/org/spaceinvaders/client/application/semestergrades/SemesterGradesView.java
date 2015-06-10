@@ -1,16 +1,12 @@
 package org.spaceinvaders.client.application.semestergrades;
 
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
-
-import org.spaceinvaders.client.application.griddemo.GridDemoPresenter;
 
 import javax.inject.Inject;
 

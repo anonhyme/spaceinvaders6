@@ -15,7 +15,6 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.griddemo.GridDemoPresenter;
-import org.spaceinvaders.client.events.HideMenuEvent;
 import org.spaceinvaders.client.events.LoginEvent;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
@@ -36,7 +35,7 @@ import javax.inject.Inject;
 public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy> {
     public interface MyView extends View {
     }
-    private static final Logger LOGGER = Logger.getLogger(GridDemoPresenter.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SemesterGradesPresenter.class.getName());
 
     @ProxyCodeSplit
     @NameToken(NameTokens.semesterGrades)
@@ -84,36 +83,35 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
         // TODO : Remove that and put it where we'll really use it
         //TODO : Inject User session to get the id
-        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
-            }
+//        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
+//            @Override
+//            public void onFailure(Throwable caught) {
+//                Window.alert(caught.getMessage());
+//            }
+//
+//            @Override
+//            public void onSuccess(GetSemesterGradesResult result) {
+//                GWT.log("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
+//            }
+//        });
 
-            @Override
-            public void onSuccess(GetSemesterGradesResult result) {
-                GWT.log("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
-            }
-        });
-
-        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(GetSemesterInfoResult result) {
-                GWT.log("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
-                GWT.log("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
-            }
-        });
+//        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
+//            @Override
+//            public void onFailure(Throwable caught) {
+//                Window.alert(caught.getMessage());
+//            }
+//
+//            @Override
+//            public void onSuccess(GetSemesterInfoResult result) {
+//                GWT.log("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
+//                GWT.log("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
+//            }
+//        });
     }
 
     private void setUserName(String userName) {
         GWT.log("setUserName ::::::::: " + userName);
         LoginEvent.fire(userName, this);
-        HideMenuEvent.fire(userName, this);
         addToSlot(SLOT_MENU_WIDGET, widgetsFactory.createTopMenu(userName));
     }
 

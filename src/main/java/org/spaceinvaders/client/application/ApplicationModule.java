@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+
 import org.spaceinvaders.client.application.griddemo.GridDemoModule;
 import org.spaceinvaders.client.application.semestergrades.SemesterGradesModule;
 

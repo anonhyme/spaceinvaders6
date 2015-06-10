@@ -7,17 +7,22 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+
 import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
 import org.spaceinvaders.client.widgets.materialmenu.MaterialMenuPresenter;
-import org.spaceinvaders.shared.dispatch.*;
+import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
+import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
 
 public class GridPresenter extends PresenterWidget<GridPresenter.MyView> implements GridUiHandlers {
     public interface MyView extends View, HasUiHandlers<GridUiHandlers> {

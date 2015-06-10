@@ -21,6 +21,7 @@ import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.dao.SemesterInfoDao;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
@@ -38,6 +39,9 @@ public class GetSemesterInfoHandler implements ActionHandler<GetSemesterInfoActi
     SemesterInfoDao semesterInfoDao;
 
     @Inject
+    public UserSessionImpl userSession;
+
+    @Inject
     GetSemesterInfoHandler(
             ServletContext servletContext,
             Provider<HttpServletRequest> requestProvider,
@@ -50,9 +54,9 @@ public class GetSemesterInfoHandler implements ActionHandler<GetSemesterInfoActi
     public GetSemesterInfoResult execute(GetSemesterInfoAction action, ExecutionContext context)
             throws ActionException {
         int semesterID = action.getSemesterID();
-        String cip = action.getCip();
+//        String cip = action.getCip();
 
-        SemesterInfo semesterInfo = semesterInfoDao.getSemesterInfo(cip, semesterID);
+        SemesterInfo semesterInfo = semesterInfoDao.getSemesterInfo(userSession.getUserId(), semesterID);
 
         return new GetSemesterInfoResult(semesterInfo);
     }

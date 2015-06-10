@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -18,7 +17,6 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
-import org.spaceinvaders.client.events.HideMenuEvent;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.commons.WidgetsFactory;
 import org.spaceinvaders.client.widgets.menu.MenuPresenter;
@@ -69,13 +67,12 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
 
     protected void onBind() {
         super.onBind();
-        fetchSemesterInfo();
+        this.fetchSemesterData();
+        this.fetchUserInfo();
+
     }
 
-    @Override
-    public void fetchSemesterInfo() {
-        GWT.log("Async call fetchSemesterData");
-
+    private void fetchUserInfo() {
         dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -84,45 +81,52 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
 
             @Override
             public void onSuccess(GetUserInfoResult result) {
+                GWT.log("1 onSuccess GetuserInfoResult :::::: ");
                 setUserName(result.getUserInfo().getCip());
             }
         });
+    }
 
-        DispatchRequest dispatchRequestInfo = this.dispatcher.execute(new GetSemesterInfoAction(getUserName(), 3), new AsyncCallback<GetSemesterInfoResult>() {
+    public void fetchSemesterData() {
+        dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(GetSemesterInfoResult result) {
-                getView().initSemesterTable(result);
-            }
-        });
-
-        DispatchRequest dispatchRequestSemesterGrades = this.dispatcher.execute(new GetSemesterGradesAction(getUserName(), 3), new AsyncCallback<GetSemesterGradesResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
+                GWT.log("onFailure GetSemesterGradesAction ::::: ");
                 Window.alert(caught.getMessage());
             }
 
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
+                GWT.log(" 3 onSuccess GetSemesterGradesResult ::::: " + result.getEvaluationResults().get(1).getCompetenceLabel());
                 getView().initSemesterGradesResult(result);
+                fetchSemesterInfo();
             }
         });
     }
 
-    @Override
-    public void onFire() {
-        HideMenuEvent.fire("hello", this);
+    protected void fetchSemesterInfo() {
+        GWT.log("Async call fetchSemesterData");
+
+        dispatcher.execute(new GetSemesterInfoAction(3), new AsyncCallback<GetSemesterInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                GWT.log("onFailure GetSemesterInfoAction ::::: ");
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetSemesterInfoResult result) {
+                GWT.log("2 onSuccess GetSemesterInfoAction ::::: ");
+
+                getView().initSemesterTable(result);
+            }
+        });
     }
 
     private void setUserName(String userName) {
         GWT.log("setUserName ::::::::: " + userName);
         MenuPresenter menuPresenter = widgetsFactory.createTopMenu(userName);
         menuPresenter.addUserLoginHandler(menuPresenter, this);
-        menuPresenter.addHideMenuHandler(menuPresenter, this);
         addToSlot(SLOT_WIDGET_ELEMENT, menuPresenter);
     }
 

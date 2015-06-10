@@ -2,7 +2,6 @@ package org.spaceinvaders.client.events;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.HasHandlers;
 
 
@@ -11,15 +10,11 @@ import com.google.gwt.event.shared.HasHandlers;
  *
  * @author antoine
  */
-public class LoginEvent extends GwtEvent<LoginEvent.LoginHandler> {
-    public static Type<LoginHandler> TYPE = new Type<LoginHandler>();
+public class LoginEvent extends GwtEvent<LoginEventHandler> {
+    public static Type<LoginEventHandler> TYPE = new Type<LoginEventHandler>();
     private final String UserName;
 
-    public interface LoginHandler extends EventHandler {
-        void onLogin(LoginEvent event);
-    }
-
-    public Type<LoginHandler> getAssociatedType() {
+    public Type<LoginEventHandler> getAssociatedType() {
         return TYPE;
     }
 
@@ -36,7 +31,7 @@ public class LoginEvent extends GwtEvent<LoginEvent.LoginHandler> {
         source.fireEvent(new LoginEvent(userName));
     }
 
-    protected void dispatch(LoginHandler loginHandler) {
-        loginHandler.onLogin(this);
+    protected void dispatch(LoginEventHandler loginEventHandler) {
+        loginEventHandler.onLogin(this);
     }
 }

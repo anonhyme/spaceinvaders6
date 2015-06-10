@@ -18,8 +18,6 @@ import org.gwtbootstrap3.client.ui.NavbarLink;
 import org.gwtbootstrap3.client.ui.html.Span;
 import org.spaceinvaders.client.resources.AppResources;
 
-import static com.google.gwt.query.client.GQuery.$;
-
 public class MenuView extends ViewImpl implements MenuPresenter.MyView {
 
     public interface Binder extends UiBinder<HTMLPanel, MenuView> {

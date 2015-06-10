@@ -1,19 +1,18 @@
 package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.query.client.Function;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.inject.Provides;
 
-import com.googlecode.gwt.charts.client.ChartWidget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import org.gwtbootstrap3.client.ui.Button;
@@ -27,22 +26,21 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
-
-import static com.google.gwt.query.client.GQuery.$;
 
 public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> implements GridDemoPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridDemoView> {
     }
 
     AppResources appResources;
+
     CellTable<CompetenceEvalResult> cellTable;
+
     HashMap<String, Integer> competenceMap;
 
     protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
+
     EvaluationDataGrid evaluationDataGrid = new EvaluationDataGrid();
 
     @UiField
@@ -62,23 +60,22 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     @Inject
     GridDemoView(Binder uiBinder, AppResources appResources) {
-        initWidget(uiBinder.createAndBindUi(this));
         this.appResources = appResources;
+        initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
     public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
-
-//        materialDiv.addClassName(appResources.topNavBar().material());
+        GWT.log("1) initSemesterGradesResult ");
         evaluationDataGrid.setCompetenceEvalResult(semesterGradesResult.getEvaluationResults());
     }
 
     @Override
     public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
         //TODO to refactor
+        GWT.log("2) initSemesterTable ");
         evaluationDataGrid.setSemesterInfo(semesterInfoResult.getSemesterInfo());
         cellTable = new CellTable<>();
-//        ChartWidget
         initColumn(evaluationDataGrid.getAllCompetences());
         dataSemesterProvider.setList(evaluationDataGrid.getAllRow());
 
