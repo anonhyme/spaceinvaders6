@@ -3,11 +3,14 @@
 
 package org.spaceinvaders.client.application.graphdemo;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
+import com.googlecode.gwt.charts.client.ChartLoader;
+import com.googlecode.gwt.charts.client.ChartPackage;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
@@ -16,11 +19,10 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
-import org.spaceinvaders.client.application.ui.graph.cumulativegradelinechartwidget.CumulativeGradeLineChartWidgetPresenter;
-import org.spaceinvaders.client.application.ui.graph.evaluationresultswidget.EvaluationResultsWidgetPresenter;
-import org.spaceinvaders.client.application.ui.graph.graphWidget.GraphWidgetPresenter;
-
-import org.spaceinvaders.client.application.ui.graph.semesteroverviewwidget.SemesterOverviewWidgetPresenter;
+import org.spaceinvaders.client.application.ui.graph.GwtCharts.CumulativeLineChart;
+import org.spaceinvaders.client.application.ui.graph.GwtCharts.EvaluationResultsChart;
+import org.spaceinvaders.client.application.ui.graph.GwtCharts.SemesterResultsChart;
+import org.spaceinvaders.client.application.ui.graph.gwtchartwidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
@@ -42,16 +44,7 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
     }
 
     @Inject
-    Provider<GraphWidgetPresenter> graphWidgetPresenterProvider;
-
-    @Inject
-    Provider<CumulativeGradeLineChartWidgetPresenter> cumulativeGradeLineChartWidgetPresenterProvider;
-
-    @Inject
-    Provider<EvaluationResultsWidgetPresenter> evaluationResultsWidgetPresenterProvider;
-
-    @Inject
-    Provider<SemesterOverviewWidgetPresenter> semesterOverviewWidgetPresenterProvider;
+    Provider<GwtChartWidgetPresenter> gwtChartWidgetPresenterProvider;
 
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_graphDemo = new Type<RevealContentHandler<?>>();
@@ -132,21 +125,31 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
         view.setClassProgress(60.9);
         view.setStudentProgress(50);
 
+        final GwtChartWidgetPresenter p4 = gwtChartWidgetPresenterProvider.get();
+        p4.setChart(new CumulativeLineChart());
+        p4.setChartData(competenceResultsEntityList);
+        view.setCol4(p4);
 
-        CumulativeGradeLineChartWidgetPresenter presenter = cumulativeGradeLineChartWidgetPresenterProvider.get();
-        presenter.setData(competenceResultsEntityList);
-        presenter.showChart();
-        view.setCol1(presenter);
+        final GwtChartWidgetPresenter p5 = gwtChartWidgetPresenterProvider.get();
+        p5.setChart(new EvaluationResultsChart());
+        p5.setChartData(competenceResultsEntityList);
+        view.setCol5(p5);
 
-        EvaluationResultsWidgetPresenter presenter2 = evaluationResultsWidgetPresenterProvider.get();
-        presenter2.setData(competenceResultsEntityList);
-        presenter2.showChart();
-        view.setCol2(presenter2);
+        final GwtChartWidgetPresenter p6 = gwtChartWidgetPresenterProvider.get();
+        p6.setChart(new SemesterResultsChart());
+        p6.setChartData(competenceResultsEntityList);
+        view.setCol6(p6);
 
-        SemesterOverviewWidgetPresenter presenter3 = semesterOverviewWidgetPresenterProvider.get();
-        presenter3.setData(competenceResultsEntityList);
-        presenter3.showChart();
-        view.setCol3(presenter3);
+
+        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+        chartLoader.loadApi(new Runnable() {
+            @Override
+            public void run() {
+                p4.setChartView();
+                p5.setChartView();
+                p6.setChartView();
+            }
+        });
 
 
 /*

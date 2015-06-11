@@ -16,6 +16,7 @@ public class EvalInfo {
         this.averageTotal = averageTotal;
         this.maxTotal = maxTotal;
     }
+
     public String getName() {
         return name;
     }

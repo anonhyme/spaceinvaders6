@@ -6,7 +6,6 @@ import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.ProgressBar;
-import org.spaceinvaders.client.application.ui.graph.graphWidget.GraphWidgetPresenter;
 
 import javax.inject.Inject;
 
