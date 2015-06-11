@@ -459,6 +459,14 @@ CREATE TABLE application_privilege_group (
     registration timestamp with time zone NOT NULL DEFAULT now()
 );
 
+CREATE TABLE educationnal_pathway (
+	log_data_id integer NOT NULL UNIQUE DEFAULT nextval('public.log_data_id_seq'::regclass),
+	ep_id serial NOT NULL,
+	label text NOT NULL,
+    user_id integer NOT NULL,
+    registration timestamp with time zone NOT NULL DEFAULT now()
+);
+
 
 CREATE TABLE employee (
 	log_data_id integer NOT NULL UNIQUE DEFAULT nextval('public.log_data_id_seq'::regclass),
@@ -528,6 +536,7 @@ CREATE TABLE student (
 	log_data_id integer NOT NULL UNIQUE DEFAULT nextval('public.log_data_id_seq'::regclass),
 	user_id integer NOT NULL,
     student_id text NOT NULL UNIQUE,
+    ep_id integer NULL,
     registration timestamp with time zone NOT NULL DEFAULT now()
 );
 
@@ -1015,6 +1024,9 @@ ALTER TABLE ONLY application_privilege_group
 ALTER TABLE ONLY administrator_group
     ADD CONSTRAINT pk_administrator_group PRIMARY KEY (group_id, administrator_id);
 
+ALTER TABLE ONLY educationnal_pathway
+    ADD CONSTRAINT pk_educationnal_pathway PRIMARY KEY (ep_id);
+
 ALTER TABLE ONLY employee
     ADD CONSTRAINT pk_employee PRIMARY KEY (user_id);
 	
@@ -1355,6 +1367,9 @@ ALTER TABLE ONLY profile_picture
 
 ALTER TABLE ONLY student
     ADD CONSTRAINT fk_student_is_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY student
+    ADD CONSTRAINT fk_student_has_ed_pathway FOREIGN KEY (ep_id) REFERENCES educationnal_pathway(ep_id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE ONLY user_group
     ADD CONSTRAINT fk_user_g_links_group FOREIGN KEY (group_id) REFERENCES groups(group_id) ON UPDATE CASCADE ON DELETE CASCADE;
@@ -5571,10 +5586,12 @@ ALTER TABLE NOTE.DEFAULT_SCORE_GROUP ADD COLUMN USER_ID INTEGER NOT NULL;
 ALTER TABLE NOTE.DEFAULT_SCORE_GROUP ADD CONSTRAINT fk_created_by_user FOREIGN KEY (USER_ID) REFERENCES public.USERS(USER_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL_TYPE ADD COLUMN USER_ID INTEGER NOT NULL;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL_TYPE ADD CONSTRAINT fk_created_by_user FOREIGN KEY (USER_ID) REFERENCES public.USERS(USER_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD COLUMN USER_ID INTEGER NOT NULL;
-ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD CONSTRAINT fk_created_by_user FOREIGN KEY (USER_ID) REFERENCES public.USERS(USER_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD COLUMN EG_TYPE_ID INTEGER NOT NULL;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD CONSTRAINT fk_eg_type FOREIGN KEY (EG_TYPE_ID) REFERENCES note.educationnal_goal_type(EG_TYPE_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD COLUMN EP_ID INTEGER NULL;
+ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD CONSTRAINT fk_ed_pathway FOREIGN KEY (EP_ID) REFERENCES public.educationnal_pathway(EP_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD COLUMN USER_ID INTEGER NOT NULL;
+ALTER TABLE NOTE.EDUCATIONNAL_GOAL ADD CONSTRAINT fk_created_by_user FOREIGN KEY (USER_ID) REFERENCES public.USERS(USER_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL_HIERARCHY ADD COLUMN USER_ID INTEGER NOT NULL;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL_HIERARCHY ADD CONSTRAINT fk_created_by_user FOREIGN KEY (USER_ID) REFERENCES public.USERS(USER_ID) ON UPDATE CASCADE ON DELETE RESTRICT;
 ALTER TABLE NOTE.EDUCATIONNAL_GOAL_INSTANCE ADD COLUMN USER_ID INTEGER NOT NULL;
@@ -6360,6 +6377,24 @@ CREATE OR REPLACE RULE v_timespan_update AS
   ON UPDATE TO note.v_timespan DO INSTEAD  UPDATE note.timespan SET label = new.label, start_date = new.start_date, end_date = new.end_date
   WHERE timespan.timespan_id = new.timespan_id;
 
+
+--
+-- Semester type
+--
+CREATE TYPE note.t_semester AS (
+  semester_label text,
+  timespan_label text,
+  semester_id int
+);
+
+-- Semester 
+
+CREATE OR REPLACE FUNCTION note.get_student_semester(administrative_user_id text) RETURNS SETOF note.t_semester AS $$
+    -- TODO : CREATE SELECT STATEMENT
+    SELECT           	'Session 1 GE/GI', 'A12', 1
+    UNION SELECT        'Session 2 GE/GI', 'H13', 2
+    UNION SELECT        'Session 3 GI', 'A13', 3
+$$ LANGUAGE SQL;
 
 
 --
