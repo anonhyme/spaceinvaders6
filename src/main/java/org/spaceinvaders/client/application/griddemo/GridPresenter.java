@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.griddemo;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;

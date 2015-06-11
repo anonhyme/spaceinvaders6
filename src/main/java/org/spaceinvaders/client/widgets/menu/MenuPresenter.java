@@ -71,8 +71,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
 
             @Override
             public void onSuccess(GetUserInfoResult result) {
-//                setUserName(result.getUserInfo().getCip());
-                getView().setUserName(result.getUserInfo().getCip());
+                getView().setUserName(result.getUserInfo().getFirstName() + " " +result.getUserInfo().getLastName());
             }
         });
     }

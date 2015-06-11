@@ -58,7 +58,7 @@ public class UserSessionImpl implements UserSession {
         try {
             Assertion assertion = (Assertion) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
             cip = assertion.getPrincipal().getName();
-            firstName = (String)assertion.getPrincipal().getAttributes().get("prenom");
+            firstName = (String) assertion.getPrincipal().getAttributes().get("prenom");
             lastName = (String) assertion.getPrincipal().getAttributes().get("nomFamille");
             email = (String) assertion.getPrincipal().getAttributes().get("courriel");
         } catch (NullPointerException ex) {
