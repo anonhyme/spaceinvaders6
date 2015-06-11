@@ -4,10 +4,10 @@ import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
 public class GetSemesterInfoAction extends UnsecuredActionImpl<GetSemesterInfoResult> {
     private int semesterID;
-    private String cip;
+//    private String cip;
 
-    public GetSemesterInfoAction(String cip, int semesterID) {
-        this.cip = cip;
+    public GetSemesterInfoAction(int semesterID) {
+//        this.cip = cip;
         this.semesterID = semesterID;
     }
 
@@ -18,9 +18,9 @@ public class GetSemesterInfoAction extends UnsecuredActionImpl<GetSemesterInfoRe
     private GetSemesterInfoAction() {
     }
 
-    public String getCip() {
-        return cip;
-    }
+//    public String getCip() {
+//        return cip;
+//    }
 
     public int getSemesterID() {
         return semesterID;

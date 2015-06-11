@@ -15,6 +15,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
+import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 import org.spaceinvaders.shared.dispatch.*;
 
 import javax.inject.Inject;
@@ -31,21 +32,31 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     }
 
     private DispatchAsync dispatcher;
+    private MenuPresenter menuPresenter;
+    public static final Object SLOT_MENU_WIDGET = new Object();
 
     @Inject
     SemesterGradesPresenter(EventBus eventBus,
                             MyView view,
                             MyProxy proxy,
-                            DispatchAsync dispatchAsync
-    ) {
+                            DispatchAsync dispatchAsync,
+                            MenuPresenter menuPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
         this.dispatcher = dispatchAsync;
+        this.menuPresenter = menuPresenter;
+    }
+
+
+    private void addNavbar() {
+        GWT.log("SemesterGradesPresenter ::: Navbar added ");
+        addToSlot(SLOT_MENU_WIDGET, menuPresenter);
     }
 
     @Override
-    protected void revealInParent() {
-        RevealRootLayoutContentEvent.fire(this, this);
+    protected void onReveal() {
+        super.onReveal();
+        addNavbar();
     }
 
     @Override
@@ -65,7 +76,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
         });
 
         // TODO : Remove that and put it where we'll really use it
-        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
+        this.dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert(caught.getMessage());
@@ -77,7 +88,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
             }
         });
 
-        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
+        this.dispatcher.execute(new GetSemesterInfoAction(3), new AsyncCallback<GetSemesterInfoResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert(caught.getMessage());

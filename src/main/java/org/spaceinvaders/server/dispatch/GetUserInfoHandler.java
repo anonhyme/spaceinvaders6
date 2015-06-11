@@ -4,9 +4,6 @@ package org.spaceinvaders.server.dispatch;
  * Created by AlexandraMaude on 2015-05-26.
  */
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -14,10 +11,13 @@ import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-import org.spaceinvaders.shared.dispatch.UserInfo;
 import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
 import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
+import org.spaceinvaders.shared.dispatch.UserInfo;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class GetUserInfoHandler implements ActionHandler<GetUserInfoAction, GetUserInfoResult> {
     private Provider<HttpServletRequest> requestProvider;

@@ -40,10 +40,8 @@ public class EvaluationEntity {
 
         EvaluationEntity that = (EvaluationEntity) o;
 
-        if (evaluationLabel != null ? !evaluationLabel.equals(that.evaluationLabel) : that.evaluationLabel != null)
-            return false;
+        return !(evaluationLabel != null ? !evaluationLabel.equals(that.evaluationLabel) : that.evaluationLabel != null);
 
-        return true;
     }
 
     @Override

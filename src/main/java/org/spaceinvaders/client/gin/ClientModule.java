@@ -11,6 +11,7 @@ import org.spaceinvaders.client.application.ApplicationModule;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.ResourceLoader;
 
+
 /**
  * See more on setting up the PlaceManager on <a href="// See more on:
  * https://github.com/ArcBees/GWTP/wiki/PlaceManager">DefaultModule's > DefaultPlaceManager</a>

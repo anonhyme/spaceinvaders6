@@ -7,11 +7,11 @@ import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 import org.spaceinvaders.shared.dispatch.UserInfo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class UserSessionImpl implements UserSession {
 
@@ -58,7 +58,7 @@ public class UserSessionImpl implements UserSession {
         try {
             Assertion assertion = (Assertion) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
             cip = assertion.getPrincipal().getName();
-            firstName = (String)assertion.getPrincipal().getAttributes().get("prenom");
+            firstName = (String) assertion.getPrincipal().getAttributes().get("prenom");
             lastName = (String) assertion.getPrincipal().getAttributes().get("nomFamille");
             email = (String) assertion.getPrincipal().getAttributes().get("courriel");
         } catch (NullPointerException ex) {
