@@ -88,16 +88,4 @@ public class UserSessionImpl implements UserSession {
 
         return cip;
     }
-
-    public void disconnect() {
-        HttpSession session = getSession();
-        String cip = "";
-
-        try {
-            session.
-        } catch (NullPointerException ex) {
-            // check your web.xml
-            Logger.getLogger(UserSessionImpl.class.getName()).log(Level.SEVERE, "Session or CAS assertion is null, verify your web.xml");
-        }
-    }
 }
