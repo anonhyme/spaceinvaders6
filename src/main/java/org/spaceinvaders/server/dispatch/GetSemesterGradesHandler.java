@@ -25,8 +25,13 @@ import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+import org.spaceinvaders.shared.dto.Evaluation;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +58,8 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
         String cip = action.getCip();
 
         List<CompetenceEvalResult> results = competenceEvalResultDao.getSemesterResults(cip, semesterID);
+
+        Map<String, Evaluation> evals = Evaluation.getEvaluations(results);
 
         return new GetSemesterGradesResult(results);
     }
