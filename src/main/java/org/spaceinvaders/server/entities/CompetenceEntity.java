@@ -1,19 +1,27 @@
 package org.spaceinvaders.server.entities;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.Table;
 
 @NamedStoredProcedureQueries({
-    @NamedStoredProcedureQuery(
-        name = "GetSemesterCompetences",
-        resultClasses = CompetenceEntity.class,
-        procedureName = "note.get_semester_competences",
-        parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class)
-        })
+        @NamedStoredProcedureQuery(
+                name = "GetSemesterCompetences",
+                resultClasses = CompetenceEntity.class,
+                procedureName = "note.get_semester_competences",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class)
+                })
 })
 @Entity
-@Table(name = "competence_t", schema = "note", catalog = "S6_PROJET_P02")
+@Table(name = "t_competence", schema = "note", catalog = "S6_PROJET_P02")
 public class CompetenceEntity {
     private String apLabel;
     private String competenceLabel;
@@ -28,7 +36,7 @@ public class CompetenceEntity {
         this.apLabel = apLabel;
     }
 
-    @Basic
+    @Id
     @Column(name = "competence_label")
     public String getCompetenceLabel() {
         return competenceLabel;

@@ -3,16 +3,18 @@ package org.spaceinvaders.server.dao;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
+
 import org.spaceinvaders.server.entities.CompetenceEntity;
 import org.spaceinvaders.server.entities.EvaluationEntity;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import javax.persistence.EntityManager;
-import javax.persistence.StoredProcedureQuery;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 
 public class SemesterInfoDaoImpl implements SemesterInfoDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -81,7 +83,7 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
     public Competence CompetenceEntityToDto(CompetenceEntity entity) {
         Competence dto = new Competence();
         dto.setApLabel(entity.getApLabel());
-        dto.setCompetenceLabel(entity.getApLabel());
+        dto.setCompetenceLabel(entity.getCompetenceLabel());
         return dto;
     }
 

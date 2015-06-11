@@ -4,13 +4,15 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
-import org.spaceinvaders.server.entities.*;
+
+import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
-import java.util.ArrayList;
-import java.util.List;
 
 @Singleton
 public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
@@ -29,7 +31,7 @@ public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
         entityManager.clear();
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("GetSemesterEvalResults");
         query.setParameter("student_id", cip);
-        query.setParameter("session_id", semesterID);
+        query.setParameter("session_id", semesterID); // TODO : should be named semester_id
         query.execute();
 
         return query.getResultList();

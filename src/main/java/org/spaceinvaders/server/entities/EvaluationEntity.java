@@ -1,19 +1,25 @@
 package org.spaceinvaders.server.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.Table;
 
 
 @NamedStoredProcedureQuery(
-    name = "GetSemesterEvals",
-    resultClasses = EvaluationEntity.class,
-    procedureName = "note.get_semester_evals",
-    parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class)
-    }
+        name = "GetSemesterEvals",
+        resultClasses = EvaluationEntity.class,
+        procedureName = "note.get_semester_evals",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "student_id", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "session_id", type = Integer.class)
+        }
 )
 @Entity
-@Table(name = "evaluation_t", schema = "note", catalog = "S6_PROJET_P02")
+@Table(name = "t_evaluation", schema = "note", catalog = "S6_PROJET_P02")
 public class EvaluationEntity {
     private String evaluationLabel;
 
