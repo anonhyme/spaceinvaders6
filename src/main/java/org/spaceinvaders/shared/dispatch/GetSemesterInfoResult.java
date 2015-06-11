@@ -1,10 +1,8 @@
 package org.spaceinvaders.shared.dispatch;
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
-import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import java.util.List;
+import org.spaceinvaders.shared.dto.SemesterInfo;
 
 /**
  * The result of a {@link GetSemesterGradesAction} action.

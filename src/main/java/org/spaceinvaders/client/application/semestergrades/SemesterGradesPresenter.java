@@ -1,8 +1,10 @@
 package org.spaceinvaders.client.application.semestergrades;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -10,12 +12,10 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
+
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.*;
 
 import javax.inject.Inject;
 
@@ -52,6 +52,18 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     protected void onBind() {
         super.onBind();
 
+        this.dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetUserInfoResult result) {
+                GWT.log("Last name = " + result.getUserInfo().getLastName());
+            }
+        });
+
         // TODO : Remove that and put it where we'll really use it
         this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
@@ -61,7 +73,7 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
             @Override
             public void onSuccess(GetSemesterGradesResult result) {
-                Window.alert("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
+                GWT.log("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
             }
         });
 
@@ -73,8 +85,8 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
 
             @Override
             public void onSuccess(GetSemesterInfoResult result) {
-                Window.alert("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
-                Window.alert("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
+                GWT.log("ap = " + result.getSemesterInfo().getCompetences().get(0).getApLabel());
+                GWT.log("competence = " + result.getSemesterInfo().getCompetences().get(4).getCompetenceLabel());
             }
         });
     }

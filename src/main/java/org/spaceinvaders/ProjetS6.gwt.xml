@@ -9,9 +9,12 @@
        <inherits name="com.googlecode.gwt.charts.Charts"/>
 
 
+    <add-linker name="xsiframe"/>
+    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+
     <!-- Default css -->
     <!--<inherits name='com.google.gwt.user.theme.standard.Standard' />-->
-     <!--<inherits name='com.google.gwt.user.theme.chrome.Chrome'/>-->
+    <!--<inherits name='com.google.gwt.user.theme.chrome.Chrome'/>-->
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
     <!-- Other module inherits -->

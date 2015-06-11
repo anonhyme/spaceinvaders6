@@ -138,7 +138,6 @@
                     <sdkDir>${gae.home}</sdkDir>
                     <appDir>${webappDirectory}</appDir>
                     <unpackVersion>${gae.version}</unpackVersion>
-
                     <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
                     <serverId>appengine-credentials</serverId>
                     <splitJars>true</splitJars>
@@ -253,14 +252,14 @@
 
         <!-- Persistence -->
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-entitymanager</artifactId>-->
-            <!--<version>4.3.10.Final</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-entitymanager</artifactId>-->
+        <!--<version>4.3.10.Final</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-validator</artifactId>-->
-            <!--<version>4.1.0.Final</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-validator</artifactId>-->
+        <!--<version>4.1.0.Final</version>-->
         <!--</dependency>-->
 
         <!-- eclipse link -->
@@ -359,9 +358,9 @@
 
         <!-- TODO : find out what this is and why it's not working -->
         <!--<dependency>-->
-            <!--<groupId>ca.uSherbrooke.gegi</groupId>-->
-            <!--<artifactId>ui-component</artifactId>-->
-            <!--<version>1.0.1</version>-->
+        <!--<groupId>ca.uSherbrooke.gegi</groupId>-->
+        <!--<artifactId>ui-component</artifactId>-->
+        <!--<version>1.0.1</version>-->
         <!--</dependency>-->
 
         <dependency>
