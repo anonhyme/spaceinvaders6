@@ -6,14 +6,11 @@
     <g:HTMLPanel>
         <div>
             <menu:MainMenu/>
-            <h2>Home page</h2>
+            <h2>Semester page</h2>
 
             <p>
-                This is the home page for this demonstration. You'll always get
-                this page as the default when you come in this showcase.
+                Here instead of this lorem ipsum, there should be a superb grid.
             </p>
-
-            <p>Also try using back of your browser after being in another page !</p>
 
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
