@@ -32,8 +32,7 @@ public class Evaluation implements Serializable {
         return null;
     }
 
-    public TreeMap<String, CompetenceEvalResult> getCompetenceEvalResults()
-    {
+    public TreeMap<String, CompetenceEvalResult> getCompetenceEvalResults() {
         return competenceEvalResultMap;
     }
 
@@ -45,8 +44,7 @@ public class Evaluation implements Serializable {
         this.evaluationLabel = label;
     }
 
-    public static SortedMap<String, Evaluation> getEvaluations(List<CompetenceEvalResult> competenceEvalResults)
-    {
+    public static SortedMap<String, Evaluation> getEvaluations(List<CompetenceEvalResult> competenceEvalResults) {
         SortedMap<String, Evaluation> map = new TreeMap<>();
         for (CompetenceEvalResult competenceResult : competenceEvalResults) {
             String evalLabel = competenceResult.getEvalLabel();

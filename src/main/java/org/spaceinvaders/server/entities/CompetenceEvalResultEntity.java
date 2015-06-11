@@ -131,10 +131,8 @@ public class CompetenceEvalResultEntity {
             return false;
         if (maxResultValue != null ? !maxResultValue.equals(that.maxResultValue) : that.maxResultValue != null)
             return false;
-        if (standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null)
-            return false;
+        return !(standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null);
 
-        return true;
     }
 
     @Override

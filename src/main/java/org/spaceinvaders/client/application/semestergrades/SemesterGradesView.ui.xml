@@ -5,7 +5,7 @@
 
     <g:HTMLPanel>
         <div>
-            <menu:MainMenu/>
+            <g:HTMLPanel ui:field="menuPanel"/>
             <h2>Semester page</h2>
 
             <p>

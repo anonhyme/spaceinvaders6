@@ -5,6 +5,6 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 public class GridDemoModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bindPresenter(GridDemoPresenter.class, GridDemoPresenter.MyView.class, GridDemoView.class, GridDemoPresenter.MyProxy.class);
+        bindPresenter(GridPresenter.class, GridPresenter.MyView.class, GridView.class, GridPresenter.MyProxy.class);
     }
 }

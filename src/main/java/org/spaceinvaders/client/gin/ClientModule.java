@@ -11,6 +11,7 @@ import org.spaceinvaders.client.application.ApplicationModule;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.ResourceLoader;
 
+
 /**
  * See more on setting up the PlaceManager on <a href="// See more on:
  * https://github.com/ArcBees/GWTP/wiki/PlaceManager">DefaultModule's > DefaultPlaceManager</a>
@@ -23,7 +24,7 @@ public class ClientModule extends AbstractPresenterModule {
         install(new ApplicationModule());
 
         // DefaultPlaceManager Places
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.semesterGrades);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.gridDemo);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.semesterGrades);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.semesterGrades);
 
