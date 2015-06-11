@@ -1,8 +1,7 @@
 package org.spaceinvaders.client.application;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -15,9 +14,6 @@ import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
-import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
-import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
-
 import javax.inject.Inject;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
@@ -25,8 +21,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     public interface MyView extends View {
         void showLoading(boolean visibile);
     }
-
-    private final DispatchAsync dispatcher;
 
 
     @ContentSlot
@@ -39,10 +33,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Inject
     ApplicationPresenter(EventBus eventBus,
                          MyView view,
-                         MyProxy proxy,
-                         DispatchAsync dispatcher) {
+                         MyProxy proxy) {
         super(eventBus, view, proxy, RevealType.Root);
-        this.dispatcher = dispatcher;
     }
 
     @ProxyEvent
@@ -53,16 +45,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Override
     protected void onBind() {
         super.onBind();
-        dispatcher.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(GetUserInfoResult result) {
-//                Window.alert("cip = " + result.getUserInfo().getCip());
-            }
-        });
+        GWT.log("Hello !");
     }
 }

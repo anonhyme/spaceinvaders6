@@ -6,7 +6,7 @@ package org.spaceinvaders.client.events;
  * @author antoine
  */
 
-        import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 public interface HasLoginHandlers {
     HandlerRegistration addUserLoginHandler(LoginEventHandler loginEventHandler, Object source);

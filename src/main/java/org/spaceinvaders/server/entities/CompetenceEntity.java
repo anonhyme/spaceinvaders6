@@ -53,10 +53,8 @@ public class CompetenceEntity {
         CompetenceEntity that = (CompetenceEntity) o;
 
         if (apLabel != null ? !apLabel.equals(that.apLabel) : that.apLabel != null) return false;
-        if (competenceLabel != null ? !competenceLabel.equals(that.competenceLabel) : that.competenceLabel != null)
-            return false;
+        return !(competenceLabel != null ? !competenceLabel.equals(that.competenceLabel) : that.competenceLabel != null);
 
-        return true;
     }
 
     @Override

@@ -6,7 +6,6 @@ import org.spaceinvaders.client.application.griddemo.GridDemoModule;
 import org.spaceinvaders.client.application.semestergrades.SemesterGradesModule;
 
 
-
 public class ApplicationModule extends AbstractPresenterModule {
     @Override
     protected void configure() {

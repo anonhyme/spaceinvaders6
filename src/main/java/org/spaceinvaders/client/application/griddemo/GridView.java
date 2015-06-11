@@ -1,21 +1,16 @@
 package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
-import com.google.inject.Provides;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
@@ -23,14 +18,15 @@ import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> implements GridDemoPresenter.MyView {
-    interface Binder extends UiBinder<Widget, GridDemoView> {
+public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
+    interface Binder extends UiBinder<Widget, GridView> {
     }
 
     AppResources appResources;
@@ -41,8 +37,6 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
 
     protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
 
-    EvaluationDataGrid evaluationDataGrid = new EvaluationDataGrid();
-
     @UiField
     HTMLPanel menuPanel;
 
@@ -52,45 +46,42 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     @UiField
     Container containerCellTable;
 
-    @UiField
-    Container containerModal;
-
-    @UiField
-    Button fire;
+    List<CompetenceEvalResult> competenceEvalResult;
 
     @Inject
-    GridDemoView(Binder uiBinder, AppResources appResources) {
+    GridView(Binder uiBinder, AppResources appResources) {
         this.appResources = appResources;
         initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
     public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
-        GWT.log("1) initSemesterGradesResult ");
-        evaluationDataGrid.setCompetenceEvalResult(semesterGradesResult.getEvaluationResults());
+        this.competenceEvalResult = semesterGradesResult.getEvaluationResults();
     }
 
     @Override
     public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
         //TODO to refactor
-        GWT.log("2) initSemesterTable ");
-        evaluationDataGrid.setSemesterInfo(semesterInfoResult.getSemesterInfo());
         cellTable = new CellTable<>();
-        initColumn(evaluationDataGrid.getAllCompetences());
-        dataSemesterProvider.setList(evaluationDataGrid.getAllRow());
+        initColumn(semesterInfoResult.getSemesterInfo());
+        dataSemesterProvider.setList(competenceEvalResult);
 
-        dataSemesterProvider.flush();
-        dataSemesterProvider.refresh();
+        //TODO check for @UiField(provided=true)
+        //!!!! Do not erase !!!!
+        //dataSemesterProvider.flush();
+        //dataSemesterProvider.refresh();
+        //cellTable.redraw();
         cellTable.setStriped(true);
         cellTable.setBordered(true);
         cellTable.setCondensed(true);
         cellTable.setColumnWidth(0, "15%");
         cellTable.setColumnWidth(1, "8%");
-        cellTable.redraw();
+
         containerCellTable.add(cellTable);
     }
 
-    private void initColumn(List<Competence> competences) {
+    private void initColumn(SemesterInfo semesterInfo) {
+        List<Competence> competences = semesterInfo.getCompetences();
         setEvaluationTypeColumn();
         setCompetenceHashMap(competences);
         for (int i = 0; i < competences.size(); i++) {
@@ -123,21 +114,9 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     }
 
     @Override
-    protected void onAttach() {
-        super.onAttach();
-//        $(containerCellTable).click(new Function() {
-//            @Override
-//            public void f() {
-//                Window.alert("hello");
-//            }
-//        });
-    }
-
-    @Override
     public void addToSlot(Object slot, IsWidget content) {
         super.addToSlot(slot, content);
-
-        if (slot == GridDemoPresenter.SLOT_WIDGET_ELEMENT) {
+        if (slot == GridPresenter.SLOT_WIDGET_ELEMENT) {
             menuPanel.add(content);
         }
     }
@@ -145,14 +124,8 @@ public class GridDemoView extends ViewWithUiHandlers<GridDemoUiHandlers> impleme
     @Override
     public void removeFromSlot(Object slot, IsWidget content) {
         super.removeFromSlot(slot, content);
-
-        if (slot == GridDemoPresenter.SLOT_WIDGET_ELEMENT) {
+        if (slot == GridPresenter.SLOT_WIDGET_ELEMENT) {
             menuPanel.remove(content);
         }
-    }
-
-    @UiHandler("fire")
-    public void initiateHacking(ClickEvent event) {
-//        getUiHandlers().onFire();
     }
 }

@@ -1,14 +1,15 @@
 
 package org.spaceinvaders.client.widgets.menu;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.query.client.GQuery;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
@@ -18,9 +19,9 @@ import org.gwtbootstrap3.client.ui.NavbarLink;
 import org.gwtbootstrap3.client.ui.html.Span;
 import org.spaceinvaders.client.resources.AppResources;
 
-public class MenuView extends ViewImpl implements MenuPresenter.MyView {
+public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements MenuPresenter.MyView {
 
-    public interface Binder extends UiBinder<HTMLPanel, MenuView> {
+    public interface Binder extends UiBinder<Widget, MenuView> {
     }
 
     @UiField
@@ -33,7 +34,7 @@ public class MenuView extends ViewImpl implements MenuPresenter.MyView {
     NavbarLink navbarLinkDisconnect;
 
     @UiField
-    Navbar materialNavBar;
+    Navbar navBar;
 
     @UiField
     NavbarBrand navbarBrand;
@@ -41,14 +42,13 @@ public class MenuView extends ViewImpl implements MenuPresenter.MyView {
     private final AppResources appResources;
 
     @Inject
-    MenuView(Binder binder, AppResources appResources) {
-        initWidget(binder.createAndBindUi(this));
+    MenuView(Binder uiBinder, AppResources appResources) {
+        initWidget(uiBinder.createAndBindUi(this));
         this.addNavbarLinkInDropDown("Session 1", "#");
         this.addNavbarLinkInDropDown("Session 2", "#");
         this.addNavbarLinkInDropDown("Session 3", "#");
         this.appResources = appResources;
-        //spanUsername.setText(user.toString());
-        //GWT.log("setUserId " + user);
+
     }
 
     @Override
@@ -58,19 +58,9 @@ public class MenuView extends ViewImpl implements MenuPresenter.MyView {
     }
 
     @Override
-    public void changeTitle(String title) {
-        GWT.log("FUCKKKKKKKKKKKKKKKKKKKKKKKKKKK");
-    }
-
-    @Override
     protected void onAttach() {
         super.onAttach();
-        materialNavBar.addStyleName(appResources.topNavBar().material());
-    }
-
-    @Override
-    public void setUiHandlers(MenuUiHandlers uiHandlers) {
-
+        navBar.addStyleName(appResources.topNavBar().material());
     }
 
     private void addNavbarLinkInDropDown(String name, String nameToken) {
@@ -79,11 +69,9 @@ public class MenuView extends ViewImpl implements MenuPresenter.MyView {
         dropDownMenu.add(anchorListItem);
     }
 
-//    @UiHandler("navbarLinkDisconnect")
-//    void onClick(ClickEvent event) {
-//        if (getUiHandlers() != null) {
-//            //getUiHandlers().disconnect();
-//        }
-//    }
+    @UiHandler("navbarLinkDisconnect")
+    void onClick(ClickEvent event) {
+        getUiHandlers().disconnect();
+    }
 
 }

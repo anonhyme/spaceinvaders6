@@ -4,7 +4,6 @@
     <!-- Inherit from the Web Toolkit core. -->
     <inherits name='com.google.gwt.user.User'/>
     <inherits name='com.google.gwt.inject.Inject'/>
-    <inherits name="com.google.gwt.logging.Logging"/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
 
     <!-- Other module inherits -->
@@ -16,15 +15,8 @@
     <source path='client'/>
     <source path='shared'/>
 
-    <add-linker name="xsiframe"/>
-    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
-
     <set-configuration-property name="CssResource.enableGss" value="true"/>
     <set-configuration-property name="CssResource.legacy" value="true"/>
     <set-configuration-property name="gin.ginjector.modules"
                                 value="org.spaceinvaders.client.gin.ClientModule"/>
-    <!-- Other setting -->
-    <!--<set-configuration-property name="CssResource.style" value="pretty"/>-->
-    <!--<set-configuration-property name="CssResource.obfuscationPrefix" value="empty"/>-->
-
 </module>

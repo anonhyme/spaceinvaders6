@@ -32,7 +32,6 @@ public class CompetenceColumn extends Column<CompetenceEvalResult, String> {
     @Override
     public String getValue(CompetenceEvalResult evaluationDataGrid) {
         NumberFormat formatter = NumberFormat.getFormat("#.##");
-
         String evaluationLabel = "   ";
         if (hashMap.get(evaluationDataGrid.getCompetenceLabel()) == index) {
             double res = 100 * evaluationDataGrid.getResultValue().doubleValue() / evaluationDataGrid.getMaxResultValue();

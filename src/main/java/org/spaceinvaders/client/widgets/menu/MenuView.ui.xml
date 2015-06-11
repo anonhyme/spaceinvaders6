@@ -7,9 +7,11 @@
     <ui:with field="nameTokens" type="org.spaceinvaders.client.place.NameTokens"/>
 
     <g:HTMLPanel>
-        <b:Navbar ui:field="materialNavBar">
+        <b:Navbar ui:field="navBar">
             <b:NavbarHeader>
-                <b:NavbarBrand ui:field="navbarBrand" targetHistoryToken="{nameTokens.getHome}">Home page</b:NavbarBrand>
+                <b:NavbarBrand ui:field="navbarBrand" targetHistoryToken="{nameTokens.getHome}">Home
+                    page
+                </b:NavbarBrand>
             </b:NavbarHeader>
 
             <b:NavbarCollapse>
