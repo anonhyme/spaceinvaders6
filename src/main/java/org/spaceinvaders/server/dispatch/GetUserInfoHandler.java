@@ -37,8 +37,8 @@ public class GetUserInfoHandler implements ActionHandler<GetUserInfoAction, GetU
     @Override
     public GetUserInfoResult execute(GetUserInfoAction action, ExecutionContext context)
             throws ActionException {
-        String cip = userSession.getUserId();
-        return new GetUserInfoResult(new UserInfo(cip));
+        UserInfo userInfo = userSession.getUserInfo();
+        return new GetUserInfoResult(userInfo);
     }
 
     @Override
