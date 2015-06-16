@@ -537,17 +537,39 @@ INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
 		(SELECT last_value AS evaluation_id from note.evaluation_evaluation_id_seq ) ev, 
 		(SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r;
 
+INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
+    SELECT r.rubric_id, eg.eg_id, 80, now(), 1
+    FROM (SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r,
+         note.educationnal_goal eg
+    WHERE eg.label = 'gen111-2';
+
 INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q2', 'Question 2', now(), 1);
 INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
 	SELECT ev.evaluation_id, r.rubric_id, 1
-	FROM note.evaluation ev, note.rubric r
-	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q2';
+	FROM 
+		(SELECT last_value AS evaluation_id from note.evaluation_evaluation_id_seq ) ev, 
+		(SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r;
+
+INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
+    SELECT r.rubric_id, eg.eg_id, 80, now(), 1
+    FROM (SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r,
+         note.educationnal_goal eg
+    WHERE eg.label = 'gen111-1';
+
+
 
 INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q3', 'Question 3', now(), 1);
 INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
 	SELECT ev.evaluation_id, r.rubric_id, 1
-	FROM note.evaluation ev, note.rubric r
-	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q3';
+	FROM 
+		(SELECT last_value AS evaluation_id from note.evaluation_evaluation_id_seq ) ev, 
+		(SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r;
+
+INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
+    SELECT r.rubric_id, eg.eg_id, 80, now(), 1
+    FROM (SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r,
+         note.educationnal_goal eg
+    WHERE eg.label = 'gen111-1';
 
 
 
