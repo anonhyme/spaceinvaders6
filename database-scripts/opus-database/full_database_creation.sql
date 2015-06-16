@@ -6377,8 +6377,6 @@ CREATE OR REPLACE RULE v_timespan_update AS
   ON UPDATE TO note.v_timespan DO INSTEAD  UPDATE note.timespan SET label = new.label, start_date = new.start_date, end_date = new.end_date
   WHERE timespan.timespan_id = new.timespan_id;
 
-<<<<<<< HEAD
-
 --
 -- Semester type
 --
@@ -6397,11 +6395,9 @@ CREATE OR REPLACE FUNCTION note.get_student_semester(administrative_user_id text
     UNION SELECT        'Session 3 GI', 'A13', 3
 $$ LANGUAGE SQL;
 
-=======
 --
 -- ********************************* CUSTOM GRADES PROCEDURES ********************************* --
 --
->>>>>>> 5058a4e52c97538ab30864d76d0f0af6b55a9d30
 
 --
 -- AP types and procedures

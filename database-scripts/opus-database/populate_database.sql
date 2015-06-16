@@ -303,7 +303,7 @@ INSERT INTO note.educationnal_goal(eg_id, label, short_description, description,
 
 INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen122', 'GEN 122', 'Équations différentielles linéaires', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
 
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen124', 'GEN 124', 'Mthématiques de base pour l''ingénieur', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI');/* INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1')*/;
+INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen124', 'GEN 124', 'Mthématiques de base pour l''ingénieur', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI');/* INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1')*/
 
 INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen135', 'GEN 135', 'Circuits électriques I', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
 
@@ -520,13 +520,40 @@ INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, use
 
 
 /**
-	Create an evaluation that represent a final exam, lab report, etc
+	Create an evaluation that represent a final exam, lab report, etc.
+	Then create question for that exam and bind it using the evaluation_rubric association table.
+	Then create criterion that represent the weight of a particular question on an AP
 */
- 
 INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
 	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app1_intra', 'App 1 Sommatif', 1
 	FROM note.evaluation_type et, note.educationnal_goal eg
 	WHERE et.label = 'Session' AND eg.label = 'gegis1');
+
+
+INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q1', 'Question 1', now(), 1);
+INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
+	SELECT ev.evaluation_id, r.rubric_id, 1
+	FROM 
+		(SELECT last_value AS evaluation_id from note.evaluation_evaluation_id_seq ) ev, 
+		(SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r;
+
+INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q2', 'Question 2', now(), 1);
+INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
+	SELECT ev.evaluation_id, r.rubric_id, 1
+	FROM note.evaluation ev, note.rubric r
+	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q2';
+
+INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q3', 'Question 3', now(), 1);
+INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
+	SELECT ev.evaluation_id, r.rubric_id, 1
+	FROM note.evaluation ev, note.rubric r
+	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q3';
+
+
+
+
+
+
  
 INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
 	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app1_rapport', 'App 1 Rapport', 1
@@ -587,23 +614,6 @@ INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, s
 /**
 	Create rubrics that represent a statement for each evaluation and bind them with the association table evaluation_rubric	
 */
-INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q1', 'Question 1', now(), 1);
-INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
-	SELECT ev.evaluation_id, r.rubric_id, 1
-	FROM note.evaluation ev, note.rubric r
-	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q1';
-
-INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q2', 'Question 2', now(), 1);
-INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
-	SELECT ev.evaluation_id, r.rubric_id, 1
-	FROM note.evaluation ev, note.rubric r
-	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q2';
-
-INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q3', 'Question 3', now(), 1);
-INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
-	SELECT ev.evaluation_id, r.rubric_id, 1
-	FROM note.evaluation ev, note.rubric r
-	WHERE ev.label = 'gegis1_app1_intra' AND r.label = 'gegis1_app1_intra_q3';
 
 
 
