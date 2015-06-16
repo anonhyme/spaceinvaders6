@@ -1,11 +1,7 @@
-
-
-
 package org.spaceinvaders.client.application.griddemo;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -21,15 +17,16 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.place.NameTokens;
+import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
 import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
 
-public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridDemoPresenter.MyProxy> implements GridDemoUiHandlers {
 
-    interface MyView extends View, HasUiHandlers<GridDemoUiHandlers> {
+public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter.MyProxy> implements GridUiHandlers {
 
+    interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void initSemesterTable(GetSemesterInfoResult result);
 
         void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult);
@@ -38,38 +35,52 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_GridDemo = new Type<RevealContentHandler<?>>();
 
+    public static final Object SLOT_WIDGET_ELEMENT = new Object();
+
     @NameToken(NameTokens.gridDemo)
     @ProxyCodeSplit
-    public interface MyProxy extends ProxyPlace<GridDemoPresenter> {
+    public interface MyProxy extends ProxyPlace<GridPresenter> {
     }
+
+    @Inject
+    MenuPresenter menuPresenter;
 
     private DispatchAsync dispatcher;
 
     @Inject
-    public GridDemoPresenter(
-            EventBus eventBus,
-            MyView view,
-            DispatchAsync dispatchAsync,
-            MyProxy proxy) {
+    public GridPresenter(EventBus eventBus,
+                         MyView view,
+                         DispatchAsync dispatchAsync,
+                         MyProxy proxy) {
         super(eventBus, view, proxy, RevealType.Root);
         this.dispatcher = dispatchAsync;
+
         getView().setUiHandlers(this);
     }
 
     protected void onBind() {
         super.onBind();
-        fetchSemesterInfo();
-        GWT.log("onBind ");
+        this.fetchSemesterData();
     }
 
-    @Override
-    public void fetchSemesterInfo() {
-        GWT.log("Async call fetchSemesterData");
-
-        this.dispatcher.execute(new GetSemesterInfoAction("bedh2102", 3), new AsyncCallback<GetSemesterInfoResult>() {
+    private void fetchSemesterData() {
+        dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetSemesterGradesResult result) {
+                getView().initSemesterGradesResult(result);
+                fetchSemesterInfo();
+            }
+        });
+    }
+
+    private void fetchSemesterInfo() {
+        dispatcher.execute(new GetSemesterInfoAction(3), new AsyncCallback<GetSemesterInfoResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
             }
 
             @Override
@@ -77,17 +88,11 @@ public class GridDemoPresenter extends Presenter<GridDemoPresenter.MyView, GridD
                 getView().initSemesterTable(result);
             }
         });
+    }
 
-        this.dispatcher.execute(new GetSemesterGradesAction("bedh2102", 3), new AsyncCallback<GetSemesterGradesResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(GetSemesterGradesResult result) {
-                getView().initSemesterGradesResult(result);
-            }
-        });
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+        addToSlot(SLOT_WIDGET_ELEMENT, menuPresenter);
     }
 }
