@@ -3,7 +3,6 @@
 
 package org.spaceinvaders.client.application.graphdemo;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
@@ -124,10 +123,11 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
 
         view.setClassProgress(60.9);
         view.setStudentProgress(50);
-
+        String [] colors = {"#FF0000", "#00FF00", "#0000FF"};
         final GwtChartWidgetPresenter p4 = gwtChartWidgetPresenterProvider.get();
         p4.setChart(new CumulativeLineChart());
         p4.setChartData(competenceResultsEntityList);
+        p4.setChartColors(colors );
         view.setCol4(p4);
 
         final GwtChartWidgetPresenter p5 = gwtChartWidgetPresenterProvider.get();
@@ -145,43 +145,11 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
         chartLoader.loadApi(new Runnable() {
             @Override
             public void run() {
-                p4.setChartView();
-                p5.setChartView();
-                p6.setChartView();
+                p4.loadChart();
+                p5.loadChart();
+                p6.loadChart();
             }
         });
-
-
-/*
-        GraphWidgetPresenter graphPresenter2 = graphWidgetPresenterProvider.get();
-        graphPresenter2.setGraphType(GraphWidgetPresenter.ChartType.Gauge);
-        graphPresenter2.setChartData();
-        graphPresenter2.showChart();
-        view.setCol2(graphPresenter2);
-
-        GraphWidgetPresenter graphPresenter3 = graphWidgetPresenterProvider.get();
-        graphPresenter3.setGraphType(GraphWidgetPresenter.ChartType.Area);
-        graphPresenter3.setChartData();
-        graphPresenter3.showChart();
-        view.setCol3(graphPresenter3);
-
-        GraphWidgetPresenter graphPresenter4 = graphWidgetPresenterProvider.get();
-        graphPresenter4.setGraphType(GraphWidgetPresenter.ChartType.StackedBar);
-        graphPresenter4.setChartData();
-        graphPresenter4.showChart();
-        view.setCol4(graphPresenter4);
-
-        GraphWidgetPresenter graphPresenter5 = graphWidgetPresenterProvider.get();
-        graphPresenter5.setGraphType(GraphWidgetPresenter.ChartType.GroupBar);
-        graphPresenter5.setChartData();
-        graphPresenter5.showChart();
-        view.setCol5(graphPresenter5);
-
-        GraphWidgetPresenter graphPresenter6 = graphWidgetPresenterProvider.get();
-        graphPresenter6.setGraphType(GraphWidgetPresenter.ChartType.Pie);
-        graphPresenter6.setChartData();
-        graphPresenter6.showChart();
-        view.setCol6(graphPresenter6);*/
 
     }
 }

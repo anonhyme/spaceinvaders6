@@ -71,6 +71,13 @@ public class SemesterResultsChart extends AbstractGWTChart {
         options.setTitle("Résultats de session");
         options.setVAxis(VAxis.create("AP"));
         options.setHAxis(HAxis.create("Résultats"));
+        if (isCustomSize) {
+            options.setWidth(width);
+            options.setHeight(height);
+        }
+        if (colorsSet){
+            options.setColors(colors);
+        }
 
         // Draw the chart
         chart.draw(dataTable, options);

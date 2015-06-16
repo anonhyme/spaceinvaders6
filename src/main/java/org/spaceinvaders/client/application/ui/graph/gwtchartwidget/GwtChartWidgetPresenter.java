@@ -37,18 +37,20 @@ public class GwtChartWidgetPresenter extends PresenterWidget<GwtChartWidgetPrese
 
     }
 
-
     public void setChartData(List<CompetenceEvalResult> data){
         chart.setChartData(data);
 
     }
 
-    public void setChartView(){
+    public void loadChart(){
         getView().setChart(chart.getChart());
         chart.loadChart();
     }
     public void setChart(AbstractGWTChart chart){
         this.chart= chart;
+    }
+    public void setChartColors(String [] colors){
+        chart.setColors(colors);
     }
 
 }

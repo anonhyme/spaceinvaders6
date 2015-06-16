@@ -12,7 +12,6 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -69,14 +68,19 @@ public class EvaluationResultsChart extends AbstractGWTChart {
             dataTable.setValue(i, 3, e.getMaxTotal());
         }
 
-
-
         // Set options
         ColumnChartOptions options = ColumnChartOptions.create();
         options.setFontName("Tahoma");
         options.setTitle("Résultats de l'AP");
         options.setHAxis(HAxis.create("Évaluation"));
         options.setVAxis(VAxis.create("Résultat"));
+        if (isCustomSize) {
+            options.setWidth(width);
+            options.setHeight(height);
+        }
+        if (colorsSet){
+            options.setColors(colors);
+        }
 
         // Draw the chart
         chart.draw(dataTable, options);
