@@ -14,6 +14,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
+import org.spaceinvaders.client.widgets.cell.CellWithEvent;
 import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
 import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;

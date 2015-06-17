@@ -18,9 +18,8 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
-import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
-import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesResult;
 import org.spaceinvaders.shared.dispatch.actions.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
 import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 
 
