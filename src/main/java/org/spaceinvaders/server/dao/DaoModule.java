@@ -1,4 +1,4 @@
-package org.spaceinvaders.server.guice;
+package org.spaceinvaders.server.dao;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.persist.jpa.JpaPersistModule;

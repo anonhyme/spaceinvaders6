@@ -57,8 +57,8 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     @Override
-    public void initSemesterGradesMapResult(GetSemesterGradesMapResult semesterGradesResult) {
-        this.evaluations = semesterGradesResult.getEvaluationMapResult();
+    public void initSemesterGradesMapResult(List<Evaluation> evaluations) {
+        this.evaluations = evaluations;
     }
 
     @Override

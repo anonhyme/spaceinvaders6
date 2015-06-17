@@ -37,7 +37,7 @@ public class EvaluationColumn extends Column<Evaluation, String> {
 
         CompetenceEvalResult result = evaluationDataGrid.getCompetenceEvalResult(key);
 
-        if(result != null) {
+        if (result != null) {
             double res = 100 * result.getResultValue().doubleValue() / result.getMaxResultValue();
             evaluationLabel = formatter.format(res);
         }

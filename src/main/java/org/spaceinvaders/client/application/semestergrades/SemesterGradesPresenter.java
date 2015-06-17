@@ -5,6 +5,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -15,6 +16,8 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.menu.MenuPresenter;
+import org.spaceinvaders.shared.api.UserInfoResource;
+import org.spaceinvaders.shared.dispatch.*;
 import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dispatch.actions.GetSemesterInfoAction;
 import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
@@ -23,8 +26,6 @@ import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dispatch.results.GetUserInfoResult;
 
 import javax.inject.Inject;
-
-// TODO : rename this class and others to something more appropriate (SemesterGridPresenter?)
 
 public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy> {
     public interface MyView extends View {
@@ -35,16 +36,18 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     public interface MyProxy extends ProxyPlace<SemesterGradesPresenter> {
     }
 
+    public static final Object SLOT_MENU_WIDGET = new Object();
     private DispatchAsync dispatcher;
     private MenuPresenter menuPresenter;
-    public static final Object SLOT_MENU_WIDGET = new Object();
 
     @Inject
     SemesterGradesPresenter(EventBus eventBus,
                             MyView view,
                             MyProxy proxy,
                             DispatchAsync dispatchAsync,
-                            MenuPresenter menuPresenter) {
+                            RestDispatch restDispatch,
+                            MenuPresenter menuPresenter,
+                            UserInfoResource userInfoResource) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
         this.dispatcher = dispatchAsync;
@@ -80,17 +83,6 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
         });
 
         // TODO : Remove that and put it where we'll really use it
-//        this.dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
-//            @Override
-//            public void onFailure(Throwable caught) {
-//                Window.alert(caught.getMessage());
-//            }
-//
-//            @Override
-//            public void onSuccess(GetSemesterGradesResult result) {
-//                GWT.log("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
-//            }
-//        });
 
         this.dispatcher.execute(new GetSemesterInfoAction(3), new AsyncCallback<GetSemesterInfoResult>() {
             @Override

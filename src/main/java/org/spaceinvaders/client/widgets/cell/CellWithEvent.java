@@ -15,6 +15,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 
 // https://code.google.com/p/google-web-toolkit/source/browse/trunk/user/javadoc/com/google/gwt/examples/cell/?r=10566
+
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 6/16/2015
  *
@@ -37,10 +38,9 @@ public class CellWithEvent extends AbstractCell<String> {
          * The template for this Cell, which includes styles and a value.
          *
          * @param styles the styles to include in the style attribute of the div
-         * @param value the safe value. Since the value type is {@link SafeHtml},
-         *          it will not be escaped before including it in the template.
-         *          Alternatively, you could make the value type String, in which
-         *          case the value would be escaped.
+         * @param value  the safe value. Since the value type is {@link SafeHtml}, it will not be
+         *               escaped before including it in the template. Alternatively, you could make
+         *               the value type String, in which case the value would be escaped.
          * @return a {@link SafeHtml} instance
          */
         @SafeHtmlTemplates.Template("<div style=\"{0}\">{1}</div>")
@@ -69,9 +69,9 @@ public class CellWithEvent extends AbstractCell<String> {
     }
 
     /**
-     * Called when an event occurs in a rendered instance of this Cell. The
-     * parent element refers to the element that contains the rendered cell, NOT
-     * to the outermost element that the Cell rendered.
+     * Called when an event occurs in a rendered instance of this Cell. The parent element refers to
+     * the element that contains the rendered cell, NOT to the outermost element that the Cell
+     * rendered.
      */
     @Override
     public void onBrowserEvent(Context context, Element parent, String value, NativeEvent event,
@@ -88,11 +88,12 @@ public class CellWithEvent extends AbstractCell<String> {
             }
         }
     }
+
     /**
-    * onEnterKeyDown is called when the user presses the ENTER key will the
-    * Cell is selected. You are not required to override this method, but its a
-    * common convention that allows your cell to respond to key events.
-    */
+     * onEnterKeyDown is called when the user presses the ENTER key will the Cell is selected. You
+     * are not required to override this method, but its a common convention that allows your cell
+     * to respond to key events.
+     */
     @Override
     protected void onEnterKeyDown(Context context, Element parent, String value, NativeEvent event,
                                   ValueUpdater<String> valueUpdater) {
