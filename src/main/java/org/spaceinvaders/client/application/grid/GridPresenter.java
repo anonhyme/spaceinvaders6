@@ -1,6 +1,5 @@
-package org.spaceinvaders.client.application.griddemo;
+package org.spaceinvaders.client.application.grid;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -18,10 +17,11 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.menu.MenuPresenter;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 
 
 public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter.MyProxy> implements GridUiHandlers {
@@ -29,7 +29,7 @@ public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter
     interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void initSemesterTable(GetSemesterInfoResult result);
 
-        void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult);
+        void initSemesterGradesMapResult(GetSemesterGradesMapResult semesterGradesResult);
     }
 
     @ContentSlot
@@ -60,18 +60,18 @@ public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter
 
     protected void onBind() {
         super.onBind();
-        this.fetchSemesterData();
+        this.fetchSemesterMapData();
     }
 
-    private void fetchSemesterData() {
-        dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
+    private void fetchSemesterMapData() {
+        dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesMapResult>() {
             @Override
             public void onFailure(Throwable caught) {
             }
 
             @Override
-            public void onSuccess(GetSemesterGradesResult result) {
-                getView().initSemesterGradesResult(result);
+            public void onSuccess(GetSemesterGradesMapResult result) {
+                getView().initSemesterGradesMapResult(result);
                 fetchSemesterInfo();
             }
         });

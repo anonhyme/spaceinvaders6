@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.griddemo;
+package org.spaceinvaders.client.application.grid;
 
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -14,10 +14,12 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.HashMap;
@@ -29,14 +31,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     interface Binder extends UiBinder<Widget, GridView> {
     }
 
-    AppResources appResources;
-
-    CellTable<CompetenceEvalResult> cellTable;
-
-    HashMap<String, Integer> competenceMap;
-
-    protected ListDataProvider<CompetenceEvalResult> dataSemesterProvider = new ListDataProvider<CompetenceEvalResult>();
-
     @UiField
     HTMLPanel menuPanel;
 
@@ -46,7 +40,14 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     @UiField
     Container containerCellTable;
 
+    AppResources appResources;
+
+    CellTable<Evaluation> cellTable;
+    HashMap<String, Integer> competenceMap;
+    protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
+
     List<CompetenceEvalResult> competenceEvalResult;
+    List<Evaluation> evaluations;
 
     @Inject
     GridView(Binder uiBinder, AppResources appResources) {
@@ -55,8 +56,8 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     @Override
-    public void initSemesterGradesResult(GetSemesterGradesResult semesterGradesResult) {
-        this.competenceEvalResult = semesterGradesResult.getEvaluationResults();
+    public void initSemesterGradesMapResult(GetSemesterGradesMapResult semesterGradesResult) {
+        this.evaluations = semesterGradesResult.getEvaluationMapResult();
     }
 
     @Override
@@ -64,7 +65,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         //TODO to refactor
         cellTable = new CellTable<>();
         initColumn(semesterInfoResult.getSemesterInfo());
-        dataSemesterProvider.setList(competenceEvalResult);
+        dataSemesterProvider.setList(evaluations);
 
         //TODO check for @UiField(provided=true)
         //!!!! Do not erase !!!!
@@ -83,9 +84,11 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     private void initColumn(SemesterInfo semesterInfo) {
         List<Competence> competences = semesterInfo.getCompetences();
         setEvaluationTypeColumn();
+
         setCompetenceHashMap(competences);
+
         for (int i = 0; i < competences.size(); i++) {
-            cellTable.addColumn(new CompetenceColumn(i, competenceMap), competences.get(i).getCompetenceLabel());
+            cellTable.addColumn(new EvaluationColumn(competences.get(i).getCompetenceLabel(), competenceMap), competences.get(i).getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
@@ -98,13 +101,13 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     private void setEvaluationTypeColumn() {
-        Column<CompetenceEvalResult, String> column = new Column<CompetenceEvalResult, String>(new TextCell()) {
+        Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
             @Override
-            public String getValue(CompetenceEvalResult data) {
+            public String getValue(Evaluation data) {
                 String value = "";
                 //TODO Check why it's not working without the try/catch
                 try {
-                    value = data.getEvalLabel();
+                    value = data.getEvaluationLabel();
                 } catch (Exception e) {
                 }
                 return value;

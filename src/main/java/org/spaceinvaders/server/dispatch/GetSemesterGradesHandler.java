@@ -1,17 +1,3 @@
-/**
- * Copyright 2011 ArcBees Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.spaceinvaders.server.dispatch;
 
 import com.google.inject.Inject;
@@ -23,18 +9,19 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGradesAction, GetSemesterGradesResult> {
+public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGradesAction, GetSemesterGradesMapResult> {
     private CompetenceEvalResultDao competenceEvalResultDao;
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
@@ -53,7 +40,7 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
     }
 
     @Override
-    public GetSemesterGradesResult execute(GetSemesterGradesAction action, ExecutionContext context)
+    public GetSemesterGradesMapResult execute(GetSemesterGradesAction action, ExecutionContext context)
             throws ActionException {
         int semesterID = action.getSemesterID();
 //        String cip = action.getCip();
@@ -62,7 +49,9 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
 
         Map<String, Evaluation> evals = Evaluation.getEvaluations(results);
 
-        return new GetSemesterGradesResult(results);
+        List<Evaluation> listEvaluation = new ArrayList<Evaluation>(evals.values());
+
+        return new GetSemesterGradesMapResult(listEvaluation);
     }
 
     @Override
@@ -71,7 +60,7 @@ public class GetSemesterGradesHandler implements ActionHandler<GetSemesterGrades
     }
 
     @Override
-    public void undo(GetSemesterGradesAction action, GetSemesterGradesResult result, ExecutionContext context)
+    public void undo(GetSemesterGradesAction action, GetSemesterGradesMapResult result, ExecutionContext context)
             throws ActionException {
         // Not undoable
     }

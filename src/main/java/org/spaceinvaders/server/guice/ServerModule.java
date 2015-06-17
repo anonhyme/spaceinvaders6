@@ -5,9 +5,9 @@ import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
 import org.spaceinvaders.server.dispatch.GetSemesterGradesHandler;
 import org.spaceinvaders.server.dispatch.GetSemesterInfoHandler;
 import org.spaceinvaders.server.dispatch.GetUserInfoHandler;
-import org.spaceinvaders.shared.dispatch.GetSemesterGradesAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
-import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
 
 public class ServerModule extends HandlerModule {
     @Override

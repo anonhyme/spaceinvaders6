@@ -17,8 +17,8 @@ import com.gwtplatform.mvp.client.View;
 import org.spaceinvaders.client.events.HasLoginHandlers;
 import org.spaceinvaders.client.events.LoginEvent;
 import org.spaceinvaders.client.events.LoginEventHandler;
-import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
-import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
+import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetUserInfoResult;
 
 @Singleton
 public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> implements LoginEventHandler, HasLoginHandlers, MenuUiHandlers {

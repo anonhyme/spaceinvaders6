@@ -24,8 +24,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.dao.SemesterInfoDao;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoAction;
-import org.spaceinvaders.shared.dispatch.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import javax.servlet.ServletContext;

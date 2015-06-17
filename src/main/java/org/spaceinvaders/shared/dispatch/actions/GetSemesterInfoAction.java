@@ -1,6 +1,8 @@
-package org.spaceinvaders.shared.dispatch;
+package org.spaceinvaders.shared.dispatch.actions;
 
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
+
+import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 
 public class GetSemesterInfoAction extends UnsecuredActionImpl<GetSemesterInfoResult> {
     private int semesterID;
