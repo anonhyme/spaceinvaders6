@@ -1,5 +1,7 @@
 package org.spaceinvaders.shared.api;
 
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+
 import org.spaceinvaders.shared.dispatch.UserInfo;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import java.util.List;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import static org.spaceinvaders.shared.api.ApiPaths.EVALUATIONS;
 import static org.spaceinvaders.shared.api.ApiPaths.SEMESTERGRADES;
@@ -23,9 +26,9 @@ import static org.spaceinvaders.shared.api.ApiParameters.COMPETENCE_RESULT;
 public interface SemesterGradesResource {
     @GET
     @Path(EVALUATIONS)
-    SortedMap<String, Evaluation> getAllEvaluations(@QueryParam(SEMESTER_ID) int semesterID);
-
-    @GET
-    @Path(COMPETENCE_RESULT)
-    List<CompetenceEvalResult> getAllCompetenceEvalResults(@QueryParam(SEMESTER_ID) int semesterID);
+    TreeMap<String, Evaluation> getAllEvaluations(@QueryParam(SEMESTER_ID) int semesterID);
+//
+//    @GET
+//    @Path(COMPETENCE_RESULT)
+//    List<CompetenceEvalResult> getAllCompetenceEvalResults(@QueryParam(SEMESTER_ID) int semesterID);
 }

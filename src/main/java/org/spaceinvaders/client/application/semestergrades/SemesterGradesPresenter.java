@@ -18,6 +18,12 @@ import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.menu.MenuPresenter;
 import org.spaceinvaders.shared.api.UserInfoResource;
 import org.spaceinvaders.shared.dispatch.*;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterInfoAction;
+import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesResult;
+import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
+import org.spaceinvaders.shared.dispatch.results.GetUserInfoResult;
 
 import javax.inject.Inject;
 
@@ -77,17 +83,6 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
         });
 
         // TODO : Remove that and put it where we'll really use it
-        this.dispatcher.execute(new GetSemesterGradesAction(3), new AsyncCallback<GetSemesterGradesResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(GetSemesterGradesResult result) {
-                GWT.log("result competence = " + result.getEvaluationResults().get(0).getCompetenceLabel());
-            }
-        });
 
         this.dispatcher.execute(new GetSemesterInfoAction(3), new AsyncCallback<GetSemesterInfoResult>() {
             @Override

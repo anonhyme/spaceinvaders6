@@ -12,8 +12,8 @@ import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import org.spaceinvaders.server.cas.UserSessionImpl;
-import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
-import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
+import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetUserInfoResult;
 import org.spaceinvaders.shared.dispatch.UserInfo;
 
 import javax.servlet.ServletContext;

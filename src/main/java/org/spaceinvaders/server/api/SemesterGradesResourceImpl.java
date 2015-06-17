@@ -1,14 +1,19 @@
 package org.spaceinvaders.server.api;
 
 import com.google.inject.Inject;
+
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+
 import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class SemesterGradesResourceImpl implements SemesterGradesResource {
     private UserSessionImpl userSession;
@@ -23,13 +28,13 @@ public class SemesterGradesResourceImpl implements SemesterGradesResource {
     }
 
     @Override
-    public SortedMap<String, Evaluation> getAllEvaluations(int semesterID) {
+    public TreeMap<String, Evaluation> getAllEvaluations(int semesterID) {
         List<CompetenceEvalResult> results = competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
         return Evaluation.getEvaluations(results);
     }
 
-    @Override
-    public List<CompetenceEvalResult> getAllCompetenceEvalResults(int semesterID) {
-        return competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
-    }
+//    @Override
+//    public List<CompetenceEvalResult> getAllCompetenceEvalResults(int semesterID) {
+//        return competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
+//    }
 }

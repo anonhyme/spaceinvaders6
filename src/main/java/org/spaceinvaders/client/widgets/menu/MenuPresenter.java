@@ -9,16 +9,21 @@ import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
+import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.events.HasLoginHandlers;
 import org.spaceinvaders.client.events.LoginEvent;
 import org.spaceinvaders.client.events.LoginEventHandler;
-import org.spaceinvaders.shared.dispatch.GetUserInfoAction;
-import org.spaceinvaders.shared.dispatch.GetUserInfoResult;
+import org.spaceinvaders.shared.api.SemesterGradesResource;
+import org.spaceinvaders.shared.api.UserInfoResource;
+import org.spaceinvaders.shared.dispatch.UserInfo;
+import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.results.GetUserInfoResult;
 
 @Singleton
 public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> implements LoginEventHandler, HasLoginHandlers, MenuUiHandlers {
@@ -30,13 +35,16 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     private EventBus eventBus;
     private DispatchAsync dispatchAsync;
     private String userName;
+    private final ResourceDelegate<UserInfoResource> userInfoDelegate;
+
 
     @Inject
     MenuPresenter(EventBus eventBus,
-                  MyView view, DispatchAsync dispatchAsync) {
+                  MyView view, DispatchAsync dispatchAsync, ResourceDelegate<UserInfoResource> userInfoDelegate) {
         super(eventBus, view);
         this.eventBus = eventBus;
         this.dispatchAsync = dispatchAsync;
+        this.userInfoDelegate = userInfoDelegate;
         getView().setUiHandlers(this);
     }
 
@@ -63,17 +71,12 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     }
 
     private void fetchUserInfo() {
-        dispatchAsync.execute(new GetUserInfoAction(), new AsyncCallback<GetUserInfoResult>() {
+        userInfoDelegate.withCallback(new AbstractAsyncCallback<UserInfo>() {
             @Override
-            public void onFailure(Throwable caught) {
-                Window.alert("Something went wrong when retrieving user info..." + caught.getMessage());
+            public void onSuccess(UserInfo result) {
+                getView().setUserName(result.getFirstName() + " " + result.getLastName());
             }
-
-            @Override
-            public void onSuccess(GetUserInfoResult result) {
-                getView().setUserName(result.getUserInfo().getFirstName() + " " +result.getUserInfo().getLastName());
-            }
-        });
+        }).get();
     }
 
     @Override

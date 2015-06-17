@@ -1,10 +1,13 @@
-package org.spaceinvaders.shared.dispatch;
+package org.spaceinvaders.shared.dispatch.results;
 
 /**
  * Created by AlexandraMaude on 2015-05-26.
  */
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
+
+import org.spaceinvaders.shared.dispatch.actions.GetUserInfoAction;
+import org.spaceinvaders.shared.dispatch.UserInfo;
 
 /**
  *  @deprecated replaced by {@link org.spaceinvaders.shared.api.UserInfoResource}

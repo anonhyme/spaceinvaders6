@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.griddemo;
+package org.spaceinvaders.client.application.grid;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

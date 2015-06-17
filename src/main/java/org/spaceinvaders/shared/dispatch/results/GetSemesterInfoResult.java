@@ -1,7 +1,8 @@
-package org.spaceinvaders.shared.dispatch;
+package org.spaceinvaders.shared.dispatch.results;
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
+import org.spaceinvaders.shared.dispatch.actions.GetSemesterGradesAction;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 /**
