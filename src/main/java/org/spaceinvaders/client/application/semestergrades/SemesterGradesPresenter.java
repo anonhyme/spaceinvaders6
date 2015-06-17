@@ -5,22 +5,21 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.widgets.menu.MenuPresenter;
+import org.spaceinvaders.shared.api.UserInfoResource;
 import org.spaceinvaders.shared.dispatch.*;
 
 import javax.inject.Inject;
-
-// TODO : rename this class and others to something more appropriate (SemesterGridPresenter?)
 
 public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy> {
     public interface MyView extends View {
@@ -31,16 +30,18 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     public interface MyProxy extends ProxyPlace<SemesterGradesPresenter> {
     }
 
+    public static final Object SLOT_MENU_WIDGET = new Object();
     private DispatchAsync dispatcher;
     private MenuPresenter menuPresenter;
-    public static final Object SLOT_MENU_WIDGET = new Object();
 
     @Inject
     SemesterGradesPresenter(EventBus eventBus,
                             MyView view,
                             MyProxy proxy,
                             DispatchAsync dispatchAsync,
-                            MenuPresenter menuPresenter) {
+                            RestDispatch restDispatch,
+                            MenuPresenter menuPresenter,
+                            UserInfoResource userInfoResource) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
         this.dispatcher = dispatchAsync;

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class SemesterInfo implements Serializable {
+
+//    private List<AP> aps; // todo : add aps to semester info
     private List<Competence> competences;
     private List<Evaluation> evals;
 
