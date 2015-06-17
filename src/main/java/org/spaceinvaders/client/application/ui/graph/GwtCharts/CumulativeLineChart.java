@@ -21,13 +21,18 @@ import java.util.Set;
 public class CumulativeLineChart extends AbstractGWTChart {
 
      private LineChart chart;
+    private String AP_ID;
+
+    public CumulativeLineChart(String apName){
+        AP_ID = apName;
+    }
 
     @Override
      public void loadChart(){
          Set<String> evalNames = new HashSet<>();
          ArrayList<EvalInfo> evalTotals = new ArrayList<>();
          for (CompetenceEvalResult c : getChartData()) {
-             if (!evalNames.contains(c.getEvalLabel())) {
+             if (!evalNames.contains(c.getEvalLabel())  && c.getCourseLabel().equals(AP_ID)) {
                  evalNames.add(c.getEvalLabel());
                  evalTotals.add(new EvalInfo(c.getEvalLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));
              } else {

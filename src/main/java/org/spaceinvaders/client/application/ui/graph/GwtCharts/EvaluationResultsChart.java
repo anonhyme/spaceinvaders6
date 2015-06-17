@@ -12,6 +12,7 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,13 +28,23 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         }
         return chart;
     }
+    String AP_ID;
+
+    public void setChartData(List<CompetenceEvalResult> data, String AP_ID){
+        this.chartData = data;
+        this.AP_ID = AP_ID;
+    }
+
+    public EvaluationResultsChart(String apName){
+        this.AP_ID = apName;
+    }
 
 
     public void loadChart( ){
         Set<String> evalNames = new HashSet<>();
         ArrayList<EvalInfo> evalTotals = new ArrayList<>();
         for (CompetenceEvalResult c : getChartData()) {
-            if (!evalNames.contains(c.getEvalLabel())) {
+            if (!evalNames.contains(c.getEvalLabel()) && c.getCourseLabel().equals(AP_ID)) {
                 evalNames.add(c.getEvalLabel());
                 evalTotals.add(new EvalInfo(c.getEvalLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));
             } else {

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public abstract class AbstractGWTChart{
     protected List<CompetenceEvalResult> chartData;
+
     protected int width;
     protected int height;
     protected boolean isCustomSize = false;
