@@ -2,6 +2,10 @@ package org.spaceinvaders.shared.dispatch;
 
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
+/**
+ *  @deprecated, replaced by {@link org.spaceinvaders.shared.api.SemesterGradesResource}
+ */
+@Deprecated
 public class GetSemesterGradesAction extends UnsecuredActionImpl<GetSemesterGradesResult> {
     private int semesterID;
 //    private String cip;

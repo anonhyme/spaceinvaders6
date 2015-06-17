@@ -5,9 +5,9 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 /**
- * The result of a {@link GetSemesterGradesAction} action.
+ *  @deprecated replaced by {@link org.spaceinvaders.shared.api.SemesterInfoResource}
  */
-public class GetSemesterInfoResult implements Result {
+@Deprecated public class GetSemesterInfoResult implements Result {
     private SemesterInfo semesterInfo;
 
     /**

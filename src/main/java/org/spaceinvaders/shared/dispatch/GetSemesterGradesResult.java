@@ -7,8 +7,9 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import java.util.List;
 
 /**
- * The result of a {@link GetSemesterGradesAction} action.
+ *  @deprecated, replaced by {@link org.spaceinvaders.shared.api.SemesterGradesResource}
  */
+@Deprecated
 public class GetSemesterGradesResult implements Result {
     private List<CompetenceEvalResult> evaluationResults;
 

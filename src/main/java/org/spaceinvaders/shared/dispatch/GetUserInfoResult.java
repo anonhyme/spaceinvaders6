@@ -7,9 +7,9 @@ package org.spaceinvaders.shared.dispatch;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * The result of a {@link GetUserInfoAction} action.
+ *  @deprecated replaced by {@link org.spaceinvaders.shared.api.UserInfoResource}
  */
-public class GetUserInfoResult implements Result {
+@Deprecated public class GetUserInfoResult implements Result {
     private UserInfo userInfo;
 
     public GetUserInfoResult(final UserInfo userInfo) {

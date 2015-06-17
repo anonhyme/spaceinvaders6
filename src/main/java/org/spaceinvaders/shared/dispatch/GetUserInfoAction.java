@@ -6,7 +6,10 @@ package org.spaceinvaders.shared.dispatch;
 
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
-public class GetUserInfoAction extends UnsecuredActionImpl<GetUserInfoResult> {
+/**
+ *  @deprecated replaced by {@link org.spaceinvaders.shared.api.UserInfoResource}
+ */
+@Deprecated public class GetUserInfoAction extends UnsecuredActionImpl<GetUserInfoResult> {
     public GetUserInfoAction() {
     }
 }
