@@ -10,4 +10,6 @@ public class ApiPaths {
     public static final String EVALUATIONS = "/evaluations";
 
     public static final String SEMESTERINFO = "/semesterinfo";
+
+    public static final String COMPETENCE_RESULT = "/competence-result";
 }

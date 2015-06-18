@@ -28,8 +28,8 @@ public class SemesterGradesResourceImpl implements SemesterGradesResource {
         return Evaluation.getEvaluations(results);
     }
 
-//    @Override
-//    public List<CompetenceEvalResult> getAllCompetenceEvalResults(int semesterID) {
-//        return competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
-//    }
+    @Override
+    public List<CompetenceEvalResult> getAllCompetenceEvalResults(int semesterID) {
+        return competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
+    }
 }

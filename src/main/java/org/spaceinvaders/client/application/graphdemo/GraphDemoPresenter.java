@@ -77,17 +77,6 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
 
         List<CompetenceEvalResult> competenceResultsEntityList= new ArrayList<CompetenceEvalResult>();
 
-       /* for (int i =0; i<6; i++) {
-            ApSummaryEntity e = new ApSummaryEntity();
-            e.setApName("GIF50" + i);
-            e.setApResult((int) Math.round(Math.random() * 100));
-            e.setApAverage((int) Math.round(Math.random() * 100));
-            e.setApMax(100);
-            apSummaryEntityList.add(e);
-        }
-        ApSummaryEntity e = new ApSummaryEntity();
-        e.setApName("Gel501");*/
-
         for (int i =0; i<6; i++) {
             CompetenceEvalResult ce = new CompetenceEvalResult();
             ce.setEvalLabel("Rapport " + i);
@@ -125,19 +114,16 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
         view.setStudentProgress(50);
         String [] colors = {"#FF0000", "#00FF00", "#0000FF"};
         final GwtChartWidgetPresenter p4 = gwtChartWidgetPresenterProvider.get();
-        p4.setChart(new CumulativeLineChart("GEN500"));
-        p4.setChartData(competenceResultsEntityList);
+        p4.setChart(new CumulativeLineChart(competenceResultsEntityList,"GEN500"));
         p4.setChartColors(colors );
         view.setCol4(p4);
 
         final GwtChartWidgetPresenter p5 = gwtChartWidgetPresenterProvider.get();
-        p5.setChart(new EvaluationResultsChart("GEN501"));
-        p5.setChartData(competenceResultsEntityList);
+        p5.setChart(new EvaluationResultsChart(competenceResultsEntityList, "GEN501"));
         view.setCol5(p5);
 
         final GwtChartWidgetPresenter p6 = gwtChartWidgetPresenterProvider.get();
-        p6.setChart(new SemesterResultsChart());
-        p6.setChartData(competenceResultsEntityList);
+        p6.setChart(new SemesterResultsChart(competenceResultsEntityList));
         view.setCol6(p6);
 
 

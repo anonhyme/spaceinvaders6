@@ -12,6 +12,7 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,6 +20,11 @@ import java.util.Set;
  */
 public class SemesterResultsChart extends AbstractGWTChart {
     private BarChart chart;
+    List<CompetenceEvalResult> data;
+
+    public SemesterResultsChart(List<CompetenceEvalResult> data){
+        this.data = data;
+    }
 
     public Widget getChart(){
         if (chart== null){
@@ -30,7 +36,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
     public void loadChart(){
         Set<String> apNames = new HashSet<>();
         ArrayList<ApInfo> apTotals = new ArrayList<>();
-        for (CompetenceEvalResult c : getChartData()) {
+        for (CompetenceEvalResult c : data) {
             if (!apNames.contains(c.getCourseLabel())) {
                 apNames.add(c.getCourseLabel());
                 apTotals.add(new ApInfo(c.getCourseLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));

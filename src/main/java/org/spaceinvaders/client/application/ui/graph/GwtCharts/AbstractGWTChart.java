@@ -9,8 +9,6 @@ import java.util.List;
  * Created by Etienne on 2015-06-10.
  */
 public abstract class AbstractGWTChart{
-    protected List<CompetenceEvalResult> chartData;
-
     protected int width;
     protected int height;
     protected boolean isCustomSize = false;
@@ -18,13 +16,7 @@ public abstract class AbstractGWTChart{
     protected boolean colorsSet;
 
     abstract public Widget getChart();
-    public void setChartData(List<CompetenceEvalResult> data){
-        chartData = data;
-    }
 
-    public  List<CompetenceEvalResult>  getChartData(){
-        return chartData;
-    }
     abstract public void loadChart();
 
     public void setSize(int width, int height){

@@ -3,7 +3,6 @@ package org.spaceinvaders.client.application.ui.graph.GwtCharts;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
-import com.googlecode.gwt.charts.client.corechart.ColumnChart;
 import com.googlecode.gwt.charts.client.corechart.LineChart;
 import com.googlecode.gwt.charts.client.corechart.LineChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
@@ -13,6 +12,7 @@ import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,19 +20,21 @@ import java.util.Set;
  */
 public class CumulativeLineChart extends AbstractGWTChart {
 
-     private LineChart chart;
-    private String AP_ID;
+    private LineChart chart;
+    private String apId;
+    List<CompetenceEvalResult> data;
 
-    public CumulativeLineChart(String apName){
-        AP_ID = apName;
+    public CumulativeLineChart(List<CompetenceEvalResult> data, String apName){
+        this.data = data;
+        apId = apName;
     }
 
     @Override
      public void loadChart(){
          Set<String> evalNames = new HashSet<>();
          ArrayList<EvalInfo> evalTotals = new ArrayList<>();
-         for (CompetenceEvalResult c : getChartData()) {
-             if (!evalNames.contains(c.getEvalLabel())  && c.getCourseLabel().equals(AP_ID)) {
+         for (CompetenceEvalResult c : data) {
+             if (!evalNames.contains(c.getEvalLabel())  && c.getCourseLabel().equals(apId)) {
                  evalNames.add(c.getEvalLabel());
                  evalTotals.add(new EvalInfo(c.getEvalLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));
              } else {
@@ -80,7 +82,7 @@ public class CumulativeLineChart extends AbstractGWTChart {
          options.setTitle("Résultats cumulatifs de l'AP");
          options.setHAxis(HAxis.create("Évaluation"));
          options.setVAxis(VAxis.create("Total"));
-         options.setPointSize(5);
+         options.setPointSize(5 );
         if (isCustomSize) {
             options.setWidth(width);
             options.setHeight(height);

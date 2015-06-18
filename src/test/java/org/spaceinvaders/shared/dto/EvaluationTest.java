@@ -13,6 +13,7 @@ import org.spaceinvaders.shared.api.SemesterGradesResource;
 
 import java.util.List;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 @RunWith(JukitoRunner.class)
 public class EvaluationTest {
@@ -63,10 +64,10 @@ public class EvaluationTest {
             Evaluation eval = evals.get(evalLabel);
 
             // For each competence result
-//            TreeMap<String, CompetenceEvalResult> evalResults = eval.getCompetenceEvalResults();
-//            for (String competenceLabel : evalResults.keySet()) {
-//                Assert.assertNotNull(evalResults.get(competenceLabel));
-//            }
+            TreeMap<String, CompetenceEvalResult> evalResults = eval.getCompetenceEvalResults();
+            for (String competenceLabel : evalResults.keySet()) {
+                Assert.assertNotNull(evalResults.get(competenceLabel));
+            }
         }
     }
 

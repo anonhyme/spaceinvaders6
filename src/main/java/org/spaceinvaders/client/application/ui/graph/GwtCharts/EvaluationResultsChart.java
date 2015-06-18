@@ -21,6 +21,13 @@ import java.util.Set;
 public class EvaluationResultsChart extends AbstractGWTChart {
 
     private ColumnChart chart;
+    String apId;
+    List<CompetenceEvalResult> data;
+
+    public EvaluationResultsChart(List<CompetenceEvalResult> data, String apName){
+        this.data = data;
+        this.apId = apName;
+    }
 
     public Widget getChart(){
         if (chart== null){
@@ -28,23 +35,12 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         }
         return chart;
     }
-    String AP_ID;
-
-    public void setChartData(List<CompetenceEvalResult> data, String AP_ID){
-        this.chartData = data;
-        this.AP_ID = AP_ID;
-    }
-
-    public EvaluationResultsChart(String apName){
-        this.AP_ID = apName;
-    }
-
 
     public void loadChart( ){
         Set<String> evalNames = new HashSet<>();
         ArrayList<EvalInfo> evalTotals = new ArrayList<>();
-        for (CompetenceEvalResult c : getChartData()) {
-            if (!evalNames.contains(c.getEvalLabel()) && c.getCourseLabel().equals(AP_ID)) {
+        for (CompetenceEvalResult c : data) {
+            if (!evalNames.contains(c.getEvalLabel()) && c.getCourseLabel().equals(apId)) {
                 evalNames.add(c.getEvalLabel());
                 evalTotals.add(new EvalInfo(c.getEvalLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));
             } else {
