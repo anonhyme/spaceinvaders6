@@ -6377,7 +6377,54 @@ CREATE OR REPLACE RULE v_timespan_update AS
   ON UPDATE TO note.v_timespan DO INSTEAD  UPDATE note.timespan SET label = new.label, start_date = new.start_date, end_date = new.end_date
   WHERE timespan.timespan_id = new.timespan_id;
 
-<<<<<<< HEAD
+
+--
+-- ********************************* CUSTOM GRADES PROCEDURES AND VIEWS********************************* --
+--
+
+--
+-- student semester views
+--
+CREATE OR REPLACE VIEW note.v_student_semester AS
+SELECT DISTINCT u.administrative_user_id, eg.short_description, t.label, eg.eg_id
+  FROM public.users u, public.user_group ug, public.groups g, note.assigned_group ag, note.educationnal_goal eg, note.timespan t
+  WHERE u.user_id = ug.member_id
+    AND g.group_id = ug.group_id
+    AND g.group_id = ag.group_id
+    AND eg.eg_id = ag.eg_id
+    AND t.timespan_id = ag.timespan_id;
+
+--
+-- Semester to AP hierarchy view
+--
+CREATE OR REPLACE VIEW note.v_semester_ap_hierarchy AS
+SELECT DISTINCT eg1.eg_id AS semester_id, eg1.short_description AS semester_desc, eg2.eg_id AS ap_id, eg2.short_description as ap_desc
+FROM note.educationnal_goal eg1
+  INNER JOIN note.educationnal_goal_hierarchy eh1
+    ON eg1.eg_id = eh1.eg_id
+  INNER JOIN note.educationnal_goal eg2
+    ON eg2.eg_id = eh1.edu_eg_id
+  INNER JOIN note.educationnal_goal_type egt1
+    ON egt1.eg_type_id = eg1.eg_type_id
+  INNER JOIN note.educationnal_goal_type egt2
+    ON egt2.eg_type_id = eg2.eg_type_id
+WHERE egt1.label = 'Session' AND egt2.label = 'Ap';
+
+--
+-- Ap to Sub Ap hierarchy view
+--
+CREATE OR REPLACE VIEW note.v_ap_subap_hierarchy AS
+SELECT DISTINCT eg1.eg_id AS ap_id, eg1.short_description AS ap_desc, eg2.eg_id AS subap_id, eg2.short_description as subap_desc
+FROM note.educationnal_goal eg1
+  INNER JOIN note.educationnal_goal_hierarchy eh1
+    ON eg1.eg_id = eh1.eg_id
+  INNER JOIN note.educationnal_goal eg2
+    ON eg2.eg_id = eh1.edu_eg_id
+  INNER JOIN note.educationnal_goal_type egt1
+    ON egt1.eg_type_id = eg1.eg_type_id
+  INNER JOIN note.educationnal_goal_type egt2
+    ON egt2.eg_type_id = eg2.eg_type_id
+WHERE egt1.label = 'Ap' AND egt2.label = 'Compétence';
 
 --
 -- Semester type
@@ -6388,20 +6435,14 @@ CREATE TYPE note.t_semester AS (
   semester_id int
 );
 
--- Semester 
-
+--
+-- student semester function
+--
 CREATE OR REPLACE FUNCTION note.get_student_semester(administrative_user_id text) RETURNS SETOF note.t_semester AS $$
-    -- TODO : CREATE SELECT STATEMENT
-    SELECT           	'Session 1 GE/GI', 'A12', 1
-    UNION SELECT        'Session 2 GE/GI', 'H13', 2
-    UNION SELECT        'Session 3 GI', 'A13', 3
+SELECT vss.short_description, vss.label, vss.eg_id
+  FROM note.v_student_semester vss
+  WHERE vss.administrative_user_id = $1;
 $$ LANGUAGE SQL;
-
-=======
---
--- ********************************* CUSTOM GRADES PROCEDURES ********************************* --
---
->>>>>>> 5058a4e52c97538ab30864d76d0f0af6b55a9d30
 
 --
 -- AP types and procedures
@@ -6465,12 +6506,11 @@ $$ LANGUAGE SQL;
 CREATE TYPE note.t_competence AS (ap_label text, competence_label text);
 
 CREATE OR REPLACE FUNCTION note.get_semester_competences(student_id text, session_id int) RETURNS SETOF note.t_competence AS $$
-  -- TODO : CREATE SELECT STATEMENT
-  SELECT           'GEN501', 'GEN501-1'
-  UNION ALL SELECT 'GEN501', 'GEN501-2'
-  UNION ALL SELECT 'GEN402', 'GEN402-1'
-  UNION ALL SELECT 'GEN666', 'GEN666-1'
-  UNION ALL SELECT 'GEN666', 'GEN666-2';
+  SELECT apsap.ap_desc, apsap.subap_desc
+  FROM note.v_semester_ap_hierarchy seap INNER JOIN note.v_ap_subap_hierarchy apsap
+  ON seap.ap_id = apsap.ap_id
+  WHERE seap.semester_id = $2
+  ORDER BY apsap.ap_desc, apsap.subap_desc
 $$ LANGUAGE SQL;
 
 CREATE TYPE note.t_evaluation AS (evaluation_label text);
