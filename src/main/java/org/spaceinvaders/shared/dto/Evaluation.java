@@ -1,40 +1,44 @@
 package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
+import java.util.TreeMap;
 
 public class Evaluation implements Serializable {
     private String evaluationLabel;
-    private TreeMap<String, CompetenceEvalResult> competenceEvalResultMap;
+    private TreeMap<String, CompetenceEvalResult> competenceEvalResults;
 
     public Evaluation(String label) {
         this.evaluationLabel = label;
-        this.competenceEvalResultMap = new TreeMap<>();
+        this.competenceEvalResults = new TreeMap<>();
     }
 
     public Evaluation() {
         this.evaluationLabel = "";
-        this.competenceEvalResultMap = new TreeMap<>();
+        this.competenceEvalResults = new TreeMap<>();
     }
 
-    public void setCompetenceEvalResult(CompetenceEvalResult competenceEvalResult) {
-        String competenceLabel = competenceEvalResult.getCompetenceLabel();
-        if (!competenceEvalResultMap.containsKey(competenceLabel)) {
-            competenceEvalResultMap.put(competenceLabel, competenceEvalResult);
+    public void setCompetenceEvalResult(CompetenceEvalResult competenceEvalResults) {
+        String competenceLabel = competenceEvalResults.getCompetenceLabel();
+        if (!this.competenceEvalResults.containsKey(competenceLabel)) {
+            this.competenceEvalResults.put(competenceLabel, competenceEvalResults);
         }
     }
 
     public CompetenceEvalResult getCompetenceEvalResult(String competenceLabel) {
-        if (competenceEvalResultMap.containsKey(competenceLabel)) {
-            return competenceEvalResultMap.get(competenceLabel);
+        if (competenceEvalResults.containsKey(competenceLabel)) {
+            return competenceEvalResults.get(competenceLabel);
         }
 
         return null;
     }
 
-    public TreeMap<String, CompetenceEvalResult> getCompetenceEvalResults()
-    {
-        return competenceEvalResultMap;
+    public void setCompetenceEvalResults(TreeMap<String, CompetenceEvalResult> competenceEvalResults) {
+        this.competenceEvalResults = competenceEvalResults;
+    }
+
+    public TreeMap<String, CompetenceEvalResult> getCompetenceEvalResults() {
+        return competenceEvalResults;
     }
 
     public String getEvaluationLabel() {
@@ -45,9 +49,8 @@ public class Evaluation implements Serializable {
         this.evaluationLabel = label;
     }
 
-    public static SortedMap<String, Evaluation> getEvaluations(List<CompetenceEvalResult> competenceEvalResults)
-    {
-        SortedMap<String, Evaluation> map = new TreeMap<>();
+    public static TreeMap<String, Evaluation> getEvaluations(List<CompetenceEvalResult> competenceEvalResults) {
+        TreeMap<String, Evaluation> map = new TreeMap<>();
         for (CompetenceEvalResult competenceResult : competenceEvalResults) {
             String evalLabel = competenceResult.getEvalLabel();
             if (!map.containsKey(evalLabel)) {

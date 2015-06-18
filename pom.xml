@@ -21,17 +21,20 @@
         <bootstrap.version>0.9.1</bootstrap.version>
         <gsss.version>1.0</gsss.version>
         <gwtchosen.version>2.0.0</gwtchosen.version>
-
         <gquery.version>1.4.3</gquery.version>
-
+        <gwt-polymer.version>0.5.5-SNAPSHOT</gwt-polymer.version>
+        <gwt-charts.version>0.9.10</gwt-charts.version>
         <gwt.style>OBF</gwt.style>
 
         <!-- server -->
-        <guice.version>4.0</guice.version>
+        <guice.version>3.0</guice.version>
         <gae.version>1.9.2</gae.version>
         <servlet-api.version>3.1.0</servlet-api.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <guava-version>18.0</guava-version>
+        <arcbees.version>1.2</arcbees.version>
+        <resteasy.version>3.0.9.Final</resteasy.version>
+        <jax-rs.version>1.1.1</jax-rs.version>
 
         <!-- testing -->
         <junit.version>4.12</junit.version>
@@ -200,14 +203,7 @@
                         <artifactId>appengine-tools-sdk</artifactId>
                         <version>${gae.version}</version>
                     </dependency>
-                    <dependency>
-                        <groupId>org.jasig.cas.client</groupId>
-                        <artifactId>cas-client-core</artifactId>
-                        <version>3.3.3</version>
-                        <scope>runtime</scope>
-                        <type>jar</type>
-                    </dependency>
-                </dependencies>
+                    </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -221,15 +217,6 @@
             <version>${gquery.version}</version>
         </dependency>
 
-
-        <!-- Client UI -->
-        <dependency>
-            <groupId>com.arcbees.gss</groupId>
-            <artifactId>gsss</artifactId>
-            <version>${gsss.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.gwtbootstrap3</groupId>
             <artifactId>gwtbootstrap3</artifactId>
@@ -238,29 +225,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rest-shared</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.arcbees</groupId>
             <artifactId>gwtchosen</artifactId>
             <version>${gwtchosen.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Persistence -->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-entitymanager</artifactId>-->
-        <!--<version>4.3.10.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-validator</artifactId>-->
-        <!--<version>4.1.0.Final</version>-->
-        <!--</dependency>-->
 
         <!-- eclipse link -->
         <dependency>
@@ -317,11 +286,19 @@
             <artifactId>guice-persist</artifactId>
             <version>${guice.version}</version>
         </dependency>
+
         <!-- Google Web Toolkit dependencies -->
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
+        </dependency>
+
+        <!-- GWT-Charts -->
+        <dependency>
+            <groupId>com.googlecode.gwt-charts</groupId>
+            <artifactId>gwt-charts</artifactId>
+            <version>${gwt-charts.version}</version>
         </dependency>
 
         <!-- Google App Engine -->
@@ -348,6 +325,69 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
+            </dependency>
+
+        <!-- rest dispatch -->
+        <dependency>
+        <groupId>com.gwtplatform</groupId>
+        <artifactId>gwtp-dispatch-rest</artifactId>
+        <version>1.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rest-shared</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform.extensions</groupId>
+            <artifactId>dispatch-rest-delegates</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arcbees</groupId>
+            <artifactId>guicy-resteasy</artifactId>
+            <version>${arcbees.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-guice</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>${jax-rs.version}</version>
+            <!-- Provided because RestEasy has its own implementation -->
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Other -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -356,43 +396,18 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- TODO : find out what this is and why it's not working -->
-        <!--<dependency>-->
-        <!--<groupId>ca.uSherbrooke.gegi</groupId>-->
-        <!--<artifactId>ui-component</artifactId>-->
-        <!--<version>1.0.1</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-processors</artifactId>
-            <version>1.4</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
+        <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jukito</groupId>
             <artifactId>jukito</artifactId>
             <version>${jukito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jasig.cas.client</groupId>
-            <artifactId>cas-client-core</artifactId>
-            <version>3.3.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>2.7.0</version>
+        <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.googlecode.gwt-charts</groupId>
@@ -407,11 +422,10 @@
         </dependency>
 
 
-        <!-- postgresql driver -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.4-1201-jdbc41</version>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>3.3.3</version>
         </dependency>
     </dependencies>
 
@@ -422,6 +436,14 @@
             <url>http://www.gel.usherbrooke.ca/artifactory/repo</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    <repository>
+            <id>sonatype.snapshots</id>
+            <name>Sonatype snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>

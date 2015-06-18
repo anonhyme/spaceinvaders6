@@ -1,14 +1,6 @@
 package org.spaceinvaders.server.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedStoredProcedureQueries;
-import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureParameter;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
@@ -131,10 +123,8 @@ public class CompetenceEvalResultEntity {
             return false;
         if (maxResultValue != null ? !maxResultValue.equals(that.maxResultValue) : that.maxResultValue != null)
             return false;
-        if (standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null)
-            return false;
+        return !(standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null);
 
-        return true;
     }
 
     @Override
