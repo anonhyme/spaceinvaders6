@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.menu;
+package org.spaceinvaders.client.application.menu;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.query.client.GQuery;

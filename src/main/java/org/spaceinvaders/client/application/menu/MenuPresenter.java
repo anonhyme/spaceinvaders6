@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.menu;
+package org.spaceinvaders.client.application.menu;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -7,7 +7,6 @@ import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
-import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
@@ -26,17 +25,16 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     }
 
     private EventBus eventBus;
-    private DispatchAsync dispatchAsync;
     private String userName;
     private final ResourceDelegate<UserInfoResource> userInfoDelegate;
 
 
     @Inject
     MenuPresenter(EventBus eventBus,
-                  MyView view, DispatchAsync dispatchAsync, ResourceDelegate<UserInfoResource> userInfoDelegate) {
+                  MyView view,
+                  ResourceDelegate<UserInfoResource> userInfoDelegate) {
         super(eventBus, view);
         this.eventBus = eventBus;
-        this.dispatchAsync = dispatchAsync;
         this.userInfoDelegate = userInfoDelegate;
         getView().setUiHandlers(this);
     }

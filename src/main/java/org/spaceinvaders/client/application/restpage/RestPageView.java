@@ -2,7 +2,7 @@ package org.spaceinvaders.client.application.restpage;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
@@ -14,7 +14,7 @@ public class RestPageView extends ViewImpl implements RestPagePresenter.MyView {
     }
 
     @UiField
-    SimplePanel main;
+    HTMLPanel main;
 
     @Inject
     RestPageView(Binder uiBinder) {

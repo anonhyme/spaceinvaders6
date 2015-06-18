@@ -5,7 +5,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -13,7 +12,6 @@ import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.shared.dto.Competence;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
@@ -106,21 +104,5 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
             }
         };
         cellTable.addColumn(column, "Evaluation");
-    }
-
-    @Override
-    public void addToSlot(Object slot, IsWidget content) {
-        super.addToSlot(slot, content);
-        if (slot == GridPresenter.SLOT_WIDGET_ELEMENT) {
-            menuPanel.add(content);
-        }
-    }
-
-    @Override
-    public void removeFromSlot(Object slot, IsWidget content) {
-        super.removeFromSlot(slot, content);
-        if (slot == GridPresenter.SLOT_WIDGET_ELEMENT) {
-            menuPanel.remove(content);
-        }
     }
 }

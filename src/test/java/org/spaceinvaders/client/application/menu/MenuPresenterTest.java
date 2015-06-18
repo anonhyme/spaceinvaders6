@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.menu;
+package org.spaceinvaders.client.application.menu;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
