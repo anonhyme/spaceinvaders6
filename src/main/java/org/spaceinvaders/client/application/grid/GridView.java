@@ -40,7 +40,8 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     private HashMap<String, Integer> competenceMap;
 
     @Inject
-    GridView(Binder uiBinder, AppResources appResources) {
+    GridView(Binder uiBinder,
+             AppResources appResources) {
         this.appResources = appResources;
         initWidget(uiBinder.createAndBindUi(this));
     }
@@ -75,19 +76,10 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         List<Competence> competences = semesterInfo.getCompetences();
         setEvaluationTypeColumn();
 
-        setCompetenceHashMap(competences);
-
-        for (int i = 0; i < competences.size(); i++) {
-            cellTable.addColumn(new EvaluationColumn(competences.get(i).getCompetenceLabel(), competenceMap), competences.get(i).getCompetenceLabel());
+        for (Competence competence : competences) {
+            cellTable.addColumn(new EvaluationColumn(competence.getCompetenceLabel()), competence.getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
-    }
-
-    private void setCompetenceHashMap(List<Competence> competences) {
-        this.competenceMap = new HashMap<>();
-        for (int i = 0; i < competences.size(); i++) {
-            competenceMap.put(competences.get(i).getCompetenceLabel(), i);
-        }
     }
 
     private void setEvaluationTypeColumn() {

@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.semestergrades;
 
+import com.google.gwt.core.client.GWT;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.mvp.client.Presenter;
@@ -8,11 +9,13 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import org.spaceinvaders.client.application.ApplicationPresenter;
+import org.spaceinvaders.client.events.SemesterChangedEvent;
 import org.spaceinvaders.client.place.NameTokens;
 
 import javax.inject.Inject;
 
-public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy> {
+public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.MyView, SemesterGradesPresenter.MyProxy>
+        implements SemesterChangedEvent.SemesterChangedHandler {
     public interface MyView extends View {
     }
 
@@ -32,5 +35,11 @@ public class SemesterGradesPresenter extends Presenter<SemesterGradesPresenter.M
     @Override
     protected void onBind() {
         super.onBind();
+        addRegisteredHandler(SemesterChangedEvent.TYPE, this);
+    }
+
+    @Override
+    public void onSemesterChanged(SemesterChangedEvent event) {
+        GWT.log(SemesterGradesPresenter.class.toString() + ": this is how you know if the semester changed");
     }
 }

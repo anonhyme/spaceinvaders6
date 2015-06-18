@@ -15,17 +15,9 @@ import java.util.HashMap;
  */
 public class EvaluationColumn extends Column<Evaluation, String> {
     private final String key;
-    private final HashMap<String, Integer> hashMap;
 
-    public EvaluationColumn(int index) {
+    public EvaluationColumn(String key) {
         super(new TextCell());
-        this.key = "";
-        this.hashMap = null;
-    }
-
-    public EvaluationColumn(String key, HashMap<String, Integer> hashMap) {
-        super(new TextCell());
-        this.hashMap = hashMap;
         this.key = key;
     }
 
@@ -35,7 +27,6 @@ public class EvaluationColumn extends Column<Evaluation, String> {
         String evaluationLabel = "   ";
 
         CompetenceEvalResult result = evaluationDataGrid.getCompetenceEvalResult(key);
-
         if (result != null) {
             double res = 100 * result.getResultValue().doubleValue() / result.getMaxResultValue();
             evaluationLabel = formatter.format(res);

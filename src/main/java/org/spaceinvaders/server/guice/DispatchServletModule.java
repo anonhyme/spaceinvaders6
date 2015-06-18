@@ -13,7 +13,7 @@ import org.spaceinvaders.shared.api.ApiPaths;
 public class DispatchServletModule extends ServletModule {
     @Override
     public void configureServlets() {
-        filter("/*").through(PersistFilter.class); // necessary to start JPA service
+        filter("/*").through(PersistFilter.class); // necessary to start JPA service todo : uncomment this
 
         filter(ApiPaths.ROOT + "/*").through(GuiceRestEasyFilterDispatcher.class);
 
