@@ -125,13 +125,13 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
         view.setStudentProgress(50);
         String [] colors = {"#FF0000", "#00FF00", "#0000FF"};
         final GwtChartWidgetPresenter p4 = gwtChartWidgetPresenterProvider.get();
-        p4.setChart(new CumulativeLineChart(""));
+        p4.setChart(new CumulativeLineChart("GEN500"));
         p4.setChartData(competenceResultsEntityList);
         p4.setChartColors(colors );
         view.setCol4(p4);
 
         final GwtChartWidgetPresenter p5 = gwtChartWidgetPresenterProvider.get();
-        p5.setChart(new EvaluationResultsChart(""));
+        p5.setChart(new EvaluationResultsChart("GEN501"));
         p5.setChartData(competenceResultsEntityList);
         view.setCol5(p5);
 

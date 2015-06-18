@@ -80,6 +80,7 @@ public class CumulativeLineChart extends AbstractGWTChart {
          options.setTitle("Résultats cumulatifs de l'AP");
          options.setHAxis(HAxis.create("Évaluation"));
          options.setVAxis(VAxis.create("Total"));
+         options.setPointSize(5);
         if (isCustomSize) {
             options.setWidth(width);
             options.setHeight(height);

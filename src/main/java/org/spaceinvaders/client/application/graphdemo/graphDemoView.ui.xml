@@ -14,12 +14,12 @@
             <b:ProgressBar ui:field="classProgress" type="WARNING" percent="40"/>
         </b:Progress>
         <b:Row>
-            <b:Column size="MD_4" ui:field="col1"></b:Column>
-            <b:Column size="MD_4" ui:field="col2"></b:Column>
-            <b:Column size="MD_4" ui:field="col3"></b:Column>
-            <b:Column size="MD_4" ui:field="col4"></b:Column>
-            <b:Column size="MD_4" ui:field="col5"></b:Column>
-            <b:Column size="MD_4" ui:field="col6"></b:Column>
+            <b:Column size="MD_12" ui:field="col1"></b:Column>
+            <b:Column size="MD_12" ui:field="col2"></b:Column>
+            <b:Column size="MD_12" ui:field="col3"></b:Column>
+            <b:Column size="MD_12" ui:field="col4"></b:Column>
+            <b:Column size="MD_12" ui:field="col5"></b:Column>
+            <b:Column size="MD_12" ui:field="col6"></b:Column>
         </b:Row>
     </g:HTMLPanel>
 
