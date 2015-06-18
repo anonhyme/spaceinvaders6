@@ -1,7 +1,6 @@
 package org.spaceinvaders.client.application.semestergrades;
 
 import com.google.inject.Inject;
-
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,7 @@ public class SemesterGradesTest {
     SemesterGradesPresenter semesterGradesPresenter;
 
     @Test
-    public void onReveal_anytime_setsTitleIntoView(SemesterGradesPresenter.MyView myView){
+    public void onReveal_anytime_setsTitleIntoView(SemesterGradesPresenter.MyView myView) {
 
     }
 }

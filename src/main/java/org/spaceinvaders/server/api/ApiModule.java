@@ -1,7 +1,6 @@
 package org.spaceinvaders.server.api;
 
 import com.google.inject.AbstractModule;
-
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.api.UserInfoResource;

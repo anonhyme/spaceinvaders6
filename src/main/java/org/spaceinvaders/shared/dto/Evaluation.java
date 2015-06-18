@@ -1,7 +1,8 @@
 package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
+import java.util.TreeMap;
 
 public class Evaluation implements Serializable {
     private String evaluationLabel;

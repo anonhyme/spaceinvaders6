@@ -1,13 +1,10 @@
 package org.spaceinvaders.server.guice;
 
 import com.arcbees.guicyresteasy.GuiceRestEasyFilterDispatcher;
-
 import com.google.inject.persist.PersistFilter;
 import com.google.inject.servlet.ServletModule;
-
 import com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
-
 import org.spaceinvaders.server.cas.UserSession;
 import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.shared.api.ApiPaths;

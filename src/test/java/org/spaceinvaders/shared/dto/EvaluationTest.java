@@ -13,7 +13,6 @@ import org.spaceinvaders.shared.api.SemesterGradesResource;
 
 import java.util.List;
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 @RunWith(JukitoRunner.class)
 public class EvaluationTest {

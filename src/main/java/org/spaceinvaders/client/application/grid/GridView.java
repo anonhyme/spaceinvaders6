@@ -8,25 +8,18 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
-
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
-import org.spaceinvaders.client.widgets.cell.CellWithEvent;
-import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesMapResult;
-import org.spaceinvaders.shared.dispatch.results.GetSemesterGradesResult;
-import org.spaceinvaders.shared.dispatch.results.GetSemesterInfoResult;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridView> {
@@ -43,12 +36,10 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     AppResources appResources;
 
-    CellTable<Evaluation> cellTable;
-    HashMap<String, Integer> competenceMap;
     protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
-
-    List<CompetenceEvalResult> competenceEvalResult;
-    List<Evaluation> evaluations;
+    private CellTable<Evaluation> cellTable;
+    private List<Evaluation> evaluations;
+    private HashMap<String, Integer> competenceMap;
 
     @Inject
     GridView(Binder uiBinder, AppResources appResources) {
@@ -62,10 +53,10 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     @Override
-    public void initSemesterTable(GetSemesterInfoResult semesterInfoResult) {
+    public void initSemesterTable(SemesterInfo semesterInfo) {
         //TODO to refactor
         cellTable = new CellTable<>();
-        initColumn(semesterInfoResult.getSemesterInfo());
+        initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
 
         //TODO check for @UiField(provided=true)

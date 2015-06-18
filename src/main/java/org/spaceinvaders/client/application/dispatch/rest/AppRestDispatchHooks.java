@@ -18,7 +18,6 @@ package org.spaceinvaders.client.application.dispatch.rest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Response;
-
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
@@ -36,16 +35,16 @@ public class AppRestDispatchHooks implements RestDispatchHooks {
 
     @Override
     public void onSuccess(RestAction action, Response response, Object result) {
-        logger.log(Level.SEVERE, "Successfully executed " + action.getPath() + ", result: " + response.getText());
-        GWT.log("onSuccess " + "Successfully executed " + action.getPath() + ", result: " + response.getText());
+        logger.log(Level.SEVERE, "Successfully execute " + action.getPath() + ", result: " + response.getText());
+        GWT.log("onSuccess " + "Successfully execute " + action.getPath() + ", result: " + response.getText());
     }
 
     @Override
     public void onFailure(RestAction action, Response response, Throwable caught) {
-        logger.log(Level.SEVERE, "Failed to executed " + action.getPath() + ", result: "
+        logger.log(Level.SEVERE, "Failed to execute " + action.getPath() + ", result: "
                 + response.getStatusText() + " " + response.getText() + " " + caught.getMessage());
 
-        GWT.log("onFailure " + "Failed to executed " + action.getPath() + ", result: "
+        GWT.log("onFailure " + "Failed to execute " + action.getPath() + ", result: "
                 + response.getStatusText() + " " + response.getText() + " " + caught.getMessage());
     }
 }

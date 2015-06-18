@@ -1,4 +1,4 @@
-package org.spaceinvaders.shared.dispatch;
+package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
 

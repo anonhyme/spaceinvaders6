@@ -1,36 +1,24 @@
-
-
-
 package org.spaceinvaders.client.application.restpage;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.api.UserInfoResource;
-import org.spaceinvaders.shared.dispatch.UserInfo;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
+import org.spaceinvaders.shared.dto.UserInfo;
 
-import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class RestPagePresenter extends Presenter<RestPagePresenter.MyView, RestPagePresenter.MyProxy> {
     interface MyView extends View {

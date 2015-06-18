@@ -1,18 +1,13 @@
 package org.spaceinvaders.server.api;
 
 import com.google.inject.Inject;
-
-import com.gwtplatform.dispatch.rest.shared.RestAction;
-
 import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class SemesterGradesResourceImpl implements SemesterGradesResource {
