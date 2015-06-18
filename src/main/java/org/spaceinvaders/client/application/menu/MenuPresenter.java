@@ -58,7 +58,6 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     public void disconnect() {
         Window.alert("The Presenter says Hi !");
         Window.alert("But it's stupid to make this alert in the presenter !");
-
-        SemesterChangedEvent.fire(3, this);
+//        DisconnectedEvent.fire(this); (we should add this event, like SemesterGradeEvent)
     }
 }

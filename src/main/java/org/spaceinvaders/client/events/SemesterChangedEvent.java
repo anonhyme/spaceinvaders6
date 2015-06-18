@@ -4,9 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
-/**
- * Created by hugbed on 2015-06-18.
- */
 public class SemesterChangedEvent extends GwtEvent<SemesterChangedEvent.SemesterChangedHandler> {
 
 
