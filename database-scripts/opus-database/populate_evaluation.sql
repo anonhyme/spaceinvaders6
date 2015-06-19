@@ -9,7 +9,6 @@ INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, s
 	FROM note.evaluation_type et, note.educationnal_goal eg
 	WHERE et.label = 'Session' AND eg.label = 'gegis1');
 
-
 INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q1', 'Question 1', now(), 1);
 INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
 	SELECT ev.evaluation_id, r.rubric_id, 1
@@ -36,8 +35,6 @@ INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
          note.educationnal_goal eg
     WHERE eg.label = 'gen111-1';
 
-
-
 INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ('gegis1_app1_intra_q3', 'Question 3', now(), 1);
 INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
 	SELECT ev.evaluation_id, r.rubric_id, 1
@@ -51,9 +48,16 @@ INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
          note.educationnal_goal eg
     WHERE eg.label = 'gen111-1';
 
+INSERT INTO note.evaluation_instance (evaluation_id, timespan_id, employee_id, occurence, registration, user_id)
+  SELECT ev.evaluation_id, t.timespan_id, e.user_id, '2012-10-12', t.start_date, 1
+  FROM note.evaluation ev, note.timespan t, public.employee e
+  WHERE t.label = 'A12' AND ev.label = 'gegis1_app1_intra' AND e.employee_id = '04000001';
 
-
-
+INSERT INTO note.evaluated_group(evaluation_instance_id, group_id, registration, user_id)
+      SELECT evi.evaluation_instance_id, g.group_id, t.start_date, 1
+      FROM note.evaluation ev, note.evaluation_instance evi, note.timespan t, public.groups g
+      WHERE ev.evaluation_id = evi.evaluation_id AND ev.label = 'gegis1_app1_intra' AND
+            evi.timespan_id = t.timespan_id AND t.label = 'A12' AND g.label = 'GI58'
 
 
 
@@ -116,8 +120,8 @@ INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, s
 
 
 /**
-	Create rubrics that represent a statement for each evaluation and bind them with the association table evaluation_rubric	
-*/
+		Give student their note
+ */
 
 
 
