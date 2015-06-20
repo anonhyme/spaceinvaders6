@@ -6,7 +6,6 @@ import com.google.gwt.event.shared.HasHandlers;
 
 public class SemesterChangedEvent extends GwtEvent<SemesterChangedEvent.SemesterChangedHandler> {
 
-
     public interface SemesterChangedHandler extends EventHandler {
         void onSemesterChanged(SemesterChangedEvent event);
     }

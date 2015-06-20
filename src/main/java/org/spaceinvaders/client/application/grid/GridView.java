@@ -17,10 +17,10 @@ import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import javax.inject.Inject;
-
 import java.util.HashMap;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridView> {
@@ -39,7 +39,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
     private CellTable<Evaluation> cellTable;
-    private List<Evaluation> evaluations;
     private HashMap<String, Integer> competenceMap;
 
     @Inject
@@ -50,12 +49,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     @Override
-    public void initSemesterGradesMapResult(List<Evaluation> evaluations) {
-        this.evaluations = evaluations;
-    }
-
-    @Override
-    public void initSemesterTable(SemesterInfo semesterInfo) {
+    public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
         //TODO to refactor
         cellTable = new CellTable<>();
         initColumn(semesterInfo);

@@ -7,8 +7,6 @@ import com.google.gwt.user.cellview.client.Column;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 
-import java.util.HashMap;
-
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 5/21/2015
  *

@@ -13,10 +13,11 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 import org.spaceinvaders.client.application.ApplicationModule;
-import org.spaceinvaders.client.dispatch.rest.AppRestDispatchHooks;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.ResourceLoader;
 import org.spaceinvaders.shared.api.ApiPaths;
+
+//import org.spaceinvaders.client.application.dispatch.rest.AppRestDispatchHooks;
 
 
 /**
@@ -32,7 +33,7 @@ public class ClientModule extends AbstractPresenterModule {
 
         // Rest dispatch
         install(new RestDispatchAsyncModule.Builder()
-                .dispatchHooks(AppRestDispatchHooks.class)
+//                .dispatchHooks(AppRestDispatchHooks.class)
                 .build());
 
         // DefaultPlaceManager Places
@@ -47,9 +48,9 @@ public class ClientModule extends AbstractPresenterModule {
     @RestApplicationPath
     String applicationPath() {
         String baseUrl = GWT.getHostPageBaseURL();
-        if (baseUrl.endsWith("/")) {
+        if (baseUrl.endsWith("/"))
             baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
-        }
+
         return baseUrl + ApiPaths.ROOT;
     }
 }
