@@ -12,4 +12,7 @@ public interface SemesterInfoDao {
     List<CompetenceEntity> getSemesterCompetences(String cip, int semesterID);
 
     SemesterInfo getSemesterInfo(String cip, int semesterID);
+
+    //TODO for test use with the mock. Return a list of SemesterInfo for the dropdown semester menu.
+    List<SemesterInfo> getSemesterInfoList(String cip);
 }

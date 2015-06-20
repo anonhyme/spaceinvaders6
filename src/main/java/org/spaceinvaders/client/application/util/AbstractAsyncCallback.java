@@ -8,4 +8,9 @@ public abstract class AbstractAsyncCallback<T> implements AsyncCallback<T> {
     public void onFailure(Throwable caught) {
         GWT.log("Abstract async callback failure bro");
     }
+
+
+    public void onFailure(String src, Throwable caught) {
+        GWT.log("Abstract async callback fail " + src);
+    }
 }

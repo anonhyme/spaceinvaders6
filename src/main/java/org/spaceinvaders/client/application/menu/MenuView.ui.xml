@@ -28,7 +28,7 @@
                         <b.html:Span ui:field="spanUsername"/>
                     </b:NavbarText>
                     <b:NavbarText>
-                        <b:NavbarLink ui:field="navbarLinkDisconnect">Déconnexion</b:NavbarLink>
+                        <b:NavbarLink ui:field="navBarDisconnect">Déconnexion</b:NavbarLink>
                     </b:NavbarText>
                 </b:Nav>
 

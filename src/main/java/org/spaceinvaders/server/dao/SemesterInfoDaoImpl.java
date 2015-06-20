@@ -63,6 +63,11 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         return semesterInfo;
     }
 
+    @Override
+    public List<SemesterInfo> getSemesterInfoList(String cip) {
+        return null;
+    }
+
     public List<Evaluation> EvaluationEntitiesToDtos(List<EvaluationEntity> entities) {
         List<Evaluation> dtos = new ArrayList<>();
         for (EvaluationEntity entity : entities) {
@@ -79,7 +84,6 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         return dtos;
     }
 
-    // TODO : I think that all this Dto business is ugly (needs to be tested if it stays this way)
     public Competence CompetenceEntityToDto(CompetenceEntity entity) {
         Competence dto = new Competence();
         dto.setApLabel(entity.getApLabel());

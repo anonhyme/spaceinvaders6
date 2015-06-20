@@ -33,7 +33,20 @@ public class SemesterInfoDaoMock implements SemesterInfoDao {
         competences.add(new Competence("GEN402", "GEN402-1"));
         competences.add(new Competence("GEN666", "GEN666-1"));
         competences.add(new Competence("GEN666", "GEN666-2"));
-
+        SemesterInfo semesterInfo = new SemesterInfo(competences, evals);
         return new SemesterInfo(competences, evals);
+    }
+
+    @Override
+    public List<SemesterInfo> getSemesterInfoList(String cip) {
+        //TODO should use the cip to fetch all valid session for the current user
+        List<SemesterInfo> semesterInfoList = new ArrayList<SemesterInfo>();
+        for (int i = 1; i < 5; i++) {
+            SemesterInfo semesterInfo = new SemesterInfo();
+            semesterInfo.setId(i);
+            semesterInfo.setLabel("Session " + i);
+            semesterInfoList.add(semesterInfo);
+        }
+        return semesterInfoList;
     }
 }

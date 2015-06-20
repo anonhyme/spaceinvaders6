@@ -13,7 +13,5 @@ public class MenuModule extends AbstractPresenterModule {
     protected void configure() {
         bind(MenuPresenter.MyView.class).to(MenuView.class);
         bindPresenterWidget(MenuPresenter.class, MenuPresenter.MyView.class, MenuView.class);
-//        install(new GinFactoryModuleBuilder().build(WidgetsFactory.class));
-//        bindPresenterWidget(MenuPresenter.class, MenuPresenter.MyView.class, MenuView.class);
     }
 }

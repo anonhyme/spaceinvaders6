@@ -20,7 +20,7 @@ public class CompetenceEvalResult implements Serializable {
     }
 
     // TODO : should be named AP label instead
-    public String getCourseLabel() {
+    public String getApLabel() {
         return courseLabel;
     }
 

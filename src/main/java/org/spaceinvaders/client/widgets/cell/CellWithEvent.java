@@ -61,7 +61,7 @@ public class CellWithEvent extends AbstractCell<String> {
         }
 
         // If the value comes from the user, we escape it to avoid XSS attacks.
-        SafeHtml safeValue = SafeHtmlUtils.fromString(value);
+        SafeHtml safeValue = SafeHtmlUtils.fromString(" ");
         // Use the template to create the Cell's html.
         SafeStyles styles = SafeStylesUtils.forTrustedColor(safeValue.asString());
         SafeHtml rendered = templates.cell(styles, safeValue);

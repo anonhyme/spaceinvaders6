@@ -5,9 +5,11 @@ import java.util.List;
 
 public class SemesterInfo implements Serializable {
 
-    //    private List<AP> aps; // todo : add aps to semester info
+    // private List<AP> aps; //TODO : add aps to semester info
     private List<Competence> competences;
     private List<Evaluation> evals;
+    private String label;
+    private int id;
 
     /**
      * For serialization only
@@ -35,5 +37,21 @@ public class SemesterInfo implements Serializable {
 
     public void setEvals(List<Evaluation> evals) {
         this.evals = evals;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
