@@ -33,4 +33,9 @@ public class SemesterGradesResourceImpl implements SemesterGradesResource {
     public List<CompetenceEvalResult> getAllCompetenceEvalResults(int semesterID) {
         return competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
     }
+
+    @Override
+    public List<CompetenceEvalResult> getAllApResults(int semesterID, int apID) {
+        return competenceEvalResultDao.getAPResults(userSession.getUserId(), semesterID, apID);
+    }
 }

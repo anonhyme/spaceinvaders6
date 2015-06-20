@@ -86,7 +86,7 @@ public class GraphDemoView extends ViewImpl implements GraphDemoPresenter.MyView
 
    public void setStudentProgress(double progress){
         studentProgress.setPercent(progress);
-       studentProgress.setText("Complétion étuudiante : " + progress + "%");
+       studentProgress.setText("Complétion étudiante : " + progress + "%");
     }
     public void setClassProgress(double progress){
         classProgress.setPercent(progress);

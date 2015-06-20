@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.spaceinvaders.client.application.dispatch.rest;
+package org.spaceinvaders.client.dispatch.rest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Response;
@@ -26,7 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AppRestDispatchHooks implements RestDispatchHooks {
-    private static final boolean HookEnabled = false;
+    public static boolean HookEnabled = false;
     private static final Logger logger = Logger.getLogger(AppRestDispatchHooks.class.getName());
 
     @Override

@@ -18,15 +18,19 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
-import org.spaceinvaders.client.application.ui.graph.GwtCharts.CumulativeLineChart;
-import org.spaceinvaders.client.application.ui.graph.GwtCharts.EvaluationResultsChart;
-import org.spaceinvaders.client.application.ui.graph.GwtCharts.SemesterResultsChart;
-import org.spaceinvaders.client.application.ui.graph.gwtchartwidget.GwtChartWidgetPresenter;
+
+import org.spaceinvaders.client.application.ApplicationPresenter;
+import org.spaceinvaders.client.application.widgets.graph.GwtCharts.CumulativeLineChart;
+import org.spaceinvaders.client.application.widgets.graph.GwtCharts.EvaluationResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.GwtCharts.SemesterResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtchartwidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.application.Application;
 
 public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, GraphDemoPresenter.MyProxy> {
 
@@ -60,7 +64,7 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
             MyView view,
             MyProxy proxy
     ) {
-        super(eventBus, view, proxy, RevealType.Root);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
         // super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
     }

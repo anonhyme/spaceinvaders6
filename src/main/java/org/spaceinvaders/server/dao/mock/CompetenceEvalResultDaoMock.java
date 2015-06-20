@@ -2,6 +2,7 @@ package org.spaceinvaders.server.dao.mock;
 
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
+import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
@@ -66,6 +67,46 @@ public class CompetenceEvalResultDaoMock implements CompetenceEvalResultDao {
         result.setMaxResultValue(110);
         result.setStandardDev(4);
         results.add(result);
+
+        return results;
+    }
+
+    @Override
+    public List<CompetenceEvalResult> getAPResults(String cip, int semesterID, int apID) {
+        List<CompetenceEvalResult> results = new ArrayList<CompetenceEvalResult>();
+
+        for (int i = 0; i < 6; i++) {
+            CompetenceEvalResult ce = new CompetenceEvalResult();
+            ce.setEvalLabel("Rapport " + i);
+            ce.setCourseLabel("GEN500");
+            ce.setCompetenceLabel("1");
+            ce.setResultValue((int) Math.round(Math.random() * 100));
+            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
+            ce.setMaxResultValue(100);
+            results.add(ce);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            CompetenceEvalResult ce = new CompetenceEvalResult();
+            ce.setEvalLabel("Rapport " + i);
+            ce.setCourseLabel("GEN500");
+            ce.setCompetenceLabel("2");
+            ce.setResultValue((int) Math.round(Math.random() * 100));
+            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
+            ce.setMaxResultValue(100);
+            results.add(ce);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            CompetenceEvalResult ce = new CompetenceEvalResult();
+            ce.setEvalLabel("Rapport " + i);
+            ce.setCourseLabel("GEN501");
+            ce.setCompetenceLabel("2");
+            ce.setResultValue((int) Math.round(Math.random() * 100));
+            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
+            ce.setMaxResultValue(100);
+            results.add(ce);
+        }
 
         return results;
     }

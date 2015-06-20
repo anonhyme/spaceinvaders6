@@ -6,7 +6,10 @@ import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
+import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,11 @@ public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
     public List<CompetenceEvalResult> getSemesterResults(String cip, int semesterID) {
         List<CompetenceEvalResultEntity> results = getSemesterResultsEntities(cip, semesterID);
         return entitiesToDtos(results);
+    }
+
+    @Override
+    public List<CompetenceEvalResult> getAPResults(String cip, int semesterID, int apID) {
+        throw new NotImplementedException();
     }
 
     public List<CompetenceEvalResult> entitiesToDtos(List<CompetenceEvalResultEntity> entities) {

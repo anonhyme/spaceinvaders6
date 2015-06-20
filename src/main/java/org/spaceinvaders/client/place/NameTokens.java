@@ -9,6 +9,7 @@ public class NameTokens {
     public static final String lolololo = "lolololo";
     public static final String graphDemo = "graphDemo";
     public static final String APpage = "APpage";
+    public static final String error = "error";
 
     public static String getSemesterGrades() {
         return semesterGrades;
@@ -36,5 +37,9 @@ public class NameTokens {
 
     public static String getLolololo() {
         return lolololo;
+    }
+
+    public static String getError() {
+        return error;
     }
 }
