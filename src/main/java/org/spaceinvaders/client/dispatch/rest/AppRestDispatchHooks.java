@@ -24,13 +24,12 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//TODO remove on release
 public class AppRestDispatchHooks implements RestDispatchHooks {
     private static final Logger logger = Logger.getLogger(AppRestDispatchHooks.class.getName());
 
     @Override
     public void onExecute(RestAction action) {
-//        logger.log(Level.SEVERE, "Executing rest dispatch " + action.getPath() + " resource action");
         GWT.log("onExecute " + "Executing rest dispatch " + action.getPath() + " resource action");
     }
 
