@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
 import java.util.TreeMap;
 
 import static org.spaceinvaders.shared.api.ApiParameters.SEMESTER_ID;

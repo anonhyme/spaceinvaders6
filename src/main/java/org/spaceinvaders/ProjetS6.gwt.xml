@@ -21,6 +21,7 @@
 
     <set-configuration-property name="CssResource.enableGss" value="true"/>
     <set-configuration-property name="CssResource.legacy" value="true"/>
+
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="org.spaceinvaders.client.gin.ClientModule"/>
 </module>

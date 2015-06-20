@@ -9,7 +9,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+
 import org.gwtbootstrap3.client.ui.*;
 import org.gwtbootstrap3.client.ui.html.Span;
 import org.spaceinvaders.client.events.SemesterChangedEvent;
