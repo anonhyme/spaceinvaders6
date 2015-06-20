@@ -1,11 +1,8 @@
 package org.spaceinvaders.client.application.semester;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
 
-import com.arcbees.gsss.grid.client.GridResources;
-import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -23,6 +20,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         implements SemesterChangedEvent.SemesterChangedHandler {
     public interface MyView extends View {
         void addGrid(IsWidget gridWidget);
+
     }
 
     @ProxyCodeSplit
@@ -32,11 +30,12 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
 
     private GridPresenter gridPresenter;
 
+    private
+
     @Inject
     SemesterPresenter(EventBus eventBus,
                       MyView view,
                       MyProxy proxy,
-                      RestDispatch restDispatch,
                       GridPresenter gridPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
         this.gridPresenter = gridPresenter;
@@ -56,10 +55,11 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     private void showGrid() {
         gridPresenter.updateGrid(0);
         getView().addGrid(gridPresenter);
+
     }
 
     @Override
     public void onSemesterChanged(SemesterChangedEvent event) {
-        GWT.log(SemesterPresenter.class.toString() + ": this is how you know if the semester changed");
+        gridPresenter.updateGrid(event.getSemesterID());
     }
 }

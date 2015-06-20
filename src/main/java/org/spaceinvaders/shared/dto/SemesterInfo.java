@@ -23,6 +23,13 @@ public class SemesterInfo implements Serializable {
         this.evals = evals;
     }
 
+    public SemesterInfo(List<Competence> competences, List<Evaluation> evals, String label, int id) {
+        this.competences = competences;
+        this.evals = evals;
+        this.label = label;
+        this.id = id;
+    }
+
     public List<Competence> getCompetences() {
         return competences;
     }

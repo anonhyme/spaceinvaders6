@@ -33,8 +33,12 @@ public class SemesterInfoDaoMock implements SemesterInfoDao {
         competences.add(new Competence("GEN402", "GEN402-1"));
         competences.add(new Competence("GEN666", "GEN666-1"));
         competences.add(new Competence("GEN666", "GEN666-2"));
-        SemesterInfo semesterInfo = new SemesterInfo(competences, evals);
-        return new SemesterInfo(competences, evals);
+
+        if(semesterID == 3) {
+            competences.add(new Competence("GEN666", "GEN666-3"));
+        }
+
+        return new SemesterInfo(competences, evals, "Session " + semesterID, semesterID);
     }
 
     @Override

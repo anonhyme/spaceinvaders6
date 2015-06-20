@@ -50,7 +50,6 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
         super(eventBus, view);
         this.semesterGradesDelegate = semesterGradesDelegate;
         this.semesterInfoDelegate = semesterInfoDelegate;
-
         getView().setUiHandlers(this);
     }
 

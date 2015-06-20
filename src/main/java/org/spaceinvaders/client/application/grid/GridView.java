@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application.grid;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -10,6 +11,7 @@ import com.google.gwt.view.client.ListDataProvider;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
+import org.gwtbootstrap3.client.ui.Alert;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
@@ -27,13 +29,13 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     @UiField
-    HTMLPanel menuPanel;
-
-    @UiField
     HTMLPanel panel;
 
     @UiField
     Container containerCellTable;
+
+    @UiField
+    Container alertBitchContainer;
 
     AppResources appResources;
 
@@ -50,8 +52,12 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     @Override
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
-        //TODO to refactor
+        //TODO refactor
         cellTable = new CellTable<>();
+        Alert alertBitch = new Alert(semesterInfo.getLabel());
+        alertBitchContainer.clear();
+        alertBitchContainer.add(alertBitch);
+
         initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
 
@@ -60,13 +66,16 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         //dataSemesterProvider.flush();
         //dataSemesterProvider.refresh();
         //cellTable.redraw();
+
         cellTable.setStriped(true);
         cellTable.setBordered(true);
         cellTable.setCondensed(true);
         cellTable.setColumnWidth(0, "15%");
         cellTable.setColumnWidth(1, "8%");
 
+        containerCellTable.clear();
         containerCellTable.add(cellTable);
+
     }
 
     private void initColumn(SemesterInfo semesterInfo) {

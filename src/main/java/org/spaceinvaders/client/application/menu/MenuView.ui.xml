@@ -15,13 +15,13 @@
             </b:NavbarHeader>
 
             <b:NavbarCollapse>
-
                 <b:NavbarNav>
                     <b:ListDropDown>
                         <b:AnchorButton dataToggle="DROPDOWN">Session</b:AnchorButton>
                         <b:DropDownMenu ui:field="dropDownMenu"/>
                     </b:ListDropDown>
                 </b:NavbarNav>
+
 
                 <b:Nav pull="RIGHT">
                     <b:NavbarText>

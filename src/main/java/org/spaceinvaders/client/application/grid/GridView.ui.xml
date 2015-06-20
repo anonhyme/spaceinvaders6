@@ -6,7 +6,9 @@
     <ui:with field="res" type="org.spaceinvaders.client.resources.AppResources"/>
 
     <g:HTMLPanel ui:field="panel">
-        <g:HTMLPanel ui:field="menuPanel"/>
+        <b:Container ui:field="alertBitchContainer"></b:Container>
+        <!--<b:Alert ui:field="alertBitch"></b:Alert>-->
+
         <b:Container ui:field="containerCellTable"/>
     </g:HTMLPanel>
 </ui:UiBinder>
