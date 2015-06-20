@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application.semestergrades;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+
 import org.spaceinvaders.client.application.menu.MenuPresenter;
 import org.spaceinvaders.client.application.menu.MenuView;
 

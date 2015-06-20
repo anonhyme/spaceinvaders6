@@ -3,12 +3,14 @@ package org.spaceinvaders.client.application.restpage;
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.shared.api.SemesterGradesResource;

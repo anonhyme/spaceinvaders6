@@ -4,13 +4,15 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
+
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
-import javax.persistence.EntityManager;
-import javax.persistence.StoredProcedureQuery;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 
 @Singleton
 public class CompetenceEvalResultDaoImpl implements CompetenceEvalResultDao {
