@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.restpage;
+package org.spaceinvaders.client.application.semester;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -9,16 +9,15 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 import javax.inject.Inject;
 
-
-public class RestPageView extends ViewImpl implements RestPagePresenter.MyView {
-    interface Binder extends UiBinder<Widget, RestPageView> {
+public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
+    public interface Binder extends UiBinder<Widget, SemesterView> {
     }
 
     @UiField
-    HTMLPanel main;
+    HTMLPanel menuPanel;
 
     @Inject
-    RestPageView(Binder uiBinder) {
+    SemesterView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
 }

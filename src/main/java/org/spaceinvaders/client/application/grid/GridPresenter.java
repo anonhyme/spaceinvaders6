@@ -66,6 +66,7 @@ public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter
     protected void onBind() {
         super.onBind();
         registerHandlers();
+        updateGrid(0); // todo : remove that, we need to call it when we have the semesterID
     }
 
     private void registerHandlers() {

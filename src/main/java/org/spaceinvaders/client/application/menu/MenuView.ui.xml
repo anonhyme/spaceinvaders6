@@ -9,8 +9,8 @@
     <g:HTMLPanel>
         <b:Navbar ui:field="navBar">
             <b:NavbarHeader>
-                <b:NavbarBrand ui:field="navbarBrand" targetHistoryToken="{nameTokens.getHome}">Home
-                    page
+                <b:NavbarBrand ui:field="navbarBrand" targetHistoryToken="{nameTokens.getHome}">
+                    Notus
                 </b:NavbarBrand>
             </b:NavbarHeader>
 
