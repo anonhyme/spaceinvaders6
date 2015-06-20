@@ -4,8 +4,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import org.spaceinvaders.client.application.appage.APpageModule;
 import org.spaceinvaders.client.application.graphdemo.GraphDemoModule;
 import org.spaceinvaders.client.application.grid.GridModule;
-import org.spaceinvaders.client.application.restpage.RestPageModule;
-import org.spaceinvaders.client.application.semestergrades.SemesterGradesModule;
+import org.spaceinvaders.client.application.semester.SemesterModule;
 import org.spaceinvaders.client.application.ui.graph.gwtchartwidget.GwtChartWidgetModule;
 
 
@@ -16,9 +15,8 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class,
                 ApplicationPresenter.MyProxy.class);
 
+        install(new SemesterModule());
         install(new GridModule());
-        install(new SemesterGradesModule());
-        install(new RestPageModule());
         install(new GraphDemoModule());
         install(new GwtChartWidgetModule());
         install(new APpageModule());

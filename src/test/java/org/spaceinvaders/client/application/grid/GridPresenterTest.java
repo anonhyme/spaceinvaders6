@@ -2,7 +2,9 @@ package org.spaceinvaders.client.application.grid;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -24,8 +26,6 @@ public class GridPresenterTest {
     private GridPresenter.MyView view;
     @Inject
     private DispatchAsync dispatchAsync;
-    @Inject
-    private GridPresenter.MyProxy proxy;
 
     @Before
     public void setUp() {

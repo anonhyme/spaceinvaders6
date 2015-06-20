@@ -3,10 +3,9 @@ package org.spaceinvaders.client.application.grid;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
+
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
-
-import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 5/21/2015

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<module rename-to='ProjetS6'>
+<module rename-to='Notus'>
 
     <!-- Inherit from the Web Toolkit core. -->
     <inherits name='com.google.gwt.user.User'/>
@@ -25,6 +25,7 @@
 
     <set-configuration-property name="CssResource.enableGss" value="true"/>
     <set-configuration-property name="CssResource.legacy" value="true"/>
+
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="org.spaceinvaders.client.gin.ClientModule"/>
 </module>
