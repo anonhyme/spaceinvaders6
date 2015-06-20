@@ -7,6 +7,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 
-public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter.MyProxy>
+public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
         implements GridUiHandlers,
         SemesterInfoReceivedEvent.SemesterInfoReceivedEventHandler,
         SemesterGradesReceivedEvent.SemesterGradesReceivedHandler {
@@ -41,18 +42,12 @@ public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter
     private SemesterInfo semesterInfo;
     private List<Evaluation> evaluations;
 
-    @NameToken(NameTokens.gridDemo)
-    @ProxyCodeSplit
-    public interface MyProxy extends ProxyPlace<GridPresenter> {
-    }
-
     @Inject
     public GridPresenter(EventBus eventBus,
                          MyView view,
-                         MyProxy proxy,
                          ResourceDelegate<SemesterGradesResource> semesterGradesDelegate,
                          ResourceDelegate<SemesterInfoResource> semesterInfoDelegate) {
-        super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
+        super(eventBus, view);
         this.semesterGradesDelegate = semesterGradesDelegate;
         this.semesterInfoDelegate = semesterInfoDelegate;
 
@@ -66,7 +61,6 @@ public class GridPresenter extends Presenter<GridPresenter.MyView, GridPresenter
     protected void onBind() {
         super.onBind();
         registerHandlers();
-        updateGrid(0); // todo : remove that, we need to call it when we have the semesterID
     }
 
     private void registerHandlers() {

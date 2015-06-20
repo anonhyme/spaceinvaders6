@@ -26,8 +26,6 @@ public class GridPresenterTest {
     private GridPresenter.MyView view;
     @Inject
     private DispatchAsync dispatchAsync;
-    @Inject
-    private GridPresenter.MyProxy proxy;
 
     @Before
     public void setUp() {

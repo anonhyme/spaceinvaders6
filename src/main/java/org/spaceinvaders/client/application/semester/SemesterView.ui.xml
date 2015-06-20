@@ -4,7 +4,8 @@
 
     <g:HTMLPanel>
         <div>
-            <g:HTMLPanel ui:field="menuPanel"/>
+            <g:SimplePanel ui:field="gridPanel"/>
+
             <h2>Semester page</h2>
 
             <p>
