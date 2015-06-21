@@ -1,5 +1,5 @@
 
-package org.spaceinvaders.client.application.widgets.graph.gwtchartwidget;
+package org.spaceinvaders.client.application.widgets.graph.gwtchartswidget;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

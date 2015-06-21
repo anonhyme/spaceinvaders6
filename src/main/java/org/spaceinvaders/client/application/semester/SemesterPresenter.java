@@ -15,14 +15,16 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
-import org.spaceinvaders.client.application.widgets.graph.gwtchartwidget.GwtChartWidgetPresenter;
+import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.events.SemesterChangedEvent;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.shared.api.SemesterGradesResource;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+import org.spaceinvaders.shared.api.EvaluationResource;
+import org.spaceinvaders.shared.dto.Evaluation;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 
@@ -31,7 +33,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     public interface MyView extends View {
         void addGrid(IsWidget gridWidget);
 
-        void updateSemesterChart(GwtChartWidgetPresenter chartWidget, List<CompetenceEvalResult> results);
+        void updateSemesterChart(GwtChartWidgetPresenter chartWidget, List<Evaluation> results);
     }
 
     @ProxyCodeSplit
@@ -40,7 +42,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     }
 
     private GridPresenter gridPresenter;
-    private final ResourceDelegate<SemesterGradesResource> semesterGradeDelegate;
+    private final ResourceDelegate<EvaluationResource> evaluationDelegate;
 
     @Inject
     Provider<GwtChartWidgetPresenter> gwtChartWidgetPresenterProvider;
@@ -50,10 +52,10 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
                       MyView view,
                       MyProxy proxy,
                       RestDispatch restDispatch,
-                      GridPresenter gridPresenter, ResourceDelegate<SemesterGradesResource> semesterGradeDelegate) {
+                      GridPresenter gridPresenter, ResourceDelegate<EvaluationResource> semesterGradeDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
         this.gridPresenter = gridPresenter;
-        this.semesterGradeDelegate = semesterGradeDelegate;
+        this.evaluationDelegate = semesterGradeDelegate;
     }
 
     @Override
@@ -74,15 +76,14 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     }
 
     private void showGraph() {
-        // todo :  HERE SHOULD GET SEMESTER RESULTS AND NOT AP RESULTS
-        semesterGradeDelegate.withCallback(new AbstractAsyncCallback<List<CompetenceEvalResult>>() {
+        evaluationDelegate.withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
             @Override
-            public void onSuccess(List<CompetenceEvalResult> results) {
+            public void onSuccess(TreeMap<String, Evaluation> results) {
                 GWT.log(results.toString());
-                GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
-                getView().updateSemesterChart(semesterChartPresenter, results);
+//                GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
+//                getView().updateSemesterChart(semesterChartPresenter, new ArrayList<Evaluation>(results.values()));
             }
-        }).getAllApResults(3, 1);
+        }).getAllEvaluations(3);
     }
 
     @Override

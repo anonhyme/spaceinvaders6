@@ -10,9 +10,9 @@ import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-import org.spaceinvaders.client.application.widgets.graph.GwtCharts.SemesterResultsChart;
-import org.spaceinvaders.client.application.widgets.graph.gwtchartwidget.GwtChartWidgetPresenter;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
+import org.spaceinvaders.shared.dto.Evaluation;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
         gridPanel.add(gridWidget);
     }
 
-    public void updateSemesterChart(final GwtChartWidgetPresenter semesterChart, List<CompetenceEvalResult> results) {
+    public void updateSemesterChart(final GwtChartWidgetPresenter semesterChart, List<Evaluation> results) {
         semesterChartPanel.clear();
 
         semesterChart.setChart(new SemesterResultsChart(results));

@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.widgets.graph.GwtCharts;
+package org.spaceinvaders.client.application.widgets.graph.gwtcharts;
 
 import com.google.gwt.user.client.ui.Widget;
 

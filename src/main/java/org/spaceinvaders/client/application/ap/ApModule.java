@@ -1,6 +1,6 @@
 package org.spaceinvaders.client.application.ap;
 
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+        import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class ApModule extends AbstractPresenterModule {
     @Override

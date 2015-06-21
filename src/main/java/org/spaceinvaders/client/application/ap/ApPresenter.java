@@ -19,12 +19,12 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
-import org.spaceinvaders.client.application.widgets.graph.GwtCharts.CumulativeLineChart;
-import org.spaceinvaders.client.application.widgets.graph.GwtCharts.EvaluationResultsChart;
-import org.spaceinvaders.client.application.widgets.graph.gwtchartwidget.GwtChartWidgetPresenter;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.CumulativeLineChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.EvaluationResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.shared.api.SemesterGradesResource;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
+import org.spaceinvaders.shared.api.EvaluationResource;
+import org.spaceinvaders.shared.dto.Competence;
 
 import java.util.List;
 
@@ -55,14 +55,14 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     public interface MyProxy extends ProxyPlace<ApPresenter> {
     }
 
-    private final ResourceDelegate<SemesterGradesResource> semesterGradesDelegate;
+    private final ResourceDelegate<EvaluationResource> semesterGradesDelegate;
 
     @Inject
     public ApPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            ResourceDelegate<SemesterGradesResource> semesterGradesDelegate) {
+            ResourceDelegate<EvaluationResource> semesterGradesDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
         this.semesterGradesDelegate = semesterGradesDelegate;
@@ -80,45 +80,45 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     private String AP_ID = "GEN501";
 
     private void getStudentSemesterResultsAndGenerateContenr() {
-        semesterGradesDelegate
-                .withCallback(new AbstractAsyncCallback<List<CompetenceEvalResult>>() {
-                    @Override
-                    public void onSuccess(List<CompetenceEvalResult> result) {
-
-                        generatePageContent(result);
-                    }
-                }).getAllCompetenceEvalResults(SESSION_ID);
+//        semesterGradesDelegate
+//                .withCallback(new AbstractAsyncCallback<List<CompetenceResult>>() {
+//                    @Override
+//                    public void onSuccess(List<CompetenceResult> result) {
+//
+//                        generatePageContent(result);
+//                    }
+//                }).getAllCompetenceEvalResults(SESSION_ID);
 
     }
 
-    private void generatePageContent(List<CompetenceEvalResult> results) {
-
-        String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
-
-        final GwtChartWidgetPresenter evaluationChartWidget = gwtChartWidgetPresenterProvider.get();
-        evaluationChartWidget.setChart(new EvaluationResultsChart(results, AP_ID));
-        evaluationChartWidget.setChartColors(colors);
-
-        final GwtChartWidgetPresenter cumulativeChartWidget = gwtChartWidgetPresenterProvider.get();
-        cumulativeChartWidget.setChart(new CumulativeLineChart(results, AP_ID));
-        cumulativeChartWidget.setChartColors(colors);
-
-        setInSlot(this.SLOT_APEvaluationsChart, evaluationChartWidget);
-        setInSlot(this.SLOT_APCumulativeChart, cumulativeChartWidget);
-
-        final MyView view = getView();
-
-        getView().setApName(AP_ID);
-
-
-        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-        chartLoader.loadApi(new Runnable() {
-            @Override
-            public void run() {
-                evaluationChartWidget.loadChart();
-                cumulativeChartWidget.loadChart();
-            }
-        });
+    private void generatePageContent(List<Competence> results) {
+//
+//        String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
+//
+//        final GwtChartWidgetPresenter evaluationChartWidget = gwtChartWidgetPresenterProvider.get();
+//        evaluationChartWidget.setChart(new EvaluationResultsChart(results, AP_ID));
+//        evaluationChartWidget.setChartColors(colors);
+//
+//        final GwtChartWidgetPresenter cumulativeChartWidget = gwtChartWidgetPresenterProvider.get();
+//        cumulativeChartWidget.setChart(new CumulativeLineChart(results, AP_ID));
+//        cumulativeChartWidget.setChartColors(colors);
+//
+//        setInSlot(this.SLOT_APEvaluationsChart, evaluationChartWidget);
+//        setInSlot(this.SLOT_APCumulativeChart, cumulativeChartWidget);
+//
+//        final MyView view = getView();
+//
+//        getView().setApName(AP_ID);
+//
+//
+//        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+//        chartLoader.loadApi(new Runnable() {
+//            @Override
+//            public void run() {
+//                evaluationChartWidget.loadChart();
+//                cumulativeChartWidget.loadChart();
+//            }
+//        });
     }
 
 }

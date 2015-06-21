@@ -1,5 +1,5 @@
 
-package org.spaceinvaders.client.application.widgets.graph.gwtchartwidget;
+package org.spaceinvaders.client.application.widgets.graph.gwtchartswidget;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -7,8 +7,8 @@ import com.google.web.bindery.event.shared.EventBus;
 
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import org.spaceinvaders.client.application.widgets.graph.ApInfo;
-import org.spaceinvaders.client.application.widgets.graph.GwtCharts.AbstractGWTChart;
+
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.AbstractGWTChart;
 
 public class GwtChartWidgetPresenter extends PresenterWidget<GwtChartWidgetPresenter.MyView> {
     public interface MyView extends View {

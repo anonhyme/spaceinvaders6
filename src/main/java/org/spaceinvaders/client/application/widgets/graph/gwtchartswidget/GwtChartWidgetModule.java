@@ -1,5 +1,5 @@
 
-package org.spaceinvaders.client.application.widgets.graph.gwtchartwidget;
+package org.spaceinvaders.client.application.widgets.graph.gwtchartswidget;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 

@@ -11,17 +11,17 @@ import java.util.TreeMap;
 /**
  * Created by hugbed on 15-06-19.
  */
-public class SemesterGradesReceivedEvent extends GwtEvent<SemesterGradesReceivedEvent.SemesterGradesReceivedHandler> {
+public class EvaluationReceivedEvent extends GwtEvent<EvaluationReceivedEvent.SemesterGradesReceivedHandler> {
 
     public interface SemesterGradesReceivedHandler extends EventHandler {
-        void onSemesterGradesReceived(SemesterGradesReceivedEvent event);
+        void onSemesterGradesReceived(EvaluationReceivedEvent event);
     }
 
     public static Type<SemesterGradesReceivedHandler> TYPE = new Type<SemesterGradesReceivedHandler>();
 
     private final TreeMap<String, Evaluation> evaluations;
 
-    public SemesterGradesReceivedEvent(TreeMap<String, Evaluation> evaluations) {
+    public EvaluationReceivedEvent(TreeMap<String, Evaluation> evaluations) {
         this.evaluations = evaluations;
     }
 
@@ -30,7 +30,7 @@ public class SemesterGradesReceivedEvent extends GwtEvent<SemesterGradesReceived
     }
 
     public static void fire(TreeMap<String, Evaluation> evaluations, HasHandlers source) {
-        source.fireEvent(new SemesterGradesReceivedEvent(evaluations));
+        source.fireEvent(new EvaluationReceivedEvent(evaluations));
     }
 
     @Override

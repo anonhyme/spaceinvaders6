@@ -4,8 +4,6 @@ package org.spaceinvaders.client.application.widgets.graph;
  * Created by Etienne on 2015-05-26.
  */
 public class ApInfo {
-
-
     private String name;
     private double studentTotal;
     private double averageTotal;

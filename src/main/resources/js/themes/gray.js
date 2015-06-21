@@ -155,7 +155,7 @@ Highcharts.theme = {
 		}
 	},
 
-	// scroll charts
+	// scroll gwtcharts
 	rangeSelector: {
 		buttonTheme: {
 			fill: {
