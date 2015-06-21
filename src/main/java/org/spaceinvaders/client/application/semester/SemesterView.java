@@ -2,6 +2,7 @@ package org.spaceinvaders.client.application.semester;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -13,6 +14,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
     SimplePanel gridPanel;
 
     @UiField
-    SimplePanel semesterChartPanel;
+    HTMLPanel semesterChartPanel;
 
     @Inject
     SemesterView(Binder uiBinder) {
@@ -38,18 +40,8 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
         gridPanel.add(gridWidget);
     }
 
-    public void updateSemesterChart(final GwtChartWidgetPresenter semesterChart, List<Evaluation> results) {
+    public void updateSemesterChart(final GwtChartWidgetPresenter semesterChart) {
         semesterChartPanel.clear();
-
-        semesterChart.setChart(new SemesterResultsChart(results));
         semesterChartPanel.add(semesterChart);
-
-        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-        chartLoader.loadApi(new Runnable() {
-            @Override
-            public void run() {
-                semesterChart.loadChart();
-            }
-        });
     }
 }

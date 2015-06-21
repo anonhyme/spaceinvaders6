@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.application.appage;
+package org.spaceinvaders.client.application.ap;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -18,8 +18,8 @@ import org.gwtbootstrap3.client.ui.html.Text;
 import javax.inject.Inject;
 
 
-public class APpageView extends ViewImpl implements APpagePresenter.MyView {
-    interface Binder extends UiBinder<Widget, APpageView> {
+public class ApView extends ViewImpl implements ApPresenter.MyView {
+    interface Binder extends UiBinder<Widget, ApView> {
     }
 
     @UiField
@@ -50,7 +50,7 @@ public class APpageView extends ViewImpl implements APpagePresenter.MyView {
 
 
     @Inject
-    APpageView(Binder uiBinder) {
+    ApView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
 
       /*  cumulativeButton.addClickHandler(new ClickHandler() {
@@ -74,15 +74,15 @@ public class APpageView extends ViewImpl implements APpagePresenter.MyView {
 
     @Override
     public void setInSlot(Object slot, IsWidget content) {
-        if (slot == APpagePresenter.SLOT_APgrid) {
+        if (slot == ApPresenter.SLOT_APgrid) {
             gridPanel.add(content);
         }
-        else if  (slot == APpagePresenter.SLOT_APCumulativeChart)
+        else if  (slot == ApPresenter.SLOT_APCumulativeChart)
         {
             cumulativeChartPanel.add(content);
 
         }
-        else if  (slot == APpagePresenter.SLOT_APEvaluationsChart)
+        else if  (slot == ApPresenter.SLOT_APEvaluationsChart)
         {
             evaluationChartPanel.add(content);
         }

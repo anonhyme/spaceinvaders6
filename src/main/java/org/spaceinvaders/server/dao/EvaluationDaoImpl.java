@@ -67,4 +67,12 @@ public class EvaluationDaoImpl implements EvaluationDao {
 
         return evaluations;
     }
+    //Todo: create SQL query
+    @Override
+    @Transactional
+    public TreeMap<String, Evaluation> getApEvaluations(String cip, int semesterID, int apID)
+    {
+        TreeMap<String, Evaluation> bleh = new TreeMap<String, Evaluation>();
+        return bleh;
+    }
 }

@@ -8,12 +8,11 @@ import com.googlecode.gwt.charts.client.corechart.ColumnChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 import org.spaceinvaders.client.application.widgets.graph.EvalInfo;
+import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.Result;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Etienne on 2015-06-10.
@@ -21,12 +20,14 @@ import java.util.Set;
 public class EvaluationResultsChart extends AbstractGWTChart {
 
     private ColumnChart chart;
-    String apId;
-    List<Evaluation> data;
+    String apName;
+    ArrayList<Evaluation>  data;
+    Ap ap;
 
-    public EvaluationResultsChart(List<Evaluation> data, String apName){
-        this.data = data;
-        this.apId = apName;
+    public EvaluationResultsChart(TreeMap<String, Evaluation> data, Ap ap){
+        this.data = new ArrayList<>(data.values());
+        this.ap = ap;
+        this.apName = ap.getName();
     }
 
     public Widget getChart(){
@@ -37,60 +38,39 @@ public class EvaluationResultsChart extends AbstractGWTChart {
     }
 
     public void loadChart( ){
-//        Set<String> evalNames = new HashSet<>();
-//        ArrayList<EvalInfo> evalTotals = new ArrayList<>();
-//        for (CompetenceResult c : data) {
-//            if (!evalNames.contains(c.getEvalLabel()) && c.getCourseLabel().equals(apId)) {
-//                evalNames.add(c.getEvalLabel());
-//                evalTotals.add(new EvalInfo(c.getEvalLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));
-//            } else {
-//                for (EvalInfo evalTotal : evalTotals) {
-//                    if (evalTotal.getName() == c.getEvalLabel()) {
-//                        EvalInfo e = evalTotal;
-//                        e.addToStudentTotal(c.getResultValue());
-//                        e.addToAverageTotal((c.getAvgResultValue()));
-//                        e.addToMaxTotal(c.getMaxResultValue());
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//
-//        DataTable dataTable = DataTable.create();
-//        dataTable.addColumn(ColumnType.STRING, "Résultat");
-//        dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
-//        dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
-//        dataTable.addColumn(ColumnType.NUMBER, "Max");
-//
-//        dataTable.addRows(evalTotals.size());
-//
-//        for (int i = 0; i < evalTotals.size(); i++) {
-//            dataTable.setValue(i, 0, evalTotals.get(i).getName());
-//        }
-//
-//        for (int i = 0; i < evalTotals.size(); i++) {
-//            EvalInfo e = evalTotals.get(i);
-//            dataTable.setValue(i, 1, e.getStudentTotal());
-//            dataTable.setValue(i, 2, e.getAverageTotal());
-//            dataTable.setValue(i, 3, e.getMaxTotal());
-//        }
-//
-//        // Set options
-//        ColumnChartOptions options = ColumnChartOptions.create();
-//        options.setFontName("Tahoma");
-//        options.setTitle("Résultats de l'AP");
-//        options.setHAxis(HAxis.create("Évaluation"));
-//        options.setVAxis(VAxis.create("Résultat"));
-//        if (isCustomSize) {
-//            options.setWidth(width);
-//            options.setHeight(height);
-//        }
-//        if (colorsSet){
-//            options.setColors(colors);
-//        }
-//
-//        // Draw the chart
-//        chart.draw(dataTable, options);
+
+        DataTable dataTable = DataTable.create();
+        dataTable.addColumn(ColumnType.STRING, "Résultat");
+        dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
+        dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
+        dataTable.addColumn(ColumnType.NUMBER, "Max");
+
+        dataTable.addRows(data.size());
+
+        for (int i = 0; i < data.size(); i++) {
+            dataTable.setValue(i, 0, data.get(i).getLabel());
+            Result r = data.get(i).getApResult(ap);
+            dataTable.setValue(i, 1, r.getStudentTotal());
+            dataTable.setValue(i, 2, r.getAvgTotal());
+            dataTable.setValue(i, 3, r.getMaxTotal());
+        }
+
+        // Set options
+        ColumnChartOptions options = ColumnChartOptions.create();
+        options.setFontName("Tahoma");
+        options.setTitle("Résultats de l'AP");
+        options.setHAxis(HAxis.create("Évaluation"));
+        options.setVAxis(VAxis.create("Résultat"));
+        if (isCustomSize) {
+            options.setWidth(width);
+            options.setHeight(height);
+        }
+        if (colorsSet){
+            options.setColors(colors);
+        }
+
+        // Draw the chart
+        chart.draw(dataTable, options);
 
     }
 

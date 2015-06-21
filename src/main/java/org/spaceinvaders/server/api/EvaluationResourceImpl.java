@@ -24,7 +24,13 @@ public class EvaluationResourceImpl implements EvaluationResource {
     }
 
     @Override
-    public TreeMap<String, Evaluation> getAllEvaluations(int semesterID) {
+     public TreeMap<String, Evaluation> getAllEvaluations(int semesterID) {
         return evaluationDao.getAll(userSession.getUserId(), semesterID);
     }
+
+    @Override
+    public TreeMap<String, Evaluation> getApEvaluations(int semesterID, int apID) {
+        return evaluationDao.getApEvaluations(userSession.getUserId(), semesterID, apID);
+    }
+
 }

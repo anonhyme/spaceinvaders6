@@ -8,10 +8,7 @@ import com.googlecode.gwt.charts.client.corechart.BarChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 import org.spaceinvaders.client.application.widgets.graph.ApInfo;
-import org.spaceinvaders.shared.dto.Ap;
-import org.spaceinvaders.shared.dto.Competence;
-import org.spaceinvaders.shared.dto.Evaluation;
-import org.spaceinvaders.shared.dto.SemesterInfo;
+import org.spaceinvaders.shared.dto.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,10 +20,12 @@ import java.util.Set;
  */
 public class SemesterResultsChart extends AbstractGWTChart {
     private BarChart chart;
-    List<Evaluation> data;
+    List<Evaluation> evaluations;
+    SemesterInfo semesterInfo;
 
-    public SemesterResultsChart(List<Evaluation> data){
-        this.data = data;
+    public SemesterResultsChart(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
+        this.semesterInfo= semesterInfo;
+        this.evaluations = evaluations;
     }
 
     public Widget getChart(){
@@ -38,71 +37,49 @@ public class SemesterResultsChart extends AbstractGWTChart {
 
     @Override
     public void loadChart() {
+        List<Ap> aps = semesterInfo.getAps();
 
+        DataTable dataTable = DataTable.create();
+        dataTable.addColumn(ColumnType.STRING, "Résultat");
+        dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
+        dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
+        dataTable.addColumn(ColumnType.NUMBER, "Max");
+
+        dataTable.addRows(aps.size());
+
+        for (int i = 0; i < aps.size(); i++) {
+            Ap ap = aps.get(i);
+            Result apTotal = new Result();
+            for (int j = 0; j< evaluations.size(); j++) {
+                Result r = evaluations.get(j).getApResult(ap);
+                apTotal.addToAvgTotal(r.getAvgTotal());
+                apTotal.addToMaxTotal(r.getMaxTotal());
+                apTotal.addToStudentTotal(r.getStudentTotal());
+            }
+            dataTable.setValue(i, 0, aps.get(i).getName());
+            dataTable.setValue(i, 1, apTotal.getStudentTotal());
+            dataTable.setValue(i, 2, apTotal.getAvgTotal());
+            dataTable.setValue(i, 3, apTotal.getMaxTotal());
+        }
+
+        //Set options
+        BarChartOptions options = BarChartOptions.create();
+        options.setFontName("Tahoma");
+        options.setTitle("Résultats de session");
+        options.setVAxis(VAxis.create("AP"));
+        options.setHAxis(HAxis.create("Résultats"));
+        if (isCustomSize) {
+            options.setWidth(width);
+            options.setHeight(height);
+        }
+        if (colorsSet){
+            options.setColors(colors);
+        }
+
+        // Draw the chart
+        chart.draw(dataTable, options);
     }
 
-    public void loadChart(SemesterInfo semesterInfo, List<Evaluation> evaluations){
-//        Set<String> apNames = new HashSet<>();
-//
-////        // todo :  create a call to get this from the server (ApInfo should be a DTO)
-////        List<ApInfo> apTotals = new ArrayList<>();
-////        for (Competence c : data) {
-////            if (!apNames.contains(c.getCourseLabel())) {
-////                apNames.add(c.getCourseLabel());
-////                apTotals.add(new ApInfo(c.getCourseLabel(), c.getResultValue(), c.getAvgResultValue(), c.getMaxResultValue()));
-////            } else {
-////                for (ApInfo apInfo : apTotals) {
-////                    if (apInfo.getName() == c.getCourseLabel()) {
-////                        apInfo.addToStudentTotal(c.getResultValue());
-////                        apInfo.addToAverageTotal((c.getAvgResultValue()));
-////                        apInfo.addToMaxTotal(c.getMaxResultValue());
-////                        break;
-////                    }
-////                }
-////            }
-////        }
-//
-//        DataTable dataTable = DataTable.create();
-//        dataTable.addColumn(ColumnType.STRING, "Résultat");
-//        dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
-//        dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
-//        dataTable.addColumn(ColumnType.NUMBER, "Max");
-//
-//        dataTable.addRows(apTotals.size());
-//
-////        for (int i = 0; i < apNames.size(); i++) {
-////            dataTable.setValue(i, 0, apTotals.get(i).getName());
-////        }
-//
-//        List<Ap> aps = semesterInfo.getAps();
-//        for (int i = 0; i < apNames.size(); i++) {
-//            dataTable.setValue(i, 0, aps.get(i).getName());
-//        }
-//
-//
-//        for (int i = 0; i < apNames.size(); i++) {
-//            ApInfo e = apTotals.get(i);
-//            dataTable.setValue(i, 1, e.getStudentTotal());
-//            dataTable.setValue(i, 2, e.getAverageTotal());
-//            dataTable.setValue(i, 3, e.getMaxTotal());
-//        }
-//
-//        // Set options
-//        BarChartOptions options = BarChartOptions.create();
-//        options.setFontName("Tahoma");
-//        options.setTitle("Résultats de session");
-//        options.setVAxis(VAxis.create("AP"));
-//        options.setHAxis(HAxis.create("Résultats"));
-//        if (isCustomSize) {
-//            options.setWidth(width);
-//            options.setHeight(height);
-//        }
-//        if (colorsSet){
-//            options.setColors(colors);
-//        }
-//
-//        // Draw the chart
-//        chart.draw(dataTable, options);
-    }
+
 
 }

@@ -47,14 +47,18 @@ public class Evaluation implements Serializable {
         return results.get(competenceLabel);
     }
 
-    public Result getResult(Ap ap) {
+    public Result getApResult(Ap ap) {
         // For each evaluation
+        Result r = new Result();
         for (String competenceLabel : results.keySet()) {
             if (ap.getCompetencesStrings().contains(competenceLabel)) {
-                return results.get(competenceLabel);
+                Result temp = results.get(competenceLabel);
+                r.addToMaxTotal(temp.getMaxTotal());
+                r.addToAvgTotal(temp.getAvgTotal());
+                r.addToStudentTotal(temp.getStudentTotal());
             }
         }
-        return null;
+        return r;
     }
 
     public void addResult(String competenceLabel, Result result) {

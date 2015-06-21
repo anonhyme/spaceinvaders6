@@ -49,4 +49,17 @@ public class Result implements Serializable {
     public double getStandardDev() {
         return standardDev;
     }
+
+    public void addToStudentTotal(double value){
+        studentTotal += value;
+
+    }
+    public void addToAvgTotal (double value){
+        avgTotal += value;
+
+    }
+
+    public void addToMaxTotal (double value){
+        maxTotal += value;
+    }
 }
