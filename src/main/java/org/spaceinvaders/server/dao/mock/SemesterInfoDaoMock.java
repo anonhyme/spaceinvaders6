@@ -13,16 +13,6 @@ import java.util.List;
 
 public class SemesterInfoDaoMock implements SemesterInfoDao {
     @Override
-    public List<EvaluationEntity> getSemesterEvals(String cip, int semesterID) {
-        return null;
-    }
-
-    @Override
-    public List<CompetenceEntity> getSemesterCompetences(String cip, int semesterID) {
-        return null;
-    }
-
-    @Override
     public SemesterInfo getSemesterInfo(String cip, int semesterID) {
         List<Evaluation> evals = new ArrayList<>();
 
