@@ -11,5 +11,7 @@ public class ApiPaths {
 
     public static final String SEMESTERINFO = "/semesterinfo";
 
-    public static final String COMPETENCE_RESULT = "/competence-result";
+    public static final String COMPETENCE_RESULTS = "/competence-results";
+
+    public static final String AP_RESULTS = "/ap-results";
 }

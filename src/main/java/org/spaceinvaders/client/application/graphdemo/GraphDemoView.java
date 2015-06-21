@@ -1,5 +1,9 @@
 package org.spaceinvaders.client.application.graphdemo;
 
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.IsWidget;
+
+
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
@@ -86,7 +90,7 @@ public class GraphDemoView extends ViewImpl implements GraphDemoPresenter.MyView
 
    public void setStudentProgress(double progress){
         studentProgress.setPercent(progress);
-       studentProgress.setText("Complétion étuudiante : " + progress + "%");
+       studentProgress.setText("Complétion étudiante : " + progress + "%");
     }
     public void setClassProgress(double progress){
         classProgress.setPercent(progress);

@@ -1,12 +1,13 @@
 package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 
 public class SemesterInfo implements Serializable {
-
-    //    private List<AP> aps; // todo : add aps to semester info
-    private List<Competence> competences;
+    private List<Ap> aps;
     private List<Evaluation> evals;
 
     /**
@@ -16,17 +17,23 @@ public class SemesterInfo implements Serializable {
     public SemesterInfo() {
     }
 
-    public SemesterInfo(List<Competence> competences, List<Evaluation> evals) {
-        this.competences = competences;
+    public SemesterInfo(List<Evaluation> evals, List<Ap> aps) {
         this.evals = evals;
+        this.aps = aps;
     }
 
-    public List<Competence> getCompetences() {
+    public List<String> getCompetences() {
+        List<String> competences = new ArrayList<>();
+
+        for (Ap ap : aps) {
+            for (String competence : ap.getCompetencesStrings()) {
+                if (!competences.contains(competence)) {
+                    competences.add(competence);
+                }
+            }
+        }
+
         return competences;
-    }
-
-    public void setCompetences(List<Competence> competences) {
-        this.competences = competences;
     }
 
     public List<Evaluation> getEvals() {
@@ -35,5 +42,13 @@ public class SemesterInfo implements Serializable {
 
     public void setEvals(List<Evaluation> evals) {
         this.evals = evals;
+    }
+
+    public List<Ap> getAps() {
+        return aps;
+    }
+
+    public void setAps(List<Ap> aps) {
+        this.aps = aps;
     }
 }

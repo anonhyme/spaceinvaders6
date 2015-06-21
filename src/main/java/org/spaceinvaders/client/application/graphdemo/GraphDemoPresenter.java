@@ -1,6 +1,3 @@
-
-
-
 package org.spaceinvaders.client.application.graphdemo;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -18,12 +15,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
-import org.spaceinvaders.client.application.ui.graph.GwtCharts.CumulativeLineChart;
-import org.spaceinvaders.client.application.ui.graph.GwtCharts.EvaluationResultsChart;
-import org.spaceinvaders.client.application.ui.graph.GwtCharts.SemesterResultsChart;
-import org.spaceinvaders.client.application.ui.graph.gwtchartwidget.GwtChartWidgetPresenter;
+
+import org.spaceinvaders.client.application.ApplicationPresenter;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.CumulativeLineChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.EvaluationResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +58,7 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
             MyView view,
             MyProxy proxy
     ) {
-        super(eventBus, view, proxy, RevealType.Root);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
         // super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
     }
@@ -75,67 +73,67 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
         super.onBind();
         MyView view = getView();
 
-        List<CompetenceEvalResult> competenceResultsEntityList= new ArrayList<CompetenceEvalResult>();
+//        List<CompetenceResult> competenceResultsEntityList= new ArrayList<CompetenceResult>();
+//
+//        for (int i =0; i<6; i++) {
+//            CompetenceResult ce = new CompetenceResult();
+//            ce.setEvalLabel("Rapport " + i);
+//            ce.setCourseLabel("GEN500");
+//            ce.setCompetenceLabel("1");
+//            ce.setResultValue((int) Math.round(Math.random() * 100));
+//            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
+//            ce.setMaxResultValue(100);
+//            competenceResultsEntityList.add(ce);
+//        }
+//
+//        for (int i =0; i<6; i++) {
+//            CompetenceResult ce = new CompetenceResult();
+//            ce.setEvalLabel("Rapport " + i);
+//            ce.setCourseLabel("GEN500");
+//            ce.setCompetenceLabel("2");
+//            ce.setResultValue((int) Math.round(Math.random() * 100));
+//            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
+//            ce.setMaxResultValue(100);
+//            competenceResultsEntityList.add(ce);
+//        }
+//
+//        for (int i =0; i<6; i++) {
+//            CompetenceResult ce = new CompetenceResult();
+//            ce.setEvalLabel("Rapport " + i);
+//            ce.setCourseLabel("GEN501");
+//            ce.setCompetenceLabel("2");
+//            ce.setResultValue((int) Math.round(Math.random() * 100));
+//            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
+//            ce.setMaxResultValue(100);
+//            competenceResultsEntityList.add(ce);
+//        }
 
-        for (int i =0; i<6; i++) {
-            CompetenceEvalResult ce = new CompetenceEvalResult();
-            ce.setEvalLabel("Rapport " + i);
-            ce.setCourseLabel("GEN500");
-            ce.setCompetenceLabel("1");
-            ce.setResultValue((int) Math.round(Math.random() * 100));
-            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
-            ce.setMaxResultValue(100);
-            competenceResultsEntityList.add(ce);
-        }
-
-        for (int i =0; i<6; i++) {
-            CompetenceEvalResult ce = new CompetenceEvalResult();
-            ce.setEvalLabel("Rapport " + i);
-            ce.setCourseLabel("GEN500");
-            ce.setCompetenceLabel("2");
-            ce.setResultValue((int) Math.round(Math.random() * 100));
-            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
-            ce.setMaxResultValue(100);
-            competenceResultsEntityList.add(ce);
-        }
-
-        for (int i =0; i<6; i++) {
-            CompetenceEvalResult ce = new CompetenceEvalResult();
-            ce.setEvalLabel("Rapport " + i);
-            ce.setCourseLabel("GEN501");
-            ce.setCompetenceLabel("2");
-            ce.setResultValue((int) Math.round(Math.random() * 100));
-            ce.setAvgResultValue((int) Math.round(Math.random() * 100));
-            ce.setMaxResultValue(100);
-            competenceResultsEntityList.add(ce);
-        }
-
-        view.setClassProgress(60.9);
-        view.setStudentProgress(50);
-        String [] colors = {"#FF0000", "#00FF00", "#0000FF"};
-        final GwtChartWidgetPresenter p4 = gwtChartWidgetPresenterProvider.get();
-        p4.setChart(new CumulativeLineChart(competenceResultsEntityList,"GEN500"));
-        p4.setChartColors(colors );
-        view.setCol4(p4);
-
-        final GwtChartWidgetPresenter p5 = gwtChartWidgetPresenterProvider.get();
-        p5.setChart(new EvaluationResultsChart(competenceResultsEntityList, "GEN501"));
-        view.setCol5(p5);
-
-        final GwtChartWidgetPresenter p6 = gwtChartWidgetPresenterProvider.get();
-        p6.setChart(new SemesterResultsChart(competenceResultsEntityList));
-        view.setCol6(p6);
+//        view.setClassProgress(60.9);
+//        view.setStudentProgress(50);
+//        String [] colors = {"#FF0000", "#00FF00", "#0000FF"};
+//        final GwtChartWidgetPresenter p4 = gwtChartWidgetPresenterProvider.get();
+//        p4.setChart(new CumulativeLineChart(competenceResultsEntityList,"GEN500"));
+//        p4.setChartColors(colors );
+//        view.setCol4(p4);
+//
+//        final GwtChartWidgetPresenter p5 = gwtChartWidgetPresenterProvider.get();
+//        p5.setChart(new EvaluationResultsChart(competenceResultsEntityList, "GEN501"));
+//        view.setCol5(p5);
+//
+//        final GwtChartWidgetPresenter p6 = gwtChartWidgetPresenterProvider.get();
+//        p6.setChart(new SemesterResultsChart(competenceResultsEntityList));
+//        view.setCol6(p6);
 
 
-        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-        chartLoader.loadApi(new Runnable() {
-            @Override
-            public void run() {
-                p4.loadChart();
-                p5.loadChart();
-                p6.loadChart();
-            }
-        });
+//        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+//        chartLoader.loadApi(new Runnable() {
+//            @Override
+//            public void run() {
+//                p4.loadChart();
+//                p5.loadChart();
+//                p6.loadChart();
+//            }
+//        });
 
     }
 }

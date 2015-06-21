@@ -2,31 +2,39 @@ package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
 
-public class Competence implements Serializable {
-    private String apLabel;
-    private String competenceLabel;
+public final class Competence implements Serializable {
+    private String label;
+    private int id;
 
-    public Competence() {
+    public Competence() {}
+
+    public Competence(String label, int id) {
+        this.label = label;
+        this.id = id;
     }
 
-    public Competence(String apLabel, String competenceLabel) {
-        this.apLabel = apLabel;
-        this.competenceLabel = competenceLabel;
+    public String getLabel() {
+        return label;
     }
 
-    public String getApLabel() {
-        return apLabel;
+    public int getId() {
+        return id;
     }
 
-    public void setApLabel(String apLabel) {
-        this.apLabel = apLabel;
+    @Override
+    public int hashCode() {
+        return 31 * id; // 31 is prime
     }
 
-    public String getCompetenceLabel() {
-        return competenceLabel;
-    }
-
-    public void setCompetenceLabel(String competenceLabel) {
-        this.competenceLabel = competenceLabel;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Competence other = (Competence) obj;
+        return id == other.id;
     }
 }
