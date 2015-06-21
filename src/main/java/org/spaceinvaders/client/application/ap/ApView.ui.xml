@@ -6,20 +6,35 @@
 
 
 <g:HTMLPanel>
-    <b:PageHeader subText="" ui:field="pageTitle"></b:PageHeader>
+    <b:Row>
+        <b:Column size="MD_4" >
+            <b:PageHeader subText="" ui:field="pageTitle"></b:PageHeader>
+            <b:Progress>
+                <b:ProgressBar ui:field="studentProgressBar" percent="30"/>
+            </b:Progress>
+            <b:Progress>
+                <b:ProgressBar ui:field="classProgressBar" percent="40"/>
+            </b:Progress>
+        </b:Column>
+        <b:Column size="MD_8">
+            <g:HTMLPanel ui:field="cumulativeChartPanel">
+                <!--b:Button type="DEFAULT" ui:field="evaluationButton" >Évaluations</b:Button-->
+            </g:HTMLPanel>
+        </b:Column>
+    </b:Row>
 
-    <b:Column size="MD_4" >
-        <g:HTMLPanel ui:field="gridPanel"/>
-    </b:Column>
-    <b:Column size="MD_8" >
-        <g:HTMLPanel ui:field="cumulativeChartPanel">
-            <b:Button type="DEFAULT" ui:field="evaluationButton">Évaluations</b:Button>
-        </g:HTMLPanel>
 
-        <g:HTMLPanel ui:field="evaluationChartPanel">
-            <b:Button type="DEFAULT" ui:field="cumulativeButton">Courbe Cumulative</b:Button>
-        </g:HTMLPanel>
-    </b:Column>
+    <b:Row>
+        <b:Column size="MD_4" >
+            <g:HTMLPanel ui:field="gridPanel"/>
+        </b:Column>
+        <b:Column size="MD_8" >
+            <g:HTMLPanel ui:field="evaluationChartPanel">
+                <!--b:Button type="DEFAULT" ui:field="cumulativeButton">Courbe Cumulative</b:Button-->
+            </g:HTMLPanel>
+
+        </b:Column>
+    </b:Row>
 </g:HTMLPanel>
 
 </ui:UiBinder>

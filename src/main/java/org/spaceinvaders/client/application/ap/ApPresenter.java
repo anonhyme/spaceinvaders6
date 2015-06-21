@@ -24,9 +24,13 @@ import org.spaceinvaders.client.application.widgets.graph.gwtcharts.EvaluationRe
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.shared.api.EvaluationResource;
+import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
+import org.spaceinvaders.shared.dto.Evaluation;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.TreeMap;
 
 public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyProxy> {
     interface MyView extends View {
@@ -35,7 +39,8 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         void setApName(String name);
 
-        void hideCumulativeChart();
+        void setStudentProgressBar(float value, String color);
+        void setClassProgressBar(float value, String color);
     }
 
     @Inject
@@ -71,54 +76,87 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     protected void onBind() {
 
         getStudentSemesterResultsAndGenerateContenr();
-        getView().hideCumulativeChart();
 
     }
 
     //TODO Access current semester id once implemented
     private int SESSION_ID = 3;
-    private String AP_ID = "GEN501";
+    private int apId = 1;
+    private String apName = "GEN501";
+    private Ap mockAp;
+
 
     private void getStudentSemesterResultsAndGenerateContenr() {
-//        semesterGradesDelegate
-//                .withCallback(new AbstractAsyncCallback<List<CompetenceResult>>() {
-//                    @Override
-//                    public void onSuccess(List<CompetenceResult> result) {
-//
-//                        generatePageContent(result);
-//                    }
-//                }).getAllCompetenceEvalResults(SESSION_ID);
+        semesterGradesDelegate
+                .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
+                    @Override
+                    public void onSuccess(TreeMap<String, Evaluation> evaluations) {
+
+                        generatePageContent(evaluations);
+                    }
+                }).getApEvaluations(SESSION_ID, apId);
 
     }
 
-    private void generatePageContent(List<Competence> results) {
-//
-//        String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
-//
-//        final GwtChartWidgetPresenter evaluationChartWidget = gwtChartWidgetPresenterProvider.get();
-//        evaluationChartWidget.setChart(new EvaluationResultsChart(results, AP_ID));
-//        evaluationChartWidget.setChartColors(colors);
-//
-//        final GwtChartWidgetPresenter cumulativeChartWidget = gwtChartWidgetPresenterProvider.get();
-//        cumulativeChartWidget.setChart(new CumulativeLineChart(results, AP_ID));
-//        cumulativeChartWidget.setChartColors(colors);
-//
-//        setInSlot(this.SLOT_APEvaluationsChart, evaluationChartWidget);
-//        setInSlot(this.SLOT_APCumulativeChart, cumulativeChartWidget);
-//
-//        final MyView view = getView();
-//
-//        getView().setApName(AP_ID);
-//
-//
-//        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-//        chartLoader.loadApi(new Runnable() {
-//            @Override
-//            public void run() {
-//                evaluationChartWidget.loadChart();
-//                cumulativeChartWidget.loadChart();
-//            }
-//        });
+    private void generatePageContent(TreeMap<String, Evaluation> evaluations) {
+
+        //Todo get AP from eventbus or somewhere?
+
+        List<Competence> mockComepetences = Arrays.asList(
+                new Competence("GEN501-1", 0),
+                new Competence("GEN501-2", 1));
+        mockAp = new Ap("GEN501", 0, mockComepetences);
+
+        String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
+
+        final GwtChartWidgetPresenter evaluationChartWidget = gwtChartWidgetPresenterProvider.get();
+        evaluationChartWidget.setChart(new EvaluationResultsChart(evaluations,mockAp));
+        evaluationChartWidget.setChartColors(colors);
+
+        final GwtChartWidgetPresenter cumulativeChartWidget = gwtChartWidgetPresenterProvider.get();
+        cumulativeChartWidget.setChart(new CumulativeLineChart(evaluations,mockAp));
+        cumulativeChartWidget.setChartColors(colors);
+
+        setInSlot(this.SLOT_APEvaluationsChart, evaluationChartWidget);
+        setInSlot(this.SLOT_APCumulativeChart, cumulativeChartWidget);
+
+        final MyView view = getView();
+        getView().setApName(apName);
+
+
+        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+        chartLoader.loadApi(new Runnable() {
+            @Override
+            public void run() {
+                evaluationChartWidget.loadChart();
+                cumulativeChartWidget.loadChart();
+            }
+        });
     }
+
+
+    private void setProgressBars(float studentProgress, float classProgress){
+        String studentColor = getStudentProgressColor(studentProgress,classProgress);
+        String classColor = "#0000CC"; //Blue
+        MyView view = getView();
+        view.setStudentProgressBar(studentProgress, studentColor);
+        view.setClassProgressBar(classProgress,classColor);
+    }
+
+    private String getStudentProgressColor(float studentProgress, float classProgress){
+        String color;
+        float progressRatio = studentProgress/classProgress;
+        if(progressRatio > 0.85){
+            color = "#FFD700"; //Gold
+        }
+        else if (progressRatio > 0.5) {
+            color = "#008000"; //Green
+        }
+        else{
+            color = "#FF0000"; //Red
+        }
+        return color;
+    }
+
 
 }

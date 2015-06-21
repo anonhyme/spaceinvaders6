@@ -16,14 +16,18 @@ import javax.ws.rs.core.MediaType;
 
 import static org.spaceinvaders.shared.api.ApiParameters.SEMESTER_ID;
 import static org.spaceinvaders.shared.api.ApiParameters.AP_ID;
-import static org.spaceinvaders.shared.api.ApiPaths.COMPETENCE_RESULTS;
 import static org.spaceinvaders.shared.api.ApiPaths.EVALUATIONS;
-import static org.spaceinvaders.shared.api.ApiPaths.SEMESTERGRADES;
-import static org.spaceinvaders.shared.api.ApiPaths.AP_RESULTS;
+import static org.spaceinvaders.shared.api.ApiPaths.ALL;
+import static org.spaceinvaders.shared.api.ApiPaths.AP;
 
 @Path(EVALUATIONS)
 @Produces(MediaType.APPLICATION_JSON)
 public interface EvaluationResource {
     @GET
+    @Path(ALL)
     TreeMap<String, Evaluation> getAllEvaluations(@QueryParam(SEMESTER_ID) int semesterID);
+
+    @GET
+    @Path(AP)
+    TreeMap<String, Evaluation> getApEvaluations(@QueryParam(SEMESTER_ID) int semesterID, @QueryParam(AP_ID) int apID);
 }

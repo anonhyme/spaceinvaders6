@@ -6,10 +6,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.PageHeader;
+import org.gwtbootstrap3.client.ui.PanelHeader;
+import org.gwtbootstrap3.client.ui.ProgressBar;
 import org.gwtbootstrap3.client.ui.html.Text;
 
 import javax.inject.Inject;
@@ -31,17 +34,26 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     @UiField
     PageHeader pageTitle ;
 
-    @UiField
+   /* @UiField
     Button cumulativeButton;
 
     @UiField
-    Button evaluationButton;
+    Button evaluationButton;*/
+
+    @UiField
+    ProgressBar studentProgressBar;
+
+    @UiField
+    ProgressBar classProgressBar;
+
+
+
 
     @Inject
     ApView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
 
-        cumulativeButton.addClickHandler(new ClickHandler() {
+      /*  cumulativeButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 hideEvaluationChart();
@@ -56,7 +68,7 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
                 hideCumulativeChart();
                 showEvaluationChart();
             }
-        });
+        });*/
     }
 
 
@@ -103,6 +115,25 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     public void showCumulativeChart(){
         cumulativeChartPanel.getElement().removeAttribute("hidden");
     }
+
+    public void setStudentProgressBar(float value, String color){
+        studentProgressBar.setPercent(value);
+
+        studentProgressBar.getElement().getStyle().setProperty("backgroundColor", color);
+        studentProgressBar.getElement().getStyle().setProperty("backgroundImage", "none");
+
+        studentProgressBar.setText("Votre complétion : " + value + "%");
+    }
+
+    public void setClassProgressBar(float value, String color) {
+        classProgressBar.setPercent(value);
+
+        classProgressBar.getElement().getStyle().setProperty("backgroundColor", color);
+        classProgressBar.getElement().getStyle().setProperty("backgroundImage", "none");
+
+        classProgressBar.setText("Avancement du cours : " + value + "%");
+    }
+
 
 
 }

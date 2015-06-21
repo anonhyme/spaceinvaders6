@@ -56,6 +56,40 @@ public class EvaluationDaoMock implements EvaluationDao {
         return results;
     }
 
+    public TreeMap<String, Evaluation> getApEvaluations(String cip, int semesterID, int apID) {
+        TreeMap<String, Evaluation> results = new TreeMap<>();
+
+        List<Competence> competences = Arrays.asList(
+                new Competence("GEN501-1", 0),
+                new Competence("GEN501-2", 1));
+
+        int evalIndex = 0;
+
+        Evaluation eval;
+        String evalLabel = "APP1 - Rapport";
+        eval = new Evaluation(evalLabel, evalIndex++);
+        eval.addResult(competences.get(0).getLabel(), getMockResult());
+        eval.addResult(competences.get(1).getLabel(), getMockResult());
+        results.put(evalLabel, eval);
+
+        evalLabel = "APP1 - Validation";
+        eval = new Evaluation(evalLabel, evalIndex++);
+        eval.addResult(competences.get(0).getLabel(), getMockResult());
+        eval.addResult(competences.get(1).getLabel(), getMockResult());
+        results.put(evalLabel, eval);
+
+
+        evalLabel = "APP1 - Sommatif";
+        eval = new Evaluation(evalLabel, evalIndex++);
+        eval.addResult(competences.get(0).getLabel(), getMockResult());
+        eval.addResult(competences.get(1).getLabel(), getMockResult());
+        results.put(evalLabel, eval);
+
+        return results;
+    }
+
+
+
     private Result getMockResult() {
         double lowestResult = 50;
         double maxTotal = 100;
