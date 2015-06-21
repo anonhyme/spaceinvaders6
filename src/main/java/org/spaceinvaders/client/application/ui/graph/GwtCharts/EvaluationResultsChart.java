@@ -78,7 +78,7 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         // Set options
         ColumnChartOptions options = ColumnChartOptions.create();
         options.setFontName("Tahoma");
-        options.setTitle("Résultats de l'AP");
+        options.setTitle("Résultats des évaluations");
         options.setHAxis(HAxis.create("Évaluation"));
         options.setVAxis(VAxis.create("Résultat"));
         if (isCustomSize) {

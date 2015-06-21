@@ -45,6 +45,8 @@ public class APpagePresenter extends Presenter<APpagePresenter.MyView, APpagePre
         void setInSlot(Object slot, IsWidget content);
         void setApName(String name);
         void hideCumulativeChart();
+        void setStudentProgressBar(float value, String color);
+        void setClassProgressBar(float value, String color);
     }
 
     @Inject
@@ -90,7 +92,7 @@ public class APpagePresenter extends Presenter<APpagePresenter.MyView, APpagePre
     protected void onBind(){
 
         getStudentSemesterResultsAndGenerateContenr();
-        getView().hideCumulativeChart();
+       // getView().hideCumulativeChart();
 
     }
 
@@ -112,7 +114,7 @@ public class APpagePresenter extends Presenter<APpagePresenter.MyView, APpagePre
 
     private void generatePageContent(List<CompetenceEvalResult> results){
 
-        String [] colors = {"#FF0000", "#00FF00", "#0000FF"};
+        String [] colors = {"#00FF00", "#FF0000", "#0000FF"};
 
         final GwtChartWidgetPresenter evaluationChartWidget = gwtChartWidgetPresenterProvider.get();
         evaluationChartWidget.setChart(new EvaluationResultsChart(results, AP_ID));
@@ -138,6 +140,30 @@ public class APpagePresenter extends Presenter<APpagePresenter.MyView, APpagePre
                 cumulativeChartWidget.loadChart();
             }
         });
+        setProgressBars(50f, 60f);
+    }
+
+    private void setProgressBars(float studentProgress, float classProgress){
+        String studentColor = getStudentProgressColor(studentProgress,classProgress);
+        String classColor = "#0000CC"; //Blue
+        MyView view = getView();
+        view.setStudentProgressBar(studentProgress, studentColor);
+        view.setClassProgressBar(classProgress,classColor);
+    }
+
+    private String getStudentProgressColor(float studentProgress, float classProgress){
+        String color;
+        float progressRatio = studentProgress/classProgress;
+        if(progressRatio > 0.85){
+             color = "#FFD700"; //Gold
+        }
+        else if (progressRatio > 0.5) {
+            color = "#008000"; //Green
+        }
+        else{
+            color = "#FF0000"; //Red
+        }
+        return color;
     }
 
 }
