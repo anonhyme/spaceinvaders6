@@ -6,9 +6,6 @@ import com.google.gwt.event.shared.HasHandlers;
 
 import org.spaceinvaders.shared.dto.Ap;
 
-/**
- * Created by hugbed on 15-06-21.
- */
 public class ApSelectedEvent extends GwtEvent<ApSelectedEvent.ApSelectedEventHandler> {
     public interface ApSelectedEventHandler extends EventHandler {
         void onApSelected(ApSelectedEvent event);

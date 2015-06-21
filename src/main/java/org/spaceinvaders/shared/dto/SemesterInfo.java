@@ -3,12 +3,11 @@ package org.spaceinvaders.shared.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
 
 public class SemesterInfo implements Serializable {
     private List<Ap> aps;
     private List<Evaluation> evals;
+    private List<String> competences;
 
     /**
      * For serialization only
@@ -23,12 +22,14 @@ public class SemesterInfo implements Serializable {
     }
 
     public List<String> getCompetences() {
-        List<String> competences = new ArrayList<>();
+        if (competences == null) {
+            competences = new ArrayList<>();
 
-        for (Ap ap : aps) {
-            for (String competence : ap.getCompetencesStrings()) {
-                if (!competences.contains(competence)) {
-                    competences.add(competence);
+            for (Ap ap : aps) {
+                for (String competence : ap.getCompetencesStrings()) {
+                    if (!competences.contains(competence)) {
+                        competences.add(competence);
+                    }
                 }
             }
         }

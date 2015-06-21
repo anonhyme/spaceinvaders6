@@ -74,7 +74,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         setEvaluationTypeColumn();
 
         for (String competenceLabel : competencesLabels) {
-            cellTable.addColumn(new EvaluationColumn(competenceLabel));
+            cellTable.addColumn(new EvaluationColumn(competenceLabel), competenceLabel);
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
