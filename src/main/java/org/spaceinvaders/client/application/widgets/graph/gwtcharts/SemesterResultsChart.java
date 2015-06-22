@@ -7,21 +7,18 @@ import com.googlecode.gwt.charts.client.corechart.BarChart;
 import com.googlecode.gwt.charts.client.corechart.BarChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
-import org.spaceinvaders.client.application.widgets.graph.ApInfo;
+
 import org.spaceinvaders.shared.dto.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Etienne on 2015-06-10.
  */
 public class SemesterResultsChart extends AbstractGWTChart {
     private BarChart chart;
-    List<Evaluation> evaluations;
-    SemesterInfo semesterInfo;
+    private List<Evaluation> evaluations;
+    private SemesterInfo semesterInfo;
 
     public SemesterResultsChart(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
         this.semesterInfo= semesterInfo;
@@ -79,7 +76,4 @@ public class SemesterResultsChart extends AbstractGWTChart {
         // Draw the chart
         chart.draw(dataTable, options);
     }
-
-
-
 }

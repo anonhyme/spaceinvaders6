@@ -5,7 +5,7 @@
     <g:HTMLPanel>
         <div>
             <g:SimplePanel ui:field="gridPanel"/>
-            <g:HTMLPanel ui:field="semesterChartPanel">LALALA</g:HTMLPanel>
+            <g:HTMLPanel ui:field="semesterChartPanel"/>
         </div>
     </g:HTMLPanel>
 </ui:UiBinder>

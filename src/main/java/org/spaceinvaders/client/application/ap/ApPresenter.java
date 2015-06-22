@@ -34,11 +34,8 @@ import java.util.TreeMap;
 
 public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyProxy> {
     interface MyView extends View {
-
         void setInSlot(Object slot, IsWidget content);
-
         void setApName(String name);
-
         void setStudentProgressBar(float value, String color);
         void setClassProgressBar(float value, String color);
     }
@@ -91,15 +88,12 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
                 .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
                     @Override
                     public void onSuccess(TreeMap<String, Evaluation> evaluations) {
-
                         generatePageContent(evaluations);
                     }
                 }).getApEvaluations(SESSION_ID, apId);
-
     }
 
     private void generatePageContent(TreeMap<String, Evaluation> evaluations) {
-
         //Todo get AP from eventbus or somewhere?
 
         List<Competence> mockComepetences = Arrays.asList(
@@ -117,8 +111,8 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         cumulativeChartWidget.setChart(new CumulativeLineChart(evaluations,mockAp));
         cumulativeChartWidget.setChartColors(colors);
 
-        setInSlot(this.SLOT_APEvaluationsChart, evaluationChartWidget);
-        setInSlot(this.SLOT_APCumulativeChart, cumulativeChartWidget);
+        setInSlot(SLOT_APEvaluationsChart, evaluationChartWidget);
+        setInSlot(SLOT_APCumulativeChart, cumulativeChartWidget);
 
         final MyView view = getView();
         getView().setApName(apName);
@@ -157,6 +151,4 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         }
         return color;
     }
-
-
 }

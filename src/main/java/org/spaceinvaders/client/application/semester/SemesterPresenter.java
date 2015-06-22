@@ -97,7 +97,6 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         evaluationDelegate.withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
             @Override
             public void onSuccess(TreeMap<String, Evaluation> results) {
-
                 GWT.log(results.toString());
                 final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
 

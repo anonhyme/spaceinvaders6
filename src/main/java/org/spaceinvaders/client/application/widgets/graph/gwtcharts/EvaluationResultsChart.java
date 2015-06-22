@@ -7,22 +7,18 @@ import com.googlecode.gwt.charts.client.corechart.ColumnChart;
 import com.googlecode.gwt.charts.client.corechart.ColumnChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
-import org.spaceinvaders.client.application.widgets.graph.EvalInfo;
+
 import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
 import java.util.*;
 
-/**
- * Created by Etienne on 2015-06-10.
- */
 public class EvaluationResultsChart extends AbstractGWTChart {
-
     private ColumnChart chart;
-    String apName;
-    ArrayList<Evaluation>  data;
-    Ap ap;
+    private String apName;
+    private ArrayList<Evaluation>  data;
+    private Ap ap;
 
     public EvaluationResultsChart(TreeMap<String, Evaluation> data, Ap ap){
         this.data = new ArrayList<>(data.values());
@@ -38,7 +34,6 @@ public class EvaluationResultsChart extends AbstractGWTChart {
     }
 
     public void loadChart( ){
-
         DataTable dataTable = DataTable.create();
         dataTable.addColumn(ColumnType.STRING, "Résultat");
         dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
@@ -71,9 +66,5 @@ public class EvaluationResultsChart extends AbstractGWTChart {
 
         // Draw the chart
         chart.draw(dataTable, options);
-
     }
-
-
-
 }

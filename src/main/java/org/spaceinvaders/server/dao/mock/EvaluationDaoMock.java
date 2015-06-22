@@ -88,8 +88,6 @@ public class EvaluationDaoMock implements EvaluationDao {
         return results;
     }
 
-
-
     private Result getMockResult() {
         double lowestResult = 50;
         double maxTotal = 100;
