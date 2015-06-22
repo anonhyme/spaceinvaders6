@@ -11,5 +11,9 @@ public interface SemesterInfoDao {
 
     List<CompetenceEntity> getSemesterCompetences(String cip, int semesterID);
 
+    String getSemesterLabel(String cip, int semesterId);
+
     SemesterInfo getSemesterInfo(String cip, int semesterID);
+
+    List<SemesterInfo> getAllSemestersInfo(String cip);
 }

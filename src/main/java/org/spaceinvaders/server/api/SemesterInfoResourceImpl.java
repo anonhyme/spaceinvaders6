@@ -6,6 +6,8 @@ import org.spaceinvaders.server.dao.SemesterInfoDao;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
+import java.util.List;
+
 public class SemesterInfoResourceImpl implements SemesterInfoResource {
     @Inject
     SemesterInfoDao semesterInfoDao;
@@ -16,5 +18,10 @@ public class SemesterInfoResourceImpl implements SemesterInfoResource {
     @Override
     public SemesterInfo get(int semesterID) {
         return semesterInfoDao.getSemesterInfo(userSession.getUserId(), semesterID);
+    }
+
+    @Override
+    public List<SemesterInfo> getAllSemestersInfo() {
+        return  semesterInfoDao.getAllSemestersInfo(userSession.getUserId());
     }
 }

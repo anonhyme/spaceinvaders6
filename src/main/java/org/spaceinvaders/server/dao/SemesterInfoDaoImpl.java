@@ -50,6 +50,24 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         return query.getResultList();
     }
 
+    @Override
+    @Transactional
+    public String getSemesterLabel(String cip, int semesterID) {
+        EntityManager entityManager = entityManagerProvider.get();
+
+        entityManager.clear();
+        // TODO : Create GetSemesterLabel procedure
+        StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("GetSemesterLabel");
+        query.setParameter("student_id", cip);
+        query.setParameter("session_id", semesterID);
+        query.execute();
+
+        //return query.getSingleResult().toString();
+        // Temporary
+        return "Session " + String.valueOf(semesterID);
+
+    }
+
     public SemesterInfo getSemesterInfo(String cip, int semesterID) {
         List<Evaluation> evals = EvaluationEntitiesToDtos((getSemesterEvals(cip, semesterID)));
         List<Competence> competences = CompetenceEntitiesToDtos(getSemesterCompetences(cip, semesterID));
@@ -57,8 +75,25 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         SemesterInfo semesterInfo = new SemesterInfo();
         semesterInfo.setCompetences(competences);
         semesterInfo.setEvals(evals);
+        semesterInfo.setLabel(getSemesterLabel(cip,semesterID));
+        semesterInfo.setSemesterId(semesterID);
 
         return semesterInfo;
+    }
+
+    public List<SemesterInfo> getAllSemestersInfo(String cip) {
+
+        List<SemesterInfo> semesterInfos = new ArrayList<>();
+
+        // TODO : Get list of all semesterIds
+        List<Integer> semesterIDs = new ArrayList<>();
+        semesterIDs.add(1);
+        semesterIDs.add(2);
+
+        for(int semesterID : semesterIDs){
+            semesterInfos.add(getSemesterInfo(cip,semesterID));
+        }
+        return semesterInfos;
     }
 
     public List<Evaluation> EvaluationEntitiesToDtos(List<EvaluationEntity> entities) {
