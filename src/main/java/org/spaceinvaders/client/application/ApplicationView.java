@@ -1,5 +1,7 @@
 package org.spaceinvaders.client.application;
 
+import com.google.gwt.cell.client.ButtonCellBase;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -10,6 +12,8 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
+
+import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 
 import javax.inject.Inject;
 
@@ -26,8 +30,10 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     @UiField
     SimplePanel mainContentPanel;
 
+
     @Inject
     ApplicationView(Binder uiBinder) {
+//        ScriptInjector.fromString(tooltipScript).inject();
         initWidget(uiBinder.createAndBindUi(this));
     }
 

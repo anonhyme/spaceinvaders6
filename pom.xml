@@ -396,6 +396,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.arcbees.gquery</groupId>
+            <artifactId>tooltip</artifactId>
+            <version>1.1</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

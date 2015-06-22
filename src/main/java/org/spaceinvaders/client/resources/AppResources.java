@@ -34,7 +34,6 @@ public interface AppResources extends ClientBundle {
 
         @ClassName("info")
         String info();
-
     }
 
     @Source("css/topNavbar.gss")

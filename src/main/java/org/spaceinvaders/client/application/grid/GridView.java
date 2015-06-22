@@ -1,7 +1,7 @@
 package org.spaceinvaders.client.application.grid;
 
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
@@ -9,24 +9,35 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 
+import com.arcbees.gquery.tooltip.client.Tooltip;
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipResources;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import org.gwtbootstrap3.client.ui.Alert;
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
+import org.spaceinvaders.client.resources.CustomTooltipResources;
+import org.spaceinvaders.client.widgets.cell.ResultCell;
+import org.spaceinvaders.client.widgets.cell.TooltipCellTemplates;
+import org.spaceinvaders.client.widgets.cell.TooltipCellWidget;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.google.gwt.query.client.GQuery.$;
+
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridView> {
     }
+
+    @Inject
+    private CustomTooltipResources style;
 
     @UiField
     HTMLPanel panel;
@@ -39,68 +50,98 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     AppResources appResources;
 
+    TooltipCellWidget tooltipCellWidget;
+
     protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
+
     private CellTable<Evaluation> cellTable;
-    private HashMap<String, Integer> competenceMap;
+
 
     @Inject
-    GridView(Binder uiBinder,
-             AppResources appResources) {
+    GridView(Binder uiBinder, AppResources appResources, TooltipCellWidget tooltipCellWidget) {
         this.appResources = appResources;
+        this.tooltipCellWidget = tooltipCellWidget;
+//        this.tooltipCellWidget.setData("hello");
+//        tooltipCellWidget.i
         initWidget(uiBinder.createAndBindUi(this));
+
     }
 
     @Override
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
         //TODO refactor
         cellTable = new CellTable<>();
-        Alert alertBitch = new Alert(semesterInfo.getLabel());
+        Alert alert = new Alert("fdsa");
+        $(cellTable).as(Tooltip.Tooltip).tooltip(setRowTooltip());
+        GWT.log("updateSemesterTable " + $(alertBitchContainer));
+
         alertBitchContainer.clear();
-        alertBitchContainer.add(alertBitch);
+
+        alertBitchContainer.add(alert);
 
         initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
 
-        //TODO check for @UiField(provided=true)
-        //!!!! Do not erase !!!!
-        //dataSemesterProvider.flush();
-        //dataSemesterProvider.refresh();
-        //cellTable.redraw();
-
         cellTable.setStriped(true);
-        cellTable.setBordered(true);
         cellTable.setCondensed(true);
-        cellTable.setColumnWidth(0, "15%");
-        cellTable.setColumnWidth(1, "8%");
+        cellTable.setColumnWidth(0, "22%");
 
         containerCellTable.clear();
         containerCellTable.add(cellTable);
-
     }
 
-    private void initColumn(SemesterInfo semesterInfo) {
-        List<Competence> competences = semesterInfo.getCompetences();
-        setEvaluationTypeColumn();
 
-        for (Competence competence : competences) {
+    private void initColumn(SemesterInfo semesterInfo) {
+        setEvaluationTypeColumn();
+        for (Competence competence : semesterInfo.getCompetences()) {
             cellTable.addColumn(new EvaluationColumn(competence.getCompetenceLabel()), competence.getCompetenceLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
 
     private void setEvaluationTypeColumn() {
-        Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
+        Column<Evaluation, String> column = new Column<Evaluation, String>(new ResultCell()) {
             @Override
             public String getValue(Evaluation data) {
-                String value = "";
+                String value = " ";
+
                 //TODO Check why it's not working without the try/catch
                 try {
                     value = data.getEvaluationLabel();
+
                 } catch (Exception e) {
                 }
+//                tooltipCellWidget.setData(value);
                 return value;
             }
         };
-        cellTable.addColumn(column, "Evaluation");
+
+        cellTable.addColumn(column, "Évaluation");
+
     }
+
+    private TooltipResources getTooltipResources() {
+        return new TooltipResources() {
+            @Override
+            @Source("css/Tooltip.gss")
+            public TooltipStyle css() {
+                return getStyle().css();
+            }
+        };
+    }
+
+    public CustomTooltipResources getStyle() {
+        return style;
+    }
+
+    private TooltipOptions setRowTooltip(){
+        TooltipOptions options = new TooltipOptions();
+        options.withResources(getTooltipResources());
+        options.withContent(TooltipCellTemplates.INSTANCE.popover());
+//        options.withSelector("tbody tr");
+//        options.withSelector("row-id");
+//        options.withContainer("element");
+        return options;
+    }
+
 }

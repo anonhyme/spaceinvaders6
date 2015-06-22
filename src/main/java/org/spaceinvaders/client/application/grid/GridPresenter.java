@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application.grid;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -18,6 +19,7 @@ import org.spaceinvaders.client.application.grid.events.SemesterGradesReceivedEv
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.application.grid.events.SemesterInfoReceivedEvent;
 import org.spaceinvaders.client.place.NameTokens;
+import org.spaceinvaders.client.resources.BootstrapJQueryJs;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -59,7 +61,13 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
 
     protected void onBind() {
         super.onBind();
-        registerHandlers();
+//        if (!isjQueryLoaded()) {
+//            GWT.log("onBind " + "hello");
+//            ScriptInjector.fromString(BootstrapJQueryJs.INSTANCE.jQuery().getText())
+//                    .setWindow(ScriptInjector.TOP_WINDOW)
+//                    .inject();
+//        }
+            registerHandlers();
     }
 
     private void registerHandlers() {
@@ -100,4 +108,9 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                     }
                 }).getAllEvaluations(3);
     }
+
+    private native boolean isjQueryLoaded() /*-{
+        console.log("hello");
+        return (typeof $wnd['jQuery'] !== 'undefined');
+    }-*/;
 }

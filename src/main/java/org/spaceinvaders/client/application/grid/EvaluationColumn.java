@@ -4,8 +4,11 @@ import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 
+import org.spaceinvaders.client.widgets.cell.TooltipCellWidget;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
+
+import javax.inject.Inject;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 5/21/2015
@@ -13,6 +16,9 @@ import org.spaceinvaders.shared.dto.Evaluation;
  * @author antoine
  */
 public class EvaluationColumn extends Column<Evaluation, String> {
+    @Inject
+    TooltipCellWidget tooltipCellWidget;
+
     private final String key;
 
     public EvaluationColumn(String key) {
