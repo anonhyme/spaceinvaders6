@@ -3,7 +3,6 @@ package org.spaceinvaders.client.application.grid.events;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-
 import org.spaceinvaders.shared.dto.Evaluation;
 
 import java.util.TreeMap;

@@ -1,9 +1,7 @@
 package org.spaceinvaders.client.resources;
 
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.CssResource;
-
 import com.arcbees.gquery.tooltip.client.TooltipResources;
+import com.google.gwt.resources.client.ClientBundle;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 6/21/2015

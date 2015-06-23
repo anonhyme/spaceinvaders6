@@ -3,8 +3,7 @@ package org.spaceinvaders.client.application.grid;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
-
-import org.spaceinvaders.client.widgets.cell.TooltipCellWidget;
+import org.spaceinvaders.client.widgets.cellGwt.TooltipCellWidget;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 

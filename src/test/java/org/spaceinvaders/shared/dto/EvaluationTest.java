@@ -1,7 +1,6 @@
 package org.spaceinvaders.shared.dto;
 
 import com.google.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Assert;

@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cell;
+package org.spaceinvaders.client.widgets.cellGwt;
 
 
 import com.google.gwt.core.client.GWT;
@@ -11,7 +11,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  * @author antoine
  */
 public interface TooltipCellTemplates extends SafeHtmlTemplates {
-    public static final String TEMPLATE_TOOLTIP =
+    String TEMPLATE_TOOLTIP =
             "<table cellpadding='10' style='text-align:left'>\n" +
             "    <tr>\n" +
             "        <td> moy. :</td>\n" +
@@ -26,8 +26,8 @@ public interface TooltipCellTemplates extends SafeHtmlTemplates {
             "        <td>20%</td>\n" +
             "    </tr>\n" +
             "</table>";
-    public static final String CELL = "<div row-id=0>HEEEEEEEEEEEEEEEEEE</div>";
-    public static TooltipCellTemplates INSTANCE = GWT.create(TooltipCellTemplates.class);
+    String CELL = "<div row-id=0>HEEEEEEEEEEEEEEEEEE</div>";
+    TooltipCellTemplates INSTANCE = GWT.create(TooltipCellTemplates.class);
 
     @Template("<div class=\"{0}\">" +
                 "<div class=\"{1}\"></div>" +

@@ -18,7 +18,6 @@ package org.spaceinvaders.client.application.dispatch.rest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Response;
-
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 

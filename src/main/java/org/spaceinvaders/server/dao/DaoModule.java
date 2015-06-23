@@ -2,7 +2,6 @@ package org.spaceinvaders.server.dao;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.persist.jpa.JpaPersistModule;
-
 import org.spaceinvaders.server.dao.mock.CompetenceEvalResultDaoMock;
 import org.spaceinvaders.server.dao.mock.SemesterInfoDaoMock;
 

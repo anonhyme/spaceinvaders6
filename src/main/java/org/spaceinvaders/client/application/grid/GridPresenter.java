@@ -1,25 +1,15 @@
 package org.spaceinvaders.client.application.grid;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.ScriptInjector;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-
-import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.grid.events.SemesterGradesReceivedEvent;
-import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.application.grid.events.SemesterInfoReceivedEvent;
-import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.resources.BootstrapJQueryJs;
+import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
+import org.spaceinvaders.client.widgets.cell.WidgetsFactory;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -37,7 +27,10 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
 
     interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations);
+        void addCellPresenter(WidgetsFactory widgetsFactory);
     }
+
+    private final WidgetsFactory widgetsFactory;
 
     private final ResourceDelegate<SemesterGradesResource> semesterGradesDelegate;
     private final ResourceDelegate<SemesterInfoResource> semesterInfoDelegate;
@@ -47,12 +40,15 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     @Inject
     public GridPresenter(EventBus eventBus,
                          MyView view,
+                         WidgetsFactory widgetsFactory,
                          ResourceDelegate<SemesterGradesResource> semesterGradesDelegate,
                          ResourceDelegate<SemesterInfoResource> semesterInfoDelegate) {
         super(eventBus, view);
+        this.widgetsFactory = widgetsFactory;
         this.semesterGradesDelegate = semesterGradesDelegate;
         this.semesterInfoDelegate = semesterInfoDelegate;
         getView().setUiHandlers(this);
+        view.addCellPresenter(widgetsFactory);
     }
 
     public void updateGrid(int semesterID) {
@@ -61,12 +57,6 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
 
     protected void onBind() {
         super.onBind();
-//        if (!isjQueryLoaded()) {
-//            GWT.log("onBind " + "hello");
-//            ScriptInjector.fromString(BootstrapJQueryJs.INSTANCE.jQuery().getText())
-//                    .setWindow(ScriptInjector.TOP_WINDOW)
-//                    .inject();
-//        }
             registerHandlers();
     }
 
@@ -109,8 +99,8 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                 }).getAllEvaluations(3);
     }
 
-    private native boolean isjQueryLoaded() /*-{
-        console.log("hello");
-        return (typeof $wnd['jQuery'] !== 'undefined');
-    }-*/;
+//    private native boolean isjQueryLoaded() /*-{
+//        console.log("hello");
+//        return (typeof $wnd['jQuery'] !== 'undefined');
+//    }-*/;
 }
