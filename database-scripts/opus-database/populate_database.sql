@@ -549,8 +549,6 @@ INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, use
 		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gis6' AND t.label = 'E15' AND g.label = 'GI58' AND p.label = 'Accès membre');
 
 
-
-
 /** 
 	Script to unbind connection from a database:
 

@@ -4949,7 +4949,7 @@ create table note.RESULT (
    CRITERION_ID         INT4                 not null,
    EVALUATION_INSTANCE_ID INT4               not null,
    STUDENT_ID           INT4                 not null,
-   GRADER_ID            INT4                 not null,
+   GRADER_ID            INT4                 null,
    VALUE                FLOAT8               not null,
    COMMENT              TEXT                 null,
    REGISTRATION         TIMESTAMP            not null default now(),
@@ -6425,6 +6425,22 @@ FROM note.educationnal_goal eg1
   INNER JOIN note.educationnal_goal_type egt2
     ON egt2.eg_type_id = eg2.eg_type_id
 WHERE egt1.label = 'Ap' AND egt2.label = 'Compétence';
+
+
+CREATE OR REPLACE FUNCTION note.get_criterion_id_with_rubric_label(label text) RETURNS integer AS $$
+SELECT c.criterion_id
+FROM note.criterion c, note.rubric r
+WHERE c.rubric_id = r.rubric_id AND r.label = $1;
+$$ LANGUAGE SQL;
+
+
+CREATE OR REPLACE FUNCTION note.get_eval_inst_id_with_eval_label(evaluation_label text, timespan_label text) RETURNS integer AS $$
+SELECT ev.evaluation_id
+FROM note.evaluation_instance evi, note.evaluation ev, note.timespan t, note.educationnal_goal eg
+WHERE evi.evaluation_id = ev.evaluation_id AND ev.label = $1 AND
+	  evi.timespan_id = t.timespan_id AND t.label = $2;
+$$ LANGUAGE SQL;
+
 
 --
 -- Semester type
