@@ -399,7 +399,9 @@ INSERT INTO note.evaluation_type(evaluation_type_id, label, registration, user_i
                                                                                          (3, 'Validation', '2008-08-19', 1),
                                                                                          (4, 'Particuliére', '2008-08-19', 1),
                                                                                          (5, 'Évaluation par les pairs', '2012-04-26', 1),
-                                                                                         (6, 'Rapport', '2012-08-19', 1);
+                                                                                         (6, 'Rapport', '2012-08-19', 1),
+                                                                                         (7, 'Somatif', '2008-08-19', 1);
+
 INSERT INTO note.quality(quality_id, label, description, validity_start, validity_end, registration, user_id) VALUES (1,  'Q1 - Connaissances en génie', '', now(), DEFAULT, now(), 1),
                                                                                                                      (2,  'Q2 - Analyse de problémes', '', now(), DEFAULT, now(), 1),
                                                                                                                      (3,  'Q3 - Investigation', '', now(), DEFAULT, now(), 1),
@@ -507,46 +509,13 @@ INSERT INTO note.administrative_element(program_id, label, description, registra
 /**
 	Add educationnal goal instance for group GI58
 */
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'A12' AND eg.label = 'gegis1');
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'H13' AND eg.label = 'gis2');
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'A13' AND eg.label = 'gis3');
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'E14' AND eg.label = 'gis4');
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'H15' AND eg.label = 'gis5');
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'E15' AND eg.label = 'gis6');
 
-
-/**
-	Assign group to educationnal goal instance previously created
-*/
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t 
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gegis1' AND t.label = 'A12' AND g.label = 'GI58' AND p.label = 'Accès membre');
-
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t 
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gis2' AND t.label = 'H13' AND g.label = 'GI58' AND p.label = 'Accès membre');
-
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t 
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gis3' AND t.label = 'A13' AND g.label = 'GI58' AND p.label = 'Accès membre');
-
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t 
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gis4' AND t.label = 'E14' AND g.label = 'GI58' AND p.label = 'Accès membre');
-
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t 
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gis5' AND t.label = 'H15' AND g.label = 'GI58' AND p.label = 'Accès membre');
-
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t 
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gis6' AND t.label = 'E15' AND g.label = 'GI58' AND p.label = 'Accès membre');
+SELECT note.create_eg_instance_assigned('A12', 'gegis1', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('H13', 'gis2', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('A13', 'gis3', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('E14', 'gis4', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('H15', 'gis5', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('E15', 'gis6', 'GI58', 'Accès membre');
 
 
 /** 

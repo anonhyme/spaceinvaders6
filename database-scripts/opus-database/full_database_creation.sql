@@ -3974,20 +3974,18 @@ PROGRAM_ID
 /* Table: note.ASSIGNED_GROUP                                        */
 /*==============================================================*/
 create table note.ASSIGNED_GROUP (
-   TIMESPAN_ID          INT4                 not null,
-   EG_ID                INT4                 not null,
+   EG_INSTANCE_ID 		INT4				 not null,
    PRIVILEGE_ID         INT4                 not null,
    GROUP_ID             INT4                 not null,
    REGISTRATION         TIMESTAMP            not null default now(),
-   constraint PK_ASSIGNED_GROUP primary key (TIMESPAN_ID, EG_ID, PRIVILEGE_ID, GROUP_ID)
+   constraint PK_ASSIGNED_GROUP primary key (EG_INSTANCE_ID, PRIVILEGE_ID, GROUP_ID)
 );
 
 /*==============================================================*/
 /* Index: ASSIGNED_GROUP_PK                                     */
 /*==============================================================*/
 create unique index ASSIGNED_GROUP_PK on note.ASSIGNED_GROUP (
-TIMESPAN_ID,
-EG_ID,
+EG_INSTANCE_ID,
 PRIVILEGE_ID,
 GROUP_ID
 );
@@ -3996,8 +3994,7 @@ GROUP_ID
 /* Index: ASSIGNED_GROUP_FK                                     */
 /*==============================================================*/
 create  index ASSIGNED_GROUP_FK on note.ASSIGNED_GROUP (
-TIMESPAN_ID,
-EG_ID
+EG_INSTANCE_ID
 );
 
 /*==============================================================*/
@@ -4166,19 +4163,19 @@ EDU_EG_ID
 /* Table: note.EDUCATIONNAL_GOAL_INSTANCE                            */
 /*==============================================================*/
 create table note.EDUCATIONNAL_GOAL_INSTANCE (
+   EG_INSTANCE_ID		SERIAL 				 not null, 
    TIMESPAN_ID          INT4                 not null,
    EG_ID                INT4                 not null,
    VALIDITY_END         TIMESTAMP            null,
    REGISTRATION         TIMESTAMP            not null default now(),
-   constraint PK_EDUCATIONNAL_GOAL_INSTANCE primary key (TIMESPAN_ID, EG_ID)
+   constraint PK_EDUCATIONNAL_GOAL_INSTANCE primary key (EG_INSTANCE_ID)
 );
 
 /*==============================================================*/
 /* Index: EDUCATIONNAL_GOAL_INSTANCE_PK                         */
 /*==============================================================*/
 create unique index EDUCATIONNAL_GOAL_INSTANCE_PK on note.EDUCATIONNAL_GOAL_INSTANCE (
-TIMESPAN_ID,
-EG_ID
+EG_INSTANCE_ID
 );
 
 /*==============================================================*/
@@ -4200,21 +4197,19 @@ EG_ID
 /*==============================================================*/
 create table note.ENDORSEMENT (
    ENDORSER_ID          INT4                 not null,
-   TIMESPAN_ID          INT4                 not null,
-   EG_ID                INT4                 not null,
+   EG_INSTANCE_ID       INT4                 not null,
    STUDENT_ID           INT4                 not null,
    ENDORSEMENT_LEVEL_ID INT4                 not null,
    COMMENT              TEXT                 null,
    REGISTRATION         TIMESTAMP            not null default now(),
-   constraint PK_ENDORSEMENT primary key (TIMESPAN_ID, EG_ID, ENDORSER_ID, STUDENT_ID, ENDORSEMENT_LEVEL_ID, REGISTRATION)
+   constraint PK_ENDORSEMENT primary key (EG_INSTANCE_ID, ENDORSER_ID, STUDENT_ID, ENDORSEMENT_LEVEL_ID, REGISTRATION)
 );
 
 /*==============================================================*/
 /* Index: ENDORSEMENT_PK                                        */
 /*==============================================================*/
 create unique index ENDORSEMENT_PK on note.ENDORSEMENT (
-TIMESPAN_ID,
-EG_ID,
+EG_INSTANCE_ID,
 ENDORSER_ID,
 STUDENT_ID,
 ENDORSEMENT_LEVEL_ID,
@@ -4225,8 +4220,7 @@ REGISTRATION
 /* Index: ENDORSED_BY_FK                                        */
 /*==============================================================*/
 create  index ENDORSED_BY_FK on note.ENDORSEMENT (
-TIMESPAN_ID,
-EG_ID,
+EG_INSTANCE_ID,
 STUDENT_ID
 );
 
@@ -4336,8 +4330,7 @@ EG_ID
 create table note.EVALUATION_INSTANCE (
    EVALUATION_INSTANCE_ID SERIAL               not null,
    EVALUATION_ID        INT4                 null,
-   TIMESPAN_ID          INT4                 null,
-   EG_ID                INT4                 null,
+   EG_INSTANCE_ID       INT4                 null,
    EMPLOYEE_ID          INT4                 not null,
    OCCURENCE            DATE                 not null,
    REGISTRATION         TIMESTAMP            not null default now(),
@@ -4369,8 +4362,7 @@ EMPLOYEE_ID
 /* Index: FOR_COURSE_FK                                         */
 /*==============================================================*/
 create  index FOR_COURSE_FK on note.EVALUATION_INSTANCE (
-TIMESPAN_ID,
-EG_ID
+EG_INSTANCE_ID
 );
 
 /*==============================================================*/
@@ -5069,10 +5061,9 @@ SCORE_ID
 /* Table: note.SCORE_GROUP_INSTANCE                                  */
 /*==============================================================*/
 create table note.SCORE_GROUP_INSTANCE (
-   SCORE_GROUP_INSTANCE_ID SERIAL               not null,
+   SCORE_GROUP_INSTANCE_ID SERIAL            not null,
    SCORE_GROUP_ID       INT4                 not null,
-   TIMESPAN_ID          INT4                 null,
-   EG_ID                INT4                 null,
+   EG_INSTANCE_ID       INT4                 null,
    REGISTRATION         TIMESTAMP            not null default now(),
    constraint PK_SCORE_GROUP_INSTANCE primary key (SCORE_GROUP_INSTANCE_ID)
 );
@@ -5095,8 +5086,7 @@ SCORE_GROUP_ID
 /* Index: FOR_COURSE_INSTANCE_FK                                */
 /*==============================================================*/
 create  index FOR_COURSE_INSTANCE_FK on note.SCORE_GROUP_INSTANCE (
-TIMESPAN_ID,
-EG_ID
+EG_INSTANCE_ID
 );
 
 /*==============================================================*/
@@ -5148,20 +5138,18 @@ REGISTRATION
 /* Table: note.STUDENT_SCORE                                         */
 /*==============================================================*/
 create table note.STUDENT_SCORE (
-   TIMESPAN_ID          INT4                 not null,
-   EG_ID                INT4                 not null,
+   EG_INSTANCE_ID       INT4                 not null,
    STUDENT_ID           INT4                 not null,
    SCORE_ID             CHAR(2)              not null,
    REGISTRATION         TIMESTAMP            not null default now(),
-   constraint PK_STUDENT_SCORE primary key (TIMESPAN_ID, EG_ID, STUDENT_ID)
+   constraint PK_STUDENT_SCORE primary key (EG_INSTANCE_ID, STUDENT_ID)
 );
 
 /*==============================================================*/
 /* Index: STUDENT_SCORE_PK                                      */
 /*==============================================================*/
 create unique index STUDENT_SCORE_PK on note.STUDENT_SCORE (
-TIMESPAN_ID,
-EG_ID,
+EG_INSTANCE_ID,
 STUDENT_ID
 );
 
@@ -5183,8 +5171,7 @@ SCORE_ID
 /* Index: FOR_COURSE_FK2                                        */
 /*==============================================================*/
 create  index FOR_COURSE_FK2 on note.STUDENT_SCORE (
-TIMESPAN_ID,
-EG_ID
+EG_INSTANCE_ID
 );
 
 /*==============================================================*/
@@ -5243,8 +5230,8 @@ alter table note.ADMINISTRATIVE_HIERARCHY
       on delete restrict on update restrict;
 
 alter table note.ASSIGNED_GROUP
-   add constraint FK_ASSIGNED_ASSIGNED__EDUCATIO foreign key (TIMESPAN_ID, EG_ID)
-      references note.EDUCATIONNAL_GOAL_INSTANCE (TIMESPAN_ID, EG_ID)
+   add constraint FK_ASSIGNED_ASSIGNED__EDUCATIO foreign key (EG_INSTANCE_ID)
+      references note.EDUCATIONNAL_GOAL_INSTANCE (EG_INSTANCE_ID)
       on delete restrict on update restrict;
 
 alter table note.ASSIGNED_GROUP
@@ -5308,8 +5295,8 @@ alter table note.EDUCATIONNAL_GOAL_INSTANCE
       on delete restrict on update restrict;
 
 alter table note.ENDORSEMENT
-   add constraint FK_ENDORSEM_ENDORSED__STUDENT_ foreign key (TIMESPAN_ID, EG_ID, STUDENT_ID)
-      references note.STUDENT_SCORE (TIMESPAN_ID, EG_ID, STUDENT_ID)
+   add constraint FK_ENDORSEM_ENDORSED__STUDENT_ foreign key (EG_INSTANCE_ID, STUDENT_ID)
+      references note.STUDENT_SCORE (EG_INSTANCE_ID, STUDENT_ID)
       on delete restrict on update restrict;
 
 alter table note.ENDORSEMENT
@@ -5343,8 +5330,8 @@ alter table note.EVALUATION
       on delete restrict on update restrict;
 
 alter table note.EVALUATION_INSTANCE
-   add constraint FK_EVALUATI_FOR_COURS_EDUCATIO foreign key (TIMESPAN_ID, EG_ID)
-      references note.EDUCATIONNAL_GOAL_INSTANCE (TIMESPAN_ID, EG_ID)
+   add constraint FK_EVALUATI_FOR_COURS_EDUCATIO foreign key (EG_INSTANCE_ID)
+      references note.EDUCATIONNAL_GOAL_INSTANCE (EG_INSTANCE_ID)
       on delete restrict on update restrict;
 
 alter table note.EVALUATION_INSTANCE
@@ -5528,8 +5515,8 @@ alter table note.SCORE_GROUP_DEFINITION
       on delete restrict on update restrict;
 
 alter table note.SCORE_GROUP_INSTANCE
-   add constraint FK_SCORE_GR_FOR_COURS_EDUCATIO foreign key (TIMESPAN_ID, EG_ID)
-      references note.EDUCATIONNAL_GOAL_INSTANCE (TIMESPAN_ID, EG_ID)
+   add constraint FK_SCORE_GR_FOR_COURS_EDUCATIO foreign key (EG_INSTANCE_ID)
+      references note.EDUCATIONNAL_GOAL_INSTANCE (EG_INSTANCE_ID)
       on delete restrict on update restrict;
 
 alter table note.SCORE_GROUP_INSTANCE
@@ -5548,8 +5535,8 @@ alter table note.SCORE_THRESHOLD_DEFINITION
       on delete restrict on update restrict;
 
 alter table note.STUDENT_SCORE
-   add constraint FK_STUDENT__FOR_COURS_EDUCATIO foreign key (TIMESPAN_ID, EG_ID)
-      references note.EDUCATIONNAL_GOAL_INSTANCE (TIMESPAN_ID, EG_ID)
+   add constraint FK_STUDENT__FOR_COURS_EDUCATIO foreign key (EG_INSTANCE_ID)
+      references note.EDUCATIONNAL_GOAL_INSTANCE (EG_INSTANCE_ID)
       on delete restrict on update restrict;
 
 alter table note.STUDENT_SCORE
@@ -5666,8 +5653,7 @@ ALTER TABLE NOTE.TRANSFORM ADD CONSTRAINT fk_created_by_user FOREIGN KEY (USER_I
 -- DROP VIEW note.v_assigned_group;
 
 CREATE OR REPLACE VIEW note.v_assigned_group AS
- SELECT assigned_group.timespan_id,
-    assigned_group.eg_id,
+ SELECT assigned_group.eg_instance_id,
     assigned_group.privilege_id,
     assigned_group.group_id,
     assigned_group.registration,
@@ -5682,8 +5668,8 @@ ALTER TABLE note.v_assigned_group
 -- DROP RULE v_assigned_group_insert ON note.v_assigned_group;
 
 CREATE OR REPLACE RULE v_assigned_group_insert AS
-    ON INSERT TO note.v_assigned_group DO INSTEAD  INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, registration, user_id)
-  VALUES (new.timespan_id, new.eg_id, new.privilege_id, new.group_id, now(), new.user_id);
+    ON INSERT TO note.v_assigned_group DO INSTEAD  INSERT INTO note.assigned_group (privilege_id, group_id, registration, user_id)
+  VALUES (new.privilege_id, new.group_id, now(), new.user_id);
 -- View: note.v_criterion
 
 -- DROP VIEW note.v_criterion;
@@ -5743,7 +5729,8 @@ ALTER TABLE note.v_educationnal_goal
 -- DROP VIEW note.v_educationnal_goal_instance;
 
 CREATE OR REPLACE VIEW note.v_educationnal_goal_instance AS
- SELECT educationnal_goal_instance.timespan_id,
+ SELECT educationnal_goal_instance.eg_instance_id,
+ 	educationnal_goal_instance.timespan_id,
     educationnal_goal_instance.eg_id,
     educationnal_goal_instance.validity_end,
     educationnal_goal_instance.registration,
@@ -5809,8 +5796,7 @@ CREATE OR REPLACE VIEW note.v_evaluation_instance AS
  SELECT
     evaluation_instance.evaluation_instance_id,
     evaluation_instance.evaluation_id,
-    evaluation_instance.timespan_id,
-    evaluation_instance.eg_id,
+    evaluation_instance.eg_instance_id,
     evaluation_instance.employee_id,
     evaluation_instance.occurence,
     evaluation_instance.registration,
@@ -5826,8 +5812,8 @@ GRANT ALL ON TABLE note.v_evaluation_instance TO opus;
 -- DROP RULE v_evaluation_instance_insert ON note.v_evaluation_instance;
 
 CREATE OR REPLACE RULE v_evaluation_instance_insert AS
-    ON INSERT TO note.v_evaluation_instance DO INSTEAD  INSERT INTO note.evaluation_instance (evaluation_instance_id, evaluation_id, timespan_id, eg_id, employee_id, occurence, registration, user_id)
-  VALUES (new.evaluation_instance_id, new.evaluation_id, new.timespan_id, new.eg_id, new.employee_id, new.occurence, now(), new.user_id);
+    ON INSERT TO note.v_evaluation_instance DO INSTEAD  INSERT INTO note.evaluation_instance (evaluation_instance_id, evaluation_id, eg_instance_id, employee_id, occurence, registration, user_id)
+  VALUES (new.evaluation_instance_id, new.evaluation_id, new.eg_instance_id, new.employee_id, new.occurence, now(), new.user_id);
 -- View: note.v_evaluation_rubric
 
 -- DROP VIEW note.v_evaluation_rubric;
@@ -6386,60 +6372,81 @@ CREATE OR REPLACE RULE v_timespan_update AS
 -- student semester views
 --
 CREATE OR REPLACE VIEW note.v_student_semester AS
-SELECT DISTINCT u.administrative_user_id, eg.short_description, t.label, eg.eg_id
-  FROM public.users u, public.user_group ug, public.groups g, note.assigned_group ag, note.educationnal_goal eg, note.timespan t
-  WHERE u.user_id = ug.member_id
-    AND g.group_id = ug.group_id
-    AND g.group_id = ag.group_id
-    AND eg.eg_id = ag.eg_id
-    AND t.timespan_id = ag.timespan_id;
+	SELECT DISTINCT u.administrative_user_id, eg.short_description, t.label, egi.eg_instance_id
+	  FROM public.users u, public.user_group ug, public.groups g, note.assigned_group ag, note.educationnal_goal_instance egi, note.timespan t, note.educationnal_goal eg
+	  WHERE u.user_id = ug.member_id
+	    AND g.group_id = ug.group_id
+	    AND g.group_id = ag.group_id
+	    AND ag.eg_instance_id = egi.eg_instance_id
+	    AND egi.eg_id = eg.eg_id
+	    AND egi.timespan_id = t.timespan_id;
 
 --
 -- Semester to AP hierarchy view
 --
 CREATE OR REPLACE VIEW note.v_semester_ap_hierarchy AS
-SELECT DISTINCT eg1.eg_id AS semester_id, eg1.short_description AS semester_desc, eg2.eg_id AS ap_id, eg2.short_description as ap_desc
-FROM note.educationnal_goal eg1
-  INNER JOIN note.educationnal_goal_hierarchy eh1
-    ON eg1.eg_id = eh1.eg_id
-  INNER JOIN note.educationnal_goal eg2
-    ON eg2.eg_id = eh1.edu_eg_id
-  INNER JOIN note.educationnal_goal_type egt1
-    ON egt1.eg_type_id = eg1.eg_type_id
-  INNER JOIN note.educationnal_goal_type egt2
-    ON egt2.eg_type_id = eg2.eg_type_id
-WHERE egt1.label = 'Session' AND egt2.label = 'Ap';
+	SELECT DISTINCT eg1.eg_id AS semester_id, eg1.short_description AS semester_desc, eg2.eg_id AS ap_id, eg2.short_description as ap_desc
+	FROM note.educationnal_goal eg1
+	  INNER JOIN note.educationnal_goal_hierarchy eh1
+	    ON eg1.eg_id = eh1.eg_id
+	  INNER JOIN note.educationnal_goal eg2
+	    ON eg2.eg_id = eh1.edu_eg_id
+	  INNER JOIN note.educationnal_goal_type egt1
+	    ON egt1.eg_type_id = eg1.eg_type_id
+	  INNER JOIN note.educationnal_goal_type egt2
+	    ON egt2.eg_type_id = eg2.eg_type_id
+	WHERE egt1.label = 'Session' AND egt2.label = 'Ap';
 
 --
 -- Ap to Sub Ap hierarchy view
 --
 CREATE OR REPLACE VIEW note.v_ap_subap_hierarchy AS
-SELECT DISTINCT eg1.eg_id AS ap_id, eg1.short_description AS ap_desc, eg2.eg_id AS subap_id, eg2.short_description as subap_desc
-FROM note.educationnal_goal eg1
-  INNER JOIN note.educationnal_goal_hierarchy eh1
-    ON eg1.eg_id = eh1.eg_id
-  INNER JOIN note.educationnal_goal eg2
-    ON eg2.eg_id = eh1.edu_eg_id
-  INNER JOIN note.educationnal_goal_type egt1
-    ON egt1.eg_type_id = eg1.eg_type_id
-  INNER JOIN note.educationnal_goal_type egt2
-    ON egt2.eg_type_id = eg2.eg_type_id
-WHERE egt1.label = 'Ap' AND egt2.label = 'Compétence';
+	SELECT DISTINCT eg1.eg_id AS ap_id, eg1.short_description AS ap_desc, eg2.eg_id AS subap_id, eg2.short_description as subap_desc
+	FROM note.educationnal_goal eg1
+	  INNER JOIN note.educationnal_goal_hierarchy eh1
+	    ON eg1.eg_id = eh1.eg_id
+	  INNER JOIN note.educationnal_goal eg2
+	    ON eg2.eg_id = eh1.edu_eg_id
+	  INNER JOIN note.educationnal_goal_type egt1
+	    ON egt1.eg_type_id = eg1.eg_type_id
+	  INNER JOIN note.educationnal_goal_type egt2
+	    ON egt2.eg_type_id = eg2.eg_type_id
+	WHERE egt1.label = 'Ap' AND egt2.label = 'Compétence';
 
 
 CREATE OR REPLACE FUNCTION note.get_criterion_id_with_rubric_label(label text) RETURNS integer AS $$
-SELECT c.criterion_id
-FROM note.criterion c, note.rubric r
-WHERE c.rubric_id = r.rubric_id AND r.label = $1;
+	SELECT c.criterion_id
+	FROM note.criterion c, note.rubric r
+	WHERE c.rubric_id = r.rubric_id AND r.label = $1;
 $$ LANGUAGE SQL;
 
 
-CREATE OR REPLACE FUNCTION note.get_eval_inst_id_with_eval_label(evaluation_label text, timespan_label text) RETURNS integer AS $$
-SELECT ev.evaluation_id
-FROM note.evaluation_instance evi, note.evaluation ev, note.timespan t, note.educationnal_goal eg
-WHERE evi.evaluation_id = ev.evaluation_id AND ev.label = $1 AND
-	  evi.timespan_id = t.timespan_id AND t.label = $2;
+CREATE OR REPLACE FUNCTION note.get_eval_inst_id_with_eval_label(evaluation_label text, eg_instance_id integer) RETURNS integer AS $$
+	SELECT ev.evaluation_id
+	FROM note.evaluation_instance evi, note.evaluation ev, note.educationnal_goal eg
+	WHERE evi.evaluation_id = ev.evaluation_id AND ev.label = $1 AND
+		  evi.eg_instance_id = $2;
 $$ LANGUAGE SQL;
+
+
+CREATE OR REPLACE FUNCTION note.create_eg_instance_assigned(timespan_label text, eg_label text, group_label text, access_privilege_label text) RETURNS void AS $$
+	INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = $1 AND eg.label = $2);
+	INSERT INTO note.assigned_group (eg_instance_id, privilege_id, group_id, user_id)
+		SELECT egi.eg_instance_id, p.privilege_id, g.group_id, 1
+		FROM public.groups g, public.privilege p, ( select last_value as eg_instance_id from note.educationnal_goal_instance_eg_instance_id_seq ) egi
+		WHERE  g.label = $3 AND p.label = $4;
+$$ LANGUAGE SQL;
+
+/**
+	TODO change that, does not work and is only a copy
+*/
+-- CREATE OR REPLACE FUNCTION note.create_eval(eval_label text, eval_short_desc text, eval_type_label text, eg_label text) RETURNS void AS $$
+-- 	INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = $1 AND eg.label = $2);
+-- 	INSERT INTO note.assigned_group (eg_instance_id, privilege_id, group_id, user_id)
+-- 		SELECT egi.eg_instance_id, p.privilege_id, g.group_id, 1
+-- 		FROM public.groups g, public.privilege p, ( select last_value as eg_instance_id from note.educationnal_goal_instance_eg_instance_id_seq ) egi
+-- 		WHERE  g.label = $3 AND p.label = $4;
+-- $$ LANGUAGE SQL;
 
 
 --
@@ -6455,7 +6462,7 @@ CREATE TYPE note.t_semester AS (
 -- student semester function
 --
 CREATE OR REPLACE FUNCTION note.get_student_semester(administrative_user_id text) RETURNS SETOF note.t_semester AS $$
-SELECT vss.short_description, vss.label, vss.eg_id
+SELECT vss.short_description, vss.label, vss.eg_instance_id
   FROM note.v_student_semester vss
   WHERE vss.administrative_user_id = $1;
 $$ LANGUAGE SQL;
@@ -6519,13 +6526,17 @@ $$ LANGUAGE SQL;
 -- TODO : probably add a procedure to retrieve competence progress (ex : student has currently 50/300 of the total points for a competence)
 -- We could also include it in the competence_eval_result_t but it seems like a lot of information at the same time
 
-CREATE TYPE note.t_competence AS (ap_label text, competence_label text);
+CREATE TYPE note.t_competence AS (
+	ap_label text,
+	competence_label text
+);
 
 CREATE OR REPLACE FUNCTION note.get_semester_competences(student_id text, session_id int) RETURNS SETOF note.t_competence AS $$
   SELECT apsap.ap_desc, apsap.subap_desc
-  FROM note.v_semester_ap_hierarchy seap INNER JOIN note.v_ap_subap_hierarchy apsap
-  ON seap.ap_id = apsap.ap_id
-  WHERE seap.semester_id = $2
+  FROM note.v_semester_ap_hierarchy seap, note.v_ap_subap_hierarchy apsap, note.educationnal_goal_instance egi
+  WHERE egi.eg_instance_id = $2
+  	AND seap.semester_id = egi.eg_id
+  	AND seap.ap_id = apsap.ap_id
   ORDER BY apsap.ap_desc, apsap.subap_desc
 $$ LANGUAGE SQL;
 

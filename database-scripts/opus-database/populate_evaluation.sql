@@ -48,7 +48,7 @@ INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
          note.educationnal_goal eg
     WHERE eg.label = 'gen111-1';
 
-INSERT INTO note.evaluation_instance (evaluation_id, timespan_id, employee_id, occurence, registration, user_id)
+INSERT INTO note.evaluation_instance (evaluation_id, eg_instance_id, employee_id, occurence, registration, user_id)
   SELECT ev.evaluation_id, t.timespan_id, e.user_id, '2012-10-12', t.start_date, 1
   FROM note.evaluation ev, note.timespan t, public.employee e
   WHERE t.label = 'A12' AND ev.label = 'gegis1_app1_intra' AND e.employee_id = '04000001';
