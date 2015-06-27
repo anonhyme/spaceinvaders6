@@ -6421,11 +6421,13 @@ CREATE OR REPLACE FUNCTION note.get_criterion_id_with_rubric_label(label text) R
 $$ LANGUAGE SQL;
 
 
-CREATE OR REPLACE FUNCTION note.get_eval_inst_id_with_eval_label(evaluation_label text, eg_instance_id integer) RETURNS integer AS $$
+CREATE OR REPLACE FUNCTION note.get_eval_inst_id_with_eval_label(evaluation_label text, timespan_label text, educ_goal_label text) RETURNS integer AS $$
 	SELECT ev.evaluation_id
-	FROM note.evaluation_instance evi, note.evaluation ev, note.educationnal_goal eg
+	FROM note.evaluation_instance evi, note.evaluation ev, note.educationnal_goal_instance egi, note.educationnal_goal eg, note.timespan t
 	WHERE evi.evaluation_id = ev.evaluation_id AND ev.label = $1 AND
-		  evi.eg_instance_id = $2;
+		  egi.eg_instance_id = evi.eg_instance_id AND
+		  eg.eg_id = egi.eg_id AND eg.label = $3 AND
+		  egi.timespan_id = t.timespan_id AND t.label = $2;
 $$ LANGUAGE SQL;
 
 

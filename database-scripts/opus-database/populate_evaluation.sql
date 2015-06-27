@@ -49,15 +49,16 @@ INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
     WHERE eg.label = 'gen111-1';
 
 INSERT INTO note.evaluation_instance (evaluation_id, eg_instance_id, employee_id, occurence, registration, user_id)
-  SELECT ev.evaluation_id, t.timespan_id, e.user_id, '2012-10-12', t.start_date, 1
-  FROM note.evaluation ev, note.timespan t, public.employee e
-  WHERE t.label = 'A12' AND ev.label = 'gegis1_app1_intra' AND e.employee_id = '04000001';
+  SELECT ev.evaluation_id, egi.eg_instance_id, e.user_id, '2012-10-12', t.start_date, 1
+  FROM note.evaluation ev, note.timespan t, public.employee e, note.educationnal_goal_instance egi, note.educationnal_goal eg
+  WHERE egi.timespan_id = t.timespan_id AND t.label = 'A12' AND egi.eg_id = eg.eg_id AND eg.label = 'gegis1' AND
+  		ev.label = 'gegis1_app1_intra' AND e.employee_id = '04000001';
 
 INSERT INTO note.evaluated_group(evaluation_instance_id, group_id, registration, user_id)
-      SELECT evi.evaluation_instance_id, g.group_id, t.start_date, 1
-      FROM note.evaluation ev, note.evaluation_instance evi, note.timespan t, public.groups g
-      WHERE ev.evaluation_id = evi.evaluation_id AND ev.label = 'gegis1_app1_intra' AND
-            evi.timespan_id = t.timespan_id AND t.label = 'A12' AND g.label = 'GI58';
+      SELECT evi.evaluation_instance_id, g.group_id, now(), 1
+      FROM note.get_eval_inst_id_with_eval_label('gegis1_app1_intra', 'A12', 'gegis1') AS evi(evaluation_instance_id),
+      	   public.groups g
+      WHERE g.label = 'GI58';
 
 
 

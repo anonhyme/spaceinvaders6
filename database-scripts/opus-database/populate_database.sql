@@ -509,7 +509,6 @@ INSERT INTO note.administrative_element(program_id, label, description, registra
 /**
 	Add educationnal goal instance for group GI58
 */
-
 SELECT note.create_eg_instance_assigned('A12', 'gegis1', 'GI58', 'Accès membre');
 SELECT note.create_eg_instance_assigned('H13', 'gis2', 'GI58', 'Accès membre');
 SELECT note.create_eg_instance_assigned('A13', 'gis3', 'GI58', 'Accès membre');
