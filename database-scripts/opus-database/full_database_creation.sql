@@ -6439,16 +6439,40 @@ CREATE OR REPLACE FUNCTION note.create_eg_instance_assigned(timespan_label text,
 		WHERE  g.label = $3 AND p.label = $4;
 $$ LANGUAGE SQL;
 
+
+CREATE OR REPLACE FUNCTION note.create_rubric_and_criterion(eval_id integer, rubric_label text, rubric_short_desc text, course_label text, weighting integer) RETURNS void AS $$
+	INSERT INTO note.rubric (label, statement, validity_start, user_id) VALUES ($2, $3, now(), 1);
+
+	INSERT INTO note.evaluation_rubric (evaluation_id, rubric_id, user_id)
+		SELECT $1, r.rubric_id, 1
+		FROM (SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r;
+
+	INSERT INTO note.criterion(rubric_id, eg_id, weighting, validity_start, user_id)
+    SELECT r.rubric_id, eg.eg_id, $5, now(), 1
+    FROM (SELECT last_value AS rubric_id from note.rubric_rubric_id_seq ) r,
+         note.educationnal_goal eg
+    WHERE eg.label = $4;
+$$ LANGUAGE SQL;
+
+
+
 /**
-	TODO change that, does not work and is only a copy
+	Insert evaluation instance for a given group on a given timespan for a given evaluation
 */
--- CREATE OR REPLACE FUNCTION note.create_eval(eval_label text, eval_short_desc text, eval_type_label text, eg_label text) RETURNS void AS $$
--- 	INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = $1 AND eg.label = $2);
--- 	INSERT INTO note.assigned_group (eg_instance_id, privilege_id, group_id, user_id)
--- 		SELECT egi.eg_instance_id, p.privilege_id, g.group_id, 1
--- 		FROM public.groups g, public.privilege p, ( select last_value as eg_instance_id from note.educationnal_goal_instance_eg_instance_id_seq ) egi
--- 		WHERE  g.label = $3 AND p.label = $4;
--- $$ LANGUAGE SQL;
+CREATE OR REPLACE FUNCTION note.create_eval_inst_and_group(eval_label text, timespan_label text, semester_label text, eval_group_label text, occurence_time text, employee_id_label text) RETURNS void AS $$
+
+	INSERT INTO note.evaluation_instance (evaluation_id, eg_instance_id, employee_id, occurence, registration, user_id)
+	  SELECT ev.evaluation_id, egi.eg_instance_id, e.user_id, $5, t.start_date, 1
+	  FROM note.evaluation ev, note.timespan t, public.employee e, note.educationnal_goal_instance egi, note.educationnal_goal eg
+	  WHERE egi.timespan_id = t.timespan_id AND t.label = $2 AND egi.eg_id = eg.eg_id AND eg.label = $3 AND
+	  		ev.label = $1 AND e.employee_id = $6;
+
+	INSERT INTO note.evaluated_group(evaluation_instance_id, group_id, registration, user_id)
+      SELECT evi.evaluation_instance_id, g.group_id, now(), 1
+      FROM note.get_eval_inst_id_with_eval_label($1, $2, $3) AS evi(evaluation_instance_id),
+      	   public.groups g
+      WHERE g.label = $4;
+$$ LANGUAGE SQL;
 
 
 --
@@ -6485,9 +6509,6 @@ CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id int) 
     UNION ALL SELECT 'GEN402', 75, 73, 90
     UNION ALL SELECT 'GEN666', 42, 50, 110;
 $$ LANGUAGE SQL;
-
--- AP procedure example
--- SELECT * FROM get_ap_results('bedh2102', 'S5I');
 
 
 --
