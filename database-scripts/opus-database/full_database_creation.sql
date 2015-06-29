@@ -6413,6 +6413,7 @@ CREATE OR REPLACE VIEW note.v_ap_subap_hierarchy AS
 	    ON egt2.eg_type_id = eg2.eg_type_id
 	WHERE egt1.label = 'Ap' AND egt2.label = 'Compétence';
 
+
 CREATE OR REPLACE VIEW note.v_student_results_by_eg_instance AS
 	SELECT egi.eg_instance_id, r.student_id, evi.evaluation_id, c.eg_id, r.value, c.weighting
 	FROM note.educationnal_goal_instance egi, note.evaluation_instance evi, note.result r, note.criterion c
@@ -6420,7 +6421,32 @@ CREATE OR REPLACE VIEW note.v_student_results_by_eg_instance AS
 		  evi.evaluation_instance_id = r.evaluation_instance_id AND 
 		  c.criterion_id = r.criterion_id;
 
+/**
+	View that contains every results for every evaluation instance for every educational goal instance for every student.
+	The view also contains the average result and the maximum point of the particular educational goal.
+*/
+CREATE OR REPLACE VIEW note.v_student_total_results_with_avg_by_eg_instance AS
+	SELECT r2.eg_instance_id, r2.evaluation_id, r2.student_id, r2.eg_id, r2.result, r4.average, r2.total
+	FROM (SELECT r.eg_instance_id, r.evaluation_id, r.student_id, r.eg_id, SUM(r.value) AS result, SUM(r.weighting) AS total 
+		  FROM note.v_student_results_by_eg_instance r 
+		  GROUP BY r.eg_id, r.eg_instance_id, r.student_id, r.evaluation_id 
+		  ORDER BY r.evaluation_id, r.student_id, r.eg_id) r2, 
+		 (SELECT r3.eg_instance_id, r3.evaluation_id, r3.eg_id, AVG(r3.result) AS average 
+		  FROM  (SELECT r.eg_instance_id, r.evaluation_id, r.student_id, r.eg_id, SUM(r.value) AS result, SUM(r.weighting) AS total 
+			     FROM note.v_student_results_by_eg_instance r 
+			     GROUP BY r.eg_id, r.eg_instance_id, r.student_id, r.evaluation_id 
+			     ORDER BY r.evaluation_id, r.student_id, r.eg_id) r3
+		  GROUP BY r3.eg_instance_id, r3.evaluation_id, r3.eg_id 
+		  ORDER BY r3.eg_instance_id, r3.evaluation_id, r3.eg_id) r4
+	WHERE r2.eg_instance_id = r4.eg_instance_id AND r2.evaluation_id = r4.evaluation_id AND r2.eg_id = r4.eg_id
+	ORDER BY r2.eg_instance_id, r2.evaluation_id, r2.student_id, r2.eg_id;
 
+
+/**
+	Function that return a unique criterion id given a particular rubric label
+	Ex:
+	SELECT * FROM note.get_criterion_id_with_rubric_label('gegis1_app1_intra_q1');
+*/
 CREATE OR REPLACE FUNCTION note.get_criterion_id_with_rubric_label(label text) RETURNS integer AS $$
 	SELECT c.criterion_id
 	FROM note.criterion c, note.rubric r
@@ -6428,6 +6454,11 @@ CREATE OR REPLACE FUNCTION note.get_criterion_id_with_rubric_label(label text) R
 $$ LANGUAGE SQL;
 
 
+/**
+	Function that return an evaluation instance id given the evaluation label, the timespan label and the semester label
+	Ex: 
+	SELECT * FROM note.get_eval_inst_id_with_eval_label('gegis1_app1_intra', 'A12', 'gegis1');
+*/
 CREATE OR REPLACE FUNCTION note.get_eval_inst_id_with_eval_label(evaluation_label text, timespan_label text, educ_goal_label text) RETURNS integer AS $$
 	SELECT ev.evaluation_id
 	FROM note.evaluation_instance evi, note.evaluation ev, note.educationnal_goal_instance egi, note.educationnal_goal eg, note.timespan t
