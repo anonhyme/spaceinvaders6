@@ -6413,6 +6413,13 @@ CREATE OR REPLACE VIEW note.v_ap_subap_hierarchy AS
 	    ON egt2.eg_type_id = eg2.eg_type_id
 	WHERE egt1.label = 'Ap' AND egt2.label = 'Compétence';
 
+CREATE OR REPLACE VIEW note.v_student_results_by_eg_instance AS
+	SELECT egi.eg_instance_id, r.student_id, evi.evaluation_id, c.eg_id, r.value, c.weighting
+	FROM note.educationnal_goal_instance egi, note.evaluation_instance evi, note.result r, note.criterion c
+	WHERE egi.eg_instance_id = evi.eg_instance_id AND
+		  evi.evaluation_instance_id = r.evaluation_instance_id AND 
+		  c.criterion_id = r.criterion_id;
+
 
 CREATE OR REPLACE FUNCTION note.get_criterion_id_with_rubric_label(label text) RETURNS integer AS $$
 	SELECT c.criterion_id

@@ -85,26 +85,36 @@ SELECT note.create_eval_inst_and_group('gegis1_app1_intra', 'A12', 'gegis1', 'GI
 		Give student their note
  */
 
-INSERT INTO note.results (criterion_id, evaluation_instance_id, student id, value, user_id)
+INSERT INTO note.result (criterion_id, evaluation_instance_id, student_id, value, user_id)
 	SELECT c.criterion_id, evi.evaluation_instance_id, u.user_id, 60, 1
 	FROM (SELECT * FROM note.get_criterion_id_with_rubric_label('gegis1_app1_intra_q1')) AS c(criterion_id),
 		 (SELECT * FROM note.get_eval_inst_id_with_eval_label('gegis1_app1_intra', 'A12', 'gegis1')) AS evi(evaluation_instance_id),
 		 public.users u
 	WHERE u.administrative_user_id = 'foum2413';
 
-INSERT INTO note.results (criterion_id, evaluation_instance_id, student id, value, user_id)
+INSERT INTO note.result (criterion_id, evaluation_instance_id, student_id, value, user_id)
 	SELECT c.criterion_id, evi.evaluation_instance_id, u.user_id, 60, 1
 	FROM (SELECT * FROM note.get_criterion_id_with_rubric_label('gegis1_app1_intra_q2')) AS c(criterion_id),
 		 (SELECT * FROM note.get_eval_inst_id_with_eval_label('gegis1_app1_intra', 'A12', 'gegis1')) AS evi(evaluation_instance_id),
 		 public.users u
 	WHERE u.administrative_user_id = 'foum2413';
 
-INSERT INTO note.results (criterion_id, evaluation_instance_id, student id, value, user_id)
+INSERT INTO note.result (criterion_id, evaluation_instance_id, student_id, value, user_id)
 	SELECT c.criterion_id, evi.evaluation_instance_id, u.user_id, 60, 1
 	FROM (SELECT * FROM note.get_criterion_id_with_rubric_label('gegis1_app1_intra_q3')) AS c(criterion_id),
 		 (SELECT * FROM note.get_eval_inst_id_with_eval_label('gegis1_app1_intra', 'A12', 'gegis1')) AS evi(evaluation_instance_id),
 		 public.users u
 	WHERE u.administrative_user_id = 'foum2413';
+
+
+/**
+	Get all the evaluation results given an educationnal goal instance
+*/
+
+SELECT egi.eg_instance_id, r.student_id, ev.short_description, eg.label, r.value, c.weighting 
+FROM note.educationnal_goal_instance egi, note.evaluation_instance evi, note.evaluation ev, note.result r, note.criterion c, note.educationnal_goal eg
+WHERE egi.eg_instance_id = evi.eg_instance_id AND  evi.evaluation_id = ev.evaluation_id AND
+	  evi.evaluation_instance_id = r.evaluation_instance_id AND c.criterion_id = r.criterion_id AND c.eg_id = eg.eg_id;
 
 
 
