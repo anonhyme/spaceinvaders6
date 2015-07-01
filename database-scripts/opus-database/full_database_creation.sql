@@ -6565,6 +6565,27 @@ $$ LANGUAGE plpgsql;
 
 
 
+CREATE OR REPLACE FUNCTION note.insert_educ_goal_with_hierarchy(eg_label text, eg_short_desc text, eg_description text, eg_type_label text, eg_hierarchy text) RETURNS VOID AS $$
+DECLARE
+    eg_array text ARRAY;
+    eg text;
+BEGIN
+	eg_array = regexp_split_to_array(eg_hierarchy, ',');
+
+	INSERT INTO note.educationnal_goal(label, short_description, description, validity_start, user_id, eg_type_id)
+	SELECT $1, $2, $3, now(), 1, egt.eg_type_id
+		FROM note.educationnal_goal_type egt
+		WHERE egt.label = $4;
+
+    FOREACH eg IN ARRAY eg_array LOOP
+    	INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = eg);
+    	RAISE NOTICE 'Made % parent of %', eg, $1;
+    END LOOP;
+
+    RETURN;
+END;
+$$ LANGUAGE plpgsql;
+
 --
 -- Semester type
 --
@@ -6604,7 +6625,7 @@ $$ LANGUAGE SQL;
 --
 -- Semester types and procedures
 --
-CREATE OR REPLACE TYPE note.t_competence_eval_result AS (
+CREATE TYPE note.t_competence_eval_result AS (
   eval_label text,
   course_label text,
   competence_label text,
@@ -6627,8 +6648,8 @@ $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION note.get_ap_eval_results(student_id text, session_id int, ap_id int) RETURNS SETOF note.t_competence_eval_result AS $$
   -- TODO : CREATE SELECT STATEMENT
-  SELECT           'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75, 85, 3
-  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73, 110, 4;
+  SELECT           'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75.0::double precision, 85, 3
+  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73.0::double precision, 110, 4;
 $$ LANGUAGE SQL;
 
 -- Ap results procedure example
