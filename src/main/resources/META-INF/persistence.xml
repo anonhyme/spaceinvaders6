@@ -12,7 +12,8 @@
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="opus"/>
             <property name="javax.persistence.jdbc.password" value="opus102"/>
-            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://thunder.servebeer.com:5433/S6_PROJET_P02"/>
+            <property name="eclipselink.jdbc.url"
+                      value="jdbc:postgresql://thunder.servebeer.com:5433/S6_PROJET_P02"/>
             <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="eclipselink.jdbc.user" value="opus"/>
             <property name="eclipselink.jdbc.password" value="opus102"/>

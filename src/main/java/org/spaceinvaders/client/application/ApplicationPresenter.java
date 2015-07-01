@@ -1,10 +1,9 @@
 package org.spaceinvaders.client.application;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
 
-import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
@@ -14,17 +13,23 @@ import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
+import org.spaceinvaders.client.application.widgets.menu.MenuPresenter;
+
 import javax.inject.Inject;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
 
     public interface MyView extends View {
         void showLoading(boolean visibile);
+
+        void addMenu(IsWidget menu);
     }
 
 
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_SetMainContent = new Type<>();
+
+    public final MenuPresenter menuPresenter;
 
     @ProxyStandard
     public interface MyProxy extends Proxy<ApplicationPresenter> {
@@ -33,8 +38,9 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Inject
     ApplicationPresenter(EventBus eventBus,
                          MyView view,
-                         MyProxy proxy) {
+                         MyProxy proxy, MenuPresenter menuPresenter) {
         super(eventBus, view, proxy, RevealType.Root);
+        this.menuPresenter = menuPresenter;
     }
 
     @ProxyEvent
@@ -45,6 +51,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     @Override
     protected void onBind() {
         super.onBind();
-        GWT.log("Hello !");
+        getView().addMenu(menuPresenter);
     }
 }

@@ -6,6 +6,7 @@
              style="position:absolute; top:0; left:0; background-color:yellow;">
             Loading...
         </div>
+        <g:HTMLPanel ui:field="menuPanel"/>
         <g:SimplePanel ui:field="mainContentPanel"/>
     </g:HTMLPanel>
 </ui:UiBinder>

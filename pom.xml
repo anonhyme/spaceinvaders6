@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.spaceinvaders</groupId>
-    <artifactId>projetS6</artifactId>
+    <artifactId>Notus</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>GWTP web application</name>
@@ -27,11 +27,14 @@
         <gwt.style>OBF</gwt.style>
 
         <!-- server -->
-        <guice.version>4.0</guice.version>
+        <guice.version>3.0</guice.version>
         <gae.version>1.9.2</gae.version>
         <servlet-api.version>3.1.0</servlet-api.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <guava-version>18.0</guava-version>
+        <arcbees.version>1.2</arcbees.version>
+        <resteasy.version>3.0.9.Final</resteasy.version>
+        <jax-rs.version>1.1.1</jax-rs.version>
 
         <!-- testing -->
         <junit.version>4.12</junit.version>
@@ -114,9 +117,9 @@
                     <appEngineVersion>${gae.version}</appEngineVersion>
                     <appEngineHome>${gae.home}</appEngineHome>
 
-                    <runTarget>ProjetS6.html</runTarget>
+                    <runTarget>Notus.html</runTarget>
                     <modules>
-                        <module>org.spaceinvaders.ProjetS6</module>
+                        <module>org.spaceinvaders.Notus</module>
                     </modules>
                 </configuration>
                 <executions>
@@ -200,7 +203,7 @@
                         <artifactId>appengine-tools-sdk</artifactId>
                         <version>${gae.version}</version>
                     </dependency>
-                </dependencies>
+                    </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -327,6 +330,62 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1201-jdbc41</version>
+            </dependency>
+
+        <!-- rest dispatch -->
+        <dependency>
+        <groupId>com.gwtplatform</groupId>
+        <artifactId>gwtp-dispatch-rest</artifactId>
+        <version>1.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rest-shared</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform.extensions</groupId>
+            <artifactId>dispatch-rest-delegates</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arcbees</groupId>
+            <artifactId>guicy-resteasy</artifactId>
+            <version>${arcbees.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-guice</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>${jax-rs.version}</version>
+            <!-- Provided because RestEasy has its own implementation -->
+            <scope>provided</scope>
         </dependency>
 
         <!-- Other -->
@@ -342,14 +401,26 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
+        <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jukito</groupId>
             <artifactId>jukito</artifactId>
             <version>${jukito.version}</version>
-            <scope>test</scope>
+        <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.gwt-charts</groupId>
+            <artifactId>gwt-charts</artifactId>
+            <version>0.9.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javadev</groupId>
+            <artifactId>underscore</artifactId>
+            <version>1.2</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.jasig.cas.client</groupId>
@@ -367,7 +438,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
+    <repository>
             <id>sonatype.snapshots</id>
             <name>Sonatype snapshot repository</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>

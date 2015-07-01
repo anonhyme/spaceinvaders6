@@ -1,4 +1,3 @@
-
 package org.spaceinvaders.client.resources;
 
 import javax.inject.Inject;

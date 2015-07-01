@@ -1,58 +1,71 @@
 package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.TreeMap;
 
 public class Evaluation implements Serializable {
-    private String evaluationLabel;
-    private TreeMap<String, CompetenceEvalResult> competenceEvalResultMap;
+    private String label;
+    private int id;
 
-    public Evaluation(String label) {
-        this.evaluationLabel = label;
-        this.competenceEvalResultMap = new TreeMap<>();
+    private TreeMap<String, Result> results; // key is competenceLabel
+
+    public Evaluation(String label, int id) {
+        this.label = label;
+        this.id = id;
+        results = new TreeMap<>();
     }
 
     public Evaluation() {
-        this.evaluationLabel = "";
-        this.competenceEvalResultMap = new TreeMap<>();
+        results = new TreeMap<>();
     }
 
-    public void setCompetenceEvalResult(CompetenceEvalResult competenceEvalResult) {
-        String competenceLabel = competenceEvalResult.getCompetenceLabel();
-        if (!competenceEvalResultMap.containsKey(competenceLabel)) {
-            competenceEvalResultMap.put(competenceLabel, competenceEvalResult);
-        }
+    public String getLabel() {
+        return label;
     }
 
-    public CompetenceEvalResult getCompetenceEvalResult(String competenceLabel) {
-        if (competenceEvalResultMap.containsKey(competenceLabel)) {
-            return competenceEvalResultMap.get(competenceLabel);
-        }
-
-        return null;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public TreeMap<String, CompetenceEvalResult> getCompetenceEvalResults() {
-        return competenceEvalResultMap;
+    public int getId() {
+        return id;
     }
 
-    public String getEvaluationLabel() {
-        return evaluationLabel;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEvaluationLabel(String label) {
-        this.evaluationLabel = label;
+    public TreeMap<String, Result> getResults() {
+        return results;
     }
 
-    public static SortedMap<String, Evaluation> getEvaluations(List<CompetenceEvalResult> competenceEvalResults) {
-        SortedMap<String, Evaluation> map = new TreeMap<>();
-        for (CompetenceEvalResult competenceResult : competenceEvalResults) {
-            String evalLabel = competenceResult.getEvalLabel();
-            if (!map.containsKey(evalLabel)) {
-                map.put(evalLabel, new Evaluation(evalLabel));
+    public void setResults(TreeMap<String, Result> results) {
+        this.results = results;
+    }
+
+    public Result getResult(String competenceLabel) {
+        return results.get(competenceLabel);
+    }
+
+    public Result getApResult(Ap ap) {
+        // For each evaluation
+        Result r = new Result();
+        for (String competenceLabel : results.keySet()) {
+            if (ap.getCompetencesStrings().contains(competenceLabel)) {
+                Result temp = results.get(competenceLabel);
+                r.addToMaxTotal(temp.getMaxTotal());
+                r.addToAvgTotal(temp.getAvgTotal());
+                r.addToStudentTotal(temp.getStudentTotal());
             }
-            map.get(evalLabel).setCompetenceEvalResult(competenceResult);
         }
-        return map;
+        return r;
     }
+
+    public void addResult(String competenceLabel, Result result) {
+        if (!results.containsKey(competenceLabel)) {
+            results.put(competenceLabel, result);
+        }
+    }
+
+
 }

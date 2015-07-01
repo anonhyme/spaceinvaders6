@@ -6,12 +6,15 @@ import com.google.inject.persist.Transactional;
 
 import org.spaceinvaders.server.entities.CompetenceEntity;
 import org.spaceinvaders.server.entities.EvaluationEntity;
+import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
@@ -24,7 +27,6 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         this.entityManagerProvider = entityManagerProvider;
     }
 
-    @Override
     @Transactional
     public List<EvaluationEntity> getSemesterEvals(String cip, int semesterID) {
         EntityManager entityManager = entityManagerProvider.get();
@@ -38,7 +40,6 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         return query.getResultList();
     }
 
-    @Override
     @Transactional
     public List<CompetenceEntity> getSemesterCompetences(String cip, int semesterID) {
         EntityManager entityManager = entityManagerProvider.get();
@@ -53,43 +54,43 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
     }
 
     public SemesterInfo getSemesterInfo(String cip, int semesterID) {
-        List<Evaluation> evals = EvaluationEntitiesToDtos((getSemesterEvals(cip, semesterID)));
-        List<Competence> competences = CompetenceEntitiesToDtos(getSemesterCompetences(cip, semesterID));
+        List<EvaluationEntity> evals = (getSemesterEvals(cip, semesterID));
+        List<CompetenceEntity> competences = getSemesterCompetences(cip, semesterID);
+
+        int i = 0;
+        Map<String, Evaluation> evalsMap = new TreeMap<>();
+        for (EvaluationEntity eval : evals) {
+            String evalLabel = eval.getEvaluationLabel();
+
+            if (!evalsMap.containsKey(evalLabel)) {
+                evalsMap.put(evalLabel, new Evaluation(evalLabel, i++));
+            }
+        }
+
+        i = 0;
+        Map<String, Ap> apMap = new TreeMap<>();
+        for (CompetenceEntity competence : competences) {
+            String apLabel = competence.getApLabel();
+
+            if (!apMap.containsKey(apLabel)) {
+                apMap.put(apLabel, new Ap(apLabel, i++, new ArrayList<Competence>()));
+            }
+        }
+
+        i = 0;
+        for (CompetenceEntity competence : competences) {
+            Ap ap = apMap.get(competence.getApLabel());
+            String competenceLabel = competence.getCompetenceLabel();
+
+            if (!ap.getCompetencesStrings().contains(competence.getCompetenceLabel())) {
+                ap.getCompetences().add(new Competence(competenceLabel, i++));
+            }
+        }
 
         SemesterInfo semesterInfo = new SemesterInfo();
-        semesterInfo.setCompetences(competences);
-        semesterInfo.setEvals(evals);
+        semesterInfo.setAps(new ArrayList<Ap>(apMap.values()));
+        semesterInfo.setEvals(new ArrayList<Evaluation>(evalsMap.values()));
 
         return semesterInfo;
-    }
-
-    public List<Evaluation> EvaluationEntitiesToDtos(List<EvaluationEntity> entities) {
-        List<Evaluation> dtos = new ArrayList<>();
-        for (EvaluationEntity entity : entities) {
-            dtos.add(EvaluationEntityToDto(entity));
-        }
-        return dtos;
-    }
-
-    public List<Competence> CompetenceEntitiesToDtos(List<CompetenceEntity> entities) {
-        List<Competence> dtos = new ArrayList<>();
-        for (CompetenceEntity entity : entities) {
-            dtos.add(CompetenceEntityToDto(entity));
-        }
-        return dtos;
-    }
-
-    // TODO : I think that all this Dto business is ugly (needs to be tested if it stays this way)
-    public Competence CompetenceEntityToDto(CompetenceEntity entity) {
-        Competence dto = new Competence();
-        dto.setApLabel(entity.getApLabel());
-        dto.setCompetenceLabel(entity.getCompetenceLabel());
-        return dto;
-    }
-
-    public Evaluation EvaluationEntityToDto(EvaluationEntity entity) {
-        Evaluation dto = new Evaluation();
-        dto.setEvaluationLabel(entity.getEvaluationLabel());
-        return dto;
     }
 }

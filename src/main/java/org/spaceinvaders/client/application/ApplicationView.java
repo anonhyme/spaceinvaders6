@@ -4,6 +4,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -18,6 +19,9 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 
     @UiField
     Element loadingMessage;
+
+    @UiField
+    HTMLPanel menuPanel;
 
     @UiField
     SimplePanel mainContentPanel;
@@ -39,5 +43,10 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     @Override
     public void showLoading(boolean visibile) {
         loadingMessage.getStyle().setVisibility(visibile ? Style.Visibility.VISIBLE : Style.Visibility.HIDDEN);
+    }
+
+    @Override
+    public void addMenu(IsWidget menu) {
+        menuPanel.add(menu);
     }
 }
