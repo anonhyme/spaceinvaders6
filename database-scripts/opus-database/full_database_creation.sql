@@ -6500,7 +6500,7 @@ $$ LANGUAGE SQL;
 CREATE OR REPLACE FUNCTION note.create_eval_inst_and_group(eval_label text, timespan_label text, semester_label text, eval_group_label text, occurence_time text, employee_id_label text) RETURNS void AS $$
 
 	INSERT INTO note.evaluation_instance (evaluation_id, eg_instance_id, employee_id, occurence, registration, user_id)
-	  SELECT ev.evaluation_id, egi.eg_instance_id, e.user_id, $5, t.start_date, 1
+	  SELECT ev.evaluation_id, egi.eg_instance_id, e.user_id, $5::date, t.start_date, 1
 	  FROM note.evaluation ev, note.timespan t, public.employee e, note.educationnal_goal_instance egi, note.educationnal_goal eg
 	  WHERE egi.timespan_id = t.timespan_id AND t.label = $2 AND egi.eg_id = eg.eg_id AND eg.label = $3 AND
 	  		ev.label = $1 AND e.employee_id = $6;
@@ -6511,6 +6511,58 @@ CREATE OR REPLACE FUNCTION note.create_eval_inst_and_group(eval_label text, time
       	   public.groups g
       WHERE g.label = $4;
 $$ LANGUAGE SQL;
+
+
+/**
+	Create random result for ewverybody that is associated with an educational goal instance.
+	You can adjust the minimal result by adding an offset (from 0.0 to 1.0).
+*/
+CREATE OR REPLACE FUNCTION note.randomize_student_result(eg_instance_id int, min_value double precision) RETURNS VOID AS $$
+DECLARE
+    eval RECORD;
+    criterion RECORD;
+    student RECORD;
+    max_result int;
+    result int;
+BEGIN
+    RAISE NOTICE 'Fetching evals...';
+
+    FOR eval IN SELECT * FROM note.evaluation_instance evi WHERE evi.eg_instance_id = $1 LOOP
+
+        RAISE NOTICE 'Eval id is:%', to_char(eval.evaluation_instance_id, '999');
+
+
+        FOR criterion IN 
+        SELECT c.criterion_id, ru.statement, c.weighting
+        FROM note.evaluation_instance evi, note.evaluation ev, note.evaluation_rubric ev_ru, note.rubric ru, note.criterion c 
+        WHERE evi.evaluation_id = ev.evaluation_id AND ev.evaluation_id = ev_ru.evaluation_id AND ev_ru.rubric_id = ru.rubric_id AND evi.evaluation_instance_id = eval.evaluation_instance_id AND ru.rubric_id = c.rubric_id 
+        LOOP
+
+        	RAISE NOTICE '	Rubric label is:%', criterion.statement;
+        	max_result := criterion.weighting;
+
+        	FOR student IN 
+        	SELECT u.user_id, u.administrative_user_id
+			FROM note.educationnal_goal_instance egi, note.assigned_group ag, public.user_group u_gr, public.users u
+			WHERE egi.eg_instance_id = $1 AND ag.eg_instance_id = egi.eg_instance_id AND ag.group_id = u_gr.group_id AND u_gr.member_id = u.user_id LOOP
+
+				result = round((random()*max_result*(1.0-min_value)) + (min_value*max_result))::integer;
+        		RAISE NOTICE '		% had %', student.administrative_user_id, result;
+
+        		INSERT INTO note.result (criterion_id, evaluation_instance_id, student_id, value, user_id)
+				SELECT criterion.criterion_id, eval.evaluation_instance_id, student.user_id, result, 1;
+        	
+    		END LOOP;
+        
+    	END LOOP;
+        
+    END LOOP;
+
+    RAISE NOTICE 'Done fetching evaluation instance for educational goal instance.';
+    RETURN;
+END;
+$$ LANGUAGE plpgsql;
+
 
 
 --
@@ -6552,23 +6604,22 @@ $$ LANGUAGE SQL;
 --
 -- Semester types and procedures
 --
-CREATE TYPE note.t_competence_eval_result AS (
+CREATE OR REPLACE TYPE note.t_competence_eval_result AS (
   eval_label text,
   course_label text,
   competence_label text,
   result_value int,
-  avg_result_value int,
+  avg_result_value double precision,
   max_result_value int,
   standard_dev int
 );
 
 CREATE OR REPLACE FUNCTION note.get_semester_eval_results(student_id text, session_id int) RETURNS SETOF note.t_competence_eval_result AS $$
-  -- TODO : CREATE SELECT STATEMENT
-  SELECT           'Sommatif APP2', 'GEN501', 'GEN501-1', 80, 75, 120, 6
-  UNION ALL SELECT 'Sommatif APP2', 'GEN501', 'GEN501-2', 56, 50, 70, 5
-  UNION ALL SELECT 'Sommatif APP2', 'GEN402', 'GEN402-1', 74, 70, 75, 11
-  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75, 85, 3
-  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73, 110, 4;
+  
+	SELECT ev.short_description, ap_subap_h.ap_desc, ap_subap_h.subap_desc, r.result::int, r.average, r.total::int, 1
+	FROM note.v_student_total_results_with_avg_by_eg_instance r, note.evaluation ev, public.users u, note.v_ap_subap_hierarchy ap_subap_h
+	WHERE r.evaluation_id = ev.evaluation_id AND r.student_id = u.user_id AND u.administrative_user_id = $1 AND
+		  r.eg_id = ap_subap_h.subap_id AND r.eg_instance_id = $2;
 $$ LANGUAGE SQL;
 
 -- Semester procedure example
