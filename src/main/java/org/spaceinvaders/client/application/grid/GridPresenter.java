@@ -2,10 +2,12 @@ package org.spaceinvaders.client.application.grid;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+
 import org.spaceinvaders.client.application.grid.events.SemesterGradesReceivedEvent;
 import org.spaceinvaders.client.application.grid.events.SemesterInfoReceivedEvent;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
@@ -27,6 +29,7 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
 
     interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations);
+
         void addCellPresenter(WidgetsFactory widgetsFactory);
     }
 
@@ -57,7 +60,7 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
 
     protected void onBind() {
         super.onBind();
-            registerHandlers();
+        registerHandlers();
     }
 
     private void registerHandlers() {
@@ -78,25 +81,26 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     }
 
     private void fetchSemesterInfo(int semesterID) {
-        final GridPresenter _this = this;
         semesterInfoDelegate
                 .withCallback(new AbstractAsyncCallback<SemesterInfo>() {
                     @Override
                     public void onSuccess(SemesterInfo semesterInfo) {
-                        SemesterInfoReceivedEvent.fire(semesterInfo, _this);
+                        SemesterInfoReceivedEvent.fire(semesterInfo, getThis());
                     }
                 }).get(semesterID);
     }
 
     private void fetchSemesterGrades() {
-        final GridPresenter _this = this;
         semesterGradesDelegate
                 .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
                     @Override
                     public void onSuccess(TreeMap<String, Evaluation> evaluations) {
-                        SemesterGradesReceivedEvent.fire(evaluations, _this);
+                        SemesterGradesReceivedEvent.fire(evaluations, getThis());
                     }
                 }).getAllEvaluations(3);
+    }
+    private GridPresenter getThis(){
+        return this;
     }
 
 //    private native boolean isjQueryLoaded() /*-{

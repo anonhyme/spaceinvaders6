@@ -7,7 +7,6 @@ import org.spaceinvaders.client.application.menu.MenuView;
 import org.spaceinvaders.client.application.semester.SemesterModule;
 import org.spaceinvaders.client.widgets.cell.CellModule;
 
-
 public class ApplicationModule extends AbstractPresenterModule {
     @Override
     protected void configure() {

@@ -8,7 +8,6 @@
 
         <b:Container ui:field="alertBitchContainer"></b:Container>
         <b:Container ui:field="containerCellTable"/>
-        <!--<a data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Hello</a>-->
 
     </g:HTMLPanel>
 </ui:UiBinder>

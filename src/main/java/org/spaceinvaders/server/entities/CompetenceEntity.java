@@ -1,6 +1,13 @@
 package org.spaceinvaders.server.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.Table;
 
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
@@ -40,13 +47,20 @@ public class CompetenceEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CompetenceEntity that = (CompetenceEntity) o;
 
-        if (apLabel != null ? !apLabel.equals(that.apLabel) : that.apLabel != null) return false;
-        return !(competenceLabel != null ? !competenceLabel.equals(that.competenceLabel) : that.competenceLabel != null);
+        if (apLabel != null ? !apLabel.equals(that.apLabel) : that.apLabel != null) {
+            return false;
+        }
+        return !(competenceLabel != null ?
+                !competenceLabel.equals(that.competenceLabel) : that.competenceLabel != null);
 
     }
 

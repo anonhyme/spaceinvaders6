@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cellGwt;
+package org.spaceinvaders.client.widgets.cellGwt.templates;
 
 import com.arcbees.gquery.tooltip.client.TooltipResources;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -37,7 +37,6 @@ public class TooltipCellWidget extends Composite {
     public void setData(String data) {
         Label label = new Label(data);
         this.data = data;
-
         container.add(label);
 
     }

@@ -1,14 +1,15 @@
 package org.spaceinvaders.server.api;
 
+import java.util.List;
+import java.util.TreeMap;
+
 import com.google.inject.Inject;
 import org.spaceinvaders.server.cas.UserSessionImpl;
+
 import org.spaceinvaders.server.dao.CompetenceEvalResultDao;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
-
-import java.util.List;
-import java.util.TreeMap;
 
 public class SemesterGradesResourceImpl implements SemesterGradesResource {
     private UserSessionImpl userSession;
@@ -24,7 +25,8 @@ public class SemesterGradesResourceImpl implements SemesterGradesResource {
 
     @Override
     public TreeMap<String, Evaluation> getAllEvaluations(int semesterID) {
-        List<CompetenceEvalResult> results = competenceEvalResultDao.getSemesterResults(userSession.getUserId(), semesterID);
+        List<CompetenceEvalResult> results = competenceEvalResultDao.
+                getSemesterResults(userSession.getUserId(), semesterID);
         return Evaluation.getEvaluations(results);
     }
 

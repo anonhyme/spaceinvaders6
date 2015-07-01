@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.spaceinvaders</groupId>
-    <artifactId>Notus</artifactId>
+    <artifactId>web-application</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <packaging>war</packaging>
-    <name>GWTP web application</name>
+    <packaging>pom</packaging>
 
     <!-- http://dev.arcbees.com/gwtp/resources/ -->
+    <modules>
+        <module>Notus</module>
+    </modules>
 
     <properties>
         <!-- client -->
@@ -18,29 +19,21 @@
         <gwtp.version>1.4</gwtp.version>
         <gin.version>2.1.2</gin.version>
         <bootstrap.version>0.9.1</bootstrap.version>
+        <gsss.version>1.0</gsss.version>
+        <gwtchosen.version>2.0.0</gwtchosen.version>
         <gquery.version>1.4.3</gquery.version>
         <gwt-charts.version>0.9.10</gwt-charts.version>
-        <arcbees-tooltips.version>1.1</arcbees-tooltips.version>
-        <gwt.style>PRETTY</gwt.style>
-        <!--
-            * PRETTY
-            * OBF
-            * DETAILED
-        -->
+        <gwt.style>OBF</gwt.style>
 
         <!-- server -->
-        <gae.version>1.9.2</gae.version>
         <guice.version>3.0</guice.version>
-        <eclipse-link.version>2.6.0</eclipse-link.version>
+        <gae.version>1.9.2</gae.version>
         <servlet-api.version>3.1.0</servlet-api.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <guava-version>18.0</guava-version>
         <arcbees.version>1.2</arcbees.version>
         <resteasy.version>3.0.9.Final</resteasy.version>
         <jax-rs.version>1.1.1</jax-rs.version>
-        <gwtp-rest.version>1.4</gwtp-rest.version>
-        <postgresql.version>9.4-1201-jdbc41</postgresql.version>
-        <cas.version>3.3.3</cas.version>
 
         <!-- testing -->
         <junit.version>4.12</junit.version>
@@ -68,221 +61,8 @@
         <gae.home>
             ${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}/appengine-java-sdk-${gae.version}
         </gae.home>
-
     </properties>
 
-    <dependencies>
-
-        <!--CLIENT DEPENDENCIES
-                * GWTP
-                * GWT
-                * GIN
-                * GQuery
-                * Bootstrap
-                * Gwt Charts
-            -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-mvp-client</artifactId>
-            <version>${gwtp.version}</version>
-        </dependency>
-
-        <!--TODO: Why rpc's still used?? -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rpc-client</artifactId>
-            <version>${gwtp.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.gwt.inject</groupId>
-            <artifactId>gin</artifactId>
-            <version>${gin.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.gwtquery</groupId>
-            <artifactId>gwtquery</artifactId>
-            <version>${gquery.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.arcbees.gquery</groupId>
-            <artifactId>tooltip</artifactId>
-            <version>${arcbees-tooltips.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.gwtbootstrap3</groupId>
-            <artifactId>gwtbootstrap3</artifactId>
-            <version>${bootstrap.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.gwt-charts</groupId>
-            <artifactId>gwt-charts</artifactId>
-            <version>${gwt-charts.version}</version>
-        </dependency>
-        <!-- CLIENT DEPENDENCIES END -->
-
-
-        <!-- SERVER DEPENDENCIES -->
-        <!--TODO: check why rpc still in use -->
-
-        <!-- CAS -->
-        <dependency>
-            <groupId>org.jasig.cas.client</groupId>
-            <artifactId>cas-client-core</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
-
-        <!-- GWTP RPC -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
-            <version>${gwtp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
-            <version>${gwtp.version}</version>
-        </dependency>
-
-        <!--GUICE-->
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>${guice.version}</version>
-        </dependency>
-
-        <!-- GUICE EXT-->
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-servlet</artifactId>
-            <version>${guice.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-assistedinject</artifactId>
-            <version>${guice.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-persist</artifactId>
-            <version>${guice.version}</version>
-        </dependency>
-
-        <!-- POSTGRESQL dependencies -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
-
-        <!-- ECLIPSE LINK -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>${eclipse-link.version}</version>
-        </dependency>
-
-        <!-- REST DISPATCH -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rest</artifactId>
-            <version>${gwtp-rest.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rest-shared</artifactId>
-            <version>${gwtp-rest.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform.extensions</groupId>
-            <artifactId>dispatch-rest-delegates</artifactId>
-            <version>${gwtp-rest.version}</version>
-        </dependency>
-
-        <!-- REST DEPENDENCY -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava-gwt</artifactId>
-            <version>${guava-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.arcbees</groupId>
-            <artifactId>guicy-resteasy</artifactId>
-            <version>${arcbees.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-guice</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
-        <!-- Provided because RestEasy has its own implementation -->
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <version>${jax-rs.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Javax Servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- TEST -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jukito</groupId>
-            <artifactId>jukito</artifactId>
-            <version>${jukito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Tester component -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-tester</artifactId>
-            <version>${gwtp.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
 
     <repositories>
         <!-- Use GWTP snapshots for the latest and greatest -->
@@ -320,7 +100,6 @@
                     <proc>none</proc>
                 </configuration>
             </plugin>
-
 
             <!-- JUnit Testing - skip *.GwtTest cases -->
             <!-- 'mvn TestJstype' - runs the Jukito tests -->
@@ -492,14 +271,220 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>dev-mock</id>
-        </profile>
-        <profile>
-            <id>dev</id>
-        </profile>
-    </profiles>
+    <dependencies>
+        <!-- GQuery -->
+        <dependency>
+            <groupId>com.googlecode.gwtquery</groupId>
+            <artifactId>gwtquery</artifactId>
+            <version>${gquery.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.gwtbootstrap3</groupId>
+            <artifactId>gwtbootstrap3</artifactId>
+            <version>${bootstrap.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>com.arcbees</groupId>
+            <artifactId>gwtchosen</artifactId>
+            <version>${gwtchosen.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- eclipse link -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- GWT-Platform dependencies -->
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-mvp-client</artifactId>
+            <version>${gwtp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rpc-client</artifactId>
+            <version>${gwtp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
+            <version>${gwtp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+            <version>${gwtp.version}</version>
+        </dependency>
+
+        <!-- GUICE DI -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+            <version>${gin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+
+        <!-- Google Web Toolkit dependencies -->
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+
+        <!-- GWT-Charts -->
+        <dependency>
+            <groupId>com.googlecode.gwt-charts</groupId>
+            <artifactId>gwt-charts</artifactId>
+            <version>${gwt-charts.version}</version>
+        </dependency>
+
+        <!-- Google App Engine -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.google.appengine</groupId>-->
+        <!--<artifactId>appengine-api-labs</artifactId>-->
+        <!--<version>${gae.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.google.appengine</groupId>-->
+        <!--<artifactId>appengine-api-stubs</artifactId>-->
+        <!--<version>${gae.version}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.google.appengine</groupId>-->
+        <!--<artifactId>appengine-testing</artifactId>-->
+        <!--<version>${gae.version}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!-- postgresql driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
+        </dependency>
+
+        <!--    REST DISPATCH DEPENDENCY   -->
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rest</artifactId>
+            <version>1.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rest-shared</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform.extensions</groupId>
+            <artifactId>dispatch-rest-delegates</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arcbees</groupId>
+            <artifactId>guicy-resteasy</artifactId>
+            <version>${arcbees.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-guice</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>${jax-rs.version}</version>
+            <!-- Provided because RestEasy has its own implementation -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Other -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.arcbees.gquery</groupId>
+            <artifactId>tooltip</artifactId>
+            <version>1.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+            <version>${jukito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+
+    </dependencies>
 </project>

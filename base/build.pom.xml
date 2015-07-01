@@ -1,0 +1,186 @@
+<build>
+    <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${maven-compiler-plugin.version}</version>
+            <configuration>
+                <source>${target.jdk}</source>
+                <target>${target.jdk}</target>
+                <encoding>${project.build.sourceEncoding}</encoding>
+                <!-- Disable annotation processors during normal compilation -->
+                <proc>none</proc>
+            </configuration>
+        </plugin>
+
+        <!-- JUnit Testing - skip *.GwtTest cases -->
+        <!-- 'mvn TestJstype' - runs the Jukito tests -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
+            <configuration>
+                <includes>
+                    <include>**/*Test.java</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*GwtTest.java</exclude>
+                </excludes>
+            </configuration>
+        </plugin>
+
+        <!-- GWT -->
+        <!-- 'mvn gwt:run' - runs development mode -->
+        <!-- 'mvn gwt:debug' - runs debug mode -->
+        <!-- 'mvn gwt:compile' - compiles gwt -->
+        <!-- 'mvn integration-TestJstype' - runs the gwt tests (*GwtTest.java) -->
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <version>${gwt.version}</version>
+            <configuration>
+                <testTimeOut>180</testTimeOut>
+                <includes>**/*GwtTest.java</includes>
+                <mode>htmlunit</mode>
+
+                <extraJvmArgs>-Xss1024K -Xmx1024M -XX:MaxPermSize=256M</extraJvmArgs>
+                <logLevel>INFO</logLevel>
+                <style>${gwt.style}</style>
+
+                <copyWebapp>true</copyWebapp>
+                <hostedWebapp>${webappDirectory}</hostedWebapp>
+
+                <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+                <appEngineVersion>${gae.version}</appEngineVersion>
+                <appEngineHome>${gae.home}</appEngineHome>
+
+                <runTarget>Notus.html</runTarget>
+                <modules>
+                    <module>org.spaceinvaders.Notus</module>
+                </modules>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>compile</goal>
+                        <goal>test</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
+        <!-- Google App Engine Deployment -->
+        <plugin>
+            <groupId>net.kindleit</groupId>
+            <artifactId>maven-gae-plugin</artifactId>
+            <version>${maven-gae-plugin.version}</version>
+            <configuration>
+                <sdkDir>${gae.home}</sdkDir>
+                <appDir>${webappDirectory}</appDir>
+                <unpackVersion>${gae.version}</unpackVersion>
+                <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
+                <serverId>appengine-credentials</serverId>
+                <splitJars>true</splitJars>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>deploy</id>
+                    <goals>
+                        <goal>deploy</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <dependencies>
+
+                <!-- Google App Engine API -->
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-api-1.0-sdk</artifactId>
+                    <version>${gae.version}</version>
+                </dependency>
+                <!-- Google App Engine Runtime Dependencies -->
+                <dependency>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-jta_1.1_spec</artifactId>
+                    <version>1.1.1</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-jpa_3.0_spec</artifactId>
+                    <version>1.1.1</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>javax.jdo</groupId>
+                    <artifactId>jdo2-api</artifactId>
+                    <version>2.3-eb</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.datanucleus</groupId>
+                    <artifactId>datanucleus-core</artifactId>
+                    <version>1.1.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.google.appengine.orm</groupId>
+                    <artifactId>datanucleus-appengine</artifactId>
+                    <version>1.0.10</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.datanucleus</groupId>
+                    <artifactId>datanucleus-jpa</artifactId>
+                    <version>1.1.5</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <!-- App Engine Runtime Dependencies -->
+                <dependency>
+                    <groupId>com.google.appengine</groupId>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <version>${gae.version}</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${maven-checkstyle-plugin.version}</version>
+            <configuration>
+                <configLocation>/checkstyle.xml</configLocation>
+                <suppressionsLocation>/suppressions.xml</suppressionsLocation>
+                <propertyExpansion>basedir=${basedir}</propertyExpansion>
+                <consoleOutput>true</consoleOutput>
+                <failsOnError>true</failsOnError>
+                <linkXRef>false</linkXRef>
+                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            </configuration>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.puppycrawl.tools</groupId>
+                    <artifactId>checkstyle</artifactId>
+                    <version>${checkstyle.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.arcbees</groupId>
+                    <artifactId>checkstyle</artifactId>
+                    <version>${arcbees-checkstyle.version}</version>
+                </dependency>
+            </dependencies>
+
+            <executions>
+                <execution>
+                    <id>validate</id>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>checkstyle</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
