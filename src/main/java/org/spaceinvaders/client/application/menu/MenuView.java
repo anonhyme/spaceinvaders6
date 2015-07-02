@@ -35,14 +35,12 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
     @UiField
     NavbarBrand navbarBrand;
 
-
     private final AppResources appResources;
 
     @Inject
     MenuView(Binder uiBinder, AppResources appResources) {
         initWidget(uiBinder.createAndBindUi(this));
         this.appResources = appResources;
-
     }
 
     @Override

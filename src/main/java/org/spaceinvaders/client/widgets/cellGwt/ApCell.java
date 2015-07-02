@@ -1,8 +1,12 @@
 package org.spaceinvaders.client.widgets.cellGwt;
 
 import com.google.gwt.cell.client.AbstractCell;
+import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.BrowserEvents;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
@@ -16,7 +20,7 @@ import org.spaceinvaders.client.widgets.cell.WidgetsFactory;
  *
  * @author antoine
  */
-public class ApCell extends AbstractCell<CellPresenter> {
+public class ApCell extends AbstractCell<String> {
 
     private String data;
     private CellPresenter cellPresenter;
@@ -26,32 +30,30 @@ public class ApCell extends AbstractCell<CellPresenter> {
     }
 
     @Override
-    public void render(Context context, CellPresenter cellPresenter, SafeHtmlBuilder sb) {
+    public void render(Context context, String data, SafeHtmlBuilder sb) {
         if (cellPresenter == null) {
             return;
         }
 
-        SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(cellPresenter.asWidget().getElement().toString());
-        GWT.log(":::: Render Cell :::: " + safeHtml);
+        SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(data.toString());
+
         sb.append(safeHtml);
     }
 
-//    @Override
-//    public void onBrowserEvent(Context context, Element parent, CellPresenter value, NativeEvent event,
-//                               ValueUpdater<CellPresenter> valueUpdater) {
-//        super.onBrowserEvent(context, parent, value, event, valueUpdater);
-//
-//        if (BrowserEvents.CLICK.equals(event.getType())) {
-//            // Ignore event that occur outside of the element.
-//            EventTarget eventTarget = event.getEventTarget();
-//            GWT.log(":::::: onBrowserEvent :::: " + Element.as(eventTarget).toString());
-//            if (parent.getFirstChildElement().isOrHasChild(Element.as(eventTarget))) {
-////                AlphaMikeFoxtrot(value.getData());
-//
-//                GWT.log(":::: render Column :::: " + this.cellPresenter.asWidget().toString());
-//            }
-//        }
-//    }
+    @Override
+    public void onBrowserEvent(Context context, Element parent, String value, NativeEvent event,
+                               ValueUpdater<String> valueUpdater) {
+        super.onBrowserEvent(context, parent, value, event, valueUpdater);
+
+        if (BrowserEvents.CLICK.equals(event.getType())) {
+            // Ignore event that occur outside of the element.
+            EventTarget eventTarget = event.getEventTarget();
+
+            if (parent.getFirstChildElement().isOrHasChild(Element.as(eventTarget))) {
+//                AlphaMikeFoxtrot(value.getData());
+            }
+        }
+    }
 
     private void AlphaMikeFoxtrot(String data) {
 

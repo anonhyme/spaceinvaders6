@@ -22,7 +22,6 @@
                     </b:ListDropDown>
                 </b:NavbarNav>
 
-
                 <b:Nav pull="RIGHT">
                     <b:NavbarText>
                         <b.html:Span ui:field="spanUsername"/>

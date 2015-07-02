@@ -24,11 +24,8 @@ import java.util.List;
  */
 public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultType, String>> {
 
-    private String data;
-    private CellPresenter cellPresenter;
-
     private final String POPOVER_JS = "$(document).ready(function(){ $(\'[data-toggle=\"popover\"]\').popover();});";
-    public static final String EMPTY = "<div>{0}</div>";
+
     private final static String POPOVER = "<div data-html=\"true\" " +
             "data-container=\"body\" " +
             "data-trigger=\"hover\" " +
@@ -51,9 +48,6 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
                     "</table>";
 
     interface Templates extends SafeHtmlTemplates {
-        @SafeHtmlTemplates.Template(EMPTY)
-        SafeHtml emptyCell(String data);
-
         @SafeHtmlTemplates.Template(POPOVER)
         SafeHtml popover(String innerHtml, String data);
 
@@ -71,7 +65,7 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
     public void render(Context context, HashMap<EvaluationResultType, String> data, SafeHtmlBuilder sb) {
 
         if (data.isEmpty()) {
-            GWT.log("Data cell is empty");
+            GWT.log("No data .... ");
             return;
         }
         SafeHtml innerHtml = templates.innerCell(data.get(EvaluationResultType.AVERAGE), data.get(EvaluationResultType.STD_DEV));
