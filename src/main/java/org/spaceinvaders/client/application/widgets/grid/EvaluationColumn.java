@@ -28,7 +28,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
     }
 
     @Override
-    public HashMap<EvaluationResultType, String> getValue(Evaluation evaluationDataGrid) {
+    public HashMap<EvaluationResultType, String> getValue(Evaluation evaluation) {
         NumberFormat formatter = NumberFormat.getFormat("#.##");
         this.dataMap = new HashMap<EvaluationResultType, String>();
 
@@ -37,14 +37,21 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         Result result = evaluation.getResult(key);
 
         if (result != null) {
-            double res = 100 * result.getStudentTotal() / result.getMaxTotal();
-//            dataMap.put("type", "text");
-            dataMap.put(EvaluationResultType.RESULT, formatter.format(res));
-            dataMap.put(EvaluationResultType.AVERAGE, result.getAvgResultValue().toString());
-            dataMap.put(EvaluationResultType.STD_DEV, result.getStandardDev().toString());
-//            resultEvaluation = formatter.format(res);
+            String maxTotal = formatDoubleToString(result.getMaxTotal());
+            String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal());
+            String averageTotal = formatDoubleToString(result.getAvgTotal());
+            String standardDev = formatDoubleToString(result.getStandardDev());
+
+            dataMap.put(EvaluationResultType.RESULT, studentResult);
+            dataMap.put(EvaluationResultType.AVERAGE, averageTotal);
+            dataMap.put(EvaluationResultType.STD_DEV, standardDev);
         }
         return dataMap;
+    }
+
+    private String formatDoubleToString(Double value) {
+        NumberFormat formatter = NumberFormat.getFormat("#.##");
+        return formatter.format(value);
     }
 
 }

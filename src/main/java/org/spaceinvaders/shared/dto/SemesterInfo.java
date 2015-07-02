@@ -8,7 +8,7 @@ public class SemesterInfo implements Serializable {
     private List<Ap> aps;
     private List<Evaluation> evals;
     private String label;
-    private List<String> competences;
+    private List<Competence> competences;
     private int id;
 
     /**
@@ -30,12 +30,12 @@ public class SemesterInfo implements Serializable {
         this.id = id;
     }
 
-    public List<String> getCompetences() {
+    public List<Competence> getCompetences() {
         if (competences == null) {
             competences = new ArrayList<>();
 
             for (Ap ap : aps) {
-                for (String competence : ap.getCompetencesStrings()) {
+                for (Competence competence : ap.getCompetences()) {
                     if (!competences.contains(competence)) {
                         competences.add(competence);
                     }
@@ -56,12 +56,15 @@ public class SemesterInfo implements Serializable {
 
     public String getLabel() {
         return label;
+    }
+
     public List<Ap> getAps() {
         return aps;
     }
 
     public void setLabel(String label) {
         this.label = label;
+    }
     public void setAps(List<Ap> aps) {
         this.aps = aps;
     }

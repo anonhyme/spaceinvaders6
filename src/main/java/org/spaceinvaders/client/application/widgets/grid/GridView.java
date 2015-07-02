@@ -74,10 +74,10 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
 
     private void initColumn(SemesterInfo semesterInfo) {
-        List<String> competencesLabels = semesterInfo.getCompetences();
+        List<Competence> competencesLabels = semesterInfo.getCompetences();
         setEvaluationTypeColumn();
-        for (String competenceLabel : competencesLabels) {
-            cellTable.addColumn(new EvaluationColumn(competenceLabel), competenceLabel);
+        for (Competence competenceLabel : competencesLabels) {
+            cellTable.addColumn(new EvaluationColumn(competenceLabel.getLabel()), competenceLabel.getLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
@@ -85,12 +85,12 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     private void setEvaluationTypeColumn() {
         Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
             @Override
-            public String getValue(Evaluation evaluation) {
+            public String getValue(Evaluation data) {
                 String value = " empty ";
                 //TODO Check why it's not working without the try/catch
                 try {
-                    GWT.log("getValue :::::  " + data.getEvaluationLabel());
-                    value = data.getEvaluationLabel();
+                    GWT.log("getValue :::::  " + data.getLabel());
+                    value = data.getLabel();
                 } catch (Exception e) {
                 }
                 return value;

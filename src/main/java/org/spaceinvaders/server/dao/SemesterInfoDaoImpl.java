@@ -9,6 +9,7 @@ import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -90,5 +91,10 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         semesterInfo.setEvals(new ArrayList<Evaluation>(evalsMap.values()));
 
         return semesterInfo;
+    }
+
+    @Override
+    public List<SemesterInfo> getSemesterInfoList(String cip) {
+        throw new NotImplementedException();
     }
 }

@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.View;
 import org.spaceinvaders.client.application.widgets.grid.events.EvaluationReceivedEvent;
 
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
+import org.spaceinvaders.client.application.widgets.grid.events.SemesterInfoReceivedEvent;
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;

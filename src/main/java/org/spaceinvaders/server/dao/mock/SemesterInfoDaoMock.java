@@ -7,6 +7,7 @@ import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +45,10 @@ public class SemesterInfoDaoMock implements SemesterInfoDao {
         aps.add(gen666);
 
         return new SemesterInfo(evals, aps);
+    }
+
+    @Override
+    public List<SemesterInfo> getSemesterInfoList(String cip) {
+        throw new NotImplementedException();
     }
 }
