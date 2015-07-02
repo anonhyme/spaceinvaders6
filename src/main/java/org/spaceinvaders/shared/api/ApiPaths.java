@@ -8,6 +8,7 @@ public class ApiPaths {
     public static final String EVALUATIONS = "/evaluations";
 
     public static final String ALL = "/all";
+    public static final String ALL_SEMESTERS = "/all/semester";
 
     public static final String AP = "/ap";
 

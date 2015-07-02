@@ -23,14 +23,6 @@ public class SemesterInfoResourceImpl implements SemesterInfoResource {
 
     @Override
     public List<SemesterInfo> getAll() {
-        List<SemesterInfo> semesterInfoList = new ArrayList<>();
-
-//        SemesterInfo semesterInfo = new SemesterInfo();
-//        semesterInfo.setId(0);
-//        semesterInfo.setLabel("Session " + 1);
-//        semesterInfoList.add(semesterInfo);
-//        semesterInfoList.add(semesterInfo);
-//        semesterInfoList.add(semesterInfo);
         return semesterInfoDao.getSemesterInfoList("boua2354");
     }
 }

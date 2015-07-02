@@ -1,13 +1,10 @@
 package org.spaceinvaders.server.dao.mock;
 
 import org.spaceinvaders.server.dao.SemesterInfoDao;
-import org.spaceinvaders.server.entities.CompetenceEntity;
-import org.spaceinvaders.server.entities.EvaluationEntity;
 import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +46,14 @@ public class SemesterInfoDaoMock implements SemesterInfoDao {
 
     @Override
     public List<SemesterInfo> getSemesterInfoList(String cip) {
-        throw new NotImplementedException();
+        //TODO should use the cip to fetch all valid session for the current user
+        List<SemesterInfo> semesterInfoList = new ArrayList<SemesterInfo>();
+        for (int i = 1; i < 5; i++) {
+            SemesterInfo semesterInfo = new SemesterInfo();
+            semesterInfo.setId(i);
+            semesterInfo.setLabel("Session " + i);
+            semesterInfoList.add(semesterInfo);
+        }
+        return semesterInfoList;
     }
 }
