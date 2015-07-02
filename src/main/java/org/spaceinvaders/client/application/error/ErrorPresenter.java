@@ -1,7 +1,6 @@
 
 
 
-
 package org.spaceinvaders.client.application.error;
 
 import com.google.gwt.event.shared.GwtEvent.Type;

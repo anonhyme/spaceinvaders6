@@ -8,7 +8,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+
 import com.gwtplatform.mvp.client.ViewImpl;
+
 import org.spaceinvaders.client.resources.BootstrapJQueryJs;
 
 import javax.inject.Inject;
@@ -25,8 +27,6 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 
     @UiField
     SimplePanel mainContentPanel;
-
-
 
     @Inject
     BootstrapJQueryJs js;

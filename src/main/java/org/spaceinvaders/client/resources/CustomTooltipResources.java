@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.resources;
 
 import com.arcbees.gquery.tooltip.client.TooltipResources;
+
 import com.google.gwt.resources.client.ClientBundle;
 
 /**
@@ -8,7 +9,7 @@ import com.google.gwt.resources.client.ClientBundle;
  *
  * @author antoine
  */
-public interface CustomTooltipResources extends ClientBundle, TooltipResources{
+public interface CustomTooltipResources extends ClientBundle, TooltipResources {
 
     interface CustomTooltipStyle extends TooltipResources.TooltipStyle {
         @ClassName("tooltip")

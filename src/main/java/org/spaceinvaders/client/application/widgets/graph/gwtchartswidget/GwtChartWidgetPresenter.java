@@ -20,17 +20,18 @@ public class GwtChartWidgetPresenter extends PresenterWidget<GwtChartWidgetPrese
     @Inject
     GwtChartWidgetPresenter(EventBus eventBus, MyView view) {
         super(eventBus, view);
-
     }
 
-    public void loadChart(){
+    public void loadChart() {
         getView().setChart(chart.getChart());
         chart.loadChart();
     }
-    public void setChart(AbstractGWTChart chart){
-        this.chart= chart;
+
+    public void setChart(AbstractGWTChart chart) {
+        this.chart = chart;
     }
-    public void setChartColors(String [] colors){
+
+    public void setChartColors(String[] colors) {
         chart.setColors(colors);
     }
 

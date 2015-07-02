@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application.widgets.graph.gwtcharts;
 
 import com.google.gwt.user.client.ui.Widget;
+
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.BarChart;
@@ -21,12 +22,12 @@ public class SemesterResultsChart extends AbstractGWTChart {
     private SemesterInfo semesterInfo;
 
     public SemesterResultsChart(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
-        this.semesterInfo= semesterInfo;
+        this.semesterInfo = semesterInfo;
         this.evaluations = evaluations;
     }
 
-    public Widget getChart(){
-        if (chart== null){
+    public Widget getChart() {
+        if (chart == null) {
             chart = new BarChart();
         }
         return chart;
@@ -47,7 +48,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
         for (int i = 0; i < aps.size(); i++) {
             Ap ap = aps.get(i);
             Result apTotal = new Result();
-            for (int j = 0; j< evaluations.size(); j++) {
+            for (int j = 0; j < evaluations.size(); j++) {
                 Result r = evaluations.get(j).getApResult(ap);
                 apTotal.addToAvgTotal(r.getAvgTotal());
                 apTotal.addToMaxTotal(r.getMaxTotal());
@@ -69,7 +70,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
             options.setWidth(width);
             options.setHeight(height);
         }
-        if (colorsSet){
+        if (colorsSet) {
             options.setColors(colors);
         }
 

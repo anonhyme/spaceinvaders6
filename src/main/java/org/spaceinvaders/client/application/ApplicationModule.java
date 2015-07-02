@@ -1,12 +1,14 @@
 package org.spaceinvaders.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+
 import org.spaceinvaders.client.application.ap.ApModule;
 import org.spaceinvaders.client.application.error.ErrorModule;
 import org.spaceinvaders.client.application.graphdemo.GraphDemoModule;
 import org.spaceinvaders.client.application.semester.SemesterModule;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetModule;
 import org.spaceinvaders.client.application.widgets.grid.GridModule;
+import org.spaceinvaders.client.application.widgets.menu.MenuModule;
 import org.spaceinvaders.client.application.widgets.menu.MenuPresenter;
 import org.spaceinvaders.client.application.widgets.menu.MenuView;
 
@@ -18,13 +20,13 @@ public class ApplicationModule extends AbstractPresenterModule {
                 ApplicationPresenter.MyProxy.class);
 
         install(new SemesterModule());
-        install(new GridModule());
 
-        bind(MenuPresenter.MyView.class).to(MenuView.class);
+        install(new MenuModule());
 
         install(new GraphDemoModule());
         install(new GwtChartWidgetModule());
         install(new ApModule());
         install(new ErrorModule());
+        install(new GridModule());
     }
 }

@@ -1,6 +1,7 @@
 package org.spaceinvaders.client.application.widgets.graph.gwtcharts;
 
 import com.google.gwt.user.client.ui.Widget;
+
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.ColumnChart;
@@ -17,23 +18,23 @@ import java.util.*;
 public class EvaluationResultsChart extends AbstractGWTChart {
     private ColumnChart chart;
     private String apName;
-    private ArrayList<Evaluation>  data;
+    private ArrayList<Evaluation> data;
     private Ap ap;
 
-    public EvaluationResultsChart(TreeMap<String, Evaluation> data, Ap ap){
+    public EvaluationResultsChart(TreeMap<String, Evaluation> data, Ap ap) {
         this.data = new ArrayList<>(data.values());
         this.ap = ap;
         this.apName = ap.getName();
     }
 
-    public Widget getChart(){
-        if (chart== null){
+    public Widget getChart() {
+        if (chart == null) {
             chart = new ColumnChart();
         }
         return chart;
     }
 
-    public void loadChart( ){
+    public void loadChart() {
         DataTable dataTable = DataTable.create();
         dataTable.addColumn(ColumnType.STRING, "Résultat");
         dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
@@ -60,7 +61,7 @@ public class EvaluationResultsChart extends AbstractGWTChart {
             options.setWidth(width);
             options.setHeight(height);
         }
-        if (colorsSet){
+        if (colorsSet) {
             options.setColors(colors);
         }
 

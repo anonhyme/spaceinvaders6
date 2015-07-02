@@ -2,10 +2,12 @@ package org.spaceinvaders.client.application.widgets.grid;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+
 import org.spaceinvaders.client.application.widgets.grid.events.EvaluationReceivedEvent;
 
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
@@ -90,7 +92,8 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                     }
                 }).getAllEvaluations(3);
     }
-    private GridPresenter getThis(){
+
+    private GridPresenter getThis() {
         return this;
     }
 

@@ -19,6 +19,10 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
+
+import static org.spaceinvaders.client.application.util.ColorHelper.*;
+
+import org.spaceinvaders.client.application.util.ColorHelper;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.CumulativeLineChart;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.EvaluationResultsChart;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
@@ -35,8 +39,11 @@ import java.util.TreeMap;
 public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyProxy> {
     interface MyView extends View {
         void setInSlot(Object slot, IsWidget content);
+
         void setApName(String name);
+
         void setStudentProgressBar(float value, String color);
+
         void setClassProgressBar(float value, String color);
     }
 
@@ -96,19 +103,19 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     private void generatePageContent(TreeMap<String, Evaluation> evaluations) {
         //Todo get AP from eventbus or somewhere?
 
-        List<Competence> mockComepetences = Arrays.asList(
+        List<Competence> mockCompetences = Arrays.asList(
                 new Competence("GEN501-1", 0),
                 new Competence("GEN501-2", 1));
-        mockAp = new Ap("GEN501", 0, mockComepetences);
+        mockAp = new Ap("GEN501", 0, mockCompetences);
 
-        String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
+        String[] colors = {RED, GREEN_FLASH, LIGHT_BLUE};
 
         final GwtChartWidgetPresenter evaluationChartWidget = gwtChartWidgetPresenterProvider.get();
-        evaluationChartWidget.setChart(new EvaluationResultsChart(evaluations,mockAp));
+        evaluationChartWidget.setChart(new EvaluationResultsChart(evaluations, mockAp));
         evaluationChartWidget.setChartColors(colors);
 
         final GwtChartWidgetPresenter cumulativeChartWidget = gwtChartWidgetPresenterProvider.get();
-        cumulativeChartWidget.setChart(new CumulativeLineChart(evaluations,mockAp));
+        cumulativeChartWidget.setChart(new CumulativeLineChart(evaluations, mockAp));
         cumulativeChartWidget.setChartColors(colors);
 
         setInSlot(SLOT_APEvaluationsChart, evaluationChartWidget);
@@ -116,7 +123,6 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         final MyView view = getView();
         getView().setApName(apName);
-
 
         ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
         chartLoader.loadApi(new Runnable() {
@@ -128,26 +134,23 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         });
     }
 
-
-    private void setProgressBars(float studentProgress, float classProgress){
-        String studentColor = getStudentProgressColor(studentProgress,classProgress);
-        String classColor = "#0000CC"; //Blue
+    private void setProgressBars(float studentProgress, float classProgress) {
+        String studentColor = getStudentProgressColor(studentProgress, classProgress);
+        String classColor = BLUE; //Blue
         MyView view = getView();
         view.setStudentProgressBar(studentProgress, studentColor);
-        view.setClassProgressBar(classProgress,classColor);
+        view.setClassProgressBar(classProgress, classColor);
     }
 
-    private String getStudentProgressColor(float studentProgress, float classProgress){
+    private String getStudentProgressColor(float studentProgress, float classProgress) {
         String color;
-        float progressRatio = studentProgress/classProgress;
-        if(progressRatio > 0.85){
-            color = "#FFD700"; //Gold
-        }
-        else if (progressRatio > 0.5) {
-            color = "#008000"; //Green
-        }
-        else{
-            color = "#FF0000"; //Red
+        float progressRatio = studentProgress / classProgress;
+        if (progressRatio > 0.85) {
+            color = GOLD;
+        } else if (progressRatio > 0.5) {
+            color = GREEN;
+        } else {
+            color = RED;
         }
         return color;
     }

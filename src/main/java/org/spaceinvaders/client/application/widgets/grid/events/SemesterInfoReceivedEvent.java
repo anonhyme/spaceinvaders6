@@ -3,6 +3,7 @@ package org.spaceinvaders.client.application.widgets.grid.events;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
+
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 public class SemesterInfoReceivedEvent extends GwtEvent<SemesterInfoReceivedEvent.SemesterInfoReceivedEventHandler> {

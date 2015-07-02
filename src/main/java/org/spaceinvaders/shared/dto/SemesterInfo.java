@@ -1,10 +1,16 @@
 package org.spaceinvaders.shared.dto;
 
+import org.spaceinvaders.server.cas.UserSessionImpl;
+import org.spaceinvaders.shared.exception.ApExeption;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SemesterInfo implements Serializable {
+
     private List<Ap> aps;
     private List<Evaluation> evals;
     private String label;
@@ -18,11 +24,15 @@ public class SemesterInfo implements Serializable {
     public SemesterInfo() {
     }
 
-    public SemesterInfo(List<Evaluation> evals, List<Ap> aps) {
+    public SemesterInfo(List<Evaluation> evals, List<Ap> aps, int id) {
         this.evals = evals;
         this.aps = aps;
+        this.id = id;
+        this.label = "Session " + id;
+//        this.competences = competences;
     }
 
+    @Deprecated
     public SemesterInfo(List<Competence> competences, List<Evaluation> evals, String label, int id) {
         this.competences = competences;
         this.evals = evals;
@@ -31,9 +41,9 @@ public class SemesterInfo implements Serializable {
     }
 
     public List<Competence> getCompetences() {
+        //TODO handle if ap is null
         if (competences == null) {
             competences = new ArrayList<>();
-
             for (Ap ap : aps) {
                 for (Competence competence : ap.getCompetences()) {
                     if (!competences.contains(competence)) {
@@ -42,8 +52,11 @@ public class SemesterInfo implements Serializable {
                 }
             }
         }
-
         return competences;
+    }
+
+    public void setCompetences(List<Competence> competences) {
+        this.competences = competences;
     }
 
     public List<Evaluation> getEvals() {
@@ -58,6 +71,7 @@ public class SemesterInfo implements Serializable {
         return label;
     }
 
+
     public List<Ap> getAps() {
         return aps;
     }
@@ -65,6 +79,7 @@ public class SemesterInfo implements Serializable {
     public void setLabel(String label) {
         this.label = label;
     }
+
     public void setAps(List<Ap> aps) {
         this.aps = aps;
     }

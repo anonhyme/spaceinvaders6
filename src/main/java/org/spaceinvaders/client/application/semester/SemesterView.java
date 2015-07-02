@@ -6,16 +6,10 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.gwt.charts.client.ChartLoader;
-import com.googlecode.gwt.charts.client.ChartPackage;
+
 import com.gwtplatform.mvp.client.ViewImpl;
 
-import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
-import org.spaceinvaders.shared.dto.Evaluation;
-import org.spaceinvaders.shared.dto.SemesterInfo;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

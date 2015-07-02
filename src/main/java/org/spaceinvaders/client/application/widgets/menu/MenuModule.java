@@ -11,7 +11,7 @@ public class MenuModule extends AbstractPresenterModule {
 
     @Override
     protected void configure() {
-        bind(MenuPresenter.MyView.class).to(MenuView.class);
+//        bind(MenuPresenter.MyView.class).to(MenuView.class);
         bindPresenterWidget(MenuPresenter.class, MenuPresenter.MyView.class, MenuView.class);
     }
 }

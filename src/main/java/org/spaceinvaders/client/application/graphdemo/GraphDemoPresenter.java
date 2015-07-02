@@ -5,6 +5,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.gwtplatform.mvp.client.Presenter;
@@ -30,13 +31,21 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
 
     interface MyView extends View {
         void setGraph(IsWidget presenter);
+
         void setCol1(IsWidget presenter);
+
         void setCol2(IsWidget presenter);
+
         void setCol3(IsWidget presenter);
+
         void setCol4(IsWidget presenter);
+
         void setCol5(IsWidget presenter);
+
         void setCol6(IsWidget presenter);
+
         void setStudentProgress(double progress);
+
         void setClassProgress(double progress);
     }
 
@@ -59,7 +68,6 @@ public class GraphDemoPresenter extends Presenter<GraphDemoPresenter.MyView, Gra
             MyProxy proxy
     ) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
-        // super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
 
     }
 

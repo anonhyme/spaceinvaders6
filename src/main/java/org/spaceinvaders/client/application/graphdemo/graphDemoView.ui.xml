@@ -3,7 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:b='urn:import:org.gwtbootstrap3.client.ui'>
 
-    <g:HTMLPanel ui:field="main" >
+    <g:HTMLPanel ui:field="main">
         <b:Progress>
             <b:ProgressBar ui:field="studentProgress" type="SUCCESS" percent="30"/>
         </b:Progress>

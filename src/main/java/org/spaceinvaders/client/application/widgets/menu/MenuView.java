@@ -7,7 +7,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+
 import org.gwtbootstrap3.client.ui.*;
 import org.gwtbootstrap3.client.ui.html.Span;
 import org.spaceinvaders.client.place.NameTokens;
@@ -52,7 +54,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
     @Override
     public void setSemesterDropdown(List<SemesterInfo> semesterInfoList) {
         for (SemesterInfo si : semesterInfoList) {
-            this.addNavbarLinkInDropDown(si.getLabel(), "#!home", si.getId());
+            this.addNavbarLinkInDropDown(si.getLabel(), si.getId());
         }
     }
 
@@ -63,9 +65,9 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
         navbarBrand.setTargetHistoryToken(NameTokens.home);
     }
 
-    private void addNavbarLinkInDropDown(String name, String nameToken, int semesterID) {
+    private void addNavbarLinkInDropDown(String name, int semesterID) {
         AnchorListItem anchorListItem = new AnchorListItem(name);
-        anchorListItem.setTargetHistoryToken(nameToken);
+        anchorListItem.setTargetHistoryToken(NameTokens.semesterGrades);
         anchorListItem.addClickHandler(getClickHandler(semesterID));
         dropDownMenu.add(anchorListItem);
     }

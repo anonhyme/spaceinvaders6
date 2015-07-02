@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
@@ -12,6 +13,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
 import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
@@ -87,6 +89,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     }
 
     private SemesterInfo semesterInfo;
+
     private void showGraph() {
         semesterInfoDelegate.withCallback(new AbstractAsyncCallback<SemesterInfo>() {
             @Override
@@ -97,7 +100,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         }).get(3);
     }
 
-    private void getEvaluations(){
+    private void getEvaluations() {
         evaluationDelegate.withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
             @Override
             public void onSuccess(TreeMap<String, Evaluation> results) {
@@ -105,7 +108,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
                 final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
 
                 String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
-                semesterChartPresenter.setChart(new SemesterResultsChart(semesterInfo,new ArrayList<>( results.values())));
+                semesterChartPresenter.setChart(new SemesterResultsChart(semesterInfo, new ArrayList<>(results.values())));
                 semesterChartPresenter.setChartColors(colors);
 
                 getView().updateSemesterChart(semesterChartPresenter);

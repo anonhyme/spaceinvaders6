@@ -6,7 +6,9 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.*;
+
 import com.gwtplatform.mvp.client.ViewImpl;
+
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.ProgressBar;
 
@@ -87,11 +89,12 @@ public class GraphDemoView extends ViewImpl implements GraphDemoPresenter.MyView
         col6.add(presenter);
     }
 
-   public void setStudentProgress(double progress){
+    public void setStudentProgress(double progress) {
         studentProgress.setPercent(progress);
-       studentProgress.setText("Complétion étudiante : " + progress + "%");
+        studentProgress.setText("Complétion étudiante : " + progress + "%");
     }
-    public void setClassProgress(double progress){
+
+    public void setClassProgress(double progress) {
         classProgress.setPercent(progress);
         classProgress.setText("Avancement du cours : " + progress + "%");
     }

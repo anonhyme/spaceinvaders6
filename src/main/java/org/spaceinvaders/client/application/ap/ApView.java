@@ -8,7 +8,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+
 import com.gwtplatform.mvp.client.ViewImpl;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.PageHeader;
 import org.gwtbootstrap3.client.ui.PanelHeader;
@@ -32,7 +34,7 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     HTMLPanel evaluationChartPanel;
 
     @UiField
-    PageHeader pageTitle ;
+    PageHeader pageTitle;
 
    /* @UiField
     Button cumulativeButton;
@@ -45,8 +47,6 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
 
     @UiField
     ProgressBar classProgressBar;
-
-
 
 
     @Inject
@@ -76,22 +76,17 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     public void setInSlot(Object slot, IsWidget content) {
         if (slot == ApPresenter.SLOT_APgrid) {
             gridPanel.add(content);
-        }
-        else if  (slot == ApPresenter.SLOT_APCumulativeChart)
-        {
+        } else if (slot == ApPresenter.SLOT_APCumulativeChart) {
             cumulativeChartPanel.add(content);
 
-        }
-        else if  (slot == ApPresenter.SLOT_APEvaluationsChart)
-        {
+        } else if (slot == ApPresenter.SLOT_APEvaluationsChart) {
             evaluationChartPanel.add(content);
-        }
-        else {
+        } else {
             super.setInSlot(slot, content);
         }
     }
 
-    public void setApName(String name){
+    public void setApName(String name) {
         pageTitle.setText(name);
 
         Text placeholder = new Text();
@@ -100,23 +95,23 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     }
 
 
-    public void hideEvaluationChart(){
+    public void hideEvaluationChart() {
         evaluationChartPanel.getElement().setAttribute("hidden", "true");
     }
 
-    public void showEvaluationChart(){
+    public void showEvaluationChart() {
         evaluationChartPanel.getElement().removeAttribute("hidden");
     }
 
-    public void hideCumulativeChart(){
+    public void hideCumulativeChart() {
         cumulativeChartPanel.getElement().setAttribute("hidden", "true");
     }
 
-    public void showCumulativeChart(){
+    public void showCumulativeChart() {
         cumulativeChartPanel.getElement().removeAttribute("hidden");
     }
 
-    public void setStudentProgressBar(float value, String color){
+    public void setStudentProgressBar(float value, String color) {
         studentProgressBar.setPercent(value);
 
         studentProgressBar.getElement().getStyle().setProperty("backgroundColor", color);
@@ -133,7 +128,6 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
 
         classProgressBar.setText("Avancement du cours : " + value + "%");
     }
-
 
 
 }

@@ -6,7 +6,8 @@ public final class Competence implements Serializable {
     private String label;
     private int id;
 
-    public Competence() {}
+    public Competence() {
+    }
 
     public Competence(String label, int id) {
         this.label = label;
@@ -17,8 +18,16 @@ public final class Competence implements Serializable {
         return label;
     }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -28,12 +37,16 @@ public final class Competence implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Competence other = (Competence) obj;
         return id == other.id;
     }
