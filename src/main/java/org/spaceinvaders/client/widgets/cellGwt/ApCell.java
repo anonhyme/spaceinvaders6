@@ -31,12 +31,6 @@ public class ApCell extends AbstractCell<CellPresenter> {
             return;
         }
 
-        this.cellPresenter = cellPresenter;
-        Popover popover = new Popover();
-        popover.add(cellPresenter.asWidget());
-
-
-//        SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(cellPresenter.asWidget().getElement().toString());
         SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(cellPresenter.asWidget().getElement().toString());
         GWT.log(":::: Render Cell :::: " + safeHtml);
         sb.append(safeHtml);

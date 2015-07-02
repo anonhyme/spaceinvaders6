@@ -13,6 +13,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 import org.spaceinvaders.client.widgets.cell.CellPresenter;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -21,7 +22,7 @@ import java.util.List;
  *
  * @author antoine
  */
-public class ResultCellStr extends AbstractCell<List<String>> {
+public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultType, String>> {
 
     private String data;
     private CellPresenter cellPresenter;
@@ -44,7 +45,7 @@ public class ResultCellStr extends AbstractCell<List<String>> {
                     "        <td>{0}</td>\n" +
                     "    </tr>\n" +
                     "    <tr>\n" +
-                    "        <td> ecart type. :</td>\n" +
+                    "        <td> Std dev. :</td>\n" +
                     "        <td>{1}</td>\n" +
                     "    </tr>\n" +
                     "</table>";
@@ -57,39 +58,31 @@ public class ResultCellStr extends AbstractCell<List<String>> {
         SafeHtml popover(String innerHtml, String data);
 
         @SafeHtmlTemplates.Template(INNER_CONTENT)
-        SafeHtml innerCell(String moy, String ecartType);
+        SafeHtml innerCell(String moy, String stdDev);
     }
 
     private static Templates templates = GWT.create(Templates.class);
 
-    public ResultCellStr() {
+    public EvaluationResultCell() {
         super(BrowserEvents.MOUSEOVER);
     }
 
     @Override
-    public void render(Context context, List<String> data, SafeHtmlBuilder sb) {
+    public void render(Context context, HashMap<EvaluationResultType, String> data, SafeHtmlBuilder sb) {
 
-        if (data == null) {
+        if (data.isEmpty()) {
+            GWT.log("Data cell is empty");
             return;
         }
-
-        if (data.size() == 0) {
-            sb.append(templates.emptyCell(data.get(0)));
-            return;
-        }
-
-        SafeHtml innerHtml = templates.innerCell(data.get(1), data.get(2));
-        SafeHtml safeHtml = templates.popover(innerHtml.asString(), data.get(0));
-        GWT.log(":::: Render Cell :::: " + safeHtml);
+        SafeHtml innerHtml = templates.innerCell(data.get(EvaluationResultType.AVERAGE), data.get(EvaluationResultType.STD_DEV));
+        SafeHtml safeHtml = templates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT));
         sb.append(safeHtml);
     }
 
-
     @Override
-    public void onBrowserEvent(Context context, Element parent, List<String> value, NativeEvent event,
-                               ValueUpdater<List<String>> valueUpdater) {
+    public void onBrowserEvent(Context context, Element parent, HashMap<EvaluationResultType, String> value, NativeEvent event,
+                               ValueUpdater<HashMap<EvaluationResultType, String>> valueUpdater) {
         GWT.log("::::: Browser Event :::::" + event.getType());
         ScriptInjector.fromString(POPOVER_JS).setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
-
 }

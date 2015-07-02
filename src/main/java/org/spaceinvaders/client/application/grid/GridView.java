@@ -80,13 +80,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
         //TODO refactor
         cellTable = new CellTable<>();
-        Alert alert = new Alert("fdsa");
-
-//        $(cellTable).as(Tooltip.Tooltip).tooltip(setRowTooltip());
-
-        alertBitchContainer.clear();
-        alertBitchContainer.add(alert);
-
         initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
 
