@@ -1,0 +1,709 @@
+@require "colors";
+@require "geometria";
+@require "gsss-mixins";
+@require "gsss-animation";
+
+@def QUIZ_QUESTIONS_1 resourceUrl("questions1");
+@def QUIZ_QUESTIONS_2 resourceUrl("questions2");
+@def QUIZ_QUESTIONS_3 resourceUrl("questions3");
+@def QUIZ_QUESTIONS_4 resourceUrl("questions4");
+@def QUIZ_QUESTIONS_5 resourceUrl("questions5");
+
+/* -- Page : bees ----------------------------------------- */
+
+.bees .header > div {
+    margin: -225px 0 0 -180px;
+    height: 410px;
+    width: 360px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.bees .intro {
+    height: 600px;
+
+    position: relative;
+}
+
+.bees .intro i {
+    font-size: 20rem;
+    color: C_PRIMARY;
+
+    position: absolute;
+}
+
+.bees .intro i.icon1 {
+    margin-right: -50px;
+
+    top: 174px;
+    right: 50%;
+
+    @mixin animation_delay(0.2sec);
+}
+
+.bees .intro i.icon1::before {
+    @mixin rotate(30deg);
+}
+
+.bees .intro i.icon2 {
+    top: 87px;
+    right: 50%;
+
+    @mixin animation_delay(0.3sec);
+}
+
+.bees .intro i.icon2::before {
+    @mixin rotate(90deg);
+}
+
+.bees .intro i.icon3 {
+    margin-right: -50px;
+
+    top: 0;
+    right: 50%;
+
+    @mixin animation_delay(0.4sec);
+}
+
+.bees .intro i.icon3::before {
+    @mixin rotate(150deg);
+}
+
+.bees .intro i.icon4 {
+    margin-left: -50px;
+
+    top: 0;
+    left: 50%;
+
+    @mixin animation_delay(0.5sec);
+}
+
+.bees .intro i.icon4::before {
+    @mixin rotate(-150deg);
+}
+
+.bees .intro i.icon5 {
+    top: 87px;
+    left: 50%;
+
+    @mixin animation_delay(0.6sec);
+}
+
+.bees .intro i.icon5::before {
+    @mixin rotate(-90deg);
+}
+
+.bees .intro i.icon6 {
+    margin-left: -50px;
+
+    top: 174px;
+    left: 50%;
+
+    @mixin animation_delay(0.7sec);
+}
+
+.bees .intro i.icon6::before {
+    @mixin rotate(-30deg);
+}
+
+@media (max-width: 979px) {
+    .bees .intro i.icon1 {
+        margin-right: -48px;
+
+        top: 168px;
+    }
+
+    .bees .intro i.icon3 {
+        margin-right: -48px;
+
+        top: 5px;
+    }
+
+    .bees .intro i.icon4 {
+        margin-left: -48px;
+
+        top: 5px;
+    }
+
+    .bees .intro i.icon6 {
+        margin-left: -48px;
+
+        top: 168px;
+    }
+}
+
+@media (max-width: 649px) {
+    .bees .header > div {
+        margin: -135px 0 0 -180px;
+    }
+
+    .bees .intro {
+        height: 351px;
+    }
+
+    .bees .intro i {
+        font-size: 16rem;
+    }
+
+    .bees .intro i.icon1 {
+        margin-right: -40px;
+
+        top: 110px;
+    }
+
+    .bees .intro i.icon2 {
+        top: 40px;
+    }
+
+    .bees .intro i.icon3 {
+        margin-right: -40px;
+
+        top: -30px;
+    }
+
+    .bees .intro i.icon4 {
+        margin-left: -40px;
+
+        top: -30px;
+    }
+
+    .bees .intro i.icon5 {
+        top: 40px;
+    }
+
+    .bees .intro i.icon6 {
+        margin-left: -40px;
+
+        top: 110px;
+    }
+}
+
+.valuesSlider > div > div:first-child{
+    min-height: 155px;
+}
+
+.slide {
+    min-height: 155px;
+
+    white-space: initial;
+}
+
+@media (max-width: 649px) {
+    .slide {
+        min-height: 170px;
+    }
+}
+
+/* -> Bee -- */
+
+.bees .hive {
+    padding-top: 175px;
+    margin: 0 auto;
+    width: 650px;
+}
+
+.bees .bee:first-child {
+    margin-bottom: 175px;
+}
+
+.bees .bee {
+    background-color: #000;
+
+    overflow: hidden;
+    visibility: hidden;
+    width: 400px;
+    height: 240px;
+    margin-top: -114px;
+
+    position: relative;
+
+    @mixin rotate(120deg);
+}
+
+.bees .bee h3 {
+    font-size: 2.2rem;
+    line-height: 1em;
+}
+
+.bees .bee h3 span {
+    display: block;
+}
+
+.bees .bee1 {
+    margin-left: 125px;
+
+    position: relative;
+    float: left;
+}
+
+.bees .bee2,
+.bees .bee3 {
+    margin-top: -114px;
+}
+
+.bees .bee2 {
+    margin-left: -92px;
+
+    float: left;
+    position: relative;
+}
+
+.bees .bee3 {
+    margin-right: -92px;
+
+    float: right;
+}
+
+.bees .beeHolder1 {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    @mixin rotate(-60deg);
+}
+
+.bees .beeHolder2 {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url(http://placekitten.com/280/280);
+
+    visibility: visible;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    @mixin rotate(-60deg);
+}
+
+.bees .beeHolder2 img {
+    margin-left: -144px;
+
+    position: absolute;
+    z-index: 2000;
+    top: 0;
+    left: 50%;
+}
+
+.bees .beeHolder2 a {
+    background-color: rgba(251, 230, 5, 0.8);
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    display: none;
+    width: 100%;
+    height: 101%;
+    padding: 45px 100px;
+
+    position: absolute;
+    z-index: 3000;
+}
+
+.bees .beeHolder2 p::after {
+    content: "+";
+    font-family: "geometriaBold";
+    font-size: 2.5rem;
+
+    display: block;
+
+    position: relative;
+    top: 25px;
+}
+
+.bees .beeHolder2:hover a {
+    display: block;
+}
+
+@media (max-width: 979px) {
+    .bees .hive {
+        padding-top: 50px;
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .bees .bee1,
+    .bees .bee2,
+    .bees .bee3 {
+        margin: 0;
+        width: 100%;
+
+        float: none;
+        left: 0;
+    }
+
+    .bees .bee {
+        margin-top: -117px;
+    }
+
+    .bees .bee:first-child {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .bees .bee:nth-child(even) {
+        margin-left: -106px;
+    }
+
+    .bees .bee:nth-child(odd) {
+        margin-left: 107px;
+    }
+
+    .bees .beeHolder2 a {
+        padding: 45px 215px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bees .bee,
+    .bees .bee:nth-child(even),
+    .bees .bee:nth-child(odd) {
+        margin: 0 0 0;
+    }
+
+    .bees .bee {
+        height: 260px;
+    }
+
+    .bees .beeHolder2 img {
+        margin-left: -50%;
+        width: 100%;
+    }
+
+    .bees .beeHolder2 a {
+        padding: 45px 45px;
+    }
+}
+
+@media (max-width: 405px) {
+    .bees .bee {
+        height: 225px;
+    }
+}
+
+@media (max-width: 350px) {
+    .bees .bee {
+        height: 204px;
+    }
+}
+
+/* -> Popup -- */
+
+.bees .popup {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    text-align: center;
+
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9990;
+}
+
+.bees .popup.active {
+    display: block;
+}
+
+.bees .popupContent {
+    margin: 10% auto 0;
+    width: 75%;
+}
+
+.bees .popupContent .bee1,
+.bees .popupContent .bee2,
+.bees .popupContent .bee3 {
+    margin-left: -200px;
+    margin-top: 10px;
+
+    position: relative;
+    left: 50%;
+    float: none;
+}
+
+.bees .popup h1 {
+    font-size: 2rem;
+    font-family: "geometriaBold";
+    line-height: 1.1em;
+    text-align: center;
+    margin: 35px 0;
+
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.bees .popup h1 span {
+    font-size: 1.5rem;
+    font-family: "geometria";
+
+    display: block;
+}
+
+.bees .popup h2 {
+    font-size: 1.4rem;
+}
+
+.bees .popup p {
+    line-height: 1.3em;
+
+    margin-bottom: 2.8em;
+}
+
+.bees .popup p a {
+    color: C_PRIMARY;
+    font-family: "geometriaBold";
+    font-size: 2rem;
+}
+
+.bees .popup p a:hover {
+    text-decoration: underline;
+}
+
+.bees .popup ul {
+    padding: 0;
+    margin-bottom: 4em;
+}
+
+.bees .popup ul li,
+.bees .popup ul li small {
+    line-height: 1.3em;
+
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.bees .popup ul.social {
+    display: inline-block;
+    width: auto;
+    padding: 0 12px 5px;
+    margin-top: -1em;
+    border-bottom: 10px solid C_PRIMARY;
+
+    list-style-type: none;
+}
+
+.bees .popup ul.social li {
+    display: inline-block;
+    margin: 0 2px 0.8em;
+}
+
+.bees .popup ul.social li a {
+    color: #fff;
+    font-size: 4rem;
+}
+
+.bees .popup ul.social li a:hover {
+    color: C_PRIMARY;
+}
+
+.bees .popup ul.social li a span {
+    display: none;
+}
+
+a:link.popupClose,
+a:visited.popupClose {
+    color: #fff;
+
+    position: fixed;
+    top: 10px;
+    right: 10px;
+
+    text-decoration: none;
+}
+
+.bees .popup .colGauche {
+    border-left-width: 80px;
+    border-right-width: 20px;
+}
+
+.bees .popup .colGaucheLarge {
+    text-align: left;
+
+    border-left-width: 20px;
+    border-right-width: 20px;
+}
+
+.bees .popup .colGaucheLarge p {
+    margin-bottom: 1.4em;
+}
+
+.bees .popup .colDroite {
+    border-right-width: 80px;
+    border-left-width: 20px;
+}
+
+@media (max-width: 979px) {
+    .bees .popupContent .bee {
+        margin-left: 0;
+    }
+    
+    .bees .popup .colGauche,
+    .bees .popup .colGaucheLarge,
+    .bees .popup .colDroite {
+        text-align: center;
+
+        border-left-width: 40px;
+        border-right-width: 40px;
+    }
+
+    .bees .popup .colGaucheLarge {
+        margin-bottom: 2.5em;
+    }
+
+    .bees .popup .colGauche ul {
+        margin-bottom: 3em;
+    }
+}
+
+@media (max-width: 649px) {
+    .bees .popup .bee {
+        height: 161px;
+        width: 190px;
+        margin-left: -90px;
+
+        left: 50%;
+    }
+
+    .bees .popup .beeHolder2 img {
+        margin-left: -93px;
+    }
+
+    .bees .popup .colGauche,
+    .bees .popup .colGaucheLarge,
+    .bees .popup .colDroite {
+        border-left-width: 5px;
+        border-right-width: 5px;
+    }
+}
+
+/* -- Quiz --------------------------------------------- */
+
+.quiz p {
+    margin-bottom: 2em;
+}
+
+.quiz button {
+    margin-top: 3em;
+}
+
+.quiz input[type=radio]:not(old) {
+    display: none;
+}
+
+.quiz input[type=radio]:not(old) + label::before {
+    content: "";
+    background-image: QUIZ_QUESTIONS_1;
+    background-position: left top;
+    background-repeat: no-repeat;
+
+    display: inline-block;
+    width: 164px;
+    height: 185px;
+    padding: 0;
+
+    cursor: pointer;
+}
+
+.quiz input[type=radio]:not(old)#answer2 + label::before {
+    background-position: center top;
+}
+
+.quiz input[type=radio]:not(old)#answer3 + label::before {
+    background-position: right top;
+}
+
+.quiz input[type=radio]:checked:not(old) + label::before {
+    background-position: left bottom;
+}
+
+.quiz input[type=radio]:checked:not(old)#answer2 + label::before {
+    background-position: center bottom;
+}
+
+.quiz input[type=radio]:checked:not(old)#answer3 + label::before {
+    background-position: right bottom;
+}
+
+.quiz[data-question="2"] input[type=radio]:not(old) + label::before {
+    background-image: QUIZ_QUESTIONS_2;
+}
+
+.quiz[data-question="3"] input[type=radio]:not(old) + label::before {
+    background-image: QUIZ_QUESTIONS_3;
+}
+
+.quiz[data-question="4"] input[type=radio]:not(old) + label::before {
+    background-image: QUIZ_QUESTIONS_4;
+}
+
+.quiz[data-question="5"] input[type=radio]:not(old) + label::before {
+    background-image: QUIZ_QUESTIONS_5;
+}
+
+.quizEnd h2 i {
+    font-size: 300%;
+
+    display: block;
+    margin-bottom: 3rem;
+}
+
+.quizEnd h2 em {
+    color: C_PRIMARY;
+}
+
+.quizEnd p {
+    font-size: 2rem;
+}
+
+.quizEnd p em {
+    font-size: 60%;
+    color: C_PRIMARY;
+
+    display: block;
+    margin-top: 5rem;
+}
+
+.quizEnd button {
+    display: none;
+}
+
+/* -- offers ------------------------------------------- */
+
+.offers h2 {
+    font-size: 2.5rem;
+
+    margin-bottom: 0;
+}
+
+.offers h3 {
+    font-size: 4rem;
+    line-height: 1;
+
+    margin: 0 0 .3em;
+}
+
+.offers > div {
+    border-bottom: 2px solid #000;
+}
+
+.offers > div:first-child,
+.offers > div:last-child {
+    border-bottom: none
+}
+
+@media (max-width: 979px) {
+    .offers h3 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 649px) {
+    .offers h3 {
+        font-size: 2rem;
+    }
+}

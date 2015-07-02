@@ -1,0 +1,118 @@
+@require "gsss-mixins";
+
+@def ARROW resourceUrl("sliderArrow");
+@def DOT resourceUrl("sliderDot");
+
+.slider {
+    position: relative;
+    z-index: 2000;
+    margin: 0 auto;
+    width: 980px;
+}
+
+.slider .container {
+    width: 900px;
+    margin: 0 auto;
+
+    text-align: center;
+    white-space: nowrap;
+
+    overflow: hidden;
+}
+
+.slider .container > * {
+    display: inline-block;
+    width: 100%;
+}
+
+.contentTransition {
+    @mixin transition_delay(margin, .6s, ease-in-out, 100ms);
+}
+
+@media (max-width: 979px) {
+    .slider {
+        width: 100%;
+    }
+
+    .slider .container {
+        width: 75%;
+        height: auto;
+    }
+}
+
+.slider .prev,
+.slider .next {
+    display: block;
+    margin-top: -16px;
+
+    position: absolute;
+    top: 50%;
+    z-index: 3000;
+}
+
+.slider .prev i:before,
+.slider .next i:before {
+    color: #000;
+    font-size: 25px;
+
+    @mixin rotate(-90deg);
+}
+
+.slider .prev span,
+.slider .next span {
+    text-indent: -9999px;
+
+    display: block;
+}
+
+.slider .prev:hover,
+.slider .next:hover {
+    background-position: center bottom;
+}
+
+.slider .prev {
+    left: 0;
+
+    @mixin flip_horizontal();
+}
+
+.slider .next {
+    right: 0;
+}
+
+.slider .pager {
+    text-align: center;
+
+    height: 20px;
+    width: 100%;
+
+    position: absolute;
+}
+
+.slider .pager a {
+    color: #fff;
+
+    display: inline-block;
+    margin-left: 7px;
+
+    cursor: pointer;
+}
+
+.slider .pager a:before {
+    content: "\2022";
+    font-size: 60px;
+}
+
+.slider .pager a.active:before {
+    color: #000;
+}
+
+.slider .pager a span {
+    display: none;
+}
+
+@media (max-width: 649px) {
+    .slider .pager a:before {
+        font-size: 30px;
+    }
+}

@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import org.spaceinvaders.client.application.ApplicationModule;
+import org.spaceinvaders.client.dispatch.rest.AppRestDispatchHooks;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.ResourceLoader;
 import org.spaceinvaders.shared.api.ApiPaths;
@@ -25,9 +26,9 @@ public class ClientModule extends AbstractPresenterModule {
                 .build());
 
         // DefaultPlaceManager Places
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.restPage);
-        bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.semesterGrades);
-        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.semesterGrades);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.semesterGrades);
+        bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.error);
+        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.error);
 
         bind(ResourceLoader.class).asEagerSingleton();
 

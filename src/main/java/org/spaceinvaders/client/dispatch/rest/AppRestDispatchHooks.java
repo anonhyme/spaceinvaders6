@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AppRestDispatchHooks implements RestDispatchHooks {
-    private static final boolean HookEnabled = false;
+    public static boolean HookEnabled = true;
     private static final Logger logger = Logger.getLogger(AppRestDispatchHooks.class.getName());
 
     @Override

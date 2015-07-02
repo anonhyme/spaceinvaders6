@@ -13,7 +13,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import org.spaceinvaders.client.application.menu.MenuPresenter;
+import org.spaceinvaders.client.application.widgets.menu.MenuPresenter;
 import org.spaceinvaders.client.resources.BootstrapJQueryJs;
 
 import javax.inject.Inject;

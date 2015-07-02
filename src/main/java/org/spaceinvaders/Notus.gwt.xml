@@ -6,6 +6,10 @@
     <inherits name='com.google.gwt.inject.Inject'/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
 
+
+       <inherits name="com.googlecode.gwt.charts.Charts"/>
+
+
     <!-- Rest dispatch -->
     <inherits name="com.gwtplatform.dispatch.rest.DispatchRest"/>
     <inherits name="com.gwtplatform.dispatch.rest.delegates.ResourceDelegate"/>
