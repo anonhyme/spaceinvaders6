@@ -2,9 +2,8 @@ package org.spaceinvaders.client.application.grid;
 
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
-
-import org.spaceinvaders.client.widgets.cellGwt.EvaluationResultType;
-import org.spaceinvaders.client.widgets.cellGwt.EvaluationResultCell;
+import org.spaceinvaders.client.widgets.cell.EvaluationResultCell;
+import org.spaceinvaders.client.widgets.cell.EvaluationResultType;
 import org.spaceinvaders.shared.dto.CompetenceEvalResult;
 import org.spaceinvaders.shared.dto.Evaluation;
 

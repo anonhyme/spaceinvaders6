@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import org.gwtbootstrap3.client.ui.*;
 import org.gwtbootstrap3.client.ui.html.Span;
+import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
@@ -59,6 +60,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
     protected void onAttach() {
         super.onAttach();
         navBar.addStyleName(appResources.topNavBar().material());
+        navbarBrand.setTargetHistoryToken(NameTokens.home);
     }
 
     private void addNavbarLinkInDropDown(String name, String nameToken, int semesterID) {

@@ -4,8 +4,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
-import org.gwtbootstrap3.client.GwtBootstrap3ClientBundle;
-
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 6/22/2015
  *

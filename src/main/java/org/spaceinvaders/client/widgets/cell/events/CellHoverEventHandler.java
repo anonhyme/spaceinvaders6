@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cellGwt.events;
+package org.spaceinvaders.client.widgets.cell.events;
 
 import com.google.gwt.event.shared.EventHandler;
 

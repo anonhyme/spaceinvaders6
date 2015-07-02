@@ -1,41 +1,27 @@
 package org.spaceinvaders.client.application.grid;
 
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipResources;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.cellview.client.CellWidget;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
-
-import com.arcbees.gquery.tooltip.client.TooltipOptions;
-import com.arcbees.gquery.tooltip.client.TooltipResources;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-
-import org.gwtbootstrap3.client.ui.Alert;
 import org.gwtbootstrap3.client.ui.Container;
-import org.gwtbootstrap3.client.ui.Popover;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.client.resources.CustomTooltipResources;
-import org.spaceinvaders.client.widgets.cell.CellPresenter;
-import org.spaceinvaders.client.widgets.cell.WidgetsFactory;
-import org.spaceinvaders.client.widgets.cellGwt.ResultCell;
-import org.spaceinvaders.client.widgets.cellGwt.templates.TooltipCellTemplates;
-import org.spaceinvaders.client.widgets.cellGwt.templates.TooltipCellWidget;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import java.util.List;
-
 import javax.inject.Inject;
-
-import static com.google.gwt.query.client.GQuery.$;
+import java.util.List;
 
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridView> {
@@ -44,8 +30,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     @Inject
     private CustomTooltipResources style;
-
-    private WidgetsFactory widgetsFactory;
 
     @UiField
     HTMLPanel panel;
@@ -58,23 +42,17 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     AppResources appResources;
 
-    TooltipCellWidget tooltipCellWidget;
 
     protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
 
     private CellTable<Evaluation> cellTable;
 
     @Inject
-    GridView(Binder uiBinder, AppResources appResources, TooltipCellWidget tooltipCellWidget) {
+    GridView(Binder uiBinder, AppResources appResources) {
         this.appResources = appResources;
-        this.tooltipCellWidget = tooltipCellWidget;
         initWidget(uiBinder.createAndBindUi(this));
     }
 
-    @Override
-    public void addCellPresenter(WidgetsFactory widgetsFactory) {
-        this.widgetsFactory = widgetsFactory;
-    }
 
     @Override
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {

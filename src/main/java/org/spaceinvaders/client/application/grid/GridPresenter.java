@@ -2,16 +2,13 @@ package org.spaceinvaders.client.application.grid;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-
 import org.spaceinvaders.client.application.grid.events.SemesterGradesReceivedEvent;
 import org.spaceinvaders.client.application.grid.events.SemesterInfoReceivedEvent;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
-import org.spaceinvaders.client.widgets.cell.WidgetsFactory;
 import org.spaceinvaders.shared.api.SemesterGradesResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -30,10 +27,7 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations);
 
-        void addCellPresenter(WidgetsFactory widgetsFactory);
     }
-
-    private final WidgetsFactory widgetsFactory;
 
     private final ResourceDelegate<SemesterGradesResource> semesterGradesDelegate;
     private final ResourceDelegate<SemesterInfoResource> semesterInfoDelegate;
@@ -43,15 +37,13 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     @Inject
     public GridPresenter(EventBus eventBus,
                          MyView view,
-                         WidgetsFactory widgetsFactory,
                          ResourceDelegate<SemesterGradesResource> semesterGradesDelegate,
                          ResourceDelegate<SemesterInfoResource> semesterInfoDelegate) {
         super(eventBus, view);
-        this.widgetsFactory = widgetsFactory;
         this.semesterGradesDelegate = semesterGradesDelegate;
         this.semesterInfoDelegate = semesterInfoDelegate;
         getView().setUiHandlers(this);
-        view.addCellPresenter(widgetsFactory);
+
     }
 
     public void updateGrid(int semesterID) {

@@ -1,8 +1,7 @@
-package org.spaceinvaders.client.widgets.cellGwt;
+package org.spaceinvaders.client.widgets.cell;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
@@ -10,10 +9,6 @@ import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
-
-import org.gwtbootstrap3.client.ui.Popover;
-import org.spaceinvaders.client.widgets.cell.CellPresenter;
-import org.spaceinvaders.client.widgets.cell.WidgetsFactory;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 6/21/2015
@@ -23,15 +18,15 @@ import org.spaceinvaders.client.widgets.cell.WidgetsFactory;
 public class ApCell extends AbstractCell<String> {
 
     private String data;
-    private CellPresenter cellPresenter;
 
-    public ApCell(WidgetsFactory widgetsFactory) {
+
+    public ApCell() {
         super(BrowserEvents.CLICK);
     }
 
     @Override
     public void render(Context context, String data, SafeHtmlBuilder sb) {
-        if (cellPresenter == null) {
+        if (data == null) {
             return;
         }
 

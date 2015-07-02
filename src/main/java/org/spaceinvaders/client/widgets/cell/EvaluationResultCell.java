@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cellGwt;
+package org.spaceinvaders.client.widgets.cell;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;
@@ -11,10 +11,7 @@ import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
-import org.spaceinvaders.client.widgets.cell.CellPresenter;
-
 import java.util.HashMap;
-import java.util.List;
 
 
 /**

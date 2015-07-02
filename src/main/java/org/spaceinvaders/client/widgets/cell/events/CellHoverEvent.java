@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cellGwt.events;
+package org.spaceinvaders.client.widgets.cell.events;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
@@ -14,7 +14,7 @@ public class CellHoverEvent extends GwtEvent<CellHoverEventHandler> {
 
     public static Type<CellHoverEventHandler> TYPE = new Type<CellHoverEventHandler>();
 
-    public CellHoverEvent(String data){
+    public CellHoverEvent(String data) {
         this.data = data;
     }
 
