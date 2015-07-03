@@ -6372,7 +6372,7 @@ CREATE OR REPLACE RULE v_timespan_update AS
 -- student semester views
 --
 CREATE OR REPLACE VIEW note.v_student_semester AS
-	SELECT DISTINCT u.administrative_user_id, eg.short_description, t.label, egi.eg_instance_id
+	SELECT DISTINCT u.administrative_user_id, eg.short_description, t.label as timespan_label, egi.eg_instance_id
 	  FROM public.users u, public.user_group ug, public.groups g, note.assigned_group ag, note.educationnal_goal_instance egi, note.timespan t, note.educationnal_goal eg
 	  WHERE u.user_id = ug.member_id
 	    AND g.group_id = ug.group_id
@@ -6415,21 +6415,25 @@ CREATE OR REPLACE VIEW note.v_ap_subap_hierarchy AS
 
 
 CREATE OR REPLACE VIEW note.v_student_results_by_eg_instance AS
-	SELECT egi.eg_instance_id, r.student_id, evi.evaluation_id, c.eg_id, r.value, c.weighting
-	FROM note.educationnal_goal_instance egi, note.evaluation_instance evi, note.result r, note.criterion c
-	WHERE egi.eg_instance_id = evi.eg_instance_id AND
-		  evi.evaluation_instance_id = r.evaluation_instance_id AND 
-		  c.criterion_id = r.criterion_id;
+    SELECT evals.eg_instance_id, evals.student_id, evals.evaluation_id, evals.eg_id, result.value, evals.weighting, case when result.evaluation_instance_id is not null then 1 else 0 end as flag 
+	FROM
+    (SELECT egi.eg_instance_id, evi.evaluation_instance_id, evi.evaluation_id, c.criterion_id, u_gr.member_id as student_id, c.eg_id, c.weighting
+    FROM note.educationnal_goal_instance egi, note.evaluation_instance evi, note.evaluation_rubric ev_ru, note.criterion c, note.assigned_group ag, public.user_group u_gr
+    WHERE egi.eg_instance_id = evi.eg_instance_id AND evi.evaluation_id = ev_ru.evaluation_id AND ev_ru.rubric_id = c.rubric_id AND egi.eg_instance_id = ag.eg_instance_id AND ag.group_id = u_gr.group_id) AS evals
+    LEFT OUTER JOIN
+    (SELECT r.evaluation_instance_id, r.student_id, r.value, r.criterion_id FROM note.result r) AS result
+    ON evals.evaluation_instance_id = result.evaluation_instance_id AND evals.student_id = result.student_id AND evals.criterion_id = result.criterion_id
+    ORDER BY evals.eg_instance_id, evals.evaluation_id, evals.student_id;
 
 /**
 	View that contains every results for every evaluation instance for every educational goal instance for every student.
 	The view also contains the average result and the maximum point of the particular educational goal.
 */
 CREATE OR REPLACE VIEW note.v_student_total_results_with_avg_by_eg_instance AS
-	SELECT r2.eg_instance_id, r2.evaluation_id, r2.student_id, r2.eg_id, r2.result, r4.average, r2.total
-	FROM (SELECT r.eg_instance_id, r.evaluation_id, r.student_id, r.eg_id, SUM(r.value) AS result, SUM(r.weighting) AS total 
+	SELECT r2.eg_instance_id, r2.evaluation_id, r2.student_id, r2.eg_id, r2.result, r4.average, r2.total, r2.flag::bit
+	FROM (SELECT r.eg_instance_id, r.evaluation_id, r.student_id, r.eg_id, SUM(r.value) AS result, SUM(r.weighting) AS total, r.flag
 		  FROM note.v_student_results_by_eg_instance r 
-		  GROUP BY r.eg_id, r.eg_instance_id, r.student_id, r.evaluation_id 
+		  GROUP BY r.eg_id, r.eg_instance_id, r.student_id, r.evaluation_id, r.flag 
 		  ORDER BY r.evaluation_id, r.student_id, r.eg_id) r2, 
 		 (SELECT r3.eg_instance_id, r3.evaluation_id, r3.eg_id, AVG(r3.result) AS average 
 		  FROM  (SELECT r.eg_instance_id, r.evaluation_id, r.student_id, r.eg_id, SUM(r.value) AS result, SUM(r.weighting) AS total 
@@ -6599,26 +6603,9 @@ CREATE TYPE note.t_semester AS (
 -- student semester function
 --
 CREATE OR REPLACE FUNCTION note.get_student_semester(administrative_user_id text) RETURNS SETOF note.t_semester AS $$
-SELECT vss.short_description, vss.label, vss.eg_instance_id
+SELECT vss.short_description, vss.timespan_label, vss.eg_instance_id
   FROM note.v_student_semester vss
   WHERE vss.administrative_user_id = $1;
-$$ LANGUAGE SQL;
-
---
--- AP types and procedures
---
-CREATE TYPE note.t_ap_grades_summary AS (
-  ap_name text,
-  result_value int,
-  avg_value int,
-  max_value int
-);
-
-CREATE OR REPLACE FUNCTION note.get_ap_results(student_id text, session_id int) RETURNS SETOF note.t_ap_grades_summary AS $$
-    -- TODO : CREATE SELECT STATEMENT
-    SELECT           'GEN501', 80, 79, 100
-    UNION ALL SELECT 'GEN402', 75, 73, 90
-    UNION ALL SELECT 'GEN666', 42, 50, 110;
 $$ LANGUAGE SQL;
 
 
@@ -6632,32 +6619,19 @@ CREATE TYPE note.t_competence_eval_result AS (
   result_value int,
   avg_result_value double precision,
   max_result_value int,
-  standard_dev int
+  standard_dev int,
+  has_result bit
 );
+
 
 CREATE OR REPLACE FUNCTION note.get_semester_eval_results(student_id text, session_id int) RETURNS SETOF note.t_competence_eval_result AS $$
   
-	SELECT ev.short_description, ap_subap_h.ap_desc, ap_subap_h.subap_desc, r.result::int, r.average, r.total::int, 1
+	SELECT ev.short_description, ap_subap_h.ap_desc, ap_subap_h.subap_desc, r.result::int, r.average, r.total::int, 1, r.flag
 	FROM note.v_student_total_results_with_avg_by_eg_instance r, note.evaluation ev, public.users u, note.v_ap_subap_hierarchy ap_subap_h
 	WHERE r.evaluation_id = ev.evaluation_id AND r.student_id = u.user_id AND u.administrative_user_id = $1 AND
 		  r.eg_id = ap_subap_h.subap_id AND r.eg_instance_id = $2;
 $$ LANGUAGE SQL;
 
--- Semester procedure example
--- SELECT * FROM get_semester_results('bedh2102', 'S5I');
-
-CREATE OR REPLACE FUNCTION note.get_ap_eval_results(student_id text, session_id int, ap_id int) RETURNS SETOF note.t_competence_eval_result AS $$
-  -- TODO : CREATE SELECT STATEMENT
-  SELECT           'Sommatif APP3', 'GEN666', 'GEN666-1', 80, 75.0::double precision, 85, 3
-  UNION ALL SELECT 'Sommatif APP3', 'GEN666', 'GEN666-2', 80, 73.0::double precision, 110, 4;
-$$ LANGUAGE SQL;
-
--- Ap results procedure example
--- SELECT * FROM get_semester_results('bedh2102', 'S5I');
-
-
--- TODO : probably add a procedure to retrieve competence progress (ex : student has currently 50/300 of the total points for a competence)
--- We could also include it in the competence_eval_result_t but it seems like a lot of information at the same time
 
 CREATE TYPE note.t_competence AS (
 	ap_label text,
@@ -6677,8 +6651,10 @@ CREATE TYPE note.t_evaluation AS (evaluation_label text);
 
 CREATE OR REPLACE FUNCTION note.get_semester_evals(student_id text, session_id int) RETURNS SETOF note.t_evaluation AS $$
   -- TODO : CREATE SELECT STATEMENT
-  SELECT           'Sommatif APP2'
-  UNION ALL SELECT 'Sommatif APP3';
+  SELECT ev.short_description
+  FROM note.evaluation_instance evi, note.evaluation ev
+  WHERE evi.eg_instance_id = $2 AND evi.evaluation_id = ev.evaluation_id
+  ORDER BY evi.occurence;
 $$ LANGUAGE SQL;
 
 
