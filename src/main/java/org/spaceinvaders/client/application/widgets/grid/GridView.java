@@ -19,6 +19,7 @@ import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.client.resources.CustomTooltipResources;
+import org.spaceinvaders.client.widgets.cell.ApCell;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
@@ -46,7 +47,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     Container alertBitchContainer;
 
     AppResources appResources;
-
 
     protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
 
@@ -88,7 +88,8 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     private void setEvaluationTypeColumn() {
-        Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
+//        Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
+        Column<Evaluation, String> column = new Column<Evaluation, String>(new ApCell()) {
             @Override
             public String getValue(Evaluation data) {
                 String value = " empty ";

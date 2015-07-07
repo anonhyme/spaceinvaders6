@@ -15,28 +15,30 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
-import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
-import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
-import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
+import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
+import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
+import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
 import org.spaceinvaders.client.events.SemesterChangedEvent;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.widgets.cell.events.CellHoverEvent;
-import org.spaceinvaders.client.widgets.cell.events.CellHoverEventHandler;
+import org.spaceinvaders.client.events.CellClickApEvent;
+
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 
 import javax.inject.Inject;
 
-public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, SemesterPresenter.MyProxy>
-        implements SemesterChangedEvent.SemesterChangedHandler, CellHoverEventHandler {
+import static org.spaceinvaders.client.application.util.ColorHelper.GREEN;
+import static org.spaceinvaders.client.application.util.ColorHelper.LIGHT_BLUE;
+import static org.spaceinvaders.client.application.util.ColorHelper.RED;
 
+public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, SemesterPresenter.MyProxy>
+        implements SemesterChangedEvent.SemesterChangedHandler, CellClickApEvent.CellClickApEventHandler {
 
     public interface MyView extends View {
         void addGrid(IsWidget gridWidget);
@@ -56,14 +58,15 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     @Inject
     Provider<GwtChartWidgetPresenter> gwtChartWidgetPresenterProvider;
 
-    private
-
     @Inject
     SemesterPresenter(EventBus eventBus,
                       MyView view,
                       MyProxy proxy,
-                      GridPresenter gridPresenter, ResourceDelegate<EvaluationResource> semesterGradeDelegate, ResourceDelegate<SemesterInfoResource> semesterInfoDelegate) {
+                      GridPresenter gridPresenter,
+                      ResourceDelegate<EvaluationResource> semesterGradeDelegate,
+                      ResourceDelegate<SemesterInfoResource> semesterInfoDelegate) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
+
         this.gridPresenter = gridPresenter;
         this.evaluationDelegate = semesterGradeDelegate;
         this.semesterInfoDelegate = semesterInfoDelegate;
@@ -79,7 +82,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
 
     private void registerHandler() {
         addRegisteredHandler(SemesterChangedEvent.TYPE, this);
-        addRegisteredHandler(CellHoverEvent.TYPE, this);
+        addRegisteredHandler(CellClickApEvent.TYPE, this);
     }
 
     private void showGrid() {
@@ -106,8 +109,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
             public void onSuccess(TreeMap<String, Evaluation> results) {
                 GWT.log(results.toString());
                 final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
-
-                String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
+                String[] colors = {RED, GREEN, LIGHT_BLUE};
                 semesterChartPresenter.setChart(new SemesterResultsChart(semesterInfo, new ArrayList<>(results.values())));
                 semesterChartPresenter.setChartColors(colors);
 
@@ -130,7 +132,9 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     }
 
     @Override
-    public void onCellHover(CellHoverEvent event) {
-        GWT.log(event.getData());
+    public void onColumnClick(CellClickApEvent event) {
+        //TODO Create ap page and reveal it
+        GWT.debugger();
     }
+
 }

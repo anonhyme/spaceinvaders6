@@ -1,11 +1,11 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 
 import org.spaceinvaders.client.widgets.cell.EvaluationResultCell;
 import org.spaceinvaders.client.widgets.cell.EvaluationResultType;
-import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
@@ -36,13 +36,16 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         String resultEvaluation = "   ";
 
         Result result = evaluation.getResult(key);
-
+        String[] apKey = key.split("-");
         if (result != null) {
+            String ap = apKey[0];
+            String competence = apKey[1];
             String maxTotal = formatDoubleToString(result.getMaxTotal());
             String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal());
             String averageTotal = formatDoubleToString(result.getAvgTotal());
             String standardDev = formatDoubleToString(result.getStandardDev());
 
+            dataMap.put(EvaluationResultType.AP, ap);
             dataMap.put(EvaluationResultType.RESULT, studentResult);
             dataMap.put(EvaluationResultType.AVERAGE, averageTotal);
             dataMap.put(EvaluationResultType.STD_DEV, standardDev);

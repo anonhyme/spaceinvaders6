@@ -6,5 +6,5 @@ package org.spaceinvaders.client.widgets.cell;
  * @author antoine
  */
 public enum EvaluationResultType {
-    RESULT, STD_DEV, AVERAGE
+    AP, COMPETENCE, RESULT, STD_DEV, AVERAGE
 }
