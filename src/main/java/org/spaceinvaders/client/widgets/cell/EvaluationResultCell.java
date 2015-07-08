@@ -81,12 +81,4 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
         GWT.log(":::: Fire ap loading ::::");
         ApSelectedEvent.fire(ap, gridPresenter);
     }
-
-
-//    @Override
-//    public void fireEvent(GwtEvent<?> event) {
-//        GWT.log("fireEvent :::: " + event.toDebugString());
-//        eventBus.fireEvent(event);
-//    }
-
 }

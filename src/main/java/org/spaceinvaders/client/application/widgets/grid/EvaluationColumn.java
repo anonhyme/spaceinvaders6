@@ -27,7 +27,6 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
     public EvaluationColumn(String key, GridPresenter gridPresenter) {
         super(new EvaluationResultCell(gridPresenter));
         this.key = key;
-
     }
 
     @Override
@@ -35,7 +34,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         NumberFormat formatter = NumberFormat.getFormat("#.##");
         this.dataMap = new HashMap<EvaluationResultType, String>();
 
-        String resultEvaluation = "   ";
+        String resultEvaluation = "";
 
         Result result = evaluation.getResult(key);
         String[] apKey = key.split("-");
@@ -48,6 +47,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
             String standardDev = formatDoubleToString(result.getStandardDev());
 
             dataMap.put(EvaluationResultType.AP, ap);
+            dataMap.put(EvaluationResultType.COMPETENCE, competence);
             dataMap.put(EvaluationResultType.RESULT, studentResult);
             dataMap.put(EvaluationResultType.AVERAGE, averageTotal);
             dataMap.put(EvaluationResultType.STD_DEV, standardDev);
