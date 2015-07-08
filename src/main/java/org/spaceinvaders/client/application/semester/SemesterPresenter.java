@@ -21,7 +21,7 @@ import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtCha
 import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
 import org.spaceinvaders.client.events.SemesterChangedEvent;
 import org.spaceinvaders.client.place.NameTokens;
-import org.spaceinvaders.client.events.CellClickApEvent;
+import org.spaceinvaders.client.events.ApSelectedEvent;
 
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
@@ -38,7 +38,7 @@ import static org.spaceinvaders.client.application.util.ColorHelper.LIGHT_BLUE;
 import static org.spaceinvaders.client.application.util.ColorHelper.RED;
 
 public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, SemesterPresenter.MyProxy>
-        implements SemesterChangedEvent.SemesterChangedHandler, CellClickApEvent.CellClickApEventHandler {
+        implements SemesterChangedEvent.SemesterChangedHandler {
 
     public interface MyView extends View {
         void addGrid(IsWidget gridWidget);
@@ -82,7 +82,6 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
 
     private void registerHandler() {
         addRegisteredHandler(SemesterChangedEvent.TYPE, this);
-        addRegisteredHandler(CellClickApEvent.TYPE, this);
     }
 
     private void showGrid() {
@@ -131,10 +130,5 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         gridPresenter.updateGrid(event.getSemesterID());
     }
 
-    @Override
-    public void onColumnClick(CellClickApEvent event) {
-        //TODO Create ap page and reveal it
-        GWT.debugger();
-    }
 
 }

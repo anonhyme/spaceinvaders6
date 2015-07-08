@@ -29,7 +29,7 @@ public class CellClickApEvent extends GwtEvent<CellClickApEvent.CellClickApEvent
     }
 
     public static void fire(String data, HasHandlers source) {
-        GWT.log(":::: EVENT FIRE :::: CellClickApEvent  " + source.toString());
+        GWT.log(":::: EVENT FIRE :::: ApSelectedEvent  " + source.toString());
         source.fireEvent(new CellClickApEvent(data));
     }
 

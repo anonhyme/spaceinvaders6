@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -12,6 +13,7 @@ import org.spaceinvaders.client.application.widgets.grid.events.EvaluationReceiv
 
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.application.widgets.grid.events.SemesterInfoReceivedEvent;
+import org.spaceinvaders.client.events.ApSelectedEvent;
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -25,11 +27,11 @@ import java.util.TreeMap;
 public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
         implements GridUiHandlers,
         SemesterInfoReceivedEvent.SemesterInfoReceivedEventHandler,
-        EvaluationReceivedEvent.SemesterGradesReceivedHandler {
+        EvaluationReceivedEvent.SemesterGradesReceivedHandler,
+        ApSelectedEvent.Handler {
 
     interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations);
-
     }
 
     private final ResourceDelegate<EvaluationResource> evaluationDelegate;
@@ -60,6 +62,7 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     private void registerHandlers() {
         addRegisteredHandler(SemesterInfoReceivedEvent.TYPE, this);
         addRegisteredHandler(EvaluationReceivedEvent.TYPE, this);
+        addRegisteredHandler(ApSelectedEvent.TYPE, this);
     }
 
     @Override
@@ -78,7 +81,7 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                 .withCallback(new AbstractAsyncCallback<SemesterInfo>() {
                     @Override
                     public void onSuccess(SemesterInfo semesterInfo) {
-                        SemesterInfoReceivedEvent.fire(semesterInfo, getThis());
+                        SemesterInfoReceivedEvent.fire(semesterInfo, getInstance());
                     }
                 }).get(semesterID);
     }
@@ -88,17 +91,19 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                 .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
                     @Override
                     public void onSuccess(TreeMap<String, Evaluation> evaluations) {
-                        EvaluationReceivedEvent.fire(evaluations, getThis());
+                        EvaluationReceivedEvent.fire(evaluations, getInstance());
                     }
                 }).getAllEvaluations(3);
     }
 
-    private GridPresenter getThis() {
+    @Override
+    public GridPresenter getInstance() {
         return this;
     }
 
-//    private native boolean isjQueryLoaded() /*-{
-//        console.log("hello");
-//        return (typeof $wnd['jQuery'] !== 'undefined');
-//    }-*/;
+    @Override
+    public void onApSelected(ApSelectedEvent event) {
+        //TODO Create ap page and reveal it
+        GWT.log(event.getAp());
+    }
 }

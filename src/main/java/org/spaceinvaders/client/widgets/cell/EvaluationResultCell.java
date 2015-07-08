@@ -15,7 +15,8 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
 import org.spaceinvaders.client.application.semester.SemesterPresenter;
-import org.spaceinvaders.client.events.CellClickApEvent;
+import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
+import org.spaceinvaders.client.events.ApSelectedEvent;
 
 import java.util.HashMap;
 
@@ -29,15 +30,15 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
     @Inject
     private EventBus eventBus;
 
-    @Inject
-    private SemesterPresenter semesterPresenter;
+    private final GridPresenter gridPresenter;
 
     private final String POPOVER_JS = "$(document).ready(function(){ $(\'[data-toggle=\"popover\"]\').popover();});";
 
     private static Templates templates = GWT.create(Templates.class);
 
-    public EvaluationResultCell() {
+    public EvaluationResultCell(GridPresenter gridPresenter) {
         super(BrowserEvents.MOUSEOVER, BrowserEvents.CLICK);
+        this.gridPresenter = gridPresenter;
     }
 
     @Override
@@ -78,13 +79,9 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
 
     private void showAp(String ap) {
         GWT.log(":::: Fire ap loading ::::");
-        CellClickApEvent.fire("hello there", semesterPresenter);
+        ApSelectedEvent.fire(ap, gridPresenter);
     }
 
-//    @Override
-//    public void onColumnClick(CellClickApEvent event) {
-//
-//    }
 
 //    @Override
 //    public void fireEvent(GwtEvent<?> event) {

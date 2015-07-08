@@ -2,7 +2,6 @@ package org.spaceinvaders.client.application.widgets.grid;
 
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipResources;
-
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -12,27 +11,23 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
-
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
+import org.spaceinvaders.client.events.ApSelectedEvent;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.client.resources.CustomTooltipResources;
 import org.spaceinvaders.client.widgets.cell.ApCell;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
-import org.spaceinvaders.shared.exception.ApExeption;
 
 import javax.inject.Inject;
-
 import java.util.List;
 
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridView> {
     }
-
 
     @Inject
     private CustomTooltipResources style;
@@ -58,7 +53,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         initWidget(uiBinder.createAndBindUi(this));
     }
 
-
     @Override
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
         //TODO refactor
@@ -70,26 +64,24 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         cellTable.setCondensed(true);
         cellTable.setColumnWidth(0, "22%");
         cellTable.setHover(false);
+        //Not sure how its work to disable row hover
         cellTable.setKeyboardSelectionPolicy(HasKeyboardSelectionPolicy.KeyboardSelectionPolicy.DISABLED);
 
         containerCellTable.clear();
         containerCellTable.add(cellTable);
-
     }
-
 
     private void initColumn(SemesterInfo semesterInfo) {
         setEvaluationTypeColumn();
         List<Competence> competencesLabels = semesterInfo.getCompetences();
         for (Competence competenceLabel : competencesLabels) {
-            cellTable.addColumn(new EvaluationColumn(competenceLabel.getLabel()), competenceLabel.getLabel());
+            cellTable.addColumn(new EvaluationColumn(competenceLabel.getLabel(), getUiHandlers().getInstance()), competenceLabel.getLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
 
     private void setEvaluationTypeColumn() {
-//        Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
-        Column<Evaluation, String> column = new Column<Evaluation, String>(new ApCell()) {
+        Column<Evaluation, String> column = new Column<Evaluation, String>(new TextCell()) {
             @Override
             public String getValue(Evaluation data) {
                 String value = " empty ";
@@ -120,6 +112,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     private TooltipOptions setRowTooltip() {
+
         TooltipOptions options = new TooltipOptions();
         options.withResources(getTooltipResources());
 //        options.withContent(TooltipCellTemplates.INSTANCE.popover());

@@ -19,22 +19,19 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.HasHandlerContainer;
 
 import org.apache.tools.ant.taskdefs.condition.Not;
+import org.spaceinvaders.client.application.semester.SemesterPresenter;
 
 /**
  * Created with IntelliJ IDEA Project: projetS6 on 6/21/2015
  *
  * @author antoine
  */
-public class ApCell extends AbstractCell<String> implements HasHandlers {
+public class ApCell extends AbstractCell<String> {
 
     private String data;
 
+
     private final static String AP_CELL = "<div>{0}</div>";
-
-    @Override
-    public void fireEvent(GwtEvent<?> event) {
-
-    }
 
 
     interface Templates extends SafeHtmlTemplates {
@@ -46,7 +43,9 @@ public class ApCell extends AbstractCell<String> implements HasHandlers {
 
     public ApCell() {
         super(BrowserEvents.CLICK);
+
     }
+
 
     @Override
     public void render(Context context, String data, SafeHtmlBuilder sb) {

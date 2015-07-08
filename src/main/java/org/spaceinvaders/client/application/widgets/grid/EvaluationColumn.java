@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 
+import org.spaceinvaders.client.application.semester.SemesterPresenter;
 import org.spaceinvaders.client.widgets.cell.EvaluationResultCell;
 import org.spaceinvaders.client.widgets.cell.EvaluationResultType;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -17,15 +18,16 @@ import java.util.HashMap;
  * @author antoine
  */
 public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResultType, String>> {
-
     private final String key;
     private HashMap<EvaluationResultType, String> dataMap;
     private final String EMPTY = "empty";
     private final String POPOVER = "popover";
 
-    public EvaluationColumn(String key) {
-        super(new EvaluationResultCell());
+
+    public EvaluationColumn(String key, GridPresenter gridPresenter) {
+        super(new EvaluationResultCell(gridPresenter));
         this.key = key;
+
     }
 
     @Override
