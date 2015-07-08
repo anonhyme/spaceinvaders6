@@ -3,37 +3,24 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:b='urn:import:org.gwtbootstrap3.client.ui'>
 
-
     <g:HTMLPanel>
-        <b:Row>
-            <b:Column size="MD_4">
-                <b:PageHeader subText="" ui:field="pageTitle"></b:PageHeader>
+        <div style="margin: auto; width: 60%;">
+            <b:PageHeader subText="" ui:field="pageTitle"/>
+            <g:SimplePanel ui:field="gridPanel"/>
+
+            <div>
+                <g:Label>Progression :</g:Label>
                 <b:Progress>
-                    <b:ProgressBar ui:field="studentProgressBar" percent="30"/>
+                    <b:ProgressBar ui:field="studentProgressBar" percent="0"/>
                 </b:Progress>
                 <b:Progress>
-                    <b:ProgressBar ui:field="classProgressBar" percent="40"/>
+                    <b:ProgressBar ui:field="classProgressBar" percent="0"/>
                 </b:Progress>
-            </b:Column>
-            <b:Column size="MD_8">
-                <g:HTMLPanel ui:field="cumulativeChartPanel">
-                    <!--b:Button type="DEFAULT" ui:field="evaluationButton" >Évaluations</b:Button-->
-                </g:HTMLPanel>
-            </b:Column>
-        </b:Row>
+            </div>
 
-
-        <b:Row>
-            <b:Column size="MD_4">
-                <g:HTMLPanel ui:field="gridPanel"/>
-            </b:Column>
-            <b:Column size="MD_8">
-                <g:HTMLPanel ui:field="evaluationChartPanel">
-                    <!--b:Button type="DEFAULT" ui:field="cumulativeButton">Courbe Cumulative</b:Button-->
-                </g:HTMLPanel>
-
-            </b:Column>
-        </b:Row>
+            <g:HTMLPanel ui:field="cumulativeChartPanel"/>
+            <g:HTMLPanel ui:field="evaluationChartPanel"/>
+        </div>
     </g:HTMLPanel>
 
 </ui:UiBinder>

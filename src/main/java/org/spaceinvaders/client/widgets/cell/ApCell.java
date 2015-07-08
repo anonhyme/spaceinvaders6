@@ -19,7 +19,6 @@ public class ApCell extends AbstractCell<String> {
 
     private String data;
 
-
     public ApCell() {
         super(BrowserEvents.CLICK);
     }

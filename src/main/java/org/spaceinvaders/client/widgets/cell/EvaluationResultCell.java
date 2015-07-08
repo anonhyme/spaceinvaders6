@@ -34,15 +34,15 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
 
     private final static String INNER_CONTENT =
             "<table cellpadding='5' style='text-align:left'>\n" +
-                    "    <tr>\n" +
-                    "        <td> moy. :</td>\n" +
-                    "        <td>{0}</td>\n" +
-                    "    </tr>\n" +
-                    "    <tr>\n" +
-                    "        <td> Std dev. :</td>\n" +
-                    "        <td>{1}</td>\n" +
-                    "    </tr>\n" +
-                    "</table>";
+            "    <tr>\n" +
+            "        <td> Moyenne =&nbsp;</td>\n" +
+            "        <td>{0}%</td>\n" +
+            "    </tr>\n" +
+            "    <tr>\n" +
+            "        <td> Écart-type =&nbsp;</td>\n" +
+            "        <td>{1}</td>\n" +
+            "    </tr>\n" +
+            "</table>";
 
     interface Templates extends SafeHtmlTemplates {
         @SafeHtmlTemplates.Template(POPOVER)
@@ -60,7 +60,6 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
 
     @Override
     public void render(Context context, HashMap<EvaluationResultType, String> data, SafeHtmlBuilder sb) {
-
         if (data.isEmpty()) {
             GWT.log("No data .... ");
             return;

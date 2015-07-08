@@ -32,7 +32,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     interface Binder extends UiBinder<Widget, GridView> {
     }
 
-
     @Inject
     private CustomTooltipResources style;
 
@@ -47,7 +46,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     AppResources appResources;
 
-
     protected ListDataProvider<Evaluation> dataSemesterProvider = new ListDataProvider<Evaluation>();
 
     private CellTable<Evaluation> cellTable;
@@ -57,7 +55,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         this.appResources = appResources;
         initWidget(uiBinder.createAndBindUi(this));
     }
-
 
     @Override
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
@@ -74,9 +71,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
         containerCellTable.clear();
         containerCellTable.add(cellTable);
-
     }
-
 
     private void initColumn(SemesterInfo semesterInfo) {
         setEvaluationTypeColumn();

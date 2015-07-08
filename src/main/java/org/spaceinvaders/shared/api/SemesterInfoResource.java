@@ -11,16 +11,15 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 import static org.spaceinvaders.shared.api.ApiParameters.SEMESTER_ID;
-import static org.spaceinvaders.shared.api.ApiPaths.ALL_SEMESTERS;
-import static org.spaceinvaders.shared.api.ApiPaths.SEMESTERINFO;
+import static org.spaceinvaders.shared.api.ApiPaths.*;
 
-@Path(SEMESTERINFO)
+@Path(SEMESTER_INFO)
 @Produces(MediaType.APPLICATION_JSON)
 public interface SemesterInfoResource {
     @GET
     SemesterInfo get(@QueryParam(SEMESTER_ID) int semesterID);
 
     @GET
-    @Path(ALL_SEMESTERS)
+    @Path(SEMESTER_INFO + ALL)
     List<SemesterInfo> getAll();
 }

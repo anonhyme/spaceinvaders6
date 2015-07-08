@@ -19,7 +19,6 @@ import java.util.HashMap;
 public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResultType, String>> {
 
     private final String key;
-    private HashMap<EvaluationResultType, String> dataMap;
     private final String EMPTY = "empty";
     private final String POPOVER = "popover";
 
@@ -30,16 +29,11 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
 
     @Override
     public HashMap<EvaluationResultType, String> getValue(Evaluation evaluation) {
-        NumberFormat formatter = NumberFormat.getFormat("#.##");
-        this.dataMap = new HashMap<EvaluationResultType, String>();
-
-        String resultEvaluation = "   ";
-
+        HashMap<EvaluationResultType, String> dataMap = new HashMap<>();
         Result result = evaluation.getResult(key);
 
         if (result != null) {
-            String maxTotal = formatDoubleToString(result.getMaxTotal());
-            String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal());
+            String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%";
             String averageTotal = formatDoubleToString(result.getAvgTotal());
             String standardDev = formatDoubleToString(result.getStandardDev());
 
@@ -54,5 +48,4 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         NumberFormat formatter = NumberFormat.getFormat("#.##");
         return formatter.format(value);
     }
-
 }

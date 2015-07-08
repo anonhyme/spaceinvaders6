@@ -6,6 +6,7 @@ import org.spaceinvaders.server.cas.UserSessionImpl;
 import org.spaceinvaders.server.dao.SemesterInfoDao;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.SemesterInfo;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,6 @@ public class SemesterInfoResourceImpl implements SemesterInfoResource {
 
     @Override
     public List<SemesterInfo> getAll() {
-        return semesterInfoDao.getSemesterInfoList(userSession.getUserId(), 0);
+        return semesterInfoDao.getSemesterInfoList(userSession.getUserId());
     }
 }
