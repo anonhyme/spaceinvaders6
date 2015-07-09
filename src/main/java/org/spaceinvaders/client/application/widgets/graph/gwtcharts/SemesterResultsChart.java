@@ -13,19 +13,19 @@ import org.spaceinvaders.shared.dto.*;
 
 import java.util.List;
 
-/**
- * Created by Etienne on 2015-06-10.
- */
 public class SemesterResultsChart extends AbstractGWTChart {
     private BarChart chart;
     private List<Evaluation> evaluations;
     private SemesterInfo semesterInfo;
+    List<Ap> aps;
+    private BarChartOptions options;
 
     public SemesterResultsChart(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
         this.semesterInfo = semesterInfo;
         this.evaluations = evaluations;
     }
 
+    @Override
     public Widget getChart() {
         if (chart == null) {
             chart = new BarChart();
@@ -35,9 +35,13 @@ public class SemesterResultsChart extends AbstractGWTChart {
 
     @Override
     public void loadChart() {
-        List<Ap> aps = semesterInfo.getAps();
+        aps = semesterInfo.getAps();
+        super.loadChart();
+    }
 
-        DataTable dataTable = DataTable.create();
+    @Override
+    void setDataTable() {
+        dataTable = DataTable.create();
         dataTable.addColumn(ColumnType.STRING, "Résultat");
         dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
         dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
@@ -59,22 +63,27 @@ public class SemesterResultsChart extends AbstractGWTChart {
             dataTable.setValue(i, 2, apTotal.getAvgTotal());
             dataTable.setValue(i, 3, apTotal.getMaxTotal());
         }
+    }
 
-        //Set options
-        BarChartOptions options = BarChartOptions.create();
+    @Override
+    void setOptions() {
+        options = BarChartOptions.create();
         options.setFontName("Tahoma");
         options.setTitle("Résultats de session");
         options.setVAxis(VAxis.create("AP"));
         options.setHAxis(HAxis.create("Résultats"));
+
+        if (colorsSet) {
+            options.setColors(colors);
+        }
+    }
+
+    @Override
+    void update() {
         if (isCustomSize) {
             options.setWidth(width);
             options.setHeight(height);
         }
-        if (colorsSet) {
-            options.setColors(colors);
-        }
-
-        // Draw the chart
         chart.draw(dataTable, options);
     }
 }

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SemesterInfo implements Serializable {
-
+    private int id;
+    private String label;
     private List<Ap> aps;
     private List<Evaluation> evals;
-    private String label;
     private List<Competence> competences;
-    private int id;
 
     /**
      * For serialization only
@@ -19,7 +18,7 @@ public class SemesterInfo implements Serializable {
     public SemesterInfo() {
     }
 
-    public SemesterInfo(List<Evaluation> evals, List<Ap> aps, int id) {
+    public SemesterInfo(int id, String label, List<Ap> aps, List<Evaluation> evals) {
         this.evals = evals;
         this.aps = aps;
         this.id = id;

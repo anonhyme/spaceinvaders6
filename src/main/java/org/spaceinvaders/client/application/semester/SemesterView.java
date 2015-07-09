@@ -33,7 +33,7 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
         gridPanel.add(gridWidget);
     }
 
-    public void updateSemesterChart(final GwtChartWidgetPresenter semesterChart) {
+    public void updateSemesterChart(IsWidget semesterChart) {
         semesterChartPanel.clear();
         semesterChartPanel.add(semesterChart);
     }

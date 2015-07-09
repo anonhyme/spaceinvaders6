@@ -20,6 +20,7 @@ public class EvaluationResultsChart extends AbstractGWTChart {
     private String apName;
     private ArrayList<Evaluation> data;
     private Ap ap;
+    private ColumnChartOptions options;
 
     public EvaluationResultsChart(TreeMap<String, Evaluation> data, Ap ap) {
         this.data = new ArrayList<>(data.values());
@@ -27,6 +28,7 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         this.apName = ap.getName();
     }
 
+    @Override
     public Widget getChart() {
         if (chart == null) {
             chart = new ColumnChart();
@@ -34,8 +36,9 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         return chart;
     }
 
-    public void loadChart() {
-        DataTable dataTable = DataTable.create();
+    @Override
+    void setDataTable() {
+        dataTable = DataTable.create();
         dataTable.addColumn(ColumnType.STRING, "Résultat");
         dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
         dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
@@ -50,22 +53,27 @@ public class EvaluationResultsChart extends AbstractGWTChart {
             dataTable.setValue(i, 2, r.getAvgTotal());
             dataTable.setValue(i, 3, r.getMaxTotal());
         }
+    }
 
-        // Set options
-        ColumnChartOptions options = ColumnChartOptions.create();
+    @Override
+    void setOptions() {
+        options = ColumnChartOptions.create();
         options.setFontName("Tahoma");
         options.setTitle("Résultats de l'AP");
         options.setHAxis(HAxis.create("Évaluation"));
         options.setVAxis(VAxis.create("Résultat"));
+
+        if (colorsSet) {
+            options.setColors(colors);
+        }
+    }
+
+    @Override
+    void update() {
         if (isCustomSize) {
             options.setWidth(width);
             options.setHeight(height);
         }
-        if (colorsSet) {
-            options.setColors(colors);
-        }
-
-        // Draw the chart
         chart.draw(dataTable, options);
     }
 }

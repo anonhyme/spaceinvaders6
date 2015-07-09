@@ -7,5 +7,4 @@ public class NameTokens {
     public static final String graphDemo = "graphDemo";
     public static final String APpage = "APpage";
     public static final String error = "error";
-
 }

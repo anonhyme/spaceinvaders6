@@ -98,7 +98,7 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
     }
 
     @Override
-    public List<SemesterInfo> getSemesterInfoList(String cip, int semesterID) {
-        return null;
+    public List<SemesterInfo> getSemesterInfoList(String cip) {
+        throw new NotImplementedException();
     }
 }

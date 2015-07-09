@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-
 public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
         implements GridUiHandlers,
         SemesterInfoReceivedEvent.SemesterInfoReceivedEventHandler,

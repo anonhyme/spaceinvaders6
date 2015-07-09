@@ -30,7 +30,6 @@ public class ApCell extends AbstractCell<String> {
 
     private String data;
 
-
     private final static String AP_CELL = "<div>{0}</div>";
 
 

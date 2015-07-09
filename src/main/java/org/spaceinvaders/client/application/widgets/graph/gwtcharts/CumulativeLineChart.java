@@ -1,5 +1,7 @@
 package org.spaceinvaders.client.application.widgets.graph.gwtcharts;
 
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.googlecode.gwt.charts.client.ColumnType;
@@ -21,6 +23,7 @@ public class CumulativeLineChart extends AbstractGWTChart {
     private LineChart chart;
     private ArrayList<Evaluation> data;
     private Ap ap;
+    private LineChartOptions options;
 
     public CumulativeLineChart(TreeMap<String, Evaluation> data, Ap ap) {
         this.data = new ArrayList<>(data.values());
@@ -28,9 +31,8 @@ public class CumulativeLineChart extends AbstractGWTChart {
     }
 
     @Override
-    public void loadChart() {
-
-        DataTable dataTable = DataTable.create();
+    void setDataTable() {
+        dataTable = DataTable.create();
         dataTable.addColumn(ColumnType.STRING, "Résultat");
         dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
         dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
@@ -54,23 +56,29 @@ public class CumulativeLineChart extends AbstractGWTChart {
             dataTable.setValue(i, 2, currentAvgTotal);
             dataTable.setValue(i, 3, currentMaxTotal);
         }
+    }
 
-        // Set options
-        LineChartOptions options = LineChartOptions.create();
+    @Override
+    void setOptions() {
+        options = LineChartOptions.create();
         options.setFontName("Tahoma");
         options.setTitle("Résultats cumulatifs de l'AP");
         options.setHAxis(HAxis.create("Évaluation"));
         options.setVAxis(VAxis.create("Total"));
         options.setPointSize(5);
+
+        if (colorsSet) {
+            options.setColors(colors);
+        }
+    }
+
+    @Override
+    public void update() {
         if (isCustomSize) {
             options.setWidth(width);
             options.setHeight(height);
         }
-        if (colorsSet) {
-            options.setColors(colors);
-        }
 
-        // Draw the chart
         chart.draw(dataTable, options);
     }
 
