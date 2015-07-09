@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-    <display-name>ProjetS6</display-name>
+    <display-name>Notus</display-name>
 
 
     <welcome-file-list>
-        <welcome-file>ProjetS6.html</welcome-file>
+        <welcome-file>Notus.html</welcome-file>
     </welcome-file-list>
 
     <listener>
