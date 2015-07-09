@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.ap;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
@@ -10,6 +11,7 @@ import org.gwtbootstrap3.client.ui.PageHeader;
 import org.gwtbootstrap3.client.ui.ProgressBar;
 
 import javax.inject.Inject;
+import java.text.DecimalFormat;
 
 public class ApView extends ViewImpl implements ApPresenter.MyView {
     interface Binder extends UiBinder<Widget, ApView> {
@@ -58,21 +60,26 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
         pageTitle.setText(name);
     }
 
-    public void setStudentProgressBar(float value, String color) {
-        studentProgressBar.setPercent(value);
+    public void setStudentProgressBar(double value, String color) {
+        //remove decimal places
+        double v = Math.floor(value);
 
+        studentProgressBar.setPercent(v);
         studentProgressBar.getElement().getStyle().setProperty("backgroundColor", color);
         studentProgressBar.getElement().getStyle().setProperty("backgroundImage", "none");
 
-        studentProgressBar.setText("Votre complétion : " + value + "%");
+        studentProgressBar.setText("Votre complétion : " + v + "%");
     }
 
-    public void setClassProgressBar(float value, String color) {
-        classProgressBar.setPercent(value);
+    public void setClassProgressBar(double value, String color) {
+        //remove decimal places
+        double v = Math.floor(value);
+
+        classProgressBar.setPercent( v);
 
         classProgressBar.getElement().getStyle().setProperty("backgroundColor", color);
         classProgressBar.getElement().getStyle().setProperty("backgroundImage", "none");
 
-        classProgressBar.setText("Avancement du cours : " + value + "%");
+        classProgressBar.setText("Avancement du cours : " + v + "%");
     }
 }

@@ -28,7 +28,9 @@ import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.Result;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
@@ -41,9 +43,9 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         void setApName(String name);
 
-        void setStudentProgressBar(float value, String color);
+        void setStudentProgressBar(double value, String color);
 
-        void setClassProgressBar(float value, String color);
+        void setClassProgressBar(double value, String color);
 
         void addCumulativeChart(IsWidget chart);
 
@@ -91,6 +93,7 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     private int apId = 1;
     private String apName = "GEN501";
 
+
     private void getStudentSemesterResultsAndGenerateContent() {
         semesterGradesDelegate
                 .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
@@ -109,8 +112,8 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
                 new Competence("GEN501-2", 1));
         Ap mockAp = new Ap("GEN501", 0, mockCompetences);
 
+        getProgressSums(evaluations, mockAp);
         setCharts(evaluations, mockAp);
-        setProgressBars(30, 40);
 
         gridPresenter.updateGrid(0);
         getView().addGrid(gridPresenter);
@@ -143,17 +146,45 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
                 cumulativeChartWidget.loadChart();
             }
         });
+
     }
 
-    private void setProgressBars(float studentProgress, float classProgress) {
+
+    private void getProgressSums(TreeMap<String, Evaluation> evaluations, Ap ap) {
+        ArrayList<Evaluation> data = new ArrayList<>(evaluations.values());
+        double currentStudentTotal = 0.0;
+        double currentMaxTotal = 0.0;
+        double currentProgressionTotal = 0.0;
+
+
+        for (int i = 0; i < data.size(); i++)
+        {
+            Result r = data.get(i).getApResult(ap);
+            currentMaxTotal += r.getMaxTotal();
+            if (r.getStudentTotal() > 0) {
+                currentStudentTotal += r.getStudentTotal();
+                currentProgressionTotal += r.getMaxTotal();
+
+            }
+
+        }
+
+        GWT.log(""+currentStudentTotal);
+        GWT.log("" +currentMaxTotal);
+        setProgressBars(currentStudentTotal, currentProgressionTotal, currentMaxTotal);
+
+
+    }
+
+    private void setProgressBars(double studentProgress, double classProgress, double maxProgress) {
         String studentColor = getStudentProgressColor(studentProgress, classProgress);
-        getView().setStudentProgressBar(studentProgress, studentColor);
-        getView().setClassProgressBar(classProgress, BLUE);
+        getView().setStudentProgressBar(studentProgress/maxProgress *100, studentColor);
+        getView().setClassProgressBar(classProgress/maxProgress *100, BLUE);
     }
 
-    private String getStudentProgressColor(float studentProgress, float classProgress) {
+    private String getStudentProgressColor(double studentProgress, double classProgress) {
         String color;
-        float progressRatio = studentProgress / classProgress;
+        double progressRatio = studentProgress / classProgress;
         if (progressRatio > 0.85) {
             color = GOLD;
         } else if (progressRatio > 0.5) {
