@@ -1,7 +1,5 @@
 package org.spaceinvaders.client.application.widgets.graph.gwtcharts;
 
-import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.googlecode.gwt.charts.client.ColumnType;

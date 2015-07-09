@@ -1,11 +1,6 @@
 package org.spaceinvaders.shared.api;
 
-import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
-import org.spaceinvaders.shared.dto.Result;
-
-import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

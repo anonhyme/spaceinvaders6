@@ -12,16 +12,13 @@ import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SemesterInfoDaoImpl implements SemesterInfoDao {
     private final Provider<EntityManager> entityManagerProvider;

@@ -26,8 +26,7 @@ import java.util.TreeMap;
 public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
         implements GridUiHandlers,
         SemesterInfoReceivedEvent.SemesterInfoReceivedEventHandler,
-        EvaluationReceivedEvent.SemesterGradesReceivedHandler,
-        ApSelectedEvent.Handler {
+        EvaluationReceivedEvent.SemesterGradesReceivedHandler{
 
     interface MyView extends View, HasUiHandlers<GridUiHandlers> {
         void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations);
@@ -61,7 +60,6 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     private void registerHandlers() {
         addRegisteredHandler(SemesterInfoReceivedEvent.TYPE, this);
         addRegisteredHandler(EvaluationReceivedEvent.TYPE, this);
-        addRegisteredHandler(ApSelectedEvent.TYPE, this);
     }
 
     @Override
@@ -98,10 +96,5 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     @Override
     public GridPresenter getInstance() {
         return this;
-    }
-    @Override
-    public void onApSelected(ApSelectedEvent event) {
-        //TODO Create ap page and reveal it
-        GWT.log(event.getAp());
     }
 }

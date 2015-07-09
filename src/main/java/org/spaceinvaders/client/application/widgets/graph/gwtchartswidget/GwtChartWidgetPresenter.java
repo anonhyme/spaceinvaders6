@@ -12,7 +12,7 @@ import org.spaceinvaders.client.application.widgets.graph.gwtcharts.AbstractGWTC
 
 public class GwtChartWidgetPresenter extends PresenterWidget<GwtChartWidgetPresenter.MyView> {
     public interface MyView extends View {
-        public void setChart(Widget chart);
+        void setChart(Widget chart);
     }
 
     private AbstractGWTChart chart;

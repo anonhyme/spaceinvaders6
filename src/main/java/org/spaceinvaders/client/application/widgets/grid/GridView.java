@@ -1,7 +1,7 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
-import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipResources;
+
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -11,18 +11,19 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
+
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+
 import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
-import org.spaceinvaders.client.events.ApSelectedEvent;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.client.resources.CustomTooltipResources;
-import org.spaceinvaders.client.widgets.cell.ApCell;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import javax.inject.Inject;
+
 import java.util.List;
 
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
@@ -37,9 +38,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     @UiField
     Container containerCellTable;
-
-    @UiField
-    Container alertBitchContainer;
 
     AppResources appResources;
 
@@ -59,15 +57,15 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         cellTable = new CellTable<>();
         initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
+        containerCellTable.addStyleName(appResources.topNavBar().materialContainer());
 
         cellTable.setStriped(true);
         cellTable.setCondensed(true);
-        cellTable.setColumnWidth(0, "22%");
+        cellTable.setColumnWidth(0, "20%");
         cellTable.setHover(false);
-        //Not sure how its work to disable row hover
-        cellTable.setKeyboardSelectionPolicy(HasKeyboardSelectionPolicy.KeyboardSelectionPolicy.DISABLED);
 
         containerCellTable.clear();
+
         containerCellTable.add(cellTable);
     }
 
@@ -85,7 +83,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
             @Override
             public String getValue(Evaluation data) {
                 String value = " empty ";
-                //TODO Check why it's not working without the try/catch
                 try {
                     GWT.log("getValue :::::  " + data.getLabel());
                     value = data.getLabel();
@@ -109,15 +106,5 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     public CustomTooltipResources getStyle() {
         return style;
-    }
-
-    private TooltipOptions setRowTooltip() {
-
-        TooltipOptions options = new TooltipOptions();
-        options.withResources(getTooltipResources());
-//        options.withContent(TooltipCellTemplates.INSTANCE.popover());
-        options.withSelector("tbody tr");
-        options.withContainer("element");
-        return options;
     }
 }

@@ -14,7 +14,6 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
-import org.spaceinvaders.client.application.semester.SemesterPresenter;
 import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
 import org.spaceinvaders.client.events.ApSelectedEvent;
 
@@ -34,7 +33,7 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
 
     private final String POPOVER_JS = "$(document).ready(function(){ $(\'[data-toggle=\"popover\"]\').popover();});";
 
-    private static Templates templates = GWT.create(Templates.class);
+    private static CellTemplates cellTemplates = GWT.create(CellTemplates.class);
 
     public EvaluationResultCell(GridPresenter gridPresenter) {
         super(BrowserEvents.MOUSEOVER, BrowserEvents.CLICK);
@@ -47,9 +46,9 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
         if (data.isEmpty()) {
             return;
         }
-
-        SafeHtml innerHtml = templates.innerCell(data.get(EvaluationResultType.AVERAGE), data.get(EvaluationResultType.STD_DEV));
-        SafeHtml safeHtml = templates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT));
+        String resultFraction = data.get(EvaluationResultType.RESULT) + "/" + data.get(EvaluationResultType.MAX_EVALUATION);
+        SafeHtml innerHtml = cellTemplates.innerCell(resultFraction, data.get(EvaluationResultType.AVERAGE), data.get(EvaluationResultType.STD_DEV));
+        SafeHtml safeHtml = cellTemplates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT));
         sb.append(safeHtml);
     }
 

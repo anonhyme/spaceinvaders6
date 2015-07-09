@@ -62,6 +62,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
     protected void onAttach() {
         super.onAttach();
         navBar.addStyleName(appResources.topNavBar().material());
+        navbarBrand.setColor("#2d9d5f");
         navbarBrand.setTargetHistoryToken(NameTokens.home);
     }
 

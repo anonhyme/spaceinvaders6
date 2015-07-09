@@ -1,10 +1,12 @@
 package org.spaceinvaders.client.application.ap;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
+
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
@@ -13,6 +15,8 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.CumulativeLineChart;
@@ -77,11 +81,16 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         getStudentSemesterResultsAndGenerateContent();
     }
 
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+        getStudentSemesterResultsAndGenerateContent();
+    }
+
     //TODO Access current semester id once implemented
     private int semesterId = 3;
     private int apId = 1;
     private String apName = "GEN501";
-//    Ap mockAp;
 
     private void getStudentSemesterResultsAndGenerateContent() {
         semesterGradesDelegate
@@ -90,7 +99,7 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
                     public void onSuccess(TreeMap<String, Evaluation> evaluations) {
                         generatePageContent(evaluations);
                     }
-                }).getApEvaluations(semesterId, apId);
+                }).getApEvaluations(3, apId);
     }
 
     private void generatePageContent(TreeMap<String, Evaluation> evaluations) {
@@ -154,5 +163,13 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
             color = RED;
         }
         return color;
+    }
+
+    @Override
+    public void prepareFromRequest(PlaceRequest request) {
+        super.prepareFromRequest(request);
+        this.apName = request.getParameter("apId", "");
+        this.semesterId = Integer.parseInt(request.getParameter("semesterId", "3"));
+        GWT.log("Prepare from request " + apName);
     }
 }

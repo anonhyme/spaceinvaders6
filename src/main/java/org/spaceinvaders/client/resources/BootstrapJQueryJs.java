@@ -11,7 +11,7 @@ import com.google.gwt.resources.client.TextResource;
  */
 public interface BootstrapJQueryJs extends ClientBundle {
 
-    public static final BootstrapJQueryJs INSTANCE = GWT.create(BootstrapJQueryJs.class);
+    BootstrapJQueryJs INSTANCE = GWT.create(BootstrapJQueryJs.class);
 
     @Source("js/jquery-1.11.2.min.cache.js")
     TextResource jQuery();

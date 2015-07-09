@@ -1,10 +1,8 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 
-import org.spaceinvaders.client.application.semester.SemesterPresenter;
 import org.spaceinvaders.client.widgets.cell.EvaluationResultCell;
 import org.spaceinvaders.client.widgets.cell.EvaluationResultType;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -31,21 +29,17 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
     @Override
     public HashMap<EvaluationResultType, String> getValue(Evaluation evaluation) {
         HashMap<EvaluationResultType, String> dataMap = new HashMap<>();
-        String resultEvaluation = "";
         Result result = evaluation.getResult(key);
         String[] apKey = key.split("-");
-        if ((result != null) && result.getIsValid()) {
-            String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%";
-            String ap = apKey[0];
-            String competence = apKey[1];
-            String averageTotal = formatDoubleToString(result.getAvgTotal());
-            String standardDev = formatDoubleToString(result.getStandardDev());
 
-            dataMap.put(EvaluationResultType.AP, ap);
-            dataMap.put(EvaluationResultType.COMPETENCE, competence);
-            dataMap.put(EvaluationResultType.RESULT, studentResult);
-            dataMap.put(EvaluationResultType.AVERAGE, averageTotal);
-            dataMap.put(EvaluationResultType.STD_DEV, standardDev);
+        if ((result != null) && result.getIsValid()) {
+            dataMap.put(EvaluationResultType.RESULT, formatDoubleToString(result.getStudentTotal()));
+            dataMap.put(EvaluationResultType.MAX_EVALUATION, formatDoubleToString(result.getStudentTotal()));
+            dataMap.put(EvaluationResultType.AP, apKey[0]);
+            dataMap.put(EvaluationResultType.COMPETENCE, apKey[1]);
+            dataMap.put(EvaluationResultType.RESULT_PERCENTAGE, formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%");
+            dataMap.put(EvaluationResultType.AVERAGE, formatDoubleToString(result.getAvgTotal()));
+            dataMap.put(EvaluationResultType.STD_DEV, formatDoubleToString(result.getStandardDev()));
         }
         return dataMap;
     }
