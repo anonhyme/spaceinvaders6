@@ -1,13 +1,8 @@
 package org.spaceinvaders.shared.dto;
 
-import org.spaceinvaders.server.cas.UserSessionImpl;
-import org.spaceinvaders.shared.exception.ApExeption;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SemesterInfo implements Serializable {
     private int id;

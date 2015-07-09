@@ -17,6 +17,7 @@ public final class ColorHelper {
 
     public static final String GREEN = "#008000";
     public static final String GREEN_FLASH = "#00FF00";
+    public static final String GREEN_UDES = "#2d9d5f";
 
     public static final String GOLD = "#FFD700";
 }

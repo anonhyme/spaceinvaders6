@@ -122,19 +122,20 @@ public class CompetenceEvalResultEntity {
 
         CompetenceEvalResultEntity that = (CompetenceEvalResultEntity) o;
 
-        if (evalLabel != null ? !evalLabel.equals(that.evalLabel) : that.evalLabel != null) return false;
-        if (courseLabel != null ? !courseLabel.equals(that.courseLabel) : that.courseLabel != null) return false;
+        if (evalLabel != null ? !evalLabel.equals(that.evalLabel) : that.evalLabel != null)
+            return false;
+        if (courseLabel != null ? !courseLabel.equals(that.courseLabel) : that.courseLabel != null)
+            return false;
         if (competenceLabel != null ? !competenceLabel.equals(that.competenceLabel) : that.competenceLabel != null)
             return false;
-        if (resultValue != null ? !resultValue.equals(that.resultValue) : that.resultValue != null) return false;
+        if (resultValue != null ? !resultValue.equals(that.resultValue) : that.resultValue != null)
+            return false;
         if (avgResultValue != null ? !avgResultValue.equals(that.avgResultValue) : that.avgResultValue != null)
             return false;
         if (maxResultValue != null ? !maxResultValue.equals(that.maxResultValue) : that.maxResultValue != null)
             return false;
-        if (standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null) return false;
-        if (hasResult != null ? !hasResult.equals(that.hasResult) : that.hasResult != null) return false;
+        return !(standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null) && !(hasResult != null ? !hasResult.equals(that.hasResult) : that.hasResult != null);
 
-        return true;
     }
 
     @Override

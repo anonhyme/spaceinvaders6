@@ -1,6 +1,5 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
-import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipResources;
 
 import com.google.gwt.cell.client.TextCell;
@@ -22,7 +21,6 @@ import org.spaceinvaders.client.resources.CustomTooltipResources;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
-import org.spaceinvaders.shared.exception.ApExeption;
 
 import javax.inject.Inject;
 
@@ -40,9 +38,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     @UiField
     Container containerCellTable;
-
-    @UiField
-    Container alertBitchContainer;
 
     AppResources appResources;
 
@@ -62,14 +57,15 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         cellTable = new CellTable<>();
         initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
+        containerCellTable.addStyleName(appResources.topNavBar().materialContainer());
 
         cellTable.setStriped(true);
         cellTable.setCondensed(true);
-        cellTable.setColumnWidth(0, "22%");
+        cellTable.setColumnWidth(0, "20%");
         cellTable.setHover(false);
-        cellTable.setKeyboardSelectionPolicy(HasKeyboardSelectionPolicy.KeyboardSelectionPolicy.DISABLED);
 
         containerCellTable.clear();
+
         containerCellTable.add(cellTable);
     }
 
@@ -77,7 +73,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         setEvaluationTypeColumn();
         List<Competence> competencesLabels = semesterInfo.getCompetences();
         for (Competence competenceLabel : competencesLabels) {
-            cellTable.addColumn(new EvaluationColumn(competenceLabel.getLabel()), competenceLabel.getLabel());
+            cellTable.addColumn(new EvaluationColumn(competenceLabel.getLabel(), getUiHandlers().getInstance()), competenceLabel.getLabel());
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
@@ -87,7 +83,6 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
             @Override
             public String getValue(Evaluation data) {
                 String value = " empty ";
-                //TODO Check why it's not working without the try/catch
                 try {
                     GWT.log("getValue :::::  " + data.getLabel());
                     value = data.getLabel();
@@ -111,14 +106,5 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     public CustomTooltipResources getStyle() {
         return style;
-    }
-
-    private TooltipOptions setRowTooltip() {
-        TooltipOptions options = new TooltipOptions();
-        options.withResources(getTooltipResources());
-//        options.withContent(TooltipCellTemplates.INSTANCE.popover());
-        options.withSelector("tbody tr");
-        options.withContainer("element");
-        return options;
     }
 }

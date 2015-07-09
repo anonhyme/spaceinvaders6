@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
 
-import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
+import org.gwtbootstrap3.client.ui.PageHeader;
 
 import javax.inject.Inject;
 
@@ -22,6 +22,9 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
 
     @UiField
     HTMLPanel semesterChartPanel;
+
+    @UiField
+    PageHeader pageTitle;
 
     @Inject
     SemesterView(Binder uiBinder) {
@@ -36,5 +39,10 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
     public void updateSemesterChart(IsWidget semesterChart) {
         semesterChartPanel.clear();
         semesterChartPanel.add(semesterChart);
+    }
+
+    @Override
+    public void updateTitle(String semesterId) {
+        pageTitle.setSubText("Note pour la Session " + semesterId);
     }
 }

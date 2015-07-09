@@ -4,34 +4,33 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
-import org.spaceinvaders.shared.dto.Ap;
-
-public class ApSelectedEvent extends GwtEvent<ApSelectedEvent.ApSelectedEventHandler> {
-    public interface ApSelectedEventHandler extends EventHandler {
+public class ApSelectedEvent extends GwtEvent<ApSelectedEvent.Handler> {
+    public interface Handler extends EventHandler {
         void onApSelected(ApSelectedEvent event);
     }
 
-    public static Type<ApSelectedEventHandler> TYPE = new Type<ApSelectedEventHandler>();
+    public static Type<Handler> TYPE = new Type<>();
 
-    private Ap ap;
+    private String ap;
+    private String sessionId;
 
-    public ApSelectedEvent(Ap ap) {
+    public ApSelectedEvent(String ap) {
         this.ap = ap;
     }
 
-    public Ap getAp() {
+    public String getAp() {
         return ap;
     }
 
-    public static void fire(Ap ap, HasHandlers source) {
+    public static void fire(String ap, HasHandlers source) {
         source.fireEvent(new ApSelectedEvent(ap));
     }
 
-    public Type<ApSelectedEventHandler> getAssociatedType() {
+    public Type<Handler> getAssociatedType() {
         return TYPE;
     }
 
-    protected void dispatch(ApSelectedEventHandler handler) {
+    protected void dispatch(Handler handler) {
         handler.onApSelected(this);
     }
 }

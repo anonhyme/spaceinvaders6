@@ -1,23 +1,15 @@
 package org.spaceinvaders.client.application.ap;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
 
 import com.gwtplatform.mvp.client.ViewImpl;
 
-import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.PageHeader;
-import org.gwtbootstrap3.client.ui.PanelHeader;
 import org.gwtbootstrap3.client.ui.ProgressBar;
-import org.gwtbootstrap3.client.ui.html.Text;
-import org.spaceinvaders.shared.dto.Competence;
 
 import javax.inject.Inject;
-import java.util.List;
-
 
 public class ApView extends ViewImpl implements ApPresenter.MyView {
     interface Binder extends UiBinder<Widget, ApView> {

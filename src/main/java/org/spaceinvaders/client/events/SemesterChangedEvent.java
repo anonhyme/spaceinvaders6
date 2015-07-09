@@ -10,7 +10,7 @@ public class SemesterChangedEvent extends GwtEvent<SemesterChangedEvent.Semester
         void onSemesterChanged(SemesterChangedEvent event);
     }
 
-    public static Type<SemesterChangedHandler> TYPE = new Type<SemesterChangedHandler>();
+    public static Type<SemesterChangedHandler> TYPE = new Type<>();
 
     private int semesterID;
 

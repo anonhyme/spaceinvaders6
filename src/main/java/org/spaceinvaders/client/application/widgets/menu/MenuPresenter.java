@@ -77,6 +77,6 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
 
     @Override
     public void disconnect() {
-//        DisconnectedEvent.fire(this); (we should add this event, like SemesterGradeEvent)
+        GWT.log("Should disconnect .. but no one did it yet");
     }
 }

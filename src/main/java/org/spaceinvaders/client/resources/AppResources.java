@@ -29,8 +29,8 @@ public interface AppResources extends ClientBundle {
         @ClassName("material")
         String material();
 
-        @ClassName("material-icon")
-        String materialIcon();
+        @ClassName("material-container")
+        String materialContainer();
 
         @ClassName("info")
         String info();

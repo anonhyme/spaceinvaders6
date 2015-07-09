@@ -7,9 +7,7 @@ import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SemesterInfoDaoMock implements SemesterInfoDao {
     @Override
