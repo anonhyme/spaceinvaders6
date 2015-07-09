@@ -84,7 +84,6 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     @Override
     protected void onReveal() {
         super.onReveal();
-        getStudentSemesterResultsAndGenerateContent();
     }
 
     //TODO Access current semester id once implemented
