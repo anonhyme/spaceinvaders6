@@ -92,14 +92,13 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                     public void onSuccess(TreeMap<String, Evaluation> evaluations) {
                         EvaluationReceivedEvent.fire(evaluations, getInstance());
                     }
-                }).getAllEvaluations(3);
+                }).getAllEvaluations(semesterInfo.getId());
     }
 
     @Override
     public GridPresenter getInstance() {
         return this;
     }
-
     @Override
     public void onApSelected(ApSelectedEvent event) {
         //TODO Create ap page and reveal it

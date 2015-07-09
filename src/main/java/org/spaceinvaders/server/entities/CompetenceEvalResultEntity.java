@@ -30,9 +30,10 @@ public class CompetenceEvalResultEntity {
     private String courseLabel;
     private String competenceLabel;
     private Integer resultValue;
-    private Integer avgResultValue;
+    private Double avgResultValue;
     private Integer maxResultValue;
     private Integer standardDev;
+    private Boolean hasResult;
 
     @Id
     @Column(name = "eval_label")
@@ -76,11 +77,11 @@ public class CompetenceEvalResultEntity {
 
     @Basic
     @Column(name = "avg_result_value")
-    public Integer getAvgResultValue() {
+    public Double getAvgResultValue() {
         return avgResultValue;
     }
 
-    public void setAvgResultValue(Integer avgResultValue) {
+    public void setAvgResultValue(Double avgResultValue) {
         this.avgResultValue = avgResultValue;
     }
 
@@ -104,6 +105,16 @@ public class CompetenceEvalResultEntity {
         this.standardDev = standardDev;
     }
 
+    @Basic
+    @Column(name = "has_result")
+    public Boolean getHasResult() {
+        return hasResult;
+    }
+
+    public void setHasResult(Boolean hasResult) {
+        this.hasResult = hasResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,20 +122,19 @@ public class CompetenceEvalResultEntity {
 
         CompetenceEvalResultEntity that = (CompetenceEvalResultEntity) o;
 
-        if (evalLabel != null ? !evalLabel.equals(that.evalLabel) : that.evalLabel != null)
-            return false;
-        if (courseLabel != null ? !courseLabel.equals(that.courseLabel) : that.courseLabel != null)
-            return false;
+        if (evalLabel != null ? !evalLabel.equals(that.evalLabel) : that.evalLabel != null) return false;
+        if (courseLabel != null ? !courseLabel.equals(that.courseLabel) : that.courseLabel != null) return false;
         if (competenceLabel != null ? !competenceLabel.equals(that.competenceLabel) : that.competenceLabel != null)
             return false;
-        if (resultValue != null ? !resultValue.equals(that.resultValue) : that.resultValue != null)
-            return false;
+        if (resultValue != null ? !resultValue.equals(that.resultValue) : that.resultValue != null) return false;
         if (avgResultValue != null ? !avgResultValue.equals(that.avgResultValue) : that.avgResultValue != null)
             return false;
         if (maxResultValue != null ? !maxResultValue.equals(that.maxResultValue) : that.maxResultValue != null)
             return false;
-        return !(standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null);
+        if (standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null) return false;
+        if (hasResult != null ? !hasResult.equals(that.hasResult) : that.hasResult != null) return false;
 
+        return true;
     }
 
     @Override
@@ -136,6 +146,7 @@ public class CompetenceEvalResultEntity {
         result = 31 * result + (avgResultValue != null ? avgResultValue.hashCode() : 0);
         result = 31 * result + (maxResultValue != null ? maxResultValue.hashCode() : 0);
         result = 31 * result + (standardDev != null ? standardDev.hashCode() : 0);
+        result = 31 * result + (hasResult != null ? hasResult.hashCode() : 0);
         return result;
     }
 }

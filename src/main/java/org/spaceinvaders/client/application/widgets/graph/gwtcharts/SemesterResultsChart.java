@@ -58,6 +58,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
                 apTotal.addToMaxTotal(r.getMaxTotal());
                 apTotal.addToStudentTotal(r.getStudentTotal());
             }
+
             dataTable.setValue(i, 0, aps.get(i).getName());
             dataTable.setValue(i, 1, apTotal.getStudentTotal());
             dataTable.setValue(i, 2, apTotal.getAvgTotal());

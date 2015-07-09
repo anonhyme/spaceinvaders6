@@ -34,7 +34,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         String resultEvaluation = "";
         Result result = evaluation.getResult(key);
         String[] apKey = key.split("-");
-        if (result != null) {
+        if ((result != null) && result.getIsValid()) {
             String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%";
             String ap = apKey[0];
             String competence = apKey[1];
