@@ -7,18 +7,14 @@ set search_path to public;
 INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('geim9002', 'Super', 'Admin', 'Admin.Super@USherbrooke.ca');
 INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('maip2202', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
 
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2410', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2411', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2412', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2413', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2414', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2415', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2416', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2417', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2418', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
-INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2419', 'Maillé', 'Pascale', 'Pascale.Maille@USherbrooke.ca');
+INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('foum2413', 'Fournier', 'Michael', 'Pascale.Maille@USherbrooke.ca');
+INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('grea1910', 'Grenier', 'Alexandra-Maude', 'Pascale.Maille@USherbrooke.ca');
+INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('rice1902', 'Richand', 'Étienne', 'Pascale.Maille@USherbrooke.ca');
+INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('bedh2102', 'Bédard', 'Hugo', 'Pascale.Maille@USherbrooke.ca');
+INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('boua2354', 'Bouchard', 'Antoine', 'Pascale.Maille@USherbrooke.ca');
+INSERT INTO users (administrative_user_id, last_name, first_name, email_address) VALUES ('stll3001', 'St-Laurent', 'Louis-Olivier', 'Pascale.Maille@USherbrooke.ca');
 
-ALTER SEQUENCE public.users_user_id_seq RESTART WITH 13;
+ALTER SEQUENCE public.users_user_id_seq RESTART WITH 9;
 
 
 -- APPLICATION
@@ -81,10 +77,6 @@ INSERT INTO user_group (member_id, group_id, user_id) VALUES (5, 3, 1);
 INSERT INTO user_group (member_id, group_id, user_id) VALUES (6, 3, 1);
 INSERT INTO user_group (member_id, group_id, user_id) VALUES (7, 3, 1);
 INSERT INTO user_group (member_id, group_id, user_id) VALUES (8, 3, 1);
-INSERT INTO user_group (member_id, group_id, user_id) VALUES (9, 3, 1);
-INSERT INTO user_group (member_id, group_id, user_id) VALUES (10, 3, 1);
-INSERT INTO user_group (member_id, group_id, user_id) VALUES (11, 3, 1);
-INSERT INTO user_group (member_id, group_id, user_id) VALUES (12, 3, 1);
 
 
 -- APPLICATION_PRIVILEGE
@@ -114,6 +106,13 @@ INSERT INTO application_privilege_group (application_id, privilege_id, group_id,
 INSERT INTO application_privilege_group (application_id, privilege_id, group_id, user_id) VALUES (7, 1, 2, 1);
 INSERT INTO application_privilege_group (application_id, privilege_id, group_id, user_id) VALUES (8, 1, 2, 1);
 
+-- EDUCATIONNAL_PATHWAY
+
+INSERT INTO educationnal_pathway (label, user_id) VALUES ('sn', 1);
+INSERT INTO educationnal_pathway (label, user_id) VALUES ('te', 1);
+INSERT INTO educationnal_pathway (label, user_id) VALUES ('ti', 1);
+INSERT INTO educationnal_pathway (label, user_id) VALUES ('to', 1);
+
 
 -- EMPLOYEE
 
@@ -126,21 +125,35 @@ INSERT INTO employee (employee_id, user_id, phone_number, office, occupation) VA
 	Example of how to simply add a student
 
 	INSERT INTO public.student (user_id, student_id)
-	    (SELECT users.user_id, 'matricule with space like: 11 111 111'
-	     FROM users
-	     WHERE users.administrative_user_id = 'abcd1234');
+	    (SELECT u.user_id, 'matricule with space like: 11 111 111', ep.ep_id
+	     FROM users u, educationnal_pathway ep
+	     WHERE u.administrative_user_id = 'abcd1234' AND ep.label = 'sn');
 */
 
-INSERT INTO STUDENT (user_id, student_id) VALUES (3, '12000001');
-INSERT INTO STUDENT (user_id, student_id) VALUES (4, '12000002');
-INSERT INTO STUDENT (user_id, student_id) VALUES (5, '12000003');
-INSERT INTO STUDENT (user_id, student_id) VALUES (6, '12000004');
-INSERT INTO STUDENT (user_id, student_id) VALUES (7, '12000005');
-INSERT INTO STUDENT (user_id, student_id) VALUES (8, '12000006');
-INSERT INTO STUDENT (user_id, student_id) VALUES (9, '12000007');
-INSERT INTO STUDENT (user_id, student_id) VALUES (10, '12000008');
-INSERT INTO STUDENT (user_id, student_id) VALUES (11, '12000009');
-INSERT INTO STUDENT (user_id, student_id) VALUES (12, '12000010');
+INSERT INTO STUDENT (user_id, student_id, ep_id) 
+	(SELECT u.user_id, '12000001', ep.ep_id
+	FROM users u, educationnal_pathway ep
+	WHERE u.administrative_user_id = 'foum2413' AND ep.label = 'ti');
+INSERT INTO STUDENT (user_id, student_id, ep_id) 
+	(SELECT u.user_id, '12000002', ep.ep_id
+	FROM users u, educationnal_pathway ep
+	WHERE u.administrative_user_id = 'grea1910' AND ep.label = 'sn');
+INSERT INTO STUDENT (user_id, student_id, ep_id) 
+	(SELECT u.user_id, '12000003', ep.ep_id
+	FROM users u, educationnal_pathway ep
+	WHERE u.administrative_user_id = 'boua2354' AND ep.label = 'sn');
+INSERT INTO STUDENT (user_id, student_id, ep_id) 
+	(SELECT u.user_id, '12000004', ep.ep_id
+	FROM users u, educationnal_pathway ep
+	WHERE u.administrative_user_id = 'bedh2102' AND ep.label = 'sn');
+INSERT INTO STUDENT (user_id, student_id, ep_id) 
+	(SELECT u.user_id, '12000005', ep.ep_id
+	FROM users u, educationnal_pathway ep
+	WHERE u.administrative_user_id = 'stll3001' AND ep.label = 'sn');
+INSERT INTO STUDENT (user_id, student_id, ep_id) 
+	(SELECT u.user_id, '12000006', ep.ep_id
+	FROM users u, educationnal_pathway ep
+	WHERE u.administrative_user_id = 'rice1902' AND ep.label = 'sn');
 
 
 -- SCHEMA CONTENT
@@ -265,85 +278,45 @@ INSERT INTO note.educationnal_goal(eg_id, label, short_description, description,
 /*inserting app*/
 /*=============*/
 
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1app1', 'APP 1', 'Réalisation et mesure de circuits électriques', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1app2', 'APP 2', 'Programmation et algorithmes', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1app3', 'APP 3', 'Circuits et physique des semi-conducteurs', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1app4', 'APP 4', 'Circuits, systèmes du 1er ordre et physique des semi-conducteurs', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1app5', 'APP 5', 'Atelier de programmation', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1app6', 'APP 6', 'Circuits, systèmes du 2ème ordre et physique des semi-conducteurs', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gegis1proj', 'Projet', 'Concours robot-jouet', 0, now(), DEFAULT, now(), 1, 5); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
 
 /*============*/
 /*inserting ap*/
 /*============*/
 
-INSERT INTO note.educationnal_goal(eg_id,  label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen101', 'GEN 101', 'Résolution de problème et conception en génie', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen111', 'GEN 111', 'La communication et le travail en équipe', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen122', 'GEN 122', 'Équations différentielles linéaires', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen135', 'GEN 135', 'Circuits électriques I', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen136', 'GEN 136', 'Circuits électriques II', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen143', 'GEN 143', 'Introduction à la programmation', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen144', 'GEN 144', 'Programmation et algorithmes', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen145', 'GEN 145', 'Atelier de programmation', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen150', 'GEN 150', 'Physique des semi-conducteurs I', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen170', 'GEN 170', 'Réalisation et mesure de circuits électriques', 0, now(), DEFAULT, now(), 1, 3); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GE'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'GI'); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gegis1');
+SELECT note.insert_educ_goal_with_hierarchy('gif301', 'GIF301', 'Conception d''une architecture de système', 'Ap', 'GI,gis3');
+SELECT note.insert_educ_goal_with_hierarchy('gif310', 'GIF310', 'Architecture et organisation des ordinateurs', 'Ap', 'GI,gis3');
+SELECT note.insert_educ_goal_with_hierarchy('gif320', 'GIF320', 'Système d''exploitation', 'Ap', 'GI,gis3');
+SELECT note.insert_educ_goal_with_hierarchy('gif331', 'GIF331', 'Réseaux et protocoles de communication', 'Ap', 'GI,gis3');
+SELECT note.insert_educ_goal_with_hierarchy('gif340', 'GIF340', 'Éléments de compilation', 'Ap', 'GI,gis3');
+SELECT note.insert_educ_goal_with_hierarchy('gif360', 'GIF360', 'Probabilités et modélisation de systèmes discrets', 'Ap', 'GI,gis3');
+SELECT note.insert_educ_goal_with_hierarchy('gif362', 'GIF362', 'MAthématiques discrètes IV', 'Ap', 'GI,gis3');
 
 
 /*================*/
 /*inserting sub-ap*/
 /*================*/
 
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen101-1', 'GEN 101-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen101');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen101-2', 'GEN 101-2', 'Compétence 2', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen101');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen101-3', 'GEN 101-3', 'Compétence 3', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen101');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen111-1', 'GEN 111-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen111');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen111-2', 'GEN 111-2', 'Compétence 2', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen111');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen111-3', 'GEN 111-3', 'Compétence 3', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen111');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen122-1', 'GEN 122-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen122');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen122-2', 'GEN 122-2', 'Compétence 2', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen122');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen135-1', 'GEN 135-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen135');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen136-1', 'GEN 136-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen136');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen136-2', 'GEN 136-2', 'Compétence 2', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen136');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen143-1', 'GEN 143-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen143');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen144-1', 'GEN 144-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen144');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen145-1', 'GEN 145-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen145');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen150-1', 'GEN 150-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen150');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen170-1', 'GEN 170-1', 'Compétence 1', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen170');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen170-2', 'GEN 170-2', 'Compétence 2', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen170');
-
-INSERT INTO note.educationnal_goal(eg_id, label, short_description, description, administrative_value, validity_start, validity_end, registration, user_id, eg_type_id) VALUES (DEFAULT, 'gen170-3', 'GEN 170-3', 'Compétence 3', 0, now(), DEFAULT, now(), 1, 4); INSERT INTO note.educationnal_goal_hierarchy (SELECT a.eg_id, b.eg_id, now(), 1 FROM note.educationnal_goal a JOIN ( select last_value as eg_id from note.educationnal_goal_eg_id_seq ) b ON 1=1 WHERE a.label = 'gen170');
+SELECT note.insert_educ_goal_with_hierarchy('gif301-1', 'GIF301-1', '', 'Compétence', 'gif301');
+SELECT note.insert_educ_goal_with_hierarchy('gif301-2', 'GIF301-2', '', 'Compétence', 'gif301');
+SELECT note.insert_educ_goal_with_hierarchy('gif301-3', 'GIF301-3', '', 'Compétence', 'gif301');
+SELECT note.insert_educ_goal_with_hierarchy('gif310-1', 'GIF310-1', '', 'Compétence', 'gif310');
+SELECT note.insert_educ_goal_with_hierarchy('gif310-2', 'GIF310-2', '', 'Compétence', 'gif310');
+SELECT note.insert_educ_goal_with_hierarchy('gif310-3', 'GIF310-3', '', 'Compétence', 'gif310');
+SELECT note.insert_educ_goal_with_hierarchy('gif320-1', 'GIF320-1', '', 'Compétence', 'gif320');
+SELECT note.insert_educ_goal_with_hierarchy('gif320-2', 'GIF320-2', '', 'Compétence', 'gif320');
+SELECT note.insert_educ_goal_with_hierarchy('gif320-3', 'GIF320-3', '', 'Compétence', 'gif320');
+SELECT note.insert_educ_goal_with_hierarchy('gif331-1', 'GIF331-1', '', 'Compétence', 'gif331');
+SELECT note.insert_educ_goal_with_hierarchy('gif331-2', 'GIF331-2', '', 'Compétence', 'gif331');
+SELECT note.insert_educ_goal_with_hierarchy('gif340-1', 'GIF340-1', '', 'Compétence', 'gif340');
+SELECT note.insert_educ_goal_with_hierarchy('gif340-2', 'GIF340-2', '', 'Compétence', 'gif340');
+SELECT note.insert_educ_goal_with_hierarchy('gif340-3', 'GIF340-3', '', 'Compétence', 'gif340');
+SELECT note.insert_educ_goal_with_hierarchy('gif340-4', 'GIF340-4', '', 'Compétence', 'gif340');
+SELECT note.insert_educ_goal_with_hierarchy('gif360-1', 'GIF360-1', '', 'Compétence', 'gif360');
+SELECT note.insert_educ_goal_with_hierarchy('gif360-2', 'GIF360-2', '', 'Compétence', 'gif360');
+SELECT note.insert_educ_goal_with_hierarchy('gif360-3', 'GIF360-3', '', 'Compétence', 'gif360');
+SELECT note.insert_educ_goal_with_hierarchy('gif360-4', 'GIF360-4', '', 'Compétence', 'gif360');
+SELECT note.insert_educ_goal_with_hierarchy('gif362-1', 'GIF362-1', '', 'Compétence', 'gif362');
+SELECT note.insert_educ_goal_with_hierarchy('gif362-2', 'GIF362-2', '', 'Compétence', 'gif362');
 
 
 /*=====================*/
@@ -356,7 +329,9 @@ INSERT INTO note.evaluation_type(evaluation_type_id, label, registration, user_i
                                                                                          (3, 'Validation', '2008-08-19', 1),
                                                                                          (4, 'Particuliére', '2008-08-19', 1),
                                                                                          (5, 'Évaluation par les pairs', '2012-04-26', 1),
-                                                                                         (6, 'Rapport', '2012-08-19', 1);
+                                                                                         (6, 'Rapport', '2012-08-19', 1),
+                                                                                         (7, 'Somatif', '2008-08-19', 1);
+
 INSERT INTO note.quality(quality_id, label, description, validity_start, validity_end, registration, user_id) VALUES (1,  'Q1 - Connaissances en génie', '', now(), DEFAULT, now(), 1),
                                                                                                                      (2,  'Q2 - Analyse de problémes', '', now(), DEFAULT, now(), 1),
                                                                                                                      (3,  'Q3 - Investigation', '', now(), DEFAULT, now(), 1),
@@ -464,77 +439,20 @@ INSERT INTO note.administrative_element(program_id, label, description, registra
 /**
 	Add educationnal goal instance for group GI58
 */
-INSERT INTO note.educationnal_goal_instance(timespan_id, eg_id, user_id) (SELECT t.timespan_id, eg.eg_id, 1 FROM note.timespan t, note.educationnal_goal eg WHERE t.label = 'A14' AND eg.label = 'gegis1');
+SELECT note.create_eg_instance_assigned('A12', 'gegis1', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('H13', 'gis2', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('A13', 'gis3', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('E14', 'gis4', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('H15', 'gis5', 'GI58', 'Accès membre');
+SELECT note.create_eg_instance_assigned('E15', 'gis6', 'GI58', 'Accès membre');
 
 
-/**
-	Assign group to educationnal goal previously created
-*/
-INSERT INTO note.assigned_group (timespan_id, eg_id, privilege_id, group_id, user_id) 
-	(SELECT egi.timespan_id, egi.eg_id, p.privilege_id, g.group_id, 1
-		FROM note.educationnal_goal_instance egi, public.groups g, public.privilege p, note.educationnal_goal eg,  note.timespan t
-		WHERE egi.eg_id = eg.eg_id AND eg.label = 'gegis1' AND t.label = 'A12' AND g.label = 'GI58' AND p.label = 'Accès membre');
+/** 
+	Script to unbind connection from a database:
 
-/**
-	Create an evaluation that represent a final exam, lab report, etc
-*/
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app1_intra', 'App 1 Sommatif', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Session' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app1_rapport', 'App 1 Rapport', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Rapport' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app2_intra', 'App 2 Sommatif', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Session' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app2_rapport', 'App 2 Rapport', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Rapport' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app3_intra', 'App 3 Sommatif', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Session' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app3_rapport', 'App 3 Rapport', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Rapport' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app4_intra', 'App 4 Sommatif', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Session' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app4_rapport', 'App 4 Rapport', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Rapport' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app5_intra', 'App 5 Sommatif', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Session' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app5_rapport', 'App 5 Rapport', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Rapport' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app6_intra', 'App 6 Sommatif', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Session' AND eg.label = 'gegis1');
- 
-INSERT INTO note.evaluation (evaluation_type_id, eg_id, validity_start, label, short_description, user_id)
-	(SELECT et.evaluation_type_id, eg.eg_id, now(), 'gegis1_app6_rapport', 'App 6 Rapport', 1
-	FROM note.evaluation_type et, note.educationnal_goal eg
-	WHERE et.label = 'Rapport' AND eg.label = 'gegis1');
+	SELECT pg_terminate_backend(pg_stat_activity.pid)
+	FROM pg_stat_activity
+	WHERE pg_stat_activity.datname = 'S6_APP1_PROB'
+  	AND pid <> pg_backend_pid();
+
+  */
