@@ -36,6 +36,5 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
     public void updateSemesterChart(IsWidget semesterChart) {
         semesterChartPanel.clear();
         semesterChartPanel.add(semesterChart);
-        // todo : make the semester chart work again
     }
 }

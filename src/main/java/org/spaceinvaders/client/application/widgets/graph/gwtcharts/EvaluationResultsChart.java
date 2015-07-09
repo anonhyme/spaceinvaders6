@@ -28,6 +28,7 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         this.apName = ap.getName();
     }
 
+    @Override
     public Widget getChart() {
         if (chart == null) {
             chart = new ColumnChart();

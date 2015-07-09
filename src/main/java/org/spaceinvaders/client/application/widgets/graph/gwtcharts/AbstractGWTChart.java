@@ -31,10 +31,8 @@ public abstract class AbstractGWTChart {
         setDataTable();
         setOptions();
         update();
-    }
-
-    public AbstractGWTChart() {
         registerResizeHandler();
+
     }
 
     public void setSize(int width, int height) {

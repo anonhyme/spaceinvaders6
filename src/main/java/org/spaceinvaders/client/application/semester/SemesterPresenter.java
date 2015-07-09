@@ -99,14 +99,14 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
             @Override
             public void onSuccess(TreeMap<String, Evaluation> results) {
                 GWT.log(results.toString());
-                final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
-
                 String[] colors = {"#FF0000", "#00FF00", "#0000FF"};
+
                 SemesterResultsChart semesterResultsChart = new SemesterResultsChart(semesterInfo, new ArrayList<>(results.values()));
                 semesterResultsChart.setSizeFromWindowSize(Window.getClientWidth(), Window.getClientHeight());
+
+                final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
                 semesterChartPresenter.setChart(semesterResultsChart);
                 semesterChartPresenter.setChartColors(colors);
-                semesterChartPresenter.loadChart();
 
                 getView().updateSemesterChart(semesterChartPresenter);
 

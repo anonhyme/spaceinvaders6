@@ -13,9 +13,6 @@ import org.spaceinvaders.shared.dto.*;
 
 import java.util.List;
 
-/**
- * Created by Etienne on 2015-06-10.
- */
 public class SemesterResultsChart extends AbstractGWTChart {
     private BarChart chart;
     private List<Evaluation> evaluations;
@@ -28,6 +25,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
         this.evaluations = evaluations;
     }
 
+    @Override
     public Widget getChart() {
         if (chart == null) {
             chart = new BarChart();
@@ -43,7 +41,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
 
     @Override
     void setDataTable() {
-        DataTable dataTable = DataTable.create();
+        dataTable = DataTable.create();
         dataTable.addColumn(ColumnType.STRING, "Résultat");
         dataTable.addColumn(ColumnType.NUMBER, "Etudiant");
         dataTable.addColumn(ColumnType.NUMBER, "Moyenne");
@@ -74,6 +72,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
         options.setTitle("Résultats de session");
         options.setVAxis(VAxis.create("AP"));
         options.setHAxis(HAxis.create("Résultats"));
+
         if (colorsSet) {
             options.setColors(colors);
         }

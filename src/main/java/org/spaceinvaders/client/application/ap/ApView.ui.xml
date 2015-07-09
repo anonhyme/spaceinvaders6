@@ -8,7 +8,7 @@
             <b:PageHeader subText="" ui:field="pageTitle"/>
             <g:SimplePanel ui:field="gridPanel"/>
 
-            <div>
+            <div style="padding-right: 15px; padding-left: 15px;">
                 <g:Label>Progression :</g:Label>
                 <b:Progress>
                     <b:ProgressBar ui:field="studentProgressBar" percent="0"/>

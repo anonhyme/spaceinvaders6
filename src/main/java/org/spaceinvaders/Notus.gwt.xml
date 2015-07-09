@@ -9,7 +9,6 @@
 
     <inherits name="com.googlecode.gwt.charts.Charts"/>
 
-
     <!-- Rest dispatch -->
     <inherits name="com.gwtplatform.dispatch.rest.DispatchRest"/>
     <inherits name="com.gwtplatform.dispatch.rest.delegates.ResourceDelegate"/>
