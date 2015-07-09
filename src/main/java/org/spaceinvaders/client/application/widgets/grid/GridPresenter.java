@@ -89,15 +89,10 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
                     public void onSuccess(TreeMap<String, Evaluation> evaluations) {
                         EvaluationReceivedEvent.fire(evaluations, getThis());
                     }
-                }).getAllEvaluations(3);
+                }).getAllEvaluations(semesterInfo.getId());
     }
 
     private GridPresenter getThis() {
         return this;
     }
-
-//    private native boolean isjQueryLoaded() /*-{
-//        console.log("hello");
-//        return (typeof $wnd['jQuery'] !== 'undefined');
-//    }-*/;
 }

@@ -3,9 +3,9 @@
 
     <persistence-unit name="persistUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>org.spaceinvaders.server.entities.CompetenceEvalResultEntity</class>
         <class>org.spaceinvaders.server.entities.CompetenceEntity</class>
         <class>org.spaceinvaders.server.entities.EvaluationEntity</class>
+        <class>org.spaceinvaders.server.entities.CompetenceEvalResultEntity</class>
         <properties>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:postgresql://thunder.servebeer.com:5433/S6_PROJET_P02"/>

@@ -45,16 +45,19 @@ public class CumulativeLineChart extends AbstractGWTChart {
         double currentMaxTotal = 0;
 
         for (int i = 0; i < data.size(); i++) {
+
             dataTable.setValue(i, 0, data.get(i).getLabel());
             Result r = data.get(i).getApResult(ap);
 
-            currentStudentTotal += r.getStudentTotal();
-            currentAvgTotal += r.getAvgTotal();
-            currentMaxTotal += r.getMaxTotal();
+            if (r.getIsValid()) {
+                currentStudentTotal += r.getStudentTotal();
+                currentAvgTotal += r.getAvgTotal();
+                currentMaxTotal += r.getMaxTotal();
 
-            dataTable.setValue(i, 1, currentStudentTotal);
-            dataTable.setValue(i, 2, currentAvgTotal);
-            dataTable.setValue(i, 3, currentMaxTotal);
+                dataTable.setValue(i, 1, currentStudentTotal);
+                dataTable.setValue(i, 2, currentAvgTotal);
+                dataTable.setValue(i, 3, currentMaxTotal);
+            }
         }
     }
 

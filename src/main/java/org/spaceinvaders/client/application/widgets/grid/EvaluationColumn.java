@@ -32,7 +32,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         HashMap<EvaluationResultType, String> dataMap = new HashMap<>();
         Result result = evaluation.getResult(key);
 
-        if (result != null) {
+        if ((result != null) && result.getIsValid()) {
             String studentResult = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%";
             String averageTotal = formatDoubleToString(result.getAvgTotal());
             String standardDev = formatDoubleToString(result.getStandardDev());

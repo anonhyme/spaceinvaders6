@@ -11,7 +11,7 @@ public class DaoModule extends AbstractModule {
     protected void configure() {
         install(new JpaPersistModule("persistUnit")); // todo uncomment this thing
 
-        bind(EvaluationDao.class).to(EvaluationDaoMock.class);
-        bind(SemesterInfoDao.class).to(SemesterInfoDaoMock.class);
+        bind(EvaluationDao.class).to(EvaluationDaoImpl.class);
+        bind(SemesterInfoDao.class).to(SemesterInfoDaoImpl.class);
     }
 }

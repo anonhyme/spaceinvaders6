@@ -47,6 +47,12 @@ public class Evaluation implements Serializable {
         return results.get(competenceLabel);
     }
 
+    public void addResult(String competenceLabel, Result result) {
+        if (!results.containsKey(competenceLabel)) {
+            results.put(competenceLabel, result);
+        }
+    }
+
     public Result getApResult(Ap ap) {
         // For each evaluation
         Result r = new Result();
@@ -60,12 +66,4 @@ public class Evaluation implements Serializable {
         }
         return r;
     }
-
-    public void addResult(String competenceLabel, Result result) {
-        if (!results.containsKey(competenceLabel)) {
-            results.put(competenceLabel, result);
-        }
-    }
-
-
 }

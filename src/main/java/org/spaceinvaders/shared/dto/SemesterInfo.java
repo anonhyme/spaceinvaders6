@@ -28,15 +28,6 @@ public class SemesterInfo implements Serializable {
         this.aps = aps;
         this.id = id;
         this.label = "Session " + id;
-//        this.competences = competences;
-    }
-
-    @Deprecated
-    public SemesterInfo(List<Competence> competences, List<Evaluation> evals, String label, int id) {
-        this.competences = competences;
-        this.evals = evals;
-        this.label = label;
-        this.id = id;
     }
 
     public List<Competence> getCompetences() {

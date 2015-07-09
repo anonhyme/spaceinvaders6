@@ -70,8 +70,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     protected void onBind() {
         super.onBind();
         registerHandler();
-        showGrid();
-        showGraph();
+        fetchSemesterInfo(3); // REPLACE THIS WITH THE RIGHT SEMESTER ID
     }
 
     private void registerHandler() {
@@ -79,19 +78,20 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         addRegisteredHandler(CellHoverEvent.TYPE, this);
     }
 
-    private void showGrid() {
-        gridPresenter.updateGrid(0);
-        getView().addGrid(gridPresenter);
-    }
-
-    private void showGraph() {
+    private void fetchSemesterInfo(int semesterID) {
         semesterInfoDelegate.withCallback(new AbstractAsyncCallback<SemesterInfo>() {
             @Override
             public void onSuccess(SemesterInfo results) {
                 semesterInfo = results;
+                showGrid();
                 getEvaluations();
             }
-        }).get(3);
+        }).get(semesterID);
+    }
+
+    private void showGrid() {
+        gridPresenter.updateGrid(semesterInfo.getId());
+        getView().addGrid(gridPresenter);
     }
 
     private void getEvaluations() {
@@ -118,12 +118,12 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
                     }
                 });
             }
-        }).getAllEvaluations(3);
+        }).getAllEvaluations(semesterInfo.getId());
     }
 
     @Override
     public void onSemesterChanged(SemesterChangedEvent event) {
-        gridPresenter.updateGrid(event.getSemesterID());
+        fetchSemesterInfo(event.getSemesterID());
     }
 
     @Override
