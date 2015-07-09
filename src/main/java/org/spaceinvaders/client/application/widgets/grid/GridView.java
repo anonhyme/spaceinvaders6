@@ -52,10 +52,10 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
     }
 
     @Override
-    public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
+    public void updateSemesterTable(List<String> competenceLabels, List<Evaluation> evaluations) {
         //TODO refactor
         cellTable = new CellTable<>();
-        initColumn(semesterInfo);
+        initColumn(competenceLabels);
         dataSemesterProvider.setList(evaluations);
         containerCellTable.addStyleName(appResources.topNavBar().materialContainer());
 
@@ -69,11 +69,10 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
         containerCellTable.add(cellTable);
     }
 
-    private void initColumn(SemesterInfo semesterInfo) {
+    private void initColumn(List<String> competenceLabels) {
         setEvaluationTypeColumn();
-        List<Competence> competencesLabels = semesterInfo.getCompetences();
-        for (Competence competenceLabel : competencesLabels) {
-            cellTable.addColumn(new EvaluationColumn(competenceLabel.getLabel(), getUiHandlers().getInstance()), competenceLabel.getLabel());
+        for (String competenceLabel : competenceLabels) {
+            cellTable.addColumn(new EvaluationColumn(competenceLabel, getUiHandlers().getInstance()), competenceLabel);
         }
         dataSemesterProvider.addDataDisplay(cellTable);
     }
@@ -84,7 +83,7 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
             public String getValue(Evaluation data) {
                 String value = " empty ";
                 try {
-                    GWT.log("getValue :::::  " + data.getLabel());
+//                    GWT.log("getValue :::::  " + data.getLabel());
                     value = data.getLabel();
                 } catch (Exception e) {
                 }

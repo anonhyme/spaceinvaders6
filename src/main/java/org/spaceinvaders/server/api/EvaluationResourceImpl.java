@@ -30,5 +30,4 @@ public class EvaluationResourceImpl implements EvaluationResource {
     public TreeMap<String, Evaluation> getApEvaluations(int semesterID, int apID) {
         return evaluationDao.getApEvaluations(userSession.getUserId(), semesterID, apID);
     }
-
 }

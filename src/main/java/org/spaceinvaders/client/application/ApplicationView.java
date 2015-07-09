@@ -54,6 +54,4 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     public void addMenu(IsWidget menu) {
         menuPanel.add(menu);
     }
-
-
 }

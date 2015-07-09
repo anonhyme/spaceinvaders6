@@ -61,13 +61,13 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
                 // Ignore event that occur outside of the element.
                 EventTarget eventTarget = event.getEventTarget();
                 if (parent.getFirstChildElement().isOrHasChild(Element.as(eventTarget))) {
-                    GWT.log("::::: Browser Event ::::: " + event.getType());
+//                    GWT.log("::::: Browser Event ::::: " + event.getType());
                 }
             }
 
             if (BrowserEvents.CLICK.equals(event.getType())) {
                 if (parent.getFirstChildElement().isOrHasChild(Element.as(event.getEventTarget()))) {
-                    GWT.log("::::: Browser Event ::::: " + event.getType());
+//                    GWT.log("::::: Browser Event ::::: " + event.getType());
                     showAp(value.get(EvaluationResultType.AP));
                 }
             }
@@ -77,7 +77,7 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
     }
 
     private void showAp(String ap) {
-        GWT.log(":::: Fire ap loading ::::");
+//        GWT.log(":::: Fire ap loading ::::");
         ApSelectedEvent.fire(ap, gridPresenter);
     }
 }

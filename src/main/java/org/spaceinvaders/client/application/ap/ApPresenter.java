@@ -28,6 +28,7 @@ import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -77,46 +78,6 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         this.gridPresenter = gridPresenter;
     }
 
-    protected void onBind() {
-        getStudentSemesterResultsAndGenerateContent();
-    }
-
-    @Override
-    protected void onReveal() {
-        super.onReveal();
-        getStudentSemesterResultsAndGenerateContent();
-    }
-
-    //TODO Access current semester id once implemented
-    private int semesterId = 3;
-    private int apId = 1;
-    private String apName = "GEN501";
-
-    private void getStudentSemesterResultsAndGenerateContent() {
-        semesterGradesDelegate
-                .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
-                    @Override
-                    public void onSuccess(TreeMap<String, Evaluation> evaluations) {
-                        generatePageContent(evaluations);
-                    }
-                }).getApEvaluations(3, apId);
-    }
-
-    private void generatePageContent(TreeMap<String, Evaluation> evaluations) {
-        //Todo get AP from eventbus or somewhere?
-
-        List<Competence> mockCompetences = Arrays.asList(
-                new Competence("GEN501-1", 0),
-                new Competence("GEN501-2", 1));
-        Ap mockAp = new Ap("GEN501", 0, mockCompetences);
-
-        setCharts(evaluations, mockAp);
-        setProgressBars(30, 40);
-
-        gridPresenter.updateGrid(0);
-        getView().addGrid(gridPresenter);
-    }
-
     private void setCharts(TreeMap<String, Evaluation> evaluations, Ap ap) {
         String[] colors = {RED, GREEN_FLASH, LIGHT_BLUE};
 
@@ -134,7 +95,7 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         getView().addEvaluationChart(evaluationChartWidget);
         getView().addCumulativeChart(cumulativeChartWidget);
-        getView().setApName(apName);
+        getView().setApName(ap.getName());
 
         ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
         chartLoader.loadApi(new Runnable() {
@@ -165,11 +126,10 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         return color;
     }
 
-    @Override
-    public void prepareFromRequest(PlaceRequest request) {
-        super.prepareFromRequest(request);
-        this.apName = request.getParameter("apId", "");
-        this.semesterId = Integer.parseInt(request.getParameter("semesterId", "3"));
-        GWT.log("Prepare from request " + apName);
+    public void update(Ap ap, TreeMap<String, Evaluation> apEvals) {
+        gridPresenter.updateGrid(ap.getCompetencesStrings(), apEvals);
+        getView().addGrid(gridPresenter);
+
+        setCharts(apEvals, ap);
     }
 }

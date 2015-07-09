@@ -66,4 +66,15 @@ public class Evaluation implements Serializable {
         }
         return r;
     }
+
+    public Evaluation getApResults(Ap ap) {
+        Evaluation apEval = new Evaluation();
+        apEval.setLabel(label);
+        for (String compLabel : results.keySet()) {
+            if (ap.containsCompetence(compLabel)) {
+                apEval.addResult(compLabel, results.get(compLabel));
+            }
+        }
+        return apEval;
+    }
 }

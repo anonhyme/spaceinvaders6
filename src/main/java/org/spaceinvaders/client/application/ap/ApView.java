@@ -39,10 +39,12 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     }
 
     public void addCumulativeChart(IsWidget chart) {
+        cumulativeChartPanel.clear();
         cumulativeChartPanel.add(chart);
     }
 
     public void addEvaluationChart(IsWidget chart) {
+        evaluationChartPanel.clear();
         evaluationChartPanel.add(chart);
     }
 

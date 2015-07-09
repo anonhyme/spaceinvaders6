@@ -19,6 +19,8 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
+import org.spaceinvaders.client.application.ap.ApPresenter;
+import org.spaceinvaders.client.application.events.RevealPresenterEvent;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
@@ -29,12 +31,15 @@ import org.spaceinvaders.client.place.NameTokens;
 
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
+import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.Result;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import javax.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import static org.spaceinvaders.client.application.util.ColorHelper.GREEN;
@@ -61,9 +66,13 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     private final ResourceDelegate<SemesterInfoResource> semesterInfoDelegate;
     private SemesterInfo semesterInfo;
     private PlaceManager placeManager;
+    private TreeMap<String, Evaluation> evaluations;
 
     @Inject
     Provider<GwtChartWidgetPresenter> gwtChartWidgetPresenterProvider;
+
+    @Inject
+    ApPresenter apPresenter;
 
     @Inject
     SemesterPresenter(EventBus eventBus,
@@ -104,14 +113,13 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
             public void onSuccess(SemesterInfo results) {
                 semesterInfo = results;
                 getView().updateTitle(Integer.toString(semesterID));
-                showGrid();
                 getEvaluations();
             }
         }).get(semesterID);
     }
 
     private void showGrid() {
-        gridPresenter.updateGrid(semesterInfo.getId());
+        gridPresenter.updateGrid(semesterInfo.getCompetencesLabels(), evaluations);
         getView().addGrid(gridPresenter);
     }
 
@@ -119,27 +127,32 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         evaluationDelegate.withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
             @Override
             public void onSuccess(TreeMap<String, Evaluation> results) {
-                GWT.log(results.toString());
-                String[] colors = {RED, GREEN, LIGHT_BLUE};
-
-                SemesterResultsChart semesterResultsChart = new SemesterResultsChart(semesterInfo, new ArrayList<>(results.values()));
-                semesterResultsChart.setSizeFromWindowSize(Window.getClientWidth(), Window.getClientHeight());
-
-                final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
-                semesterChartPresenter.setChart(semesterResultsChart);
-                semesterChartPresenter.setChartColors(colors);
-
-                getView().updateSemesterChart(semesterChartPresenter);
-
-                ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-                chartLoader.loadApi(new Runnable() {
-                    @Override
-                    public void run() {
-                        semesterChartPresenter.loadChart();
-                    }
-                });
+                evaluations = results;
+                showGrid();
+                showCharts();
             }
         }).getAllEvaluations(semesterInfo.getId());
+    }
+
+    private void showCharts() {
+        String[] colors = {RED, GREEN, LIGHT_BLUE};
+
+        SemesterResultsChart semesterResultsChart = new SemesterResultsChart(semesterInfo, new ArrayList<>(evaluations.values()));
+        semesterResultsChart.setSizeFromWindowSize(Window.getClientWidth(), Window.getClientHeight());
+
+        final GwtChartWidgetPresenter semesterChartPresenter = gwtChartWidgetPresenterProvider.get();
+        semesterChartPresenter.setChart(semesterResultsChart);
+        semesterChartPresenter.setChartColors(colors);
+
+        getView().updateSemesterChart(semesterChartPresenter);
+
+        ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+        chartLoader.loadApi(new Runnable() {
+            @Override
+            public void run() {
+                semesterChartPresenter.loadChart();
+            }
+        });
     }
 
     @Override
@@ -149,13 +162,25 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
 
     @Override
     public void onApSelected(ApSelectedEvent event) {
-        //TODO Create ap page and reveal it
+        String apLabel = event.getAp();
+        Ap ap = semesterInfo.findAp(apLabel);
+
+        // Filter results for this AP
+        TreeMap<String, Evaluation> apEvals = new TreeMap<>();
+        for (String competenceLabel : evaluations.keySet()) {
+            Evaluation eval = evaluations.get(competenceLabel);
+            Evaluation apEval = eval.getApResults(ap);
+
+            if (apEval.getResults().size() != 0) {
+                apEvals.put(eval.getLabel(), apEval);
+            }
+        }
+
+        apPresenter.update(ap, apEvals);
+
         PlaceRequest placeRequest = new PlaceRequest.Builder().
                 nameToken(NameTokens.APpage).
-                with("apId", event.getAp()).
-                with("semesterId", Integer.toString(semesterInfo.getId())).
                 build();
         placeManager.revealPlace(placeRequest);
-        GWT.log(event.getAp());
     }
 }

@@ -12,7 +12,6 @@ public class ApSelectedEvent extends GwtEvent<ApSelectedEvent.Handler> {
     public static Type<Handler> TYPE = new Type<>();
 
     private String ap;
-    private String sessionId;
 
     public ApSelectedEvent(String ap) {
         this.ap = ap;
