@@ -53,19 +53,15 @@ public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements Grid
 
     @Override
     public void updateSemesterTable(SemesterInfo semesterInfo, List<Evaluation> evaluations) {
-        //TODO refactor
         cellTable = new CellTable<>();
         initColumn(semesterInfo);
         dataSemesterProvider.setList(evaluations);
         containerCellTable.addStyleName(appResources.topNavBar().materialContainer());
-
         cellTable.setStriped(true);
         cellTable.setCondensed(true);
         cellTable.setColumnWidth(0, "20%");
         cellTable.setHover(false);
-
         containerCellTable.clear();
-
         containerCellTable.add(cellTable);
     }
 

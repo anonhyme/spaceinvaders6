@@ -48,7 +48,7 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
         }
         String resultFraction = data.get(EvaluationResultType.RESULT) + "/" + data.get(EvaluationResultType.MAX_EVALUATION);
         SafeHtml innerHtml = cellTemplates.innerCell(resultFraction, data.get(EvaluationResultType.AVERAGE), data.get(EvaluationResultType.STD_DEV));
-        SafeHtml safeHtml = cellTemplates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT));
+        SafeHtml safeHtml = cellTemplates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT_PERCENTAGE));
         sb.append(safeHtml);
     }
 
