@@ -65,7 +65,10 @@ public class CumulativeLineChart extends AbstractGWTChart {
         options.setFontName("Tahoma");
         options.setTitle("Résultats cumulatifs de l'AP");
         options.setHAxis(HAxis.create("Évaluation"));
-        options.setVAxis(VAxis.create("Total"));
+
+        VAxis v = VAxis.create("Total");
+        v.setMinValue(0);
+        options.setVAxis(v);
         options.setPointSize(5);
 
         if (colorsSet) {
