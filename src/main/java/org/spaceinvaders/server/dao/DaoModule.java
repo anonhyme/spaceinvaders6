@@ -9,9 +9,9 @@ import org.spaceinvaders.server.dao.mock.SemesterInfoDaoMock;
 public class DaoModule extends AbstractModule {
     @Override
     protected void configure() {
-        install(new JpaPersistModule("persistUnit")); // todo uncomment this thing
+        install(new JpaPersistModule("persistUnit"));
 
-        bind(EvaluationDao.class).to(EvaluationDaoMock.class);
-        bind(SemesterInfoDao.class).to(SemesterInfoDaoMock.class);
+        bind(EvaluationDao.class).to(EvaluationDaoImpl.class);
+        bind(SemesterInfoDao.class).to(SemesterInfoDaoImpl.class);
     }
 }

@@ -80,8 +80,6 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         this.gridPresenter = gridPresenter;
     }
 
-
-        getProgressSums(evaluations, mockAp);
     private void setCharts(TreeMap<String, Evaluation> evaluations, Ap ap) {
         String[] colors = {RED, GREEN_FLASH, LIGHT_BLUE};
 
@@ -124,19 +122,15 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         {
             Result r = data.get(i).getApResult(ap);
             currentMaxTotal += r.getMaxTotal();
-            if (r.getStudentTotal() > 0) {
+            if (r.getIsValid()) {
                 currentStudentTotal += r.getStudentTotal();
                 currentProgressionTotal += r.getMaxTotal();
-
             }
-
         }
 
         GWT.log(""+currentStudentTotal);
         GWT.log("" +currentMaxTotal);
         setProgressBars(currentStudentTotal, currentProgressionTotal, currentMaxTotal);
-
-
     }
 
     private void setProgressBars(double studentProgress, double classProgress, double maxProgress) {
@@ -163,5 +157,6 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         getView().addGrid(gridPresenter);
 
         setCharts(apEvals, ap);
+        getProgressSums(apEvals, ap);
     }
 }
