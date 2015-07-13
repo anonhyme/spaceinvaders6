@@ -1,5 +1,6 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 
@@ -33,11 +34,13 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
         String[] apKey = key.split("-");
 
         if ((result != null) && result.getIsValid()) {
+            String resultPercent = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%";
+            GWT.log("result presenter  :::: " + resultPercent );
             dataMap.put(EvaluationResultType.RESULT, formatDoubleToString(result.getStudentTotal()));
-            dataMap.put(EvaluationResultType.MAX_EVALUATION, formatDoubleToString(result.getStudentTotal()));
+            dataMap.put(EvaluationResultType.MAX_EVALUATION, formatDoubleToString(result.getMaxTotal()));
             dataMap.put(EvaluationResultType.AP, apKey[0]);
             dataMap.put(EvaluationResultType.COMPETENCE, apKey[1]);
-            dataMap.put(EvaluationResultType.RESULT_PERCENTAGE, formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%");
+            dataMap.put(EvaluationResultType.RESULT_PERCENTAGE, resultPercent);
             dataMap.put(EvaluationResultType.AVERAGE, formatDoubleToString(result.getAvgTotal()));
             dataMap.put(EvaluationResultType.STD_DEV, formatDoubleToString(result.getStandardDev()));
         }
