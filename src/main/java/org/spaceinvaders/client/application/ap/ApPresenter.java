@@ -28,7 +28,10 @@ import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.SemesterInfo;
+import org.spaceinvaders.shared.dto.Result;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
@@ -41,9 +44,9 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         void setApName(String name);
 
-        void setStudentProgressBar(float value, String color);
+        void setStudentProgressBar(double value, String color);
 
-        void setClassProgressBar(float value, String color);
+        void setClassProgressBar(double value, String color);
 
         void addCumulativeChart(IsWidget chart);
 
@@ -77,45 +80,6 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         this.gridPresenter = gridPresenter;
     }
 
-    protected void onBind() {
-        getStudentSemesterResultsAndGenerateContent();
-    }
-
-    @Override
-    protected void onReveal() {
-        super.onReveal();
-    }
-
-    //TODO Access current semester id once implemented
-    private int semesterId = 3;
-    private int apId = 1;
-    private String apName = "GEN501";
-
-    private void getStudentSemesterResultsAndGenerateContent() {
-        semesterGradesDelegate
-                .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
-                    @Override
-                    public void onSuccess(TreeMap<String, Evaluation> evaluations) {
-                        generatePageContent(evaluations);
-                    }
-                }).getApEvaluations(3, apId);
-    }
-
-    private void generatePageContent(TreeMap<String, Evaluation> evaluations) {
-        //Todo get AP from eventbus or somewhere?
-
-        List<Competence> mockCompetences = Arrays.asList(
-                new Competence("GEN501-1", 0),
-                new Competence("GEN501-2", 1));
-        Ap mockAp = new Ap("GEN501", 0, mockCompetences);
-
-        setCharts(evaluations, mockAp);
-        setProgressBars(30, 40);
-
-        gridPresenter.updateGrid(0);
-        getView().addGrid(gridPresenter);
-    }
-
     private void setCharts(TreeMap<String, Evaluation> evaluations, Ap ap) {
         String[] colors = {RED, GREEN_FLASH, LIGHT_BLUE};
 
@@ -133,7 +97,7 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         getView().addEvaluationChart(evaluationChartWidget);
         getView().addCumulativeChart(cumulativeChartWidget);
-        getView().setApName(apName);
+        getView().setApName(ap.getName());
 
         ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
         chartLoader.loadApi(new Runnable() {
@@ -143,17 +107,41 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
                 cumulativeChartWidget.loadChart();
             }
         });
+
     }
 
-    private void setProgressBars(float studentProgress, float classProgress) {
+
+    private void getProgressSums(TreeMap<String, Evaluation> evaluations, Ap ap) {
+        ArrayList<Evaluation> data = new ArrayList<>(evaluations.values());
+        double currentStudentTotal = 0.0;
+        double currentMaxTotal = 0.0;
+        double currentProgressionTotal = 0.0;
+
+
+        for (int i = 0; i < data.size(); i++)
+        {
+            Result r = data.get(i).getApResult(ap);
+            currentMaxTotal += r.getMaxTotal();
+            if (r.getIsValid()) {
+                currentStudentTotal += r.getStudentTotal();
+                currentProgressionTotal += r.getMaxTotal();
+            }
+        }
+
+        GWT.log(""+currentStudentTotal);
+        GWT.log("" +currentMaxTotal);
+        setProgressBars(currentStudentTotal, currentProgressionTotal, currentMaxTotal);
+    }
+
+    private void setProgressBars(double studentProgress, double classProgress, double maxProgress) {
         String studentColor = getStudentProgressColor(studentProgress, classProgress);
-        getView().setStudentProgressBar(studentProgress, studentColor);
-        getView().setClassProgressBar(classProgress, BLUE);
+        getView().setStudentProgressBar(studentProgress/maxProgress *100, studentColor);
+        getView().setClassProgressBar(classProgress/maxProgress *100, BLUE);
     }
 
-    private String getStudentProgressColor(float studentProgress, float classProgress) {
+    private String getStudentProgressColor(double studentProgress, double classProgress) {
         String color;
-        float progressRatio = studentProgress / classProgress;
+        double progressRatio = studentProgress / classProgress;
         if (progressRatio > 0.85) {
             color = GOLD;
         } else if (progressRatio > 0.5) {
@@ -164,11 +152,11 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         return color;
     }
 
-    @Override
-    public void prepareFromRequest(PlaceRequest request) {
-        super.prepareFromRequest(request);
-        this.apName = request.getParameter("apId", "");
-        this.semesterId = Integer.parseInt(request.getParameter("semesterId", "3"));
-        GWT.log("Prepare from request " + apName);
+    public void update(Ap ap, TreeMap<String, Evaluation> apEvals) {
+        gridPresenter.updateGrid(ap.getCompetencesStrings(), apEvals);
+        getView().addGrid(gridPresenter);
+
+        setCharts(apEvals, ap);
+        getProgressSums(apEvals, ap);
     }
 }

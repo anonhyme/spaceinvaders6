@@ -72,7 +72,9 @@ public class SemesterResultsChart extends AbstractGWTChart {
         options.setFontName("Tahoma");
         options.setTitle("Résultats de session");
         options.setVAxis(VAxis.create("AP"));
-        options.setHAxis(HAxis.create("Résultats"));
+        HAxis h = HAxis.create("Résultat");
+        h.setMinValue(0);
+        options.setHAxis(h);
 
         if (colorsSet) {
             options.setColors(colors);

@@ -69,7 +69,7 @@ public abstract class AbstractGWTChart {
                 resizeTimer.cancel();
                 resizeTimer.schedule(250);
 
-                GWT.log(this.getClass().toString() + " : resizing window.");
+//                GWT.log(this.getClass().toString() + " : resizing window.");
 
                 getInstance().setSizeFromWindowSize(event.getWidth(), event.getHeight());
                 getInstance().update();

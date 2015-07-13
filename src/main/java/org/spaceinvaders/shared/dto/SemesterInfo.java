@@ -40,6 +40,14 @@ public class SemesterInfo implements Serializable {
         return competences;
     }
 
+    public List<String> getCompetencesLabels() {
+        List<String> labels = new ArrayList<>();
+        for (Competence label : competences) {
+            labels.add(label.getLabel());
+        }
+        return labels;
+    }
+
     public void setCompetences(List<Competence> competences) {
         this.competences = competences;
     }
@@ -74,5 +82,14 @@ public class SemesterInfo implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Ap findAp(String apLabel) {
+        for (Ap ap : aps) {
+            if (ap.getName() == apLabel) {
+                return ap;
+            }
+        }
+        return null;
     }
 }

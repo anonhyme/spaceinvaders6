@@ -4,8 +4,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 
-import org.spaceinvaders.client.widgets.cell.EvaluationResultCell;
-import org.spaceinvaders.client.widgets.cell.EvaluationResultType;
+import org.spaceinvaders.client.application.widgets.grid.cell.EvaluationResultCell;
+import org.spaceinvaders.client.application.widgets.grid.cell.EvaluationResultType;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 

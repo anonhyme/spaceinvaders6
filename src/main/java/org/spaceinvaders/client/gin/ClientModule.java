@@ -2,6 +2,7 @@ package org.spaceinvaders.client.gin;
 
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
+import com.google.inject.spi.StaticInjectionRequest;
 
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule;

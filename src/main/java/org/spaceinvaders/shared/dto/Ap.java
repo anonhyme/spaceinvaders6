@@ -57,4 +57,13 @@ public class Ap implements Serializable {
         }
         return competencesStrings;
     }
+
+    public boolean containsCompetence(String competenceLabel) {
+        for (Competence competence : competences) {
+            if (competence.getLabel() == competenceLabel) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

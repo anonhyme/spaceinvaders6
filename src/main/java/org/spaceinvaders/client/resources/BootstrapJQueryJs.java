@@ -19,6 +19,6 @@ public interface BootstrapJQueryJs extends ClientBundle {
     @Source("js/bootstrap-3.3.2.min.cache.js")
     TextResource bootstrap();
 
-    @Source("js/testJS.js")
-    TextResource testJs();
+//    @Source("js/testJS.js")
+//    TextResource testJs();
 }

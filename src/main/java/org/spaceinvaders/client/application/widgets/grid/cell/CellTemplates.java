@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cell;
+package org.spaceinvaders.client.application.widgets.grid.cell;
 
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;

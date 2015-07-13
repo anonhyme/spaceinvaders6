@@ -4,8 +4,7 @@ import javax.inject.Inject;
 
 public class ResourceLoader {
     @Inject
-    ResourceLoader(AppResources appResources, CustomTooltipResources tooltipResources) {
-        appResources.topNavBar().ensureInjected();
-        tooltipResources.css().ensureInjected();
+    ResourceLoader(AppResources appResources) {
+        appResources.notus().ensureInjected();
     }
 }

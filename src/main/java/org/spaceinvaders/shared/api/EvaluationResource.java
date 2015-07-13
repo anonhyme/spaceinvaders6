@@ -20,10 +20,10 @@ import static org.spaceinvaders.shared.api.ApiPaths.AP;
 @Produces(MediaType.APPLICATION_JSON)
 public interface EvaluationResource {
     @GET
-    @Path(ALL)
+    @Path(EVALUATIONS + ALL)
     TreeMap<String, Evaluation> getAllEvaluations(@QueryParam(SEMESTER_ID) int semesterID);
 
     @GET
-    @Path(AP)
+    @Path(EVALUATIONS + AP)
     TreeMap<String, Evaluation> getApEvaluations(@QueryParam(SEMESTER_ID) int semesterID, @QueryParam(AP_ID) int apID);
 }

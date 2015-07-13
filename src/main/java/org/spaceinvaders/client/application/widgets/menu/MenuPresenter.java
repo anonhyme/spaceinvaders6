@@ -71,7 +71,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
 
     @Override
     public void semesterChanged(int semesterID) {
-        GWT.log("::: semesterChanged ::: " + semesterID);
+//        GWT.log("::: semesterChanged ::: " + semesterID);
         SemesterChangedEvent.fire(semesterID, this);
     }
 

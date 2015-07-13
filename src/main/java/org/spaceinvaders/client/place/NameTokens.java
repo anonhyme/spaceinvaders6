@@ -5,4 +5,9 @@ public class NameTokens {
     public static final String home = semesterGrades;
     public static final String APpage = "ap";
     public static final String error = "error";
+    public static final String resultTable = "resultTable";
+
+    public static String getResultTable() {
+        return resultTable;
+    }
 }

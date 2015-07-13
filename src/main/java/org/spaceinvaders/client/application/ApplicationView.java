@@ -2,6 +2,7 @@ package org.spaceinvaders.client.application;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -54,6 +55,4 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     public void addMenu(IsWidget menu) {
         menuPanel.add(menu);
     }
-
-
 }
