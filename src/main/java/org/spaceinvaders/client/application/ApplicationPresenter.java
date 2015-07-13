@@ -15,12 +15,14 @@ import com.gwtplatform.mvp.client.proxy.LockInteractionEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
+import org.spaceinvaders.client.application.events.RevealPresenterEvent;
 import org.spaceinvaders.client.application.widgets.menu.MenuPresenter;
 import org.spaceinvaders.client.resources.BootstrapJQueryJs;
 
 import javax.inject.Inject;
 
-public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
+public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy>
+        implements RevealPresenterEvent.RevealPresenterHandler{
 
     public interface MyView extends View {
         void showLoading(boolean visibile);
@@ -28,8 +30,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
         void addMenu(IsWidget menu);
     }
 
-    @Inject
-    BootstrapJQueryJs bootstrapJQueryJs;
+//    @Inject
+//    BootstrapJQueryJs bootstrapJQueryJs;
 
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_SetMainContent = new Type<>();
@@ -63,5 +65,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
         super.onBind();
     }
 
-
+    @Override
+    public void onRevealPresenter(RevealPresenterEvent event) {
+        getView().setInSlot(SLOT_SetMainContent, event.getPresenterWidget());
+    }
 }

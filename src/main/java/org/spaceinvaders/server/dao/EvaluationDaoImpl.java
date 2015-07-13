@@ -4,19 +4,14 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
-
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
-import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
+import java.util.List;
+import java.util.TreeMap;
 
 @Singleton
 public class EvaluationDaoImpl implements EvaluationDao {
@@ -58,12 +53,19 @@ public class EvaluationDaoImpl implements EvaluationDao {
             }
 
             Evaluation eval = evaluations.get(evalLabel);
-            eval.addResult(
-                    entity.getCompetenceLabel(),
-                    new Result(entity.getResultValue(), entity.getAvgResultValue(), entity.getMaxResultValue(), entity.getStandardDev()));
+
+            if (entity.getHasResult()) {
+                eval.addResult(entity.getCompetenceLabel(),
+                        new Result(entity.getResultValue(),
+                                entity.getAvgResultValue(),
+                                entity.getMaxResultValue(),
+                                entity.getStandardDev()));
+            } else {
+                eval.addResult(entity.getCompetenceLabel(), new Result(entity.getMaxResultValue()));
+            }
+
             compIndex++;
         }
-
 
         return evaluations;
     }

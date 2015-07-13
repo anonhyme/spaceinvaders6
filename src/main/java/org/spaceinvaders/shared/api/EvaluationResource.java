@@ -1,11 +1,6 @@
 package org.spaceinvaders.shared.api;
 
-import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
-import org.spaceinvaders.shared.dto.Result;
-
-import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,10 +20,10 @@ import static org.spaceinvaders.shared.api.ApiPaths.AP;
 @Produces(MediaType.APPLICATION_JSON)
 public interface EvaluationResource {
     @GET
-    @Path(ALL)
+    @Path(EVALUATIONS + ALL)
     TreeMap<String, Evaluation> getAllEvaluations(@QueryParam(SEMESTER_ID) int semesterID);
 
     @GET
-    @Path(AP)
+    @Path(EVALUATIONS + AP)
     TreeMap<String, Evaluation> getApEvaluations(@QueryParam(SEMESTER_ID) int semesterID, @QueryParam(AP_ID) int apID);
 }

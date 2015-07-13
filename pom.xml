@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.spaceinvaders</groupId>
     <artifactId>Notus</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -20,13 +21,7 @@
         <bootstrap.version>0.9.1</bootstrap.version>
         <gquery.version>1.4.3</gquery.version>
         <gwt-charts.version>0.9.10</gwt-charts.version>
-        <arcbees-tooltips.version>1.1</arcbees-tooltips.version>
         <gwt.style>PRETTY</gwt.style>
-        <!--
-            * PRETTY
-            * OBF
-            * DETAILED
-        -->
 
         <!-- server -->
         <gae.version>1.9.2</gae.version>
@@ -47,7 +42,7 @@
         <jukito.version>1.4.1</jukito.version>
 
         <!-- maven -->
-        <maven-checkstyle-plugin.version>2.14</maven-checkstyle-plugin.version>
+
         <gwt-maven-plugin.version>2.7.0</gwt-maven-plugin.version>
         <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -55,9 +50,6 @@
         <maven-gae-plugin.version>0.9.6</maven-gae-plugin.version>
         <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
         <maven-build-helper-plugin.version>1.7</maven-build-helper-plugin.version>
-
-        <arcbees-checkstyle.version>1.2</arcbees-checkstyle.version>
-        <checkstyle.version>6.3</checkstyle.version>
 
         <target.jdk>1.7</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,7 +64,6 @@
     </properties>
 
     <dependencies>
-
         <!--CLIENT DEPENDENCIES
                 * GWTP
                 * GWT
@@ -110,13 +101,6 @@
             <groupId>com.googlecode.gwtquery</groupId>
             <artifactId>gwtquery</artifactId>
             <version>${gquery.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.arcbees.gquery</groupId>
-            <artifactId>tooltip</artifactId>
-            <version>${arcbees-tooltips.version}</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -275,17 +259,17 @@
         </dependency>
 
         <!-- Tester component -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-tester</artifactId>
-            <version>${gwtp.version}</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.gwtplatform</groupId>-->
+        <!--<artifactId>gwtp-tester</artifactId>-->
+        <!--<version>${gwtp.version}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
 
     </dependencies>
 
     <repositories>
-        <!-- Use GWTP snapshots for the latest and greatest -->
+         <!--Use GWTP snapshots for the latest and greatest-->
         <repository>
             <id>sonatype.snapshots</id>
             <name>Sonatype snapshot repository</name>
@@ -306,6 +290,11 @@
 
     <build>
         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
@@ -316,23 +305,20 @@
                     <source>${target.jdk}</source>
                     <target>${target.jdk}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <!-- Disable annotation processors during normal compilation -->
                     <proc>none</proc>
                 </configuration>
             </plugin>
 
-
-            <!-- JUnit Testing - skip *.GwtTest cases -->
-            <!-- 'mvn TestJstype' - runs the Jukito tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>
+                        <!--<include>**/*Test.java</include>-->
                     </includes>
                     <excludes>
+                        <include>**/*Test.java</include>
                         <exclude>**/*GwtTest.java</exclude>
                     </excludes>
                 </configuration>
@@ -348,24 +334,23 @@
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>${gwt.version}</version>
                 <configuration>
-                    <testTimeOut>180</testTimeOut>
-                    <includes>**/*GwtTest.java</includes>
-                    <mode>htmlunit</mode>
-
-                    <extraJvmArgs>-Xss1024K -Xmx1024M -XX:MaxPermSize=256M</extraJvmArgs>
-                    <logLevel>INFO</logLevel>
-                    <style>${gwt.style}</style>
-
                     <copyWebapp>true</copyWebapp>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
+                    <!--<includes>**/*GwtTest.java</includes>-->
+                    <mode>htmlunit</mode>
 
                     <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
                     <appEngineVersion>${gae.version}</appEngineVersion>
                     <appEngineHome>${gae.home}</appEngineHome>
+                    <extraJvmArgs>-Xss1024K -Xmx512M -XX:MaxPermSize=256M</extraJvmArgs>
+                    <localWorkers>2</localWorkers>
+                    <gen>target/gwt-generated</gen>
+                    <logLevel>INFO</logLevel>
+                    <!--<style>${gwt.style}</style>-->
 
                     <runTarget>Notus.html</runTarget>
                     <modules>
-                        <module>org.spaceinvaders.Notus</module>
+                        <module>org.spaceinvaders.notus</module>
                     </modules>
                 </configuration>
                 <executions>
@@ -399,7 +384,14 @@
                         </goals>
                     </execution>
                 </executions>
+
                 <dependencies>
+                    <dependency>
+                        <groupId>net.kindleit</groupId>
+                        <artifactId>gae-runtime</artifactId>
+                        <version>1.8.8</version>
+                        <type>pom</type>
+                    </dependency>
 
                     <!-- Google App Engine API -->
                     <dependency>
@@ -448,58 +440,11 @@
                         <groupId>com.google.appengine</groupId>
                         <artifactId>appengine-tools-sdk</artifactId>
                         <version>${gae.version}</version>
+                        <scope>runtime</scope>
                     </dependency>
                 </dependencies>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
-                <configuration>
-                    <configLocation>/checkstyle.xml</configLocation>
-                    <suppressionsLocation>/suppressions.xml</suppressionsLocation>
-                    <propertyExpansion>basedir=${basedir}</propertyExpansion>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                </configuration>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>${checkstyle.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.arcbees</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>${arcbees-checkstyle.version}</version>
-                    </dependency>
-                </dependencies>
-
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>checkstyle</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev-mock</id>
-        </profile>
-        <profile>
-            <id>dev</id>
-        </profile>
-    </profiles>
-
 
 </project>

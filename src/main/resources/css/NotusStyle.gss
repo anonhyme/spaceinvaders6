@@ -1,10 +1,6 @@
 /** Add css rules here for your application. */
 @external "gwt-*";
 
-@def GREEN_TOP_NAV #57a544;
-@def SHADOW_INNER rgba(0, 0, 0, 0.26);
-@def SHADOW_OUTER rgba(0, 0, 0, 0.22);
-
 .materialTop {
     margin-top: auto;
     background-color: #57a544;
@@ -17,7 +13,6 @@
 }
 
 .material {
-    /*background-color: #2d9d5f;*/
     border-radius: 3px;
     padding: 10px 25px;
     text-align: right;

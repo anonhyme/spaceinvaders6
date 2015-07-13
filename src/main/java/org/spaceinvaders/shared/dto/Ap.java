@@ -17,6 +17,7 @@ public class Ap implements Serializable {
         this.name = name;
         this.id = id;
         this.competences = competences;
+        this.competencesStrings = new ArrayList<>();
     }
 
     public void setName(String name) {
@@ -48,12 +49,21 @@ public class Ap implements Serializable {
     }
 
     public List<String> getCompetencesStrings() {
-        if (competencesStrings == null) {
+        if ((competencesStrings.size() == 0) && (competences.size() != 0)) {
             competencesStrings = new ArrayList<>();
             for (Competence comp : competences) {
                 competencesStrings.add(comp.getLabel());
             }
         }
         return competencesStrings;
+    }
+
+    public boolean containsCompetence(String competenceLabel) {
+        for (Competence competence : competences) {
+            if (competence.getLabel() == competenceLabel) {
+                return true;
+            }
+        }
+        return false;
     }
 }

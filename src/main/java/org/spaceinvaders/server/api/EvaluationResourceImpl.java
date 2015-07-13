@@ -7,8 +7,6 @@ import org.spaceinvaders.server.dao.EvaluationDao;
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.dto.Evaluation;
 
-import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 public class EvaluationResourceImpl implements EvaluationResource {
@@ -32,5 +30,4 @@ public class EvaluationResourceImpl implements EvaluationResource {
     public TreeMap<String, Evaluation> getApEvaluations(int semesterID, int apID) {
         return evaluationDao.getApEvaluations(userSession.getUserId(), semesterID, apID);
     }
-
 }

@@ -21,7 +21,7 @@ import com.google.gwt.resources.client.CssResource;
 
 public interface AppResources extends ClientBundle {
 
-    interface TopNavbar extends CssResource {
+    interface Notus extends CssResource {
 
         @ClassName("materialTop")
         String materialTop();
@@ -29,13 +29,13 @@ public interface AppResources extends ClientBundle {
         @ClassName("material")
         String material();
 
-        @ClassName("material-icon")
-        String materialIcon();
+        @ClassName("material-container")
+        String materialContainer();
 
         @ClassName("info")
         String info();
     }
 
-    @Source("css/topNavbar.gss")
-    TopNavbar topNavBar();
+    @Source("css/NotusStyle.gss")
+    Notus notus();
 }

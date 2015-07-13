@@ -4,6 +4,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import org.spaceinvaders.client.application.ap.ApModule;
 import org.spaceinvaders.client.application.error.ErrorModule;
+import org.spaceinvaders.client.application.resulttable.ResultTableModule;
 import org.spaceinvaders.client.application.semester.SemesterModule;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetModule;
 import org.spaceinvaders.client.application.widgets.grid.GridModule;
@@ -22,5 +23,6 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new ApModule());
         install(new ErrorModule());
         install(new GridModule());
+        install(new ResultTableModule());
     }
 }

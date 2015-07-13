@@ -1,13 +1,8 @@
 package org.spaceinvaders.shared.dto;
 
-import org.spaceinvaders.server.cas.UserSessionImpl;
-import org.spaceinvaders.shared.exception.ApExeption;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SemesterInfo implements Serializable {
     private int id;
@@ -28,15 +23,6 @@ public class SemesterInfo implements Serializable {
         this.aps = aps;
         this.id = id;
         this.label = "Session " + id;
-//        this.competences = competences;
-    }
-
-    @Deprecated
-    public SemesterInfo(List<Competence> competences, List<Evaluation> evals, String label, int id) {
-        this.competences = competences;
-        this.evals = evals;
-        this.label = label;
-        this.id = id;
     }
 
     public List<Competence> getCompetences() {
@@ -52,6 +38,14 @@ public class SemesterInfo implements Serializable {
             }
         }
         return competences;
+    }
+
+    public List<String> getCompetencesLabels() {
+        List<String> labels = new ArrayList<>();
+        for (Competence label : competences) {
+            labels.add(label.getLabel());
+        }
+        return labels;
     }
 
     public void setCompetences(List<Competence> competences) {
@@ -88,5 +82,14 @@ public class SemesterInfo implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Ap findAp(String apLabel) {
+        for (Ap ap : aps) {
+            if (ap.getName() == apLabel) {
+                return ap;
+            }
+        }
+        return null;
     }
 }

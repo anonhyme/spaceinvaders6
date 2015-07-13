@@ -58,6 +58,7 @@ public class SemesterResultsChart extends AbstractGWTChart {
                 apTotal.addToMaxTotal(r.getMaxTotal());
                 apTotal.addToStudentTotal(r.getStudentTotal());
             }
+
             dataTable.setValue(i, 0, aps.get(i).getName());
             dataTable.setValue(i, 1, apTotal.getStudentTotal());
             dataTable.setValue(i, 2, apTotal.getAvgTotal());
@@ -71,7 +72,9 @@ public class SemesterResultsChart extends AbstractGWTChart {
         options.setFontName("Tahoma");
         options.setTitle("Résultats de session");
         options.setVAxis(VAxis.create("AP"));
-        options.setHAxis(HAxis.create("Résultats"));
+        HAxis h = HAxis.create("Résultat");
+        h.setMinValue(0);
+        options.setHAxis(h);
 
         if (colorsSet) {
             options.setColors(colors);

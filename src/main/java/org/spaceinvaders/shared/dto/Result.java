@@ -7,12 +7,25 @@ public class Result implements Serializable {
     private double avgTotal;
     private double maxTotal;
     private double standardDev;
+    private boolean isValid;
 
     public Result(double studentTotal, double averageTotal, double maxTotal, double standardDev) {
         this.studentTotal = studentTotal;
         this.avgTotal = averageTotal;
         this.maxTotal = maxTotal;
         this.standardDev = standardDev;
+        this.isValid = true;
+    }
+
+    public Result(double maxTotal) {
+        this.studentTotal = 0;
+        this.avgTotal = 0;
+        this.maxTotal = maxTotal;
+        this.standardDev = 0;
+        this.isValid = false;
+    }
+
+    public Result() {
     }
 
     public void setStudentTotal(double studentTotal) {
@@ -29,9 +42,6 @@ public class Result implements Serializable {
 
     public void setStandardDev(double standardDev) {
         this.standardDev = standardDev;
-    }
-
-    public Result() {
     }
 
     public double getStudentTotal() {
@@ -62,5 +72,13 @@ public class Result implements Serializable {
 
     public void addToMaxTotal(double value) {
         maxTotal += value;
+    }
+
+    public boolean getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(boolean isValid) {
+        this.isValid = isValid;
     }
 }

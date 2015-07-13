@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
+import org.spaceinvaders.server.dao.mock.SemesterInfoDaoMock;
 import org.spaceinvaders.server.entities.CompetenceEntity;
 import org.spaceinvaders.server.entities.EvaluationEntity;
 import org.spaceinvaders.shared.dto.Ap;
@@ -11,16 +12,13 @@ import org.spaceinvaders.shared.dto.Competence;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SemesterInfoDaoImpl implements SemesterInfoDao {
     private final Provider<EntityManager> entityManagerProvider;
@@ -93,12 +91,16 @@ public class SemesterInfoDaoImpl implements SemesterInfoDao {
         SemesterInfo semesterInfo = new SemesterInfo();
         semesterInfo.setAps(new ArrayList<Ap>(apMap.values()));
         semesterInfo.setEvals(new ArrayList<Evaluation>(evalsMap.values()));
+        semesterInfo.setId(semesterID);
 
         return semesterInfo;
     }
 
     @Override
     public List<SemesterInfo> getSemesterInfoList(String cip) {
-        throw new NotImplementedException();
+        SemesterInfoDaoMock mock = new SemesterInfoDaoMock();
+        return mock.getSemesterInfoList("somecip");
+
+//        throw new NotImplementedException(); // TODO : implement this thing
     }
 }

@@ -47,25 +47,40 @@ public class Evaluation implements Serializable {
         return results.get(competenceLabel);
     }
 
-    public Result getApResult(Ap ap) {
-        // For each evaluation
-        Result r = new Result();
-        for (String competenceLabel : results.keySet()) {
-            if (ap.getCompetencesStrings().contains(competenceLabel)) {
-                Result temp = results.get(competenceLabel);
-                r.addToMaxTotal(temp.getMaxTotal());
-                r.addToAvgTotal(temp.getAvgTotal());
-                r.addToStudentTotal(temp.getStudentTotal());
-            }
-        }
-        return r;
-    }
-
     public void addResult(String competenceLabel, Result result) {
         if (!results.containsKey(competenceLabel)) {
             results.put(competenceLabel, result);
         }
     }
 
+    public Result getApResult(Ap ap) {
+        // For each evaluation
+        Result r = new Result();
 
+        boolean isValid = true;
+        for (String competenceLabel : results.keySet()) {
+            if (ap.getCompetencesStrings().contains(competenceLabel)) {
+                Result temp = results.get(competenceLabel);
+                r.addToMaxTotal(temp.getMaxTotal());
+                r.addToAvgTotal(temp.getAvgTotal());
+                r.addToStudentTotal(temp.getStudentTotal());
+                if (!temp.getIsValid()) {
+                    isValid = false;
+                }
+            }
+        }
+        r.setIsValid(isValid);
+        return r;
+    }
+
+    public Evaluation getApResults(Ap ap) {
+        Evaluation apEval = new Evaluation();
+        apEval.setLabel(label);
+        for (String compLabel : results.keySet()) {
+            if (ap.containsCompetence(compLabel)) {
+                apEval.addResult(compLabel, results.get(compLabel));
+            }
+        }
+        return apEval;
+    }
 }

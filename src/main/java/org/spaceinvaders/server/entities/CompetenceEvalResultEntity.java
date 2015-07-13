@@ -30,9 +30,10 @@ public class CompetenceEvalResultEntity {
     private String courseLabel;
     private String competenceLabel;
     private Integer resultValue;
-    private Integer avgResultValue;
+    private Double avgResultValue;
     private Integer maxResultValue;
     private Integer standardDev;
+    private Boolean hasResult;
 
     @Id
     @Column(name = "eval_label")
@@ -76,11 +77,11 @@ public class CompetenceEvalResultEntity {
 
     @Basic
     @Column(name = "avg_result_value")
-    public Integer getAvgResultValue() {
+    public Double getAvgResultValue() {
         return avgResultValue;
     }
 
-    public void setAvgResultValue(Integer avgResultValue) {
+    public void setAvgResultValue(Double avgResultValue) {
         this.avgResultValue = avgResultValue;
     }
 
@@ -104,6 +105,16 @@ public class CompetenceEvalResultEntity {
         this.standardDev = standardDev;
     }
 
+    @Basic
+    @Column(name = "has_result")
+    public Boolean getHasResult() {
+        return hasResult;
+    }
+
+    public void setHasResult(Boolean hasResult) {
+        this.hasResult = hasResult;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,7 +134,7 @@ public class CompetenceEvalResultEntity {
             return false;
         if (maxResultValue != null ? !maxResultValue.equals(that.maxResultValue) : that.maxResultValue != null)
             return false;
-        return !(standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null);
+        return !(standardDev != null ? !standardDev.equals(that.standardDev) : that.standardDev != null) && !(hasResult != null ? !hasResult.equals(that.hasResult) : that.hasResult != null);
 
     }
 
@@ -136,6 +147,7 @@ public class CompetenceEvalResultEntity {
         result = 31 * result + (avgResultValue != null ? avgResultValue.hashCode() : 0);
         result = 31 * result + (maxResultValue != null ? maxResultValue.hashCode() : 0);
         result = 31 * result + (standardDev != null ? standardDev.hashCode() : 0);
+        result = 31 * result + (hasResult != null ? hasResult.hashCode() : 0);
         return result;
     }
 }
