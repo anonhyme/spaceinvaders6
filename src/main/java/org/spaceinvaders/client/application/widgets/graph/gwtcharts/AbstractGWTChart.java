@@ -67,9 +67,7 @@ public abstract class AbstractGWTChart {
             @Override
             public void onResize(ResizeEvent event) {
                 resizeTimer.cancel();
-                resizeTimer.schedule(250);
-
-//                GWT.log(this.getClass().toString() + " : resizing window.");
+                resizeTimer.schedule(300);
 
                 getInstance().setSizeFromWindowSize(event.getWidth(), event.getHeight());
                 getInstance().update();

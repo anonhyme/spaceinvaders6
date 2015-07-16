@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cell;
+package org.spaceinvaders.client.application.widgets.grid.cell;
 
 /**
  * Created with IntelliJ IDEA Project: notus on 7/1/2015

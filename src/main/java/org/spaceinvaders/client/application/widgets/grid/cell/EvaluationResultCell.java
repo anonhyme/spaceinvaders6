@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cell;
+package org.spaceinvaders.client.application.widgets.grid.cell;
 
 
 import com.google.gwt.cell.client.AbstractCell;
@@ -42,13 +42,12 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
 
     @Override
     public void render(Context context, HashMap<EvaluationResultType, String> data, SafeHtmlBuilder sb) {
-
         if (data.isEmpty()) {
             return;
         }
         String resultFraction = data.get(EvaluationResultType.RESULT) + "/" + data.get(EvaluationResultType.MAX_EVALUATION);
         SafeHtml innerHtml = cellTemplates.innerCell(resultFraction, data.get(EvaluationResultType.AVERAGE), data.get(EvaluationResultType.STD_DEV));
-        SafeHtml safeHtml = cellTemplates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT));
+        SafeHtml safeHtml = cellTemplates.popover(innerHtml.asString(), data.get(EvaluationResultType.RESULT) + "%");
         sb.append(safeHtml);
     }
 
@@ -61,13 +60,11 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
                 // Ignore event that occur outside of the element.
                 EventTarget eventTarget = event.getEventTarget();
                 if (parent.getFirstChildElement().isOrHasChild(Element.as(eventTarget))) {
-//                    GWT.log("::::: Browser Event ::::: " + event.getType());
                 }
             }
 
             if (BrowserEvents.CLICK.equals(event.getType())) {
                 if (parent.getFirstChildElement().isOrHasChild(Element.as(event.getEventTarget()))) {
-//                    GWT.log("::::: Browser Event ::::: " + event.getType());
                     showAp(value.get(EvaluationResultType.AP));
                 }
             }
@@ -77,7 +74,6 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
     }
 
     private void showAp(String ap) {
-//        GWT.log(":::: Fire ap loading ::::");
         ApSelectedEvent.fire(ap, gridPresenter);
     }
 }

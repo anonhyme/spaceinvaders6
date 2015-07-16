@@ -30,9 +30,6 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
         void updateSemesterTable(List<String> competencesLabels, List<Evaluation> evaluations);
     }
 
-//    private final ResourceDelegate<EvaluationResource> evaluationDelegate;
-//    private final ResourceDelegate<SemesterInfoResource> semesterInfoDelegate;
-
     @Inject
     public GridPresenter(EventBus eventBus,
                          MyView view) {
@@ -43,47 +40,6 @@ public class GridPresenter extends PresenterWidget<GridPresenter.MyView>
     public void updateGrid(List<String> competencesLabels, TreeMap<String, Evaluation> evaluations) {
         getView().updateSemesterTable(competencesLabels, new ArrayList<>(evaluations.values()));
     }
-
-//    protected void onBind() {
-//        super.onBind();
-//        registerHandlers();
-//    }
-
-//    private void registerHandlers() {
-//        addRegisteredHandler(SemesterInfoReceivedEvent.TYPE, this);
-//        addRegisteredHandler(EvaluationReceivedEvent.TYPE, this);
-//    }
-//
-//    @Override
-//    public void onSemesterInfoReceived(SemesterInfoReceivedEvent event) {
-//        this.semesterInfo = event.getSemesterInfo();
-//        fetchSemesterGrades();
-//    }
-//
-//    @Override
-//    public void onSemesterGradesReceived(EvaluationReceivedEvent event) {
-//        getView().updateSemesterTable(semesterInfo, new ArrayList<>(event.getEvaluations().values()));
-//    }
-//
-//    private void fetchSemesterInfo(int semesterID) {
-//        semesterInfoDelegate
-//                .withCallback(new AbstractAsyncCallback<SemesterInfo>() {
-//                    @Override
-//                    public void onSuccess(SemesterInfo semesterInfo) {
-//                        SemesterInfoReceivedEvent.fire(semesterInfo, getInstance());
-//                    }
-//                }).get(semesterID);
-//    }
-//
-//    private void fetchSemesterGrades() {
-//        evaluationDelegate
-//                .withCallback(new AbstractAsyncCallback<TreeMap<String, Evaluation>>() {
-//                    @Override
-//                    public void onSuccess(TreeMap<String, Evaluation> evaluations) {
-//                        EvaluationReceivedEvent.fire(evaluations, getInstance());
-//                    }
-//                }).getAllEvaluations(semesterInfo.getId());
-//    }
 
     @Override
     public GridPresenter getInstance() {

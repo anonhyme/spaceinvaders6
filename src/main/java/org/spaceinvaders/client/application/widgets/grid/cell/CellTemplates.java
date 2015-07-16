@@ -1,4 +1,4 @@
-package org.spaceinvaders.client.widgets.cell;
+package org.spaceinvaders.client.application.widgets.grid.cell;
 
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -10,7 +10,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  */
 public interface CellTemplates extends SafeHtmlTemplates {
 
-    String POPOVER = "<div data-html=\"true\" " +
+    String POPOVER = "<div style='cursor: pointer;' data-html=\"true\" " +
             "data-container=\"body\" " +
             "data-trigger=\"hover\" " +
             "data-toggle=\"popover\" " +
@@ -20,17 +20,17 @@ public interface CellTemplates extends SafeHtmlTemplates {
             "</div>";
 
     String INNER_CONTENT =
-            "<table cellpadding='5' style='text-align:center'>\n" +
+            "<table cellpadding='5' style='text-align:center;'>\n" +
                     "    <tr style='text-align:center'>\n" +
-                    "        <td> note :</td>\n" +
+                    "        <td> Note :</td>\n" +
                     "        <td>{0}</td>\n" +
                     "    </tr>\n" +
                     "    <tr style='text-align:center'>\n" +
-                    "        <td> moy. :</td>\n" +
+                    "        <td> Moyenne :</td>\n" +
                     "        <td>{1}</td>\n" +
                     "    </tr>\n" +
                     "    <tr style='text-align:center'>\n" +
-                    "        <td> Std dev. :</td>\n" +
+                    "        <td> Écart-type :</td>\n" +
                     "        <td>{2}</td>\n" +
                     "    </tr>\n" +
                     "</table>";
