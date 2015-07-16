@@ -49,10 +49,11 @@ public class Ap implements Serializable {
     }
 
     public List<String> getCompetencesStrings() {
-        if ((competencesStrings.size() == 0) && (competences.size() != 0)) {
-            competencesStrings = new ArrayList<>();
+        if (competences.size() != 0) {
             for (Competence comp : competences) {
-                competencesStrings.add(comp.getLabel());
+                if (!competencesStrings.contains(comp.getLabel())) {
+                    competencesStrings.add(comp.getLabel());
+                }
             }
         }
         return competencesStrings;

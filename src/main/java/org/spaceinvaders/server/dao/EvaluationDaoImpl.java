@@ -39,7 +39,6 @@ public class EvaluationDaoImpl implements EvaluationDao {
     }
 
     private TreeMap<String, Evaluation> getEvaluations(List<CompetenceEvalResultEntity> entities) {
-
         TreeMap<String, Evaluation> evaluations = new TreeMap<>();
 
         int evalIndex = 0;
