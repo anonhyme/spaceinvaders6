@@ -38,7 +38,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
             dataMap.put(EvaluationResultType.AP, apKey[0]);
             dataMap.put(EvaluationResultType.COMPETENCE, apKey[1]);
             dataMap.put(EvaluationResultType.RESULT_PERCENTAGE, formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%");
-            dataMap.put(EvaluationResultType.AVERAGE, formatDoubleToString(result.getAvgTotal()) + "%");
+            dataMap.put(EvaluationResultType.AVERAGE, formatDoubleToString(100 * result.getAvgTotal() / result.getMaxTotal()) + "%");
             dataMap.put(EvaluationResultType.STD_DEV, formatDoubleToString(result.getStandardDev()));
         }
         return dataMap;
