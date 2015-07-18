@@ -27,6 +27,9 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     HTMLPanel evaluationChartPanel;
 
     @UiField
+    HTMLPanel progressBarPanel;
+
+    @UiField
     PageHeader pageTitle;
 
     @UiField
@@ -82,4 +85,17 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
 
         classProgressBar.setText("Avancement du cours : " + v + "%");
     }
+
+    public void showErrorMessage() {
+        clearPannels();
+        gridPanel.add(new Label("Aucun AP sélectionné. Veuillez sélectionner un AP dans la grille de session."));
+    }
+
+    public void clearPannels() {
+        cumulativeChartPanel.clear();
+        evaluationChartPanel.clear();
+        gridPanel.clear();
+        progressBarPanel.clear();
+    }
+
 }

@@ -8,15 +8,17 @@
             <b:PageHeader subText="" ui:field="pageTitle"/>
             <g:SimplePanel ui:field="gridPanel"/>
 
-            <div style="padding-right: 15px; padding-left: 15px;">
-                <g:Label>Progression :</g:Label>
-                <b:Progress>
-                    <b:ProgressBar ui:field="studentProgressBar" percent="0"/>
-                </b:Progress>
-                <b:Progress>
-                    <b:ProgressBar ui:field="classProgressBar" percent="0"/>
-                </b:Progress>
-            </div>
+            <g:HTMLPanel ui:field="progressBarPanel">
+                <div style="padding-right: 15px; padding-left: 15px;">
+                    <g:Label>Progression :</g:Label>
+                    <b:Progress>
+                        <b:ProgressBar ui:field="studentProgressBar" percent="0"/>
+                    </b:Progress>
+                    <b:Progress>
+                        <b:ProgressBar ui:field="classProgressBar" percent="0"/>
+                    </b:Progress>
+                </div>
+            </g:HTMLPanel>
 
             <g:HTMLPanel ui:field="cumulativeChartPanel"/>
             <g:HTMLPanel ui:field="evaluationChartPanel"/>

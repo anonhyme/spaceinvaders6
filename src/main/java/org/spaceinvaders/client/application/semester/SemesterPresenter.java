@@ -50,10 +50,9 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         implements SemesterChangedEvent.SemesterChangedHandler, ApSelectedEvent.Handler {
     public interface MyView extends View {
         void addGrid(IsWidget gridWidget);
-
         void updateSemesterChart(IsWidget chartWidget);
-
         void updateTitle(String title);
+        void showNoGradesMessage();
     }
 
     @ProxyCodeSplit
@@ -74,6 +73,8 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     @Inject
     ApPresenter apPresenter;
 
+    private int semesterID;
+
     @Inject
     SemesterPresenter(EventBus eventBus,
                       PlaceManager placeManager,
@@ -87,19 +88,20 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
         this.gridPresenter = gridPresenter;
         this.evaluationDelegate = semesterGradeDelegate;
         this.semesterInfoDelegate = semesterInfoDelegate;
+        this.semesterID = 3;
     }
 
     @Override
     protected void onBind() {
         super.onBind();
         registerHandler();
-        fetchSemesterInfo(3); //TODO REPLACE THIS WITH THE RIGHT SEMESTER ID
+        fetchSemesterInfo(semesterID); //TODO REPLACE THIS WITH THE RIGHT SEMESTER ID
     }
 
     @Override
-    protected void onReveal() {
-        super.onReveal();
-        fetchSemesterInfo(3); //TODO REPLACE THIS WITH THE RIGHT SEMESTER ID
+    protected void onReset() {
+        super.onReset();
+        fetchSemesterInfo(semesterID);
     }
 
     private void registerHandler() {
@@ -128,8 +130,14 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
             @Override
             public void onSuccess(TreeMap<String, Evaluation> results) {
                 evaluations = results;
-                showGrid();
-                showCharts();
+
+                if (evaluations.size() != 0) {
+                    showGrid();
+                    showCharts();
+                } else {
+                    getView().showNoGradesMessage();
+                }
+
             }
         }).getAllEvaluations(semesterInfo.getId());
     }
@@ -156,8 +164,21 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     }
 
     @Override
+    public void prepareFromRequest(PlaceRequest request) {
+        super.prepareFromRequest(request);
+        String semesterIDStr = request.getParameter("semester-id", "");
+        try {
+            semesterID = Integer.decode(semesterIDStr);
+        } catch (Exception e) {}
+    }
+
+    @Override
     public void onSemesterChanged(SemesterChangedEvent event) {
-        fetchSemesterInfo(event.getSemesterID());
+        PlaceRequest placeRequest = new PlaceRequest.Builder(placeManager.getCurrentPlaceRequest()).
+                nameToken(NameTokens.semesterGrades)
+                .with("semester-id", Integer.toString(event.getSemesterID()))
+                .build();
+        placeManager.revealPlace(placeRequest);
     }
 
     @Override

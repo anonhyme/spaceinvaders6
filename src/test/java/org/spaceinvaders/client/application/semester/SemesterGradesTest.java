@@ -17,7 +17,7 @@ public class SemesterGradesTest {
     SemesterPresenter semesterPresenter;
 
     @Test
-    public void onReveal_anytime_setsTitleIntoView(SemesterPresenter.MyView myView) {
+    public void onBind_anytime_updateTitle(SemesterPresenter.MyView myView) {
 
     }
 }

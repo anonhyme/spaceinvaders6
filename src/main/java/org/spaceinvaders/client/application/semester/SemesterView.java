@@ -4,6 +4,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -39,6 +40,16 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
     public void updateSemesterChart(IsWidget semesterChart) {
         semesterChartPanel.clear();
         semesterChartPanel.add(semesterChart);
+    }
+
+    public void showNoGradesMessage() {
+        clearPannels();
+        semesterChartPanel.add(new Label("Aucun résultat pour cette session."));
+    }
+
+    public void clearPannels(){
+        gridPanel.clear();
+        semesterChartPanel.clear();
     }
 
     @Override

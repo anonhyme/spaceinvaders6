@@ -53,6 +53,8 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
         void addEvaluationChart(IsWidget chart);
 
         void addGrid(IsWidget grid);
+
+        void showErrorMessage();
     }
 
     @Inject
@@ -64,8 +66,8 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     }
 
     private final ResourceDelegate<EvaluationResource> semesterGradesDelegate;
-
     private GridPresenter gridPresenter;
+    private Ap ap;
 
     @Inject
     public ApPresenter(
@@ -78,6 +80,14 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
 
         this.semesterGradesDelegate = semesterGradesDelegate;
         this.gridPresenter = gridPresenter;
+    }
+
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+        if (ap == null) {
+            getView().showErrorMessage();
+        }
     }
 
     private void setCharts(TreeMap<String, Evaluation> evaluations, Ap ap) {
@@ -153,6 +163,8 @@ public class ApPresenter extends Presenter<ApPresenter.MyView, ApPresenter.MyPro
     }
 
     public void update(Ap ap, TreeMap<String, Evaluation> apEvals) {
+        this.ap = ap;
+
         gridPresenter.updateGrid(ap.getCompetencesStrings(), apEvals);
         getView().addGrid(gridPresenter);
 
