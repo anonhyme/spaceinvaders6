@@ -1,9 +1,7 @@
 package org.spaceinvaders.client.application.semester;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -20,7 +18,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import org.spaceinvaders.client.application.ApplicationPresenter;
 import org.spaceinvaders.client.application.ap.ApPresenter;
-import org.spaceinvaders.client.application.events.RevealPresenterEvent;
 import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
 import org.spaceinvaders.client.application.widgets.graph.gwtcharts.SemesterResultsChart;
 import org.spaceinvaders.client.application.widgets.graph.gwtchartswidget.GwtChartWidgetPresenter;
@@ -28,19 +25,16 @@ import org.spaceinvaders.client.application.widgets.grid.GridPresenter;
 import org.spaceinvaders.client.events.ApSelectedEvent;
 import org.spaceinvaders.client.events.SemesterChangedEvent;
 import org.spaceinvaders.client.place.NameTokens;
-
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
-import org.spaceinvaders.shared.dto.Result;
 import org.spaceinvaders.shared.dto.SemesterInfo;
 
-import javax.inject.Inject;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
+
+import javax.inject.Inject;
 
 import static org.spaceinvaders.client.application.util.ColorHelper.GREEN;
 import static org.spaceinvaders.client.application.util.ColorHelper.LIGHT_BLUE;
@@ -93,6 +87,7 @@ public class SemesterPresenter extends Presenter<SemesterPresenter.MyView, Semes
     protected void onBind() {
         super.onBind();
         registerHandler();
+
 //        fetchSemesterInfo(3); //TODO REPLACE THIS WITH THE RIGHT SEMESTER ID
     }
 

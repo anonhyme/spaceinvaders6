@@ -15,9 +15,9 @@ import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.spaceinvaders.client.resources.AppResources;
 import org.spaceinvaders.shared.dto.Evaluation;
 
-import javax.inject.Inject;
-
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class GridView extends ViewWithUiHandlers<GridUiHandlers> implements GridPresenter.MyView {
     interface Binder extends UiBinder<Widget, GridView> {

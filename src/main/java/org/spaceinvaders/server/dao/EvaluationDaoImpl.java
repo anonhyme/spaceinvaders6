@@ -4,14 +4,16 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
+
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
-import javax.persistence.EntityManager;
-import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 import java.util.TreeMap;
+
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 
 @Singleton
 public class EvaluationDaoImpl implements EvaluationDao {

@@ -9,7 +9,10 @@ import com.googlecode.gwt.charts.client.corechart.BarChartOptions;
 import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.VAxis;
 
-import org.spaceinvaders.shared.dto.*;
+import org.spaceinvaders.shared.dto.Ap;
+import org.spaceinvaders.shared.dto.Evaluation;
+import org.spaceinvaders.shared.dto.Result;
+import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.List;
 

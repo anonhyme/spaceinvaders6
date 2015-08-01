@@ -61,6 +61,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
     }
 
     private void fetchSemesterList() {
+        //TODO this throw an: Unexpected token ILLEGAL error
+        GWT.log("semesterList GetAll()");
         semesterInfoDelegate.withCallback(new AbstractAsyncCallback<List<SemesterInfo>>() {
             @Override
             public void onSuccess(List<SemesterInfo> result) {
@@ -71,7 +73,6 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView> impleme
 
     @Override
     public void semesterChanged(int semesterID) {
-//        GWT.log("::: semesterChanged ::: " + semesterID);
         SemesterChangedEvent.fire(semesterID, this);
     }
 

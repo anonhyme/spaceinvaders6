@@ -2,7 +2,6 @@ package org.spaceinvaders.client.gin;
 
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
-import com.google.inject.spi.StaticInjectionRequest;
 
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule;
@@ -20,17 +19,23 @@ import org.spaceinvaders.shared.api.ApiPaths;
 public class ClientModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        install(new DefaultModule());
+        install(new DefaultModule.Builder()
+                .defaultPlace(NameTokens.semesterGrades)
+                .errorPlace(NameTokens.error)
+                .unauthorizedPlace(NameTokens.error)
+                .build());
+
         install(new ApplicationModule());
+        install(new DefaultModule());
 
         // Rest dispatch
         install(new RestDispatchAsyncModule.Builder()
                 .build());
 
         // DefaultPlaceManager Places
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.semesterGrades);
-        bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.error);
-        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.error);
+//        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.semesterGrades);
+//        bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.error);
+//        bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.error);
 
         bind(ResourceLoader.class).asEagerSingleton();
 

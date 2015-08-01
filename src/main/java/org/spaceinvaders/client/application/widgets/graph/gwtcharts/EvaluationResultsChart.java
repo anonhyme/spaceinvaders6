@@ -13,7 +13,8 @@ import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class EvaluationResultsChart extends AbstractGWTChart {
     private ColumnChart chart;

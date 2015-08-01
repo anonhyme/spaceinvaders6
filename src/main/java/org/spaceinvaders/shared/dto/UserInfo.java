@@ -15,6 +15,13 @@ public class UserInfo implements Serializable {
         this.cip = cip;
     }
 
+    public UserInfo(String cip, String firstName, String lastName, String email) {
+        this.cip = cip;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     /**
      * For serialization only
      */

@@ -7,11 +7,11 @@ import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 import org.spaceinvaders.shared.dto.UserInfo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class UserSessionImpl implements UserSession {
 
@@ -23,7 +23,7 @@ public class UserSessionImpl implements UserSession {
         provider = requestProvider;
     }
 
-    public UserSessionImpl(HttpServletRequest request) {
+    private UserSessionImpl(HttpServletRequest request) {
         if (request.isRequestedSessionIdValid() && request.isRequestedSessionIdFromCookie()) {
             session = request.getSession(false);
         }
@@ -62,16 +62,9 @@ public class UserSessionImpl implements UserSession {
             lastName = (String) assertion.getPrincipal().getAttributes().get("nomFamille");
             email = (String) assertion.getPrincipal().getAttributes().get("courriel");
         } catch (NullPointerException ex) {
-            Logger.getLogger(UserSessionImpl.class.getName()).log(Level.SEVERE, "Session or CAS assertion is null, verify your web.xml");
+            Logger.getLogger(UserSessionImpl.class.getName()).log(Level.SEVERE, "Session or CAS assertion is null, verify your web.xml or you try to access resources before authentication");
         }
-
-        UserInfo userInfo = new UserInfo();
-        userInfo.setCip(cip);
-        userInfo.setFirstName(firstName);
-        userInfo.setLastName(lastName);
-        userInfo.setEmail(email);
-
-        return userInfo;
+        return new UserInfo(cip, firstName, lastName, email);
     }
 
     public String getUserId() {

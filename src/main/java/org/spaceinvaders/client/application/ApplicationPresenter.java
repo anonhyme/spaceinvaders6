@@ -1,7 +1,6 @@
 package org.spaceinvaders.client.application;
 
 
-import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
@@ -17,7 +16,6 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import org.spaceinvaders.client.application.events.RevealPresenterEvent;
 import org.spaceinvaders.client.application.widgets.menu.MenuPresenter;
-import org.spaceinvaders.client.resources.BootstrapJQueryJs;
 
 import javax.inject.Inject;
 
@@ -29,9 +27,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
         void addMenu(IsWidget menu);
     }
-
-//    @Inject
-//    BootstrapJQueryJs bootstrapJQueryJs;
 
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_SetMainContent = new Type<>();
@@ -49,9 +44,10 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
         super(eventBus, view, proxy, RevealType.Root);
         this.menuPresenter = menuPresenter;
 
-        ScriptInjector.fromString(BootstrapJQueryJs.INSTANCE.toString())
-                .setWindow(ScriptInjector.TOP_WINDOW)
-                .inject();
+//        ScriptInjector.fromString(BootstrapJQueryJs.INSTANCE.toString())
+//                .setWindow(ScriptInjector.TOP_WINDOW)
+//                .inject();
+
         getView().addMenu(menuPresenter);
     }
 

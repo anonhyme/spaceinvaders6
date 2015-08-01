@@ -1,9 +1,11 @@
 package org.spaceinvaders.client.application.ap;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import com.gwtplatform.mvp.client.ViewImpl;
 
@@ -11,11 +13,13 @@ import org.gwtbootstrap3.client.ui.PageHeader;
 import org.gwtbootstrap3.client.ui.ProgressBar;
 
 import javax.inject.Inject;
-import java.text.DecimalFormat;
 
 public class ApView extends ViewImpl implements ApPresenter.MyView {
     interface Binder extends UiBinder<Widget, ApView> {
     }
+
+    @UiField
+    PageHeader pageTitle;
 
     @UiField
     SimplePanel gridPanel;
@@ -26,8 +30,6 @@ public class ApView extends ViewImpl implements ApPresenter.MyView {
     @UiField
     HTMLPanel evaluationChartPanel;
 
-    @UiField
-    PageHeader pageTitle;
 
     @UiField
     ProgressBar studentProgressBar;

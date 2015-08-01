@@ -35,7 +35,7 @@ public class EvaluationColumn extends Column<Evaluation, HashMap<EvaluationResul
 
         if ((result != null) && result.getIsValid()) {
             String resultPercent = formatDoubleToString(100 * result.getStudentTotal() / result.getMaxTotal()) + "%";
-            GWT.log("result presenter  :::: " + resultPercent );
+            GWT.log("Result percent :::: " + resultPercent);
             dataMap.put(EvaluationResultType.RESULT, formatDoubleToString(result.getStudentTotal()));
             dataMap.put(EvaluationResultType.MAX_EVALUATION, formatDoubleToString(result.getMaxTotal()));
             dataMap.put(EvaluationResultType.AP, apKey[0]);

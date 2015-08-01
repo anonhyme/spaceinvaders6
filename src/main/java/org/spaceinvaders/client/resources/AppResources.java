@@ -32,8 +32,6 @@ public interface AppResources extends ClientBundle {
         @ClassName("material-container")
         String materialContainer();
 
-        @ClassName("info")
-        String info();
     }
 
     @Source("css/NotusStyle.gss")

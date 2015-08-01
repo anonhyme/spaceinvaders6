@@ -26,9 +26,12 @@ public class SemesterView extends ViewImpl implements SemesterPresenter.MyView {
     @UiField
     PageHeader pageTitle;
 
+
+
     @Inject
     SemesterView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+
     }
 
     public void addGrid(IsWidget gridWidget) {

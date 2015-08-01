@@ -12,11 +12,13 @@
     <name>GWTP web application</name>
 
     <!-- http://dev.arcbees.com/gwtp/resources/ -->
+    <!--https://github.com/ArcBees/gwtp-extensions/wiki/GinUiBinder-->
+    <!--http://dev.arcbees.com/gwtp/communication/CSRF-Protection.html-->
 
     <properties>
         <!-- client -->
         <gwt.version>2.7.0</gwt.version>
-        <gwtp.version>1.5-SNAPSHOT</gwtp.version>
+        <gwtp.version>1.4</gwtp.version>
         <gin.version>2.1.2</gin.version>
         <bootstrap.version>0.9.1</bootstrap.version>
         <gquery.version>1.4.3</gquery.version>
@@ -64,10 +66,22 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${gae.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.gwtplatform.extensions</groupId>
             <artifactId>ginuibinder</artifactId>
-            <version>${gwt.version}-SNAPSHOT</version>
+            <version>${gwt.version}</version>
         </dependency>
         <!--CLIENT DEPENDENCIES
                 * GWTP
@@ -90,42 +104,17 @@
             <version>${gwtp.version}</version>
         </dependency>
 
-        <!-- GWTP RPC -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
-            <version>${gwtp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
-            <version>${gwtp.version}</version>
-        </dependency>
-
-        <!-- REST DISPATCH -->
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rest</artifactId>
-            <version>${gwtp-rest.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform</groupId>
-            <artifactId>gwtp-dispatch-rest-shared</artifactId>
-            <version>${gwtp-rest.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gwtplatform.extensions</groupId>
-            <artifactId>dispatch-rest-delegates</artifactId>
-            <version>${gwtp-rest.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
-            <scope></scope>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${gwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -165,6 +154,18 @@
             <version>${cas.version}</version>
         </dependency>
 
+        <!-- GWTP RPC -->
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
+            <version>${gwtp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rpc-shared</artifactId>
+            <version>${gwtp.version}</version>
+        </dependency>
+
         <!--GUICE-->
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -201,6 +202,25 @@
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>${eclipse-link.version}</version>
+        </dependency>
+
+        <!-- REST DISPATCH -->
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rest</artifactId>
+            <version>${gwtp-rest.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-dispatch-rest-shared</artifactId>
+            <version>${gwtp-rest.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform.extensions</groupId>
+            <artifactId>dispatch-rest-delegates</artifactId>
+            <version>${gwtp-rest.version}</version>
         </dependency>
 
         <!-- REST DEPENDENCY -->
@@ -242,6 +262,20 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+
+
         <!-- Javax Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -263,6 +297,7 @@
             <version>${jukito.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <repositories>
@@ -354,7 +389,7 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
-                            <goal>test</goal>
+                            <!--<goal>test</goal>-->
                         </goals>
                     </execution>
                 </executions>
