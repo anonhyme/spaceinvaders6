@@ -10,7 +10,11 @@ import com.google.inject.Inject;
 
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import org.gwtbootstrap3.client.ui.*;
+import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.DropDownMenu;
+import org.gwtbootstrap3.client.ui.Navbar;
+import org.gwtbootstrap3.client.ui.NavbarBrand;
+import org.gwtbootstrap3.client.ui.NavbarLink;
 import org.gwtbootstrap3.client.ui.html.Span;
 import org.spaceinvaders.client.place.NameTokens;
 import org.spaceinvaders.client.resources.AppResources;

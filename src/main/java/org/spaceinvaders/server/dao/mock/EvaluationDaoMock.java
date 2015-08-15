@@ -48,7 +48,7 @@ public class EvaluationDaoMock implements EvaluationDao {
         results.put(evalLabel, eval);
 
         evalLabel = "APP3 - Sommatif";
-        eval = new Evaluation(evalLabel, evalIndex++);
+        eval = new Evaluation(evalLabel, evalIndex);
         eval.addResult(competences.get(3).getLabel(), getMockResult());
         eval.addResult(competences.get(4).getLabel(), getMockResult());
         results.put(evalLabel, eval);
@@ -80,7 +80,7 @@ public class EvaluationDaoMock implements EvaluationDao {
 
 
         evalLabel = "APP1 - Sommatif";
-        eval = new Evaluation(evalLabel, evalIndex++);
+        eval = new Evaluation(evalLabel, evalIndex);
         eval.addResult(competences.get(0).getLabel(), getMockResult());
         eval.addResult(competences.get(1).getLabel(), getMockResult());
         results.put(evalLabel, eval);

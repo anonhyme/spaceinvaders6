@@ -86,7 +86,7 @@ public class SemesterInfo implements Serializable {
 
     public Ap findAp(String apLabel) {
         for (Ap ap : aps) {
-            if (ap.getName() == apLabel) {
+            if (ap.getName().equals(apLabel)) {
                 return ap;
             }
         }

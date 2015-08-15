@@ -5,8 +5,9 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Created with IntelliJ IDEA Project: projetS6 on 6/22/2015
- *
+ * Created with IntelliJ IDEA
+ * Project: notus
+ * on 6/22/2015
  * @author antoine
  */
 public interface BootstrapJQueryJs extends ClientBundle {
@@ -18,7 +19,4 @@ public interface BootstrapJQueryJs extends ClientBundle {
 
     @Source("js/bootstrap-3.3.2.min.cache.js")
     TextResource bootstrap();
-
-    @Source("js/testJS.js")
-    TextResource testJs();
 }

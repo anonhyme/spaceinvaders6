@@ -5,13 +5,6 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.ui.IsWidget;
 
-import com.gwtplatform.mvp.client.PresenterWidget;
-
-import org.spaceinvaders.shared.dto.Ap;
-import org.spaceinvaders.shared.dto.Evaluation;
-
-import java.util.TreeMap;
-
 public class RevealPresenterEvent extends GwtEvent<RevealPresenterEvent.RevealPresenterHandler> {
     public interface RevealPresenterHandler extends EventHandler {
         void onRevealPresenter(RevealPresenterEvent event);

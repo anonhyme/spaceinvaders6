@@ -68,7 +68,7 @@ public class EvaluationResultCell extends AbstractCell<HashMap<EvaluationResultT
                     showAp(value.get(EvaluationResultType.AP));
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }

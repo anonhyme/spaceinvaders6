@@ -1,11 +1,11 @@
 package org.spaceinvaders.client.application.widgets.graph.gwtcharts;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.Timer;
+
 import com.googlecode.gwt.charts.client.DataTable;
 
 public abstract class AbstractGWTChart {
@@ -32,18 +32,11 @@ public abstract class AbstractGWTChart {
         setOptions();
         update();
         registerResizeHandler();
-
-    }
-
-    public void setSize(int width, int height) {
-        this.width = width;
-        this.height = height;
-        isCustomSize = true;
     }
 
     public void setSizeFromWindowSize(int windowWidth, int windowHeight) {
-        this.width = (int)((double)windowWidth * WINDOW_WIDTH_RATIO);
-        this.height = (int)((double)windowHeight * WINDOW_HEIGHT_RATIO);
+        this.width = (int) (windowWidth * WINDOW_WIDTH_RATIO);
+        this.height = (int) (windowHeight * WINDOW_HEIGHT_RATIO);
         isCustomSize = true;
     }
 
@@ -52,7 +45,7 @@ public abstract class AbstractGWTChart {
         colorsSet = true;
     }
 
-    public AbstractGWTChart getInstance() {
+    private AbstractGWTChart getInstance() {
         return this;
     }
 
@@ -68,7 +61,6 @@ public abstract class AbstractGWTChart {
             public void onResize(ResizeEvent event) {
                 resizeTimer.cancel();
                 resizeTimer.schedule(300);
-
                 getInstance().setSizeFromWindowSize(event.getWidth(), event.getHeight());
                 getInstance().update();
             }

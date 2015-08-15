@@ -4,14 +4,16 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
+
 import org.spaceinvaders.server.entities.CompetenceEvalResultEntity;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
-import javax.persistence.EntityManager;
-import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 import java.util.TreeMap;
+
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 
 @Singleton
 public class EvaluationDaoImpl implements EvaluationDao {
@@ -26,15 +28,12 @@ public class EvaluationDaoImpl implements EvaluationDao {
     @Transactional
     public TreeMap<String, Evaluation> getAll(String cip, int semesterID) {
         EntityManager entityManager = entityManagerProvider.get();
-
         entityManager.clear();
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("GetSemesterEvalResults");
         query.setParameter("student_id", cip);
-        query.setParameter("session_id", semesterID); // TODO : should be named semester_id
+        query.setParameter("session_id", semesterID);
         query.execute();
-
         List<CompetenceEvalResultEntity> entities = query.getResultList();
-
         return getEvaluations(entities);
     }
 
@@ -45,14 +44,11 @@ public class EvaluationDaoImpl implements EvaluationDao {
         int compIndex = 0;
         for (CompetenceEvalResultEntity entity : entities) {
             String evalLabel = entity.getEvalLabel();
-
             if (!evaluations.containsKey(entity.getEvalLabel())) {
                 evaluations.put(evalLabel, new Evaluation(evalLabel, evalIndex));
                 evalIndex++;
             }
-
             Evaluation eval = evaluations.get(evalLabel);
-
             if (entity.getHasResult()) {
                 eval.addResult(entity.getCompetenceLabel(),
                         new Result(entity.getResultValue(),
@@ -62,18 +58,14 @@ public class EvaluationDaoImpl implements EvaluationDao {
             } else {
                 eval.addResult(entity.getCompetenceLabel(), new Result(entity.getMaxResultValue()));
             }
-
             compIndex++;
         }
-
         return evaluations;
     }
 
-    //Todo: create SQL query
     @Override
     @Transactional
     public TreeMap<String, Evaluation> getApEvaluations(String cip, int semesterID, int apID) {
-        TreeMap<String, Evaluation> bleh = new TreeMap<String, Evaluation>();
-        return bleh;
+        return new TreeMap<String, Evaluation>();
     }
 }

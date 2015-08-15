@@ -13,11 +13,11 @@ import org.spaceinvaders.shared.dto.Ap;
 import org.spaceinvaders.shared.dto.Evaluation;
 import org.spaceinvaders.shared.dto.Result;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class EvaluationResultsChart extends AbstractGWTChart {
     private ColumnChart chart;
-    private String apName;
     private ArrayList<Evaluation> data;
     private Ap ap;
     private ColumnChartOptions options;
@@ -25,7 +25,6 @@ public class EvaluationResultsChart extends AbstractGWTChart {
     public EvaluationResultsChart(TreeMap<String, Evaluation> data, Ap ap) {
         this.data = new ArrayList<>(data.values());
         this.ap = ap;
-        this.apName = ap.getName();
     }
 
     @Override
@@ -57,9 +56,6 @@ public class EvaluationResultsChart extends AbstractGWTChart {
 
     @Override
     void setOptions() {
-
-
-
         options = ColumnChartOptions.create();
         options.setFontName("Tahoma");
         options.setTitle("Résultats de l'AP");
@@ -67,8 +63,6 @@ public class EvaluationResultsChart extends AbstractGWTChart {
         VAxis v = VAxis.create("Résultat");
         v.setMinValue(0);
         options.setVAxis(v);
-
-
         if (colorsSet) {
             options.setColors(colors);
         }

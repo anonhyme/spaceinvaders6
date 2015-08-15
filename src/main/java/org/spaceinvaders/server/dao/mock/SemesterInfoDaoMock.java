@@ -41,7 +41,7 @@ public class SemesterInfoDaoMock implements SemesterInfoDao {
         evals.add(new Evaluation("APP1 - Sommatif", evalIndex++));
         evals.add(new Evaluation("APP2 - Sommatif", evalIndex++));
         evals.add(new Evaluation("APP3 - Rapport", evalIndex++));
-        evals.add(new Evaluation("APP3 - Sommatif", evalIndex++));
+        evals.add(new Evaluation("APP3 - Sommatif", evalIndex));
 
         int compIndex = 0;
         gen501Competences.add(new Competence("GEN501-1", compIndex++));
@@ -52,7 +52,7 @@ public class SemesterInfoDaoMock implements SemesterInfoDao {
         gen402 = new Ap("GEN402", 1, gen402Competences);
 
         gen666Competences.add(new Competence("GEN666-1", compIndex++));
-        gen666Competences.add(new Competence("GEN666-2", compIndex++));
+        gen666Competences.add(new Competence("GEN666-2", compIndex));
         gen666 = new Ap("GEN666", 2, gen666Competences);
 
         aps.add(gen501);

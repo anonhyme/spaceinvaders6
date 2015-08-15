@@ -1,9 +1,11 @@
 package org.spaceinvaders.shared.dto;
 
 import java.io.Serializable;
-
 /**
- * Created by hugbed on 2015-05-27.
+ * Created with IntelliJ IDEA
+ * Project: notus
+ * on 5/27/2015
+ * @author hugbed
  */
 public class UserInfo implements Serializable {
     private String cip;

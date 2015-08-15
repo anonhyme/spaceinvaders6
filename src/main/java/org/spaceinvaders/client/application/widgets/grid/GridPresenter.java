@@ -1,23 +1,13 @@
 package org.spaceinvaders.client.application.widgets.grid;
 
-import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
-import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
-import org.spaceinvaders.client.application.widgets.grid.events.EvaluationReceivedEvent;
-
-import org.spaceinvaders.client.application.util.AbstractAsyncCallback;
-import org.spaceinvaders.client.application.widgets.grid.events.SemesterInfoReceivedEvent;
-import org.spaceinvaders.client.events.ApSelectedEvent;
-import org.spaceinvaders.shared.api.EvaluationResource;
-import org.spaceinvaders.shared.api.SemesterInfoResource;
 import org.spaceinvaders.shared.dto.Evaluation;
-import org.spaceinvaders.shared.dto.SemesterInfo;
 
 import java.util.ArrayList;
 import java.util.List;
