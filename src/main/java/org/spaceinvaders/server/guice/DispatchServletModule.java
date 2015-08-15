@@ -9,7 +9,7 @@ import com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 
 import org.spaceinvaders.server.cas.UserSession;
-import org.spaceinvaders.server.cas.UserSessionImpl;
+import org.spaceinvaders.server.cas.UserSessionOffline;
 import org.spaceinvaders.shared.api.ApiPaths;
 
 
@@ -22,6 +22,7 @@ public class DispatchServletModule extends ServletModule {
 
         serve("/" + ActionImpl.DEFAULT_SERVICE_NAME + "*").with(DispatchServiceImpl.class);
 
-        bind(UserSession.class).to(UserSessionImpl.class);
+        bind(UserSession.class).to(UserSessionOffline.class);
+//        install(new CasModule());
     }
 }

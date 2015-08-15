@@ -103,4 +103,6 @@ public class EvaluationDaoMock implements EvaluationDao {
     private double getRandom(double min, double max) {
         return Math.round(Math.random() * (max - min) + min);
     }
+
+
 }

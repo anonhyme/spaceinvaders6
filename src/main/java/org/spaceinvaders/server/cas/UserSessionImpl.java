@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//CAS Implementation
 public class UserSessionImpl implements UserSession {
 
     private Provider<HttpServletRequest> provider = null;
@@ -43,10 +44,12 @@ public class UserSessionImpl implements UserSession {
         }
     }
 
+    @Override
     public boolean isValid() {
         return getSession() != null;
     }
 
+    @Override
     public UserInfo getUserInfo() {
         HttpSession session = getSession();
 
@@ -74,6 +77,7 @@ public class UserSessionImpl implements UserSession {
         return userInfo;
     }
 
+    @Override
     public String getUserId() {
         HttpSession session = getSession();
         String cip = "";

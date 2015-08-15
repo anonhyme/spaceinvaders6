@@ -2,7 +2,7 @@ package org.spaceinvaders.server.api;
 
 import com.google.inject.Inject;
 
-import org.spaceinvaders.server.cas.UserSessionImpl;
+import org.spaceinvaders.server.cas.UserSession;
 import org.spaceinvaders.server.dao.EvaluationDao;
 import org.spaceinvaders.shared.api.EvaluationResource;
 import org.spaceinvaders.shared.dto.Evaluation;
@@ -10,13 +10,13 @@ import org.spaceinvaders.shared.dto.Evaluation;
 import java.util.TreeMap;
 
 public class EvaluationResourceImpl implements EvaluationResource {
-    private UserSessionImpl userSession;
+    private UserSession userSession;
     private EvaluationDao evaluationDao;
 
     @Inject
     EvaluationResourceImpl(
             EvaluationDao evaluationDao,
-            UserSessionImpl userSession) {
+            UserSession userSession) {
         this.evaluationDao = evaluationDao;
         this.userSession = userSession;
     }
